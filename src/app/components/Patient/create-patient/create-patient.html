@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+
+<div class="container my-4 background">
+  <div class="card shadow-sm border-0 background">
+    <div class="card-body p-4">
+      <h5 class="card-title mb-4 text-secondary">
+        <i class="bi bi-person-lines-fill me-2"></i>User Information
+      </h5>
+      
+      <form>
+        <div class="row g-3 ">
+          
+          <!-- First Name -->
+          <div class="col-md-4 ">
+            <label class="form-label fw-semibold text-muted small">First Name</label>
+            <input type="text" class="form-control" name="Fname" placeholder="John" [(ngModel)]="Fristname" >
+          </div>
+
+          <!-- Last Name -->
+          <div class="col-md-4 ">
+            <label class="form-label fw-semibold text-muted small">Last Name</label>
+            <input type="text" class="form-control" name="Lname" placeholder="Doe" [(ngModel)]="LastName">
+          </div>
+
+          <!-- Phone Number -->
+          <div class="col-md-4 ">
+            <label class="form-label fw-semibold text-muted small">Phone Number</label>
+            <input type="tel" class="form-control" name="Phone" placeholder="+20..." [(ngModel)] = "Phone">
+          </div>
+
+        </div>
+
+        <!-- Action Button Row -->
+        <div class="row mt-4 ">
+          <div class="col-12 d-flex justify-content-end">
+            <button type="button" class="btn btn-primary px-4" [disabled]="isLoading" (click)="onSubmit()">
+              Save Changes
+            </button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<app-list-patient  ></app-list-patient>
+

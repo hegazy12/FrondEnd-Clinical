@@ -1,0 +1,53 @@
+
+
+<div class="container my-4 background">
+  <div class="card shadow-sm border-0 background">
+    <div class="card-body p-4">
+      <h5 class="card-title mb-4 text-secondary">
+        <i class="bi bi-person-lines-fill me-2"></i>Make a new Appointment
+      </h5>
+      
+      <form>
+        <div class="row g-3 ">
+          
+          <!-- First Name -->
+          <div class="col-md-4 ">
+            <label class="form-label fw-semibold text-muted small">Date Appointment</label>
+            <input type="date" class="form-control" name="Fname" placeholder="John" [(ngModel)]="dateTimeAppointment" >
+          </div>
+
+
+          
+          <div class="col-md-4 ">
+             <label class="form-label fw-semibold text-muted small">Doctors</label>
+            <select class="form-select" aria-label="Default select example" (change)="onSpecialtyChange($event)">
+              <option value="no" selected>Open this select menu</option>
+              @for (Doctor of Docrors(); track $index) {
+              <option value="{{Doctor.id}}">{{Doctor.firstName }} {{Doctor.lastName}}</option>
+            }
+            </select>
+          </div>
+          
+          <div class="col-md-4 ">
+            <label class="form-label fw-semibold text-muted small">Deposit</label>
+            <input type="number" class="form-control" name="Lname" placeholder="0" [(ngModel)]="deposit">
+          </div>
+
+          <div class="col-md-4 ">
+            <label class="form-label fw-semibold text-muted small">Note</label>
+            <input type="text" class="form-control" name="Lname" placeholder="Doe" [(ngModel)]="note">
+          </div>
+
+         <div class="row mt-4 ">
+          <div class="col-12 d-flex justify-content-end">
+            <button type="button" class="btn btn-primary px-4" [disabled]="isLoading" (click)="onSubmit()">
+              Save Changes
+            </button>
+          </div>
+        </div> 
+        
+      </div>
+      </form>
+    </div>
+  </div>
+</div>

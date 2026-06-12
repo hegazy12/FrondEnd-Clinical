@@ -1,0 +1,12 @@
+<div class="container">
+ <div class="row">
+@for (item of Appointments(); track $index)
+ {
+    <div class="col-sm-4 border border-secondary">
+     <h4>{{item.doctor.firstName}} {{item.doctor.lastName}}  : {{item.doctor.specialization}}</h4>
+     <h5>{{item.appoinmentDate}}</h5>
+
+    </div>
+ }
+ </div>
+</div>
