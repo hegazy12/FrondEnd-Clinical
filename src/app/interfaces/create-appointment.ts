@@ -1,5 +1,5 @@
 export interface CreateAppointment {
-  dateTimeAppoinment: Date | string; 
+  dateAppoinment: Date | string; 
   note?: string | null;               
   doctorId: string;                  
   patientId: string;                

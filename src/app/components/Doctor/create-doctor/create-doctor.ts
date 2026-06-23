@@ -3,7 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { Callapi } from '../../../services/callapi/callapi';
 import { VerfivationToken} from '../../../services/verfivationToken/verfivation-token'
 import { Router } from '@angular/router';
-
+import { SwalAlert } from '../../../services/swalAlert/swal-alert';
+import { createDoctors } from '../../../interfaces/CreateDoctor'
 
 @Component({
   selector: 'app-create-doctor',
@@ -14,15 +15,47 @@ import { Router } from '@angular/router';
 
 export class CreateDoctor 
 {
-    constructor(private Callapi : Callapi ,private Verfication :VerfivationToken ,private router: Router){}
+   public Userid :string = "" ;
+   public fristName: string = ""; 
+   public lastName: string = "";
+   public specialization: string= "";
+   public isLoading : boolean = false;
+
+    constructor(
+        private Callapi : Callapi,
+        private Verfication :VerfivationToken,
+        private router: Router,
+        private swal: SwalAlert, ){}
     
-    ngOnInit():void{
+    ngOnInit():void {
         if(this.Verfication.islogin() == false)
         {
             this.router.navigate(['/Login']);
         }
         else
-        {  
+        {
+
         }
-    }    
+    }
+
+    onSubmit(){
+       this.isLoading = true; 
+       let Create : createDoctors ={firstName :this.fristName , 
+                                    lastName : this.lastName , 
+                                    specialization : this.specialization ,
+                                    Userid : this.Userid };
+        
+        let sub =this.Callapi.createDoctor(Create).subscribe({
+            next:(res)=>{
+                sub.unsubscribe();
+                this.swal.showSuccess();
+                this.isLoading = false;
+            },
+            error :(err)=>{
+                sub.unsubscribe();
+                this.isLoading = false;   
+            }
+        });
+    }
+
 }

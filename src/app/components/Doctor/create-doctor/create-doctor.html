@@ -1,1 +1,45 @@
-<p>create-doctor works!</p>
+
+<div class="container my-4 background">
+  <div class="card shadow-sm border-0 background">
+    <div class="card-body p-4">
+      <h5 class="card-title mb-4 text-secondary">
+        <i class="bi bi-person-lines-fill me-2"></i>Make a new Appointment
+      </h5>
+      
+      <form>
+        <div class="row g-3 ">
+          
+          <!-- First Name -->
+          <div class="col-md-4 ">
+            <label class="form-label fw-semibold text-muted small">User id</label>
+            <input type="text" class="form-control" name="Fname" placeholder="John" [(ngModel)]="Userid" >
+          </div>
+          
+          <div class="col-md-4 ">
+            <label class="form-label fw-semibold text-muted small">First Name</label>
+            <input type="text" class="form-control" name="Lname" placeholder="0" [(ngModel)]="fristName">
+          </div>
+
+          <div class="col-md-4 ">
+            <label class="form-label fw-semibold text-muted small">Last Name</label>
+            <input type="text" class="form-control" name="Lname" placeholder="Doe" [(ngModel)]="lastName">
+          </div>
+
+          <div class="col-md-4 ">
+            <label class="form-label fw-semibold text-muted small">Specialization</label>
+            <input type="text" class="form-control" name="Lname" placeholder="Doe" [(ngModel)]="specialization">
+          </div>
+
+         <div class="row mt-4 ">
+          <div class="col-12 d-flex justify-content-end">
+            <button type="button" class="btn btn-primary px-4" [disabled]="isLoading" (click)="onSubmit()">
+              Save Changes
+            </button>
+          </div>
+        </div>
+
+      </div>
+      </form>
+    </div>
+  </div>
+</div>

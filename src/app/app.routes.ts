@@ -3,7 +3,7 @@ import { Login } from './components/login/login';
 import { Mainpage } from './components/mainpage/mainpage';
 import {CreatePatient} from './components/Patient/create-patient/create-patient';
 import {Patientview} from './components/Patient/patientview/patientview'
-
+import {Settings} from './components/settings/settings'
 
 export const routes: Routes = [
     {
@@ -22,6 +22,9 @@ export const routes: Routes = [
     },{
         path:"Patientview/:id",
         component:Patientview
+    },{
+        path:"Sitting",
+        component: Settings
     }
 ];
         

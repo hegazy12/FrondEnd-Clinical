@@ -34,8 +34,6 @@ export class ListAppintment {
              this.GetPatientAppoinment(this.patientId);  
             }
       }
- 
-
 
   public GetPatientAppoinment(patientId : string) : boolean
       {
@@ -43,17 +41,14 @@ export class ListAppintment {
               next: (P : Appointment[]) =>
                 {
                     this.Appointments.set(P);
-                    console.log(P); 
                     Sup.unsubscribe();
                 },
               error: (err) => 
               {
-                console.error(err); 
                 Sup.unsubscribe();
-                this.router.navigate(['/Login']);
               }
             });
           return true;
-      }
+    }
 
 }

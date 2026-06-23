@@ -27,23 +27,9 @@ export class Mainpage
     else
     {
       console.log("ManePage is " + this.Vervication.islogin());
-      this.loadvideos()
     }
   }
 
-  public loadvideos() :void 
-  {
-    this.callapi.getViduos().subscribe
-    ({
-       next : (re)=>{
-        console.log(re);
-       },
-       error:(err) => {
-        console.log(err)
-
-       }
-    })
-  }
   
 
 }

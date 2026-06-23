@@ -1,0 +1,22 @@
+<form>
+     <div class="row g-3 ">
+        
+        <div class="col-md-9">
+            <input type="text" class="form-control" #TextsearchTearm placeholder="Search Drug"  >
+        </div>
+        <div class="col-md-3">
+            <input type="button" class="btn btn-primary" value="GetDrugs" (click)="SearchDrug(TextsearchTearm.value)" >           
+        </div>        
+         
+
+        <div class="col-md-9">
+            <label class="form-label fw-semibold text-muted small">Drug</label>
+            <select class="form-select" aria-label="Default select example"  >
+              @for (Drug of DTODrugs(); track $index) {
+                <option [value]="Drug.id">{{Drug.commercialNameEn}} /{{Drug.scientificName}}</option>
+               }
+            </select>
+        </div>
+
+     </div>
+</form>

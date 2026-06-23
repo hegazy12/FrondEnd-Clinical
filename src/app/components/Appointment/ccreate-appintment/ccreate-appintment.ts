@@ -51,7 +51,6 @@ export class CCreateAppintment
           next: (D : DTODocror[]) =>
             { 
                 this.Docrors.set(D);
-                console.log(D);
                 Sup.unsubscribe();
             },
           error: (err) => {
@@ -71,17 +70,18 @@ export class CCreateAppintment
 
       public onSubmit() : void
       {
-        let Appointment :CreateAppointment = {dateTimeAppoinment: this.dateTimeAppointment, 
+        let Appointment :CreateAppointment = {dateAppoinment: this.dateTimeAppointment, 
                                               deposit           : this.deposit,
                                               doctorId          : this.doctorId(),
                                               patientId         : this.patientId,
                                               note              : this.note}
         let sub =  this.Callapi.createِِِAppointment(Appointment).subscribe({
         next: (res) => {
-          console.log('Successfully created:', res); 
            sub.unsubscribe(); 
            this.swal.showSuccess();},
-           error: (err) => {console.error(err); sub.unsubscribe(); this.isLoading = false; } 
+           error: (err) => { 
+            sub.unsubscribe(); 
+            this.isLoading = false; } 
          });
       }
 
