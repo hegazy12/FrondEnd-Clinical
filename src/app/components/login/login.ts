@@ -38,8 +38,8 @@ export class Login
     console.log('Username:', this.username);
     console.log('Password:', this.password);
     
-    var url = "http://194.146.24.155/clinical/api/Account/Login";
-    //var url = "http://localhost:5076/api/Account/Login";
+    // var url = "http://194.146.24.155/clinical/api/Account/Login";
+    var url = "http://localhost:5076/api/Account/Login";
     this.http.post(url, { email: this.username, password: this.password })
       .subscribe(response => {
         

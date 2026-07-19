@@ -12,8 +12,8 @@ import {DTODrug} from '../../interfaces/dtodrug'
 })
 export class Callapi 
 {
-  private url: string = "http://194.146.24.155/clinical/api/";
-  //private url: string = "http://localhost:5076/api/"
+  //private url: string = "http://194.146.24.155/clinical/api/";
+  private url: string = "http://localhost:5076/api/"
   
   constructor(private Http:HttpClient , private token :VerfivationToken)
   {
@@ -111,6 +111,12 @@ export class Callapi
       catchError(error => {return throwError(() => error);
       })
     );
+  }
+
+  
+  public GetDrugById(DrugId:string)
+  {
+    
   }
 
 }
