@@ -13,17 +13,17 @@ export class VerfivationToken
 
   public getToken(): string | null {
     if (this.isBrowser)
-    {this.token = JSON.parse(localStorage.getItem("token") || "null").token;
-    return this.token;
+    {this.token = localStorage.getItem("token") || "null";
+    return this.token.replace(/"/g, ''); // Remove double quotes if present
   }else {
     return null;
   }
   }
   
-  public GetLoginState() : number | null {
+  public GetLoginState() : boolean | null {
   if (this.isBrowser)
   {
-    return parseInt(JSON.parse(localStorage.getItem("token") || "null").login);
+    return Boolean(localStorage.getItem("Login")) ||false;
   }
   else
   {
@@ -36,13 +36,13 @@ export class VerfivationToken
    
     if (!this.isBrowser) return false;
     try {
-        if(localStorage.getItem('token') === null){
+        if(localStorage.getItem('token') === null || localStorage.getItem('token') === undefined || localStorage.getItem('token') === "null" || localStorage.getItem('token') === "undefined"){
             return false;
         }
-        else if (this.GetLoginState() == 0 || this.GetLoginState() === null ){
+        else if (this.GetLoginState() === false || this.GetLoginState() === null ){
           return false;
         }
-        else if(this.GetLoginState() == 1){
+        else if(this.GetLoginState() == true){
           return true;
         } else {
           return false;

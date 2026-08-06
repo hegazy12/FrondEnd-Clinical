@@ -20,5 +20,29 @@ export class SwalAlert {
       });
     }
 
+    showError(message: string)
+    {
+      Swal.fire({
+        title: 'Error!',
+        text: message,
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#dc3545' // Bootstrap danger color
+      });
+    }
+
+showLoginFailed(message: string ) {
+    Swal.fire({
+      title: 'Login Failed!',
+      text: message,
+      icon: 'error',
+      confirmButtonText: 'Try Again',
+      confirmButtonColor: '#dc3545', // Danger Red
+      background: '#fff',
+      customClass: {
+        confirmButton: 'px-4 py-2'
+      }
+    });
+  }
     
 }

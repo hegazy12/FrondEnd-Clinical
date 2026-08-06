@@ -2,8 +2,9 @@ import { Component, Injectable } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import {VerfivationToken } from '../../services/verfivationToken/verfivation-token'
-
+import {VerfivationToken } from '../../services/verfivationToken/verfivation-token';
+import { LoginResponse } from '../../interfaces/login-response';
+import {SwalAlert} from '../../services/swalAlert/swal-alert';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class Login
   public password: string = '';
 
   
-  constructor(private http: HttpClient, private router: Router ,private Verfivation : VerfivationToken) {}
+  constructor(private http: HttpClient, private router: Router ,private Verfivation : VerfivationToken,private swal: SwalAlert) {}
   
   
   
@@ -39,17 +40,24 @@ export class Login
     console.log('Password:', this.password);
     
     // var url = "http://194.146.24.155/clinical/api/Account/Login";
-    var url = "http://localhost:5076/api/Account/Login";
-    this.http.post(url, { email: this.username, password: this.password })
+    var url = " https://localhost:7262/Account/Login";
+    this.http.post<LoginResponse>(url, { userName: this.username, password: this.password })
       .subscribe(response => {
-        
-        console.log('Login successful:', response);
-        
-        localStorage.setItem('token', JSON.stringify(response));
-        
-        if(this.Verfivation.GetLoginState() == 1)
+
+       
+        localStorage.setItem('Login', JSON.stringify(response.success));
+        if(response.success === true)
         {
+          localStorage.setItem('token', JSON.stringify(response.data.token));
+          console.log('Token stored in localStorage:', response.data.token);
           this.router.navigate(['/Mainpage']);
+          console.log('Login successful:', response);
+        }
+        else
+        {
+          console.error('Login failed:', response.message);
+          localStorage.removeItem('token');
+          this.swal.showLoginFailed(response.message);
         }
         
       }, error => {

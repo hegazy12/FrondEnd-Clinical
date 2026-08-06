@@ -4,7 +4,7 @@ import { VerfivationToken } from '../../../services/verfivationToken/verfivation
 import { Router, RouterLink } from '@angular/router';
 import { Patient } from '../../../interfaces/patient-create';
 import { CommonModule } from '@angular/common'; 
-
+import { PatientDTO, PatientsResponse } from '../../../interfaces/patient-response';
 @Component({
   selector: 'app-list-patient',
   standalone: true,
@@ -19,6 +19,8 @@ export class ListPatient
       
       public Patients = signal<Patient[]>([]);
       public isloding = signal<boolean>(false);
+      public PatientsResponse = signal<PatientsResponse | null>(null);
+      public PatientsData = signal<PatientDTO[] | null>(null);
 
       ngOnInit():void
       {
@@ -28,7 +30,8 @@ export class ListPatient
           }
         else
         {
-          this.getPatients(1);
+        //  this.getPatients(1);
+          this.getPatientsNew();
         }
       }
         
@@ -52,5 +55,24 @@ export class ListPatient
             });
             return true;
     }
-
+    
+      public getPatientsNew() : boolean
+      {
+             let Sup = this.Callapi.getPatientsNew().subscribe({
+              next: (P : PatientsResponse) =>
+                {
+                    this.PatientsResponse.set(P);
+                    this.PatientsData.set(P.data);
+                    Sup.unsubscribe();
+                    this.isloding.set(true);
+                    console.log("this.isloding" + this.isloding);
+                },
+              error: (err) => {
+                console.error(err); 
+                Sup.unsubscribe();
+                this.router.navigate(['/Login']);
+              }
+            });
+            return true;
+    }
 }

@@ -29,7 +29,5 @@ export class Mainpage
       console.log("ManePage is " + this.Vervication.islogin());
     }
   }
-
   
-
 }

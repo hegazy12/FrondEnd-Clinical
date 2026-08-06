@@ -14,11 +14,11 @@
 
     @if(isloding())
     {
-        @for (patient of Patients(); track $index) {
+        @for (patient of PatientsData(); track $index) {
             <tr>
-                <td>{{ patient.fristName }} </td>
+                <td>{{ patient.firstName }}</td>
                 <td>{{ patient.lastName }}</td>
-                <td>{{ patient.phone }}</td>
+                <td>{{ patient.phoneNumber }}</td>
                <td><a [routerLink]="['/Patientview', patient.id]">view</a> </td>
             </tr>
             } 

@@ -58,7 +58,7 @@ export class CreatePatient
     {
      this.isLoading = true;
     
-     let Patint : PatientCreate ={ fristName :this.Fristname , lastName : this.LastName, phone : this.Phone} ;
+     let Patint : PatientCreate ={ FirstName :this.Fristname , LastName : this.LastName, PhoneNumber : this.Phone} ;
     
      this.makefildesEmpty();
     

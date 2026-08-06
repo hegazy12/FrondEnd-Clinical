@@ -4,16 +4,17 @@ import { tap, catchError, throwError, Observable } from 'rxjs';
 import { VerfivationToken} from '../verfivationToken/verfivation-token';
 import { Patient, PatientCreate} from '../../interfaces/patient-create'; 
 import { CreateAppointment} from '../../interfaces/create-appointment'; 
-import { DTODocror,Appointment} from '../../interfaces/dtodocror'
-import { createDoctors} from '../../interfaces/CreateDoctor'
-import {DTODrug} from '../../interfaces/dtodrug'
+import { DTODocror,Appointment} from '../../interfaces/dtodocror';
+import { createDoctors} from '../../interfaces/CreateDoctor';
+import {DTODrug} from '../../interfaces/dtodrug';
+import { PatientsResponse,PatientResponse } from '../../interfaces/patient-response';
 @Injectable({
   providedIn: 'root',
 })
 export class Callapi 
 {
   //private url: string = "http://194.146.24.155/clinical/api/";
-  private url: string = "http://localhost:5076/api/"
+  private url: string = "https://localhost:7262/"
   
   constructor(private Http:HttpClient , private token :VerfivationToken)
   {
@@ -45,16 +46,28 @@ export class Callapi
     );
   }
   
-  public GetPatient(id : string)
-  {
-    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
-    
-    return this.Http.get<Patient>(this.url + `Patient/GetPatien/${id}`, { headers }).pipe(
+  public getPatientsNew(): Observable<PatientsResponse>
+   {    
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`});
+    return this.Http.get<PatientsResponse>(this.url + `Patient/GetPatientsNew`, { headers }).pipe(
       tap(response => {}),
       catchError(error => {return throwError(() => error);
       })
     );
   }
+
+
+  public GetPatient(id : string)
+  {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    
+    return this.Http.get<PatientResponse>(this.url + `Patient/GetPatient/${id}`, { headers }).pipe(
+      tap(response => {}),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+  }
+
   public createِِِAppointment(Create: CreateAppointment):Observable<any>
   {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
@@ -88,8 +101,6 @@ export class Callapi
       })
     );
   }
-  
-  
   public GetPatientAppoinment(PatientId:string)
   {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
@@ -100,8 +111,6 @@ export class Callapi
       })
     );
   }
-
-  
   public SearchDrugs(SearchTerm:string)
   {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
@@ -112,11 +121,8 @@ export class Callapi
       })
     );
   }
-
-  
   public GetDrugById(DrugId:string)
   {
     
   }
-
 }
