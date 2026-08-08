@@ -8,6 +8,11 @@
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/CreatePatient']">Add Patient</a>
       </li>
+       @if (roles.includes('Doctor')) {
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/Mypatient']">my Patients</a>
+        </li>
+       }
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/Sitting']">Settings</a>
       </li>

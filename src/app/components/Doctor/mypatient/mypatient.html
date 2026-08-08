@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+
+
+<div class="container mt-4 background">
+  <h3 class="mb-4 text-primary">Patients Registry</h3>
+  <div class="table-responsive shadow-sm rounded">
+    <table class="table table-hover table-striped align-middle mb-0">
+      <thead class="table-dark">
+        <tr>
+          <th>Name</th>
+          <th>notes</th>
+          <th>status</th>
+          <th>Appointment Date</th>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+
+    
+      @for (item of Appointments(); track $index) {
+          <tr>
+              <td>{{ item.patientFirstName }} - {{ item.patientLastName }}</td>
+              <td>{{item.notes}}</td>
+              <td>{{ item.status }}</td>
+              <td>{{ item.appointmentDate  }}</td>
+              <td> <a [routerLink]="['/Patientappointment', item.id]"> view </a> </td>
+          </tr>
+          } 
+          @empty
+            {
+          <tr>
+              <td colspan="5" class="text-center text-muted py-4">No patients found.</td>
+          </tr>
+          }
+    
+    </tbody>
+    </table>
+  </div>
+</div>

@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { DTODocror} from '../../../interfaces/dtodocror';
 import {CreateAppointment} from '../../../interfaces/create-appointment';
 import {SwalAlert} from '../../../services/swalAlert/swal-alert';
+import { DoctorsResponse,DoctorDto1 } from '../../../interfaces/doctor-dto';
+import { AppointmentDTO0 } from '../../../interfaces/appointment-dto-0';
 
 @Component({
   selector: 'app-ccreate-appintment',
@@ -20,7 +22,7 @@ export class CCreateAppintment
     public doctorId =signal<string>('');
     public patientId: string="";                
     public deposit: number=0;  
-    public Docrors = signal<DTODocror[]>([]);
+    public Docrors = signal<DoctorDto1[]>([]);
     public isLoading : boolean = false;
 
     constructor(private Callapi : Callapi ,
@@ -48,10 +50,9 @@ export class CCreateAppintment
      public getDoctors() : boolean
       {
           let Sup = this.Callapi.GetDoctors().subscribe({
-          next: (D : DTODocror[]) =>
+          next: (D : DoctorsResponse) =>
             { 
-                this.Docrors.set(D);
-                Sup.unsubscribe();
+                this.Docrors.set(D.data);
             },
           error: (err) => {
             Sup.unsubscribe();
@@ -70,11 +71,13 @@ export class CCreateAppintment
 
       public onSubmit() : void
       {
-        let Appointment :CreateAppointment = {dateAppoinment: this.dateTimeAppointment, 
+        let Appointment :AppointmentDTO0 = {  appointmentDate    : this.dateTimeAppointment, 
                                               deposit           : this.deposit,
                                               doctorId          : this.doctorId(),
                                               patientId         : this.patientId,
-                                              note              : this.note}
+                                              notes              : this.note,
+                                              status            : "Pending" };
+
         let sub =  this.Callapi.createِِِAppointment(Appointment).subscribe({
         next: (res) => {
            sub.unsubscribe(); 

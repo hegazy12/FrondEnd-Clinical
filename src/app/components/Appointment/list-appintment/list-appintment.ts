@@ -2,7 +2,7 @@ import {Component ,signal} from '@angular/core';
 import {Callapi} from '../../../services/callapi/callapi';
 import {VerfivationToken} from '../../../services/verfivationToken/verfivation-token';
 import {Router,ActivatedRoute} from '@angular/router';
-import {Appointment} from '../../../interfaces/dtodocror'
+import { AppointmentDTO1, AppointmentsResponse } from '../../../interfaces/appointment-dto-0';
 
 @Component({
   selector: 'app-list-appintment',
@@ -12,7 +12,8 @@ import {Appointment} from '../../../interfaces/dtodocror'
 })
 export class ListAppintment {
   
-  public Appointments = signal<Appointment[]>([]);
+  public AppointmentsResponse = signal<AppointmentsResponse>;
+  public Appointments=signal<AppointmentDTO1[]>([]);
   public patientId: string ="";    
 
   constructor(  private Callapi     : Callapi ,
@@ -20,7 +21,7 @@ export class ListAppintment {
                 private router      : Router,
                 private route: ActivatedRoute)
                 { 
-                  this.patientId = this.route.snapshot.paramMap.get('id') || '';
+                 this.patientId = this.route.snapshot.paramMap.get('id') || '';
                 }
 
      
@@ -37,17 +38,17 @@ export class ListAppintment {
 
   public GetPatientAppoinment(patientId : string) : boolean
       {
-             let Sup = this.Callapi.GetPatientAppoinment(patientId).subscribe({
-              next: (P : Appointment[]) =>
-                {
-                    this.Appointments.set(P);
-                    Sup.unsubscribe();
-                },
-              error: (err) => 
-              {
+          let Sup = this.Callapi.GetPatientAppoinment(patientId).subscribe({
+          next: (P : AppointmentsResponse) =>
+            {
+                this.Appointments.set(P.data);
                 Sup.unsubscribe();
-              }
-            });
+            },
+          error: (err) => 
+          {
+            Sup.unsubscribe();
+          }
+          });
           return true;
     }
 

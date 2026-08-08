@@ -35,26 +35,26 @@ export class ListPatient
         }
       }
         
-      public getPatients(numberpage : number) : boolean
-      {
-             let Sup = this.Callapi.getpatients(numberpage).subscribe({
-              next: (P : Patient[]) =>
-                {
-                    this.Patients.set(P);
-                    console.log(P); 
-                    Sup.unsubscribe();
-                    this.isloding.set(true);
+    //   public getPatients(numberpage : number) : boolean
+    //   {
+    //          let Sup = this.Callapi.getpatients(numberpage).subscribe({
+    //           next: (P : Patient[]) =>
+    //             {
+    //                 this.Patients.set(P);
+    //                 console.log(P); 
+    //                 Sup.unsubscribe();
+    //                 this.isloding.set(true);
 
-                    console.log("this.isloding" + this.isloding);
-                },
-              error: (err) => {
-                console.error(err); 
-                Sup.unsubscribe();
-                this.router.navigate(['/Login']);
-              }
-            });
-            return true;
-    }
+    //                 console.log("this.isloding" + this.isloding);
+    //             },
+    //           error: (err) => {
+    //             console.error(err); 
+    //             Sup.unsubscribe();
+    //             this.router.navigate(['/Login']);
+    //           }
+    //         });
+    //         return true;
+    // }
     
       public getPatientsNew() : boolean
       {

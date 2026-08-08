@@ -40,7 +40,8 @@ export class Login
     console.log('Password:', this.password);
     
     // var url = "http://194.146.24.155/clinical/api/Account/Login";
-    var url = " https://localhost:7262/Account/Login";
+    //var url = " https://localhost:7262/Account/Login";
+    var url = "http://localhost:5244/Account/Login";
     this.http.post<LoginResponse>(url, { userName: this.username, password: this.password })
       .subscribe(response => {
 
@@ -48,7 +49,10 @@ export class Login
         localStorage.setItem('Login', JSON.stringify(response.success));
         if(response.success === true)
         {
-          localStorage.setItem('token', JSON.stringify(response.data.token));
+          localStorage.setItem('token'      , JSON.stringify(response.data.token));
+          localStorage.setItem('roles'      , JSON.stringify(response.data.roles));
+          localStorage.setItem('id'         , JSON.stringify(response.data.id));
+          localStorage.setItem('userName'   , JSON.stringify(response.data.userName));
           console.log('Token stored in localStorage:', response.data.token);
           this.router.navigate(['/Mainpage']);
           console.log('Login successful:', response);

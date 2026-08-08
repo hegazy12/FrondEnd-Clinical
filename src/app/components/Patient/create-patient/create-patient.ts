@@ -22,6 +22,9 @@ export class CreatePatient
     public Fristname : string ='';
     public LastName  : string = '';
     public Phone     : string= '';
+    public Address   : string= '';
+    public DateOfBirth : string= '';
+    public gender : string= '';
     public isLoading :boolean = false;
 
     public refrishvalue : boolean= false;
@@ -58,7 +61,13 @@ export class CreatePatient
     {
      this.isLoading = true;
     
-     let Patint : PatientCreate ={ FirstName :this.Fristname , LastName : this.LastName, PhoneNumber : this.Phone} ;
+     let Patint : PatientCreate ={ 
+      firstName :this.Fristname ,
+      lastName : this.LastName,
+      phoneNumber : this.Phone, 
+      dateOfBirth : this.DateOfBirth,
+      address : this.Address, 
+      gender : this.gender};
     
      this.makefildesEmpty();
     

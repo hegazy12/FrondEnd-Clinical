@@ -8,13 +8,18 @@ import { DTODocror,Appointment} from '../../interfaces/dtodocror';
 import { createDoctors} from '../../interfaces/CreateDoctor';
 import {DTODrug} from '../../interfaces/dtodrug';
 import { PatientsResponse,PatientResponse } from '../../interfaces/patient-response';
+import { DoctorResponse,DoctorsResponse,DoctorDto0} from '../../interfaces/doctor-dto';
+import { AppointmentAllinfo, AppointmentDTO0,AppointmentDTO1, AppointmentResponse, AppointmentsResponse} from '../../interfaces/appointment-dto-0';
+
 @Injectable({
   providedIn: 'root',
 })
 export class Callapi 
 {
   //private url: string = "http://194.146.24.155/clinical/api/";
-  private url: string = "https://localhost:7262/"
+  //private url: string = "https://localhost:7262/"
+  private url: string = "http://localhost:5244/"
+
   
   constructor(private Http:HttpClient , private token :VerfivationToken)
   {
@@ -68,17 +73,20 @@ export class Callapi
     );
   }
 
-  public createِِِAppointment(Create: CreateAppointment):Observable<any>
+  public createِِِAppointment(Create: AppointmentDTO0):Observable<AppointmentResponse>
   {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
     
-     return this.Http.post<any>(this.url + "Appointment/Creat",Create,{ headers }).pipe(
+     return this.Http.post<AppointmentResponse>(this.url + "Appointment/createAppointment",Create,{ headers }).pipe(
       tap(response => {}),
       catchError(error => {
         return throwError(() => error);
       })
     );
   }
+
+
+
   public createDoctor(Create: createDoctors):Observable<any>
     {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
@@ -90,32 +98,57 @@ export class Callapi
       })
     );
   }
+  
   public GetDoctors()
   {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
     
-    return this.Http.get<DTODocror[]>(this.url + `Doctor/getDoctors`, { headers }).pipe(
+    return this.Http.get<DoctorsResponse>(this.url + `Doctor/getAllDoctors`, { headers }).pipe(
       tap(response => {}),
       catchError(error => {
         return throwError(() => error);
       })
     );
   }
-  public GetPatientAppoinment(PatientId:string)
+
+
+  public GetPatientAppoinment(PatientId:string):Observable<AppointmentsResponse>
   {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
     
-    return this.Http.get<Appointment[]>(this.url + `Appointment/GetDTOAppoinments/${PatientId}`, { headers }).pipe(
+    return this.Http.get<AppointmentsResponse>(this.url + `Appointment/getPatientAppointments/${PatientId}`, { headers }).pipe(
       tap(response => {}),
       catchError(error => {return throwError(() => error);
       })
     );
   }
+
+
+  public GetDoctorAppoinment(DoctorId:string):Observable<AppointmentsResponse>
+  {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    return this.Http.get<AppointmentsResponse>(this.url + `Appointment/getDoctorAppointments/${DoctorId}`, { headers }).pipe(
+      tap(response => {}),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+  }
+
+  public GetAppointmentAllInfo(AppointmentId:string):Observable<AppointmentAllinfo>
+  {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    return this.Http.get<AppointmentAllinfo>(this.url + `Appointment/GetAllInfo/${AppointmentId}`, { headers }).pipe(
+      tap(response => {}),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+  }
+
   public SearchDrugs(SearchTerm:string)
   {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
     
-    return this.Http.get<DTODrug[]>(this.url + `Drug/GetDrugs/${SearchTerm}`, { headers }).pipe(
+    return this.Http.get<DTODrug[]>(this.url + `Drug/GetDrugs?SearchTerm=${SearchTerm}`, { headers }).pipe(
       tap(response => { }),
       catchError(error => {return throwError(() => error);
       })

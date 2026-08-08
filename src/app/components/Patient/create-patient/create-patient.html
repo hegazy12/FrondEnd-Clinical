@@ -28,6 +28,47 @@
             <input type="tel" class="form-control" name="Phone" placeholder="+20..." [(ngModel)] = "Phone">
           </div>
 
+          <!-- Address -->
+          <div class="col-md-4 ">
+            <label class="form-label fw-semibold text-muted small">Address</label>
+            <input type="text" class="form-control" name="Address" placeholder="123 Main St" [(ngModel)]="Address">
+          </div>
+
+          <!-- dateOfBirth -->
+          <div class="col-md-4 ">
+            <label class="form-label fw-semibold text-muted small">dateOfBirth</label>
+            <input type="date" class="form-control" name="DateOfBirth" placeholder="1990-01-01" [(ngModel)]="DateOfBirth">
+          </div>
+
+       <!-- Gender Toggle Buttons -->
+        <div class="col-md-4">
+          <label class="form-label fw-semibold text-muted small d-block">Gender</label>
+          <div class="btn-group w-100" role="group">
+          <div class="form-check form-check-inline">
+            <label for="genderMale" >Male</label>
+                <input 
+                  type="radio" 
+                  name="gender" 
+                  id="genderMale" 
+                  value="Male" 
+                  class="ms-8"
+                  [(ngModel)]="gender">
+            </div>
+
+                <div class="form-check form-check-inline">
+                  <label for="genderFemale" >Female</label>
+                      <input 
+                        type="radio" 
+                        name="gender" 
+                        id="genderFemale" 
+                        value="Female" 
+                        class="ms-8"
+                        [(ngModel)]="gender">
+              </div>
+          </div>
+        </div>
+
+          
         </div>
 
         <!-- Action Button Row -->
@@ -38,6 +79,8 @@
             </button>
           </div>
         </div>
+
+
       </form>
 
     </div>

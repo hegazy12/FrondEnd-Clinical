@@ -10,7 +10,14 @@ import { Router } from '@angular/router';
 })
 export class Navbar 
 {
-  constructor(private router: Router ){}
+  public roles :string[] = JSON.parse(localStorage.getItem("roles") || "[]");
+ 
+   constructor(private router: Router ){}
+
+   ngOnInit():void
+   {
+    console.log("roles : " + this.roles);
+   }
 
   public logOut (): void 
   {

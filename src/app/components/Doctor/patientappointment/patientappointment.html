@@ -1,0 +1,10 @@
+<app-navbar></app-navbar>
+<h1>Patient Appointment</h1>
+<h2>{{ appointment()?.patientFirstName }} {{ appointment()?.patientLastName }} {{ appointment()?.PatientDTO_1?.gender}}</h2>
+<h4>{{ appointment()?.PatientDTO_1?.dateOfBirth}} {{appointment()?.PatientDTO_1?.phoneNumber}}</h4>
+<div class="container">
+  <div class="row">
+     <app-make-prescription></app-make-prescription>
+  </div>
+</div>
+

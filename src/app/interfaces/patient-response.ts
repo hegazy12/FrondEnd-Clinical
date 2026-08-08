@@ -6,11 +6,18 @@ export interface PatientDTO {
   lastName: string;
   address: string;
   phoneNumber: string;
+  gender: string;
   dateOfBirth: string | Date; 
 }
+
+export interface PatientDTO2 extends PatientDTO 
+{
+
+} 
 
 export type PatientsResponse = GeneralResponse<PatientDTO[]>;
 
 export type PatientResponse = GeneralResponse<PatientDTO>;
+//export type PatientallinfoResponse = GeneralResponse<PatientDTO2>;
 
 

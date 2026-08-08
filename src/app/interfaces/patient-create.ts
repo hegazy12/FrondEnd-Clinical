@@ -1,13 +1,16 @@
 export interface PatientCreate {
-    FirstName: string; // Kept your exact spelling to match your backend model
-    LastName: string;
-    PhoneNumber: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    dateOfBirth : Date | string;
+    address : string;
+    gender : string;
 }
 
 
 export interface Patient {
     id :string ;
-    FirstName: string; // Kept your exact spelling to match your backend model
-    LastName: string;
-    PhoneNumber: string;
+    firstName: string; 
+    lastName: string;
+    phoneNumber: string;
 }

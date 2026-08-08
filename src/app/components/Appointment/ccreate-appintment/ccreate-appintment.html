@@ -20,10 +20,10 @@
             <select class="form-select" aria-label="Default select example" (change)="onSpecialtyChange($event)">
               <option value="no" selected>Open this select menu</option>
               @for (Doctor of Docrors(); track $index) {
-              <option value="{{Doctor.id}}">{{Doctor.firstName }} {{Doctor.lastName}}</option>
+              <option value="{{Doctor.id}}">{{Doctor.fristName}} {{Doctor.lastName}} ({{Doctor.specialization}}) </option>
             }
             </select>
-          </div>
+          </div> 
           
           <div class="col-md-4 ">
             <label class="form-label fw-semibold text-muted small">Deposit</label>
