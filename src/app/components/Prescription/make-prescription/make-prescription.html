@@ -1,22 +1,58 @@
 <form>
-     <div class="row g-3 ">
+     <div class="row" style="margin-right: .5%; margin-left: .5%;">
         
-        <div class="col-md-9">
+        <div class="col-md-11">
             <input type="text" class="form-control" #TextsearchTearm placeholder="Search Drug"  >
         </div>
-        <div class="col-md-3">
-            <input type="button" class="btn btn-primary" value="GetDrugs" (click)="SearchDrug(TextsearchTearm.value)" >           
-        </div>        
-         
 
-        <div class="col-md-9">
+        <div class="col-md-1 d-flex justify-content-end">
+            <input type="button" class="btn btn-primary" value="GetDrugs" (click)="SearchDrug(TextsearchTearm.value)" >           
+        </div>   
+
+        <div class="col-md-12">
             <label class="form-label fw-semibold text-muted small">Drug</label>
-            <select class="form-select" aria-label="Default select example"  >
+            <select class="form-select" aria-label="Default select example" name="drug" (change)="onSpecialtyChange($event)" >
               @for (Drug of DTODrugs(); track $index) {
                 <option [value]="Drug.id">{{Drug.commercialNameEn}} /{{Drug.scientificName}}</option>
                }
             </select>
         </div>
 
-     </div>
+       <div class="col-md-6" ><label>From</label> <input class="form-control" type="date" name="form" [(ngModel)]="from" ></div>  
+       <div class="col-md-6" ><label>To </label>  <input type="date" class="form-control" name="to" [(ngModel)]="to" ></div>
+       
+       <div class="col-md-6" >
+       <label>Frequency</label> 
+        <select class="form-control" name="frequency" (change)="onSpecialtyChange($event)"  >
+            <option value="6">ever 6 hours</option> 
+            <option value="8">ever 8 hours</option> 
+            <option value="12">ever 12 hours</option> 
+            <option value="24">ever 1 day</option> 
+            <option value="48">ever 2 day</option> 
+        </select>
+        </div>
+    
+    <div class="col-md-6" >
+    <label for="type">type</label>
+    <select class="form-control" name="type" (change)="onSpecialtyChange($event)" >
+         <option value="1" > type 1 </option> 
+         <option value="1" > type 2 </option> 
+         <option value="1" > type 3 </option> 
+         <option value="1" > type 4 </option> 
+    </select>
+    </div>
+    
+    <div class="col-md-12" >
+        <label>Notes</label>
+        <textarea id="notes" name="notes" class="form-control" rows="3" placeholder="Enter notes..." [(ngModel)]="Note" ></textarea>
+    </div>
+    
+    <div class="col-12 d-flex justify-content-end" style="margin-top: 1%;" >
+    <button type="button" class="btn btn-primary " (click)="onSubmit()" >Save Changes</button>
+    </div>
+</div>
+
 </form>
+<div class="row" style="margin:.5%">
+<app-prescription-list></app-prescription-list>
+</div>

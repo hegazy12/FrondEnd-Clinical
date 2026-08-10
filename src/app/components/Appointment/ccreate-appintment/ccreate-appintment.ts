@@ -3,8 +3,6 @@ import { Callapi} from '../../../services/callapi/callapi';
 import {VerfivationToken} from '../../../services/verfivationToken/verfivation-token';
 import {Router,ActivatedRoute} from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { DTODocror} from '../../../interfaces/dtodocror';
-import {CreateAppointment} from '../../../interfaces/create-appointment';
 import {SwalAlert} from '../../../services/swalAlert/swal-alert';
 import { DoctorsResponse,DoctorDto1 } from '../../../interfaces/doctor-dto';
 import { AppointmentDTO0 } from '../../../interfaces/appointment-dto-0';
@@ -65,9 +63,8 @@ export class CCreateAppintment
       onSpecialtyChange(event: Event) {
        const element = event.target as HTMLSelectElement;
         this.doctorId.set(element.value);
+        console.log(element.name);
       }
-
-
 
       public onSubmit() : void
       {

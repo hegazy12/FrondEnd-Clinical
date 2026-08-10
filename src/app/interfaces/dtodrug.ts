@@ -6,5 +6,5 @@ export interface DTODrug {
     manufacturer: string;
     drugClass : string;
     route : string;
-    priceEgp : number;
+   
 }

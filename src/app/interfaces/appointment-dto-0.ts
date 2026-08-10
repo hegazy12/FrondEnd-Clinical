@@ -23,8 +23,8 @@ export interface AppointmentDTO1 extends AppointmentDTO0
 
 export  interface AppointmentDTO2 extends AppointmentDTO1
 {
-   PatientDTO_1 : PatientDTO;
-   DoctorDTO_1  : DoctorDto1 ;
+   patientDTO_1 : PatientDTO;
+   doctorDTO_1  : DoctorDto1 ;
 }
 
 

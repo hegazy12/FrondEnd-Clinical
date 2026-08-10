@@ -10,7 +10,7 @@ import {DTODrug} from '../../interfaces/dtodrug';
 import { PatientsResponse,PatientResponse } from '../../interfaces/patient-response';
 import { DoctorResponse,DoctorsResponse,DoctorDto0} from '../../interfaces/doctor-dto';
 import { AppointmentAllinfo, AppointmentDTO0,AppointmentDTO1, AppointmentResponse, AppointmentsResponse} from '../../interfaces/appointment-dto-0';
-
+import {Prescriptiondto,PrescriptionResponse} from '../../interfaces/prescription';
 @Injectable({
   providedIn: 'root',
 })
@@ -158,4 +158,31 @@ export class Callapi
   {
     
   }
+
+  public CreatPrescription(Prescriptiondto : Prescriptiondto)
+  {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    
+    console.log(headers);
+    console.log(this.token.getToken());
+    
+    return this.Http.post<Prescriptiondto>(this.url + `Prescription/Create`,Prescriptiondto, { headers }).pipe(
+      tap(response => { }),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+  
+  }
+
+  public  PrescriptionList(Id:string)
+  {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    
+    return this.Http.get<PrescriptionResponse>(this.url + `Prescription/GetbyappotmintID/${Id}`, { headers }).pipe(
+      tap(response => { }),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+  }
+
 }

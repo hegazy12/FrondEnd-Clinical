@@ -5,10 +5,11 @@ import { Callapi } from '../../../services/callapi/callapi';
 import { Navbar } from '../../navbar/navbar';
 import {AppointmentAllinfo, AppointmentDTO2} from '../../../interfaces/appointment-dto-0';
 import { MakePrescription } from '../../Prescription/make-prescription/make-prescription';
-
+import {PrescriptionList} from '../../Prescription/prescription-list/prescription-list';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-patientappointment',
-  imports:  [Navbar,MakePrescription],
+  imports:  [Navbar,MakePrescription,PrescriptionList,DatePipe],
   templateUrl: './patientappointment.html',
   styleUrl: './patientappointment.css',
 })
@@ -49,7 +50,7 @@ export class Patientappointment {
         next: (P :AppointmentAllinfo ) =>
           {
               this.appointment.set(P.data);
-              console.log("Patientappointment data " + JSON.stringify(P.data));
+              console.log("P.data.patientDTO_1.firstName " + JSON.stringify(P.data.patientDTO_1.firstName));
               Sup.unsubscribe();
           },
         error: (err) => 
@@ -60,8 +61,3 @@ export class Patientappointment {
               return true;
         }
 }
-
-
-
-
-

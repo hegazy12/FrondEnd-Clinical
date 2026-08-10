@@ -1,0 +1,19 @@
+/* Alternating row colors */
+.prescription-table .table-row:nth-of-type(odd) {
+  background-color: #ffffff;
+}
+
+.prescription-table .table-row:nth-of-type(even) {
+  background-color: #f2f6ff; /* light blue-gray tint */
+}
+
+/* Hover effect */
+.prescription-table .table-row:hover {
+  background-color: #dbe9ff; /* stronger blue on hover */
+  transition: background-color 0.15s ease-in-out;
+}
+
+/* Optional: bottom border between rows */
+.prescription-table .table-row {
+  border-bottom: 1px solid #e9ecef;
+}

@@ -1,10 +1,37 @@
 <app-navbar></app-navbar>
-<h1>Patient Appointment</h1>
-<h2>{{ appointment()?.patientFirstName }} {{ appointment()?.patientLastName }} {{ appointment()?.PatientDTO_1?.gender}}</h2>
-<h4>{{ appointment()?.PatientDTO_1?.dateOfBirth}} {{appointment()?.PatientDTO_1?.phoneNumber}}</h4>
-<div class="container">
-  <div class="row">
-     <app-make-prescription></app-make-prescription>
+
+<div class="container-fluid px-4 py-3">
+  <!-- Patient Header Section -->
+  <div class="border-bottom pb-3 mb-4">
+    <!-- <h1 class="h3 fw-bold text-primary mb-1">Patient Appointment</h1> -->
+    <h2 class="h3 fw-bold text-primary mb-1">
+      {{ appointment()?.patientFirstName }} {{ appointment()?.patientLastName }}
+      <!-- <span class="badge ">{{ appointment()?.patientDTO_1?.gender }} </span> -->
+    </h2>
+    <p class="text-muted mb-0">
+      <span class="me-3" ><strong>Gender: </strong> {{ appointment()?.patientDTO_1?.gender }}</span>
+      <span class="me-3" ><strong>DOB:</strong> {{ appointment()?.patientDTO_1?.dateOfBirth | date: 'mediumDate'}}</span>
+      <span><strong>Phone:</strong> {{ appointment()?.patientDTO_1?.phoneNumber }}</span>
+      
+    </p>
+  </div>
+
+  <!-- Full-Width Content Area -->
+  <div class="row g-3">
+    <!-- Left Action Column -->
+    <div class="col-lg-2 col-xl-1">
+      <button class="btn btn-primary shadow-sm" style="margin: 1%;" >
+        Prescription
+      </button>
+      <button class="btn btn-primary shadow-sm" style="margin: 1%;" >
+        investgation
+      </button>
+    </div>
+
+    <!-- Right Main Form Column -->
+    <div class="col-lg-10 col-xl-11">
+      <app-make-prescription #makeprescription ></app-make-prescription>
+    </div>
   </div>
 </div>
 
