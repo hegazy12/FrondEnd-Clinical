@@ -44,7 +44,6 @@ export class ListPatient
     //                 console.log(P); 
     //                 Sup.unsubscribe();
     //                 this.isloding.set(true);
-
     //                 console.log("this.isloding" + this.isloding);
     //             },
     //           error: (err) => {
@@ -56,7 +55,7 @@ export class ListPatient
     //         return true;
     // }
     
-      public getPatientsNew() : boolean
+      public getPatientsNew() 
       {
              let Sup = this.Callapi.getPatientsNew().subscribe({
               next: (P : PatientsResponse) =>
@@ -73,6 +72,6 @@ export class ListPatient
                 this.router.navigate(['/Login']);
               }
             });
-            return true;
+           
     }
 }

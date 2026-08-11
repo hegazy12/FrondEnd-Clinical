@@ -1,4 +1,4 @@
-import { Component , signal } from '@angular/core';
+import { Component , signal , ViewChild} from '@angular/core';
 import { SwalAlert } from '../../../services/swalAlert/swal-alert';
 import { Callapi } from '../../../services/callapi/callapi';
 import { VerfivationToken } from '../../../services/verfivationToken/verfivation-token';
@@ -6,7 +6,6 @@ import { Router , ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DTODrug} from '../../../interfaces/dtodrug';
 import {Prescriptiondto} from '../../../interfaces/prescription'
-import { parse } from 'path';
 import {PrescriptionList } from '../prescription-list/prescription-list'
 
 
@@ -19,6 +18,8 @@ import {PrescriptionList } from '../prescription-list/prescription-list'
 
 export class MakePrescription 
 {
+  @ViewChild(PrescriptionList) prescriptionListRef!: PrescriptionList;
+
   public DTODrugs = signal<DTODrug[]>([]);
   public from : Date| string=""; 
   public to : Date| string=""; 
@@ -51,7 +52,8 @@ export class MakePrescription
 
      onSpecialtyChange(event: Event) {
        const element = event.target as HTMLSelectElement;
-        if(element.name =="frequency") 
+         console.log("element.name = " + element.name);
+       if(element.name =="frequency") 
         {
            this.Frequency.set(Number(element.value));
            console.log("Frequency = " + this.Frequency);
@@ -59,7 +61,7 @@ export class MakePrescription
         }else if(element.name == "type")
         {
             this.type.set(Number(element.value));
-             console.log("Frequency = " + this.type);
+             console.log("type = " + this.type());
         }else if(element.name == "drug")
         {
             this.DrugId.set(element.value);
@@ -90,26 +92,29 @@ export class MakePrescription
         type :this.type(),
         notes :""
       };
+      
+      this.Create(Pres);
 
-       this.Create(Pres);
+      //this.PrescriptionList!.GetPrescriptionList(this.appointmentId);
     }
 
-  
-
-
-   public Create(Pres :Prescriptiondto) : boolean {
+  public Create(Pres :Prescriptiondto)  {
       let sub =this.Callapi.CreatPrescription(Pres).subscribe({
             next:(res)=>{
                 sub.unsubscribe();
                 this.swal.showSuccess();
-                return true;
+                // Safe call check
+                if (this.prescriptionListRef) {
+                  this.prescriptionListRef.GetPrescriptionList(this.appointmentId);
+                } else {
+                  console.warn('PrescriptionList component is not present in the DOM.');
+                }
             },
             error :(err)=>{
                 sub.unsubscribe();
-                return false;
             }
         });
-        return true;
+        
     }
-
+    
   }

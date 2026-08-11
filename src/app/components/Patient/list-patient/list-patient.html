@@ -1,43 +1,35 @@
-<div class="container mt-4 background">
-  <h3 class="mb-4 text-primary">Patients Registry</h3>
-  <div class="table-responsive shadow-sm rounded">
-    <table class="table table-hover table-striped align-middle mb-0">
-      <thead class="table-dark">
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Phone Number</th>
-          <th>Address</th>
-          <th>Date of Birth</th>
-          <th>Gender</th>
-          <td>Action</td>
-        </tr>
-      </thead>
-      <tbody>
+<div class="prescription-table border rounded overflow-hidden">
+
+  <div class="row g-0" style="background-color: #0d6efd;">
+        <div class="col-md-2 text-white fw-semibold p-2"> Name</div>
+        <div class="col-md-2 text-white fw-semibold p-2"> phoneNumber</div>
+        <div class="col-md-2 text-white fw-semibold p-2"> address </div>
+        <div class="col-md-2 text-white fw-semibold p-2"> dateOfBirth </div>
+        <div class="col-md-2 text-white fw-semibold p-2"> gender </div>
+   </div>
 
     @if(isloding())
     {
       @for (patient of PatientsData(); track $index) {
-          <tr>
-              <td>{{ patient.firstName }}</td>
-              <td>{{ patient.lastName }}</td>
-              <td>{{ patient.phoneNumber }}</td>
-              <td>{{ patient.address }}</td>
-              <td>{{ patient.dateOfBirth | date }}</td>
-              <td>{{ patient.gender }}</td>
-              <td><a [routerLink]="['/Patient/GetPatient', patient.id]">view</a> </td>
-          </tr>
+          <div class="row g-0 table-row">
+              <div class="col-md-2 p-2">{{ patient.firstName }} - {{ patient.lastName }}</div>           
+              <div class="col-md-2 p-2">{{ patient.phoneNumber }}</div>
+              <div class="col-md-2 p-2">{{ patient.address }}</div>
+              <div class="col-md-2 p-2">{{ patient.dateOfBirth | date }}</div>
+              <div class="col-md-2 p-2">{{ patient.gender }}</div>
+              <div class="col-md-2 p-2"><a [routerLink]="['/Patient/GetPatient', patient.id]">view</a> </div>
+            
+          </div>
           } 
           @empty
             {
-          <tr>
-              <td colspan="3" class="text-center text-muted py-4">No patients found.</td>
-          </tr>
+           <div class="row g-0">
+              <div class="col-md-12 text-center text-muted py-4">
+              No patients found.
+              </div>
+            </div>
           }
     }
-    </tbody>
-    </table>
-  </div>
+
+
 </div>
-
-

@@ -9,7 +9,7 @@ import {PrescriptionList} from '../../Prescription/prescription-list/prescriptio
 import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-patientappointment',
-  imports:  [Navbar,MakePrescription,PrescriptionList,DatePipe],
+  imports:  [Navbar,MakePrescription,DatePipe],
   templateUrl: './patientappointment.html',
   styleUrl: './patientappointment.css',
 })

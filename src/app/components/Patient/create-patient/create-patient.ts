@@ -1,14 +1,12 @@
-import { Component } from '@angular/core';
-import {Navbar} from '../../navbar/navbar'
+import { Component , ViewChild } from '@angular/core';
+import { Navbar } from '../../navbar/navbar'
 import { FormsModule } from '@angular/forms';
-import { PatientCreate} from '../../../interfaces/patient-create'
+import { PatientCreate } from '../../../interfaces/patient-create'
 import { Callapi } from '../../../services/callapi/callapi';
-import { VerfivationToken} from '../../../services/verfivationToken/verfivation-token'
+import { VerfivationToken } from '../../../services/verfivationToken/verfivation-token'
 import { Router } from '@angular/router';
-import { ListPatient} from '../list-patient/list-patient';
-import { ViewChild } from '@angular/core';
-import Swal from 'sweetalert2';
-import{SwalAlert} from '../../../services/swalAlert/swal-alert';
+import { ListPatient } from '../list-patient/list-patient';
+import{  SwalAlert } from '../../../services/swalAlert/swal-alert';
 
 @Component({
   selector: 'app-create-patient',
@@ -19,6 +17,9 @@ import{SwalAlert} from '../../../services/swalAlert/swal-alert';
 
 export class CreatePatient 
 {
+    @ViewChild(ListPatient) ListPatienttRef!: ListPatient;
+   
+   
     public Fristname : string ='';
     public LastName  : string = '';
     public Phone     : string= '';
@@ -26,14 +27,13 @@ export class CreatePatient
     public DateOfBirth : string= '';
     public gender : string= '';
     public isLoading :boolean = false;
-
     public refrishvalue : boolean= false;
 
     constructor(private Callapi : Callapi ,private Verfication :VerfivationToken ,private router: Router,private swal: SwalAlert){
       
     }
     
-    @ViewChild(ListPatient) childPatientList!: ListPatient;
+   
 
     ngOnInit():void{
      if(this.Verfication.islogin() == false)
@@ -72,7 +72,15 @@ export class CreatePatient
      this.makefildesEmpty();
     
      let sub = this.Callapi.createPatient(Patint).subscribe({
-      next: (res) => {console.log('Successfully created:', res); sub.unsubscribe(); this.swal.showSuccess();  this.isLoading = false;},
+      next: (res) => {
+        console.log('Successfully created:', res);
+         sub.unsubscribe(); 
+         this.swal.showSuccess();  
+         this.isLoading = false;
+
+         this.ListPatienttRef.getPatientsNew();
+
+      },
       error: (err) => {console.error(err); sub.unsubscribe(); this.isLoading = false; } 
     });
   }
