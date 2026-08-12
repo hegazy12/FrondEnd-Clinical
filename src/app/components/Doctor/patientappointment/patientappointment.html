@@ -16,22 +16,34 @@
     </p>
   </div>
 
-  <!-- Full-Width Content Area -->
   <div class="row g-3">
     <!-- Left Action Column -->
     <div class="col-lg-2 col-xl-1">
-      <button class="btn btn-primary shadow-sm" style="margin: 1%;" >
-        Prescription
+      <button class="btn btn-primary shadow-sm" style="margin: 1%;" #prescriptionid name="prescription" (click)="viewpage(prescriptionid.name)" >
+        prescription
       </button>
-      <button class="btn btn-primary shadow-sm" style="margin: 1%;" >
+      <button class="btn btn-primary shadow-sm" style="margin: 1%;" #investgationid  name="investgation" (click)="viewpage(investgationid.name)" >
         investgation
+      </button>
+      <button class="btn btn-primary shadow-sm" style="margin: 1%;" #vitalsignsid  name="vitalsigns" (click)="viewpage(vitalsignsid.name)" >
+        vitalsigns
+      </button>
+      <button class="btn btn-primary shadow-sm" style="margin: 1%;" #allergiesid name="allergies" (click)="viewpage(allergiesid.name)" >
+        allergies
       </button>
     </div>
 
-    <!-- Right Main Form Column -->
+
     <div class="col-lg-10 col-xl-11">
-      <app-make-prescription #makeprescription ></app-make-prescription>
+      @if(view() == 1){
+        <app-make-prescription #makeprescription ></app-make-prescription>
+      }@else if (view() == 2) {
+        <app-creat-investgation #creatinvestgation ></app-creat-investgation>
+      } 
     </div>
+
+  
+
   </div>
 </div>
 

@@ -13,27 +13,27 @@ export const routes: Routes = [
         component: Login
     },
     {
-        path:"Login",
+        path:"login",
         component: Login
     },{
-        path:"Mainpage",
+        path:"mainpage",
         component: Mainpage
     },{
-        path :"CreatePatient",
+        path :"createpatient",
         component :CreatePatient
     },{
-        path:"Patient/GetPatient/:id",
+        path:"patient/getpatient/:id",
         component:Patientview
     },{
-        path:"Sitting",
+        path:"sitting",
         component: Settings
     },
     {
-        path: 'Mypatient',
+        path: 'mypatient',
         component: Mypatient
     },
     {
-        path: 'Patientappointment/:id',
+        path: 'patientappointment/:id',
         component: Patientappointment
     }
 ];

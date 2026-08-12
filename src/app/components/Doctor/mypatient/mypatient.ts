@@ -29,7 +29,7 @@ export class Mypatient {
     if(this.Vervication.islogin() == false)
     {
         console.log("ManePage is " + this.Vervication.islogin());
-         this.router.navigate(['/Login']);
+         this.router.navigate(['/login']);
     }
     else
     {

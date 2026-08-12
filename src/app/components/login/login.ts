@@ -28,7 +28,7 @@ export class Login
   ngOnInit():void{
 
      if(this.Verfivation.islogin() == true){
-        this.router.navigate(['/Mainpage']);
+        this.router.navigate(['/mainpage']);
       }
     
     }
@@ -54,7 +54,7 @@ export class Login
           localStorage.setItem('id'         , JSON.stringify(response.data.id));
           localStorage.setItem('userName'   , JSON.stringify(response.data.userName));
           console.log('Token stored in localStorage:', response.data.token);
-          this.router.navigate(['/Mainpage']);
+          this.router.navigate(['/mainpage']);
           console.log('Login successful:', response);
         }
         else

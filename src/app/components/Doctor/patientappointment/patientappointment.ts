@@ -5,11 +5,11 @@ import { Callapi } from '../../../services/callapi/callapi';
 import { Navbar } from '../../navbar/navbar';
 import {AppointmentAllinfo, AppointmentDTO2} from '../../../interfaces/appointment-dto-0';
 import { MakePrescription } from '../../Prescription/make-prescription/make-prescription';
-import {PrescriptionList} from '../../Prescription/prescription-list/prescription-list';
 import { DatePipe } from '@angular/common';
+import { CreatInvestgation } from '../../investgation/creat-investgation/creat-investgation';
 @Component({
   selector: 'app-patientappointment',
-  imports:  [Navbar,MakePrescription,DatePipe],
+  imports:  [Navbar,MakePrescription,DatePipe,CreatInvestgation],
   templateUrl: './patientappointment.html',
   styleUrl: './patientappointment.css',
 })
@@ -17,7 +17,8 @@ import { DatePipe } from '@angular/common';
 export class Patientappointment {
   
   appointmentId: string = "";
-  
+  public view = signal<number>(1);
+
   constructor(private callapi : Callapi,
               private router:Router,
               private Vervication:VerfivationToken,
@@ -31,7 +32,7 @@ export class Patientappointment {
   if(this.Vervication.islogin() == false)
     {
         console.log("ManePage is " + this.Vervication.islogin());
-        this.router.navigate(['/Login']);
+        this.router.navigate(['/login']);
     }
     else
     {
@@ -41,6 +42,21 @@ export class Patientappointment {
     }
   }
   
+  public viewpage(viewName : string)
+  {
+    if(viewName == "prescription"){
+      this.view.set(1);
+    }else if(viewName == "investgation"){
+      this.view.set(2);
+    }else if(viewName == "vitalsigns"){ 
+      this.view.set(3);
+    }
+    else if(viewName == "allergies"){ 
+      this.view.set(4);
+    }
+
+  }
+
   public appointmentResponse = signal<AppointmentAllinfo | null>(null);
   public appointment = signal<AppointmentDTO2 | null>(null);
 

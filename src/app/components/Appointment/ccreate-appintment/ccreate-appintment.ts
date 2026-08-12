@@ -36,7 +36,7 @@ export class CCreateAppintment
      ngOnInit():void{
           if(this.Verfication.islogin() == false)
             {
-              this.router.navigate(['/Login']);
+              this.router.navigate(['/login']);
             }
             else
             {

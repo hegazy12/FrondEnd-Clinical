@@ -81,6 +81,7 @@ export class MakePrescription
      })
   }
 
+
   public onSubmit() : void
   {
       let Pres :Prescriptiondto =
@@ -94,10 +95,10 @@ export class MakePrescription
       };
       
       this.Create(Pres);
-
       //this.PrescriptionList!.GetPrescriptionList(this.appointmentId);
     }
 
+    
   public Create(Pres :Prescriptiondto)  {
       let sub =this.Callapi.CreatPrescription(Pres).subscribe({
             next:(res)=>{
@@ -114,7 +115,6 @@ export class MakePrescription
                 sub.unsubscribe();
             }
         });
-        
     }
     
   }

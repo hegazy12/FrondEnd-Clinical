@@ -1,11 +1,11 @@
 <div class="row" style="padding: .3%; background-color: #0d6efd; border-radius: 6px;">
   <div class="col-md-1">
-    <strong> <a class="nav-link text-white" [routerLink]="['/CreatePatient']">Add Patient</a></strong>
+    <strong> <a class="nav-link text-white" [routerLink]="['/createpatient']">Add Patient</a></strong>
   </div>
 
   <div class="col-md-10">
-    @if (roles.includes('Doctor')) {
-      <strong> <a class="nav-link text-white" [routerLink]="['/Mypatient']">my Patients</a> </strong>
+    @if (roles.includes('doctor') ||roles.includes('Doctor')) {
+      <strong> <a class="nav-link text-white" [routerLink]="['/mypatient']">my Patients</a> </strong>
     }
   </div>
 

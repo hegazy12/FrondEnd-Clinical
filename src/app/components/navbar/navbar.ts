@@ -21,8 +21,7 @@ export class Navbar
 
   public logOut (): void 
   {
-    localStorage.removeItem("token");
-    localStorage.removeItem("Login");
-    this.router.navigate(['/Login']);
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 }

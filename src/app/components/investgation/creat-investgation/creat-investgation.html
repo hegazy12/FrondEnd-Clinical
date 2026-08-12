@@ -1,1 +1,37 @@
-<p>creat-investgation works!</p>
+<form>
+     <div class="row" style="margin-right: .5%; margin-left: .5%;">
+        <div class="col-md-10">
+            <input type="text" class="form-control" #TextsearchTearm placeholder="Search Examination"  >
+        </div>
+
+        <div class="col-md-2 d-flex justify-content-end">
+            <input type="button" class="btn btn-primary" value="GetExaminations" (click)="SearchExaminations(TextsearchTearm.value)" >           
+        </div>   
+
+        <div class="col-md-12">
+            <label class="form-label fw-semibold text-muted small">Examination</label>
+            <select class="form-select" aria-label="Default select example" name="Examination" #examination (change)="onSpecialtyChange($event)"  >
+              @for (EX of Examinations(); track $index) {
+                <option [value]="EX.id">{{EX.nameEn}} /{{EX.code}}</option>
+               }
+            </select>
+        </div>
+        
+        <div class="col-md-10" style="margin-top: 1%;" >
+          @if(MedicalExaminationsDTO() != null){
+          <h5>
+            ({{MedicalExaminationsDTO()?.code}}) {{MedicalExaminationsDTO()?.nameEn}} - {{MedicalExaminationsDTO()?.classificationExaminationDTO1?.categoryNameEn}}
+          </h5>
+          }
+        </div>
+        
+        <div class="col-2 d-flex justify-content-end" style="margin-top: 1%;" >
+          <button type="button" class="btn btn-primary " (click)="onSubmit()" >Save Changes</button>
+        </div>
+
+     </div>
+</form>
+
+<div class="row" style="margin:.5%">
+<app-list-investgation></app-list-investgation>
+</div>

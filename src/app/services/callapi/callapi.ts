@@ -1,16 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap, catchError, throwError, Observable } from 'rxjs';
-import { VerfivationToken} from '../verfivationToken/verfivation-token';
-import { Patient, PatientCreate} from '../../interfaces/patient-create'; 
-import { CreateAppointment} from '../../interfaces/create-appointment'; 
-import { DTODocror,Appointment} from '../../interfaces/dtodocror';
-import { createDoctors} from '../../interfaces/CreateDoctor';
-import {DTODrug} from '../../interfaces/dtodrug';
+import { VerfivationToken } from '../verfivationToken/verfivation-token';
+import { PatientCreate } from '../../interfaces/patient-create'; 
+import { createDoctors } from '../../interfaces/CreateDoctor';
+import { DTODrug } from '../../interfaces/dtodrug';
 import { PatientsResponse,PatientResponse } from '../../interfaces/patient-response';
-import { DoctorResponse,DoctorsResponse,DoctorDto0} from '../../interfaces/doctor-dto';
-import { AppointmentAllinfo, AppointmentDTO0,AppointmentDTO1, AppointmentResponse, AppointmentsResponse} from '../../interfaces/appointment-dto-0';
-import {Prescriptiondto,PrescriptionResponse} from '../../interfaces/prescription';
+import { DoctorsResponse } from '../../interfaces/doctor-dto';
+import { AppointmentAllinfo, AppointmentDTO0, AppointmentResponse, AppointmentsResponse } from '../../interfaces/appointment-dto-0';
+import { Prescriptiondto,PrescriptionResponse } from '../../interfaces/prescription';
+import {MedicalExaminationsResponse ,saveMedicalExaminationDTO,saveExaminationListResponse} from '../../interfaces/medical-examinations-dto'
 @Injectable({
   providedIn: 'root',
 })
@@ -18,7 +17,9 @@ export class Callapi
 {
   //private url: string = "http://194.146.24.155/clinical/api/";
   //private url: string = "https://localhost:7262/"
-  private url: string = "http://localhost:5244/"
+  //private url: string = "http://localhost:5244/"
+  private url: string = "http://192.168.0.148:5000/"
+
 
   
   constructor(private Http:HttpClient , private token :VerfivationToken)
@@ -154,6 +155,20 @@ export class Callapi
       })
     );
   }
+
+  public SearchMedicalExaminations(SearchTerm:string)
+  {
+    
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    return this.Http.get<MedicalExaminationsResponse>(this.url + `medicalExamination/GetGetDrugs?SearchTerm=${SearchTerm}`, { headers }).pipe(
+      tap(response => { }),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+    
+  }
+
+
   public GetDrugById(DrugId:string)
   {
     
@@ -184,5 +199,26 @@ export class Callapi
       })
     );
   }
+  
+  public createExamination(Create: saveMedicalExaminationDTO):Observable<any>
+   {
+     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});  
+        return this.Http.post<any>(this.url + "medicalExamination/Add",Create,{ headers }).pipe(
+          tap(response => {}),
+          catchError(error => {
+            return throwError(() => error);
+      })
+    );
+  }
 
+  public ExaminationList(id: string):Observable<saveExaminationListResponse>
+   {
+     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    
+    return this.Http.get<saveExaminationListResponse>(this.url + `medicalExamination/GetByAppointmentId?id=${id}`, { headers }).pipe(
+      tap(response => { }),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+  }
 }

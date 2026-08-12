@@ -21,8 +21,8 @@ export class Mainpage
   {
     if(this.Vervication.islogin() == false)
     {
-         console.log("ManePage is " + this.Vervication.islogin());
-         this.router.navigate(['/Login']);
+         console.log("manePage is " + this.Vervication.islogin());
+         this.router.navigate(['/login']);
     }
     else
     {
