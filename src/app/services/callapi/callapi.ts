@@ -17,9 +17,9 @@ export class Callapi
 {
   //private url: string = "http://194.146.24.155/clinical/api/";
   //private url: string = "https://localhost:7262/"
-  //private url: string = "http://localhost:5244/"
-  private url: string = "http://192.168.0.148:5000/"
-
+  private url: string = "https://barge-manhole-crib.ngrok-free.dev/api/"
+  //private url: string = "http://192.168.0.148:5000/"
+   //private url = "https://barge-manhole-crib.ngrok-free.dev/"
 
   
   constructor(private Http:HttpClient , private token :VerfivationToken)
@@ -29,7 +29,8 @@ export class Callapi
 
   public createPatient(patientData: PatientCreate):Observable<any>
   {
-     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,
+     'ngrok-skip-browser-warning': 'true'});
     
      return this.Http.post<any>(this.url + "Patient/Create",patientData,{ headers }).pipe(
       tap(response => {
@@ -43,7 +44,7 @@ export class Callapi
 
   public getpatients(nuberpage : number): Observable<any>
    {    
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`});
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
 
     return this.Http.get<PatientCreate[]>(this.url + `Patient/GetPatiensInPage/${nuberpage}`, { headers }).pipe(
       tap(response => {}),
@@ -54,7 +55,7 @@ export class Callapi
   
   public getPatientsNew(): Observable<PatientsResponse>
    {    
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`});
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
     return this.Http.get<PatientsResponse>(this.url + `Patient/GetPatientsNew`, { headers }).pipe(
       tap(response => {}),
       catchError(error => {return throwError(() => error);
@@ -65,7 +66,7 @@ export class Callapi
 
   public GetPatient(id : string)
   {
-    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
     
     return this.Http.get<PatientResponse>(this.url + `Patient/GetPatient/${id}`, { headers }).pipe(
       tap(response => {}),
@@ -76,7 +77,7 @@ export class Callapi
 
   public createِِِAppointment(Create: AppointmentDTO0):Observable<AppointmentResponse>
   {
-    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
     
      return this.Http.post<AppointmentResponse>(this.url + "Appointment/createAppointment",Create,{ headers }).pipe(
       tap(response => {}),
@@ -90,7 +91,7 @@ export class Callapi
 
   public createDoctor(Create: createDoctors):Observable<any>
     {
-    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
     
      return this.Http.post<any>(this.url + "Doctor/CreateDoctor",Create,{ headers }).pipe(
       tap(response => {}),
@@ -102,7 +103,7 @@ export class Callapi
   
   public GetDoctors()
   {
-    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
     
     return this.Http.get<DoctorsResponse>(this.url + `Doctor/getAllDoctors`, { headers }).pipe(
       tap(response => {}),
@@ -115,7 +116,7 @@ export class Callapi
 
   public GetPatientAppoinment(PatientId:string):Observable<AppointmentsResponse>
   {
-    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
     
     return this.Http.get<AppointmentsResponse>(this.url + `Appointment/getPatientAppointments/${PatientId}`, { headers }).pipe(
       tap(response => {}),
@@ -127,7 +128,7 @@ export class Callapi
 
   public GetDoctorAppoinment(DoctorId:string):Observable<AppointmentsResponse>
   {
-    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
     return this.Http.get<AppointmentsResponse>(this.url + `Appointment/getDoctorAppointments/${DoctorId}`, { headers }).pipe(
       tap(response => {}),
       catchError(error => {return throwError(() => error);
@@ -137,7 +138,7 @@ export class Callapi
 
   public GetAppointmentAllInfo(AppointmentId:string):Observable<AppointmentAllinfo>
   {
-    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
     return this.Http.get<AppointmentAllinfo>(this.url + `Appointment/GetAllInfo/${AppointmentId}`, { headers }).pipe(
       tap(response => {}),
       catchError(error => {return throwError(() => error);
@@ -147,7 +148,7 @@ export class Callapi
 
   public SearchDrugs(SearchTerm:string)
   {
-    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
     
     return this.Http.get<DTODrug[]>(this.url + `Drug/GetDrugs?SearchTerm=${SearchTerm}`, { headers }).pipe(
       tap(response => { }),
@@ -159,7 +160,7 @@ export class Callapi
   public SearchMedicalExaminations(SearchTerm:string)
   {
     
-    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
     return this.Http.get<MedicalExaminationsResponse>(this.url + `medicalExamination/GetGetDrugs?SearchTerm=${SearchTerm}`, { headers }).pipe(
       tap(response => { }),
       catchError(error => {return throwError(() => error);
@@ -176,7 +177,7 @@ export class Callapi
 
   public CreatPrescription(Prescriptiondto : Prescriptiondto)
   {
-    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
     
     console.log(headers);
     console.log(this.token.getToken());
@@ -191,7 +192,7 @@ export class Callapi
 
   public  PrescriptionList(Id:string)
   {
-    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
     
     return this.Http.get<PrescriptionResponse>(this.url + `Prescription/GetbyappotmintID/${Id}`, { headers }).pipe(
       tap(response => { }),
@@ -202,7 +203,7 @@ export class Callapi
   
   public createExamination(Create: saveMedicalExaminationDTO):Observable<any>
    {
-     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});  
+     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});  
         return this.Http.post<any>(this.url + "medicalExamination/Add",Create,{ headers }).pipe(
           tap(response => {}),
           catchError(error => {
@@ -213,7 +214,7 @@ export class Callapi
 
   public ExaminationList(id: string):Observable<saveExaminationListResponse>
    {
-     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`});
+     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
     
     return this.Http.get<saveExaminationListResponse>(this.url + `medicalExamination/GetByAppointmentId?id=${id}`, { headers }).pipe(
       tap(response => { }),
@@ -221,4 +222,6 @@ export class Callapi
       })
     );
   }
+
+  
 }

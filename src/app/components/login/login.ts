@@ -40,8 +40,10 @@ export class Login
     console.log('Password:', this.password);
     
     // var url = "http://194.146.24.155/clinical/api/Account/Login";
-    //var url = " https://localhost:7262/Account/Login";
-    var url = "http://localhost:5244/Account/Login";
+    // var url = " https://localhost:7262/Account/Login";
+    // var url = "http://192.168.0.148:5000/Account/Login";
+     var url = "https://barge-manhole-crib.ngrok-free.dev/api/Account/Login";
+    // var url = "https://barge-manhole-crib.ngrok-free.dev/Account/Login"
     this.http.post<LoginResponse>(url, { userName: this.username, password: this.password })
       .subscribe(response => {
 

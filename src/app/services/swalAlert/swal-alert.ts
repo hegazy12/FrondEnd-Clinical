@@ -31,6 +31,21 @@ export class SwalAlert {
       });
     }
 
+    showWoringSave(message: string)
+    {
+     Swal.fire({
+      title : "can't save change",
+      text :message,
+      icon:"warning",
+      confirmButtonColor: '#dc3545', // Danger Red
+      background: '#fff',
+      customClass: {
+        confirmButton: 'px-4 py-2'
+      }
+
+     })
+    }
+
 showLoginFailed(message: string ) {
     Swal.fire({
       title: 'Login Failed!',

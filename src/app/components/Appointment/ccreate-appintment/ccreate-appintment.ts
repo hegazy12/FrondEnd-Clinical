@@ -6,10 +6,11 @@ import { FormsModule } from '@angular/forms';
 import {SwalAlert} from '../../../services/swalAlert/swal-alert';
 import { DoctorsResponse,DoctorDto1 } from '../../../interfaces/doctor-dto';
 import { AppointmentDTO0 } from '../../../interfaces/appointment-dto-0';
+import {ListAppintment} from '../../Appointment/list-appintment/list-appintment';
 
 @Component({
   selector: 'app-ccreate-appintment',
-  imports: [FormsModule],
+  imports: [FormsModule,ListAppintment],
   templateUrl: './ccreate-appintment.html',
   styleUrl: './ccreate-appintment.css',
 })
@@ -66,24 +67,36 @@ export class CCreateAppintment
         console.log(element.name);
       }
 
-      public onSubmit() : void
+      public onSubmit() : boolean
       {
-        let Appointment :AppointmentDTO0 = {  appointmentDate    : this.dateTimeAppointment, 
+        let Appointment :AppointmentDTO0 = {  appointmentDate   : this.dateTimeAppointment, 
                                               deposit           : this.deposit,
                                               doctorId          : this.doctorId(),
                                               patientId         : this.patientId,
-                                              notes              : this.note,
+                                              notes             : this.note,
                                               status            : "Pending" };
+        console.log(Appointment);
+        if(Appointment.appointmentDate == "") 
+        {
+          this.swal.showWoringSave("please inter datetime for Appointment");
+          return false;
+        }else if(Appointment.doctorId == "")
+        {
+           this.swal.showWoringSave("Please Select Doctor");
+           return false
+        }else{
 
-        let sub =  this.Callapi.createِِِAppointment(Appointment).subscribe({
-        next: (res) => {
-           sub.unsubscribe(); 
-           this.swal.showSuccess();},
-           error: (err) => { 
+          let sub =  this.Callapi.createِِِAppointment(Appointment).subscribe({
+          next: (res) => {
             sub.unsubscribe(); 
-            this.isLoading = false; } 
-         });
-      }
-
-
+            this.swal.showSuccess();
+            return true},
+            error: (err) => { 
+              sub.unsubscribe(); 
+              this.isLoading = false;
+            return false } 
+          });
+        }
+         return true;
+        }
 }

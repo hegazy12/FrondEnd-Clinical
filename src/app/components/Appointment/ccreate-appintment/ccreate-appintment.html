@@ -3,8 +3,9 @@
 <div class="container my-4 background">
   <div class="card shadow-sm border-0 background">
     <div class="card-body p-4">
+
       <h5 class="card-title mb-4 text-secondary">
-        <i class="bi bi-person-lines-fill me-2"></i>Make a new Appointment
+        <i class="bi bi-person-lines-fill me-2">Make a new Appointment</i>
       </h5>
       
       <form>
@@ -19,8 +20,8 @@
             <select class="form-select" aria-label="Default select example" name="Doctors" (change)="onSpecialtyChange($event)">
               <option value="no" selected>Open this select menu</option>
               @for (Doctor of Docrors(); track $index) {
-              <option value="{{Doctor.id}}">{{Doctor.fristName}} {{Doctor.lastName}} ({{Doctor.specialization}}) </option>
-            }
+                  <option value="{{Doctor.id}}">{{Doctor.fristName}} {{Doctor.lastName}} ({{Doctor.specialization}}) </option>
+              }
             </select>
           </div> 
           
@@ -44,6 +45,10 @@
         
       </div>
       </form>
+      
+        <div class="row" style="margin:.5%">
+        <app-list-appintment></app-list-appintment>
+        </div>
     </div>
   </div>
 </div>

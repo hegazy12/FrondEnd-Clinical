@@ -53,6 +53,8 @@ export class CreatePatient
      this.Fristname  ='';
      this.LastName  = '';
      this.Phone    = '';
+     this.Address = '';
+     this.DateOfBirth = '';
     }
 
 
@@ -61,14 +63,36 @@ export class CreatePatient
     {
      this.isLoading = true;
     
-     let Patint : PatientCreate ={ 
+      let Patint : PatientCreate ={ 
       firstName :this.Fristname ,
       lastName : this.LastName,
       phoneNumber : this.Phone, 
       dateOfBirth : this.DateOfBirth,
       address : this.Address, 
       gender : this.gender};
-    
+
+      console.log(Patint);
+      if(Patint.firstName == "")
+      {
+        this.swal.showWoringSave("please inter Fristname for patient");
+        this.isLoading = false;
+      }
+      else if(Patint.lastName == "")
+      {
+        this.swal.showWoringSave("Please inter Lastname for patient");
+        this.isLoading = false;
+      }else if(Patint.dateOfBirth == ""){
+        this.swal.showWoringSave("Please inter dateOfBirth for patient");
+        this.isLoading = false;
+
+      }else if(Patint.gender == ""){
+        this.swal.showWoringSave("Please select gender for patient");
+        this.isLoading = false;
+      }else if(Patint.phoneNumber == ""){
+        this.swal.showWoringSave("Please inter phoneNumber for patient");
+        this.isLoading = false;
+      } else{
+
      this.makefildesEmpty();
     
      let sub = this.Callapi.createPatient(Patint).subscribe({
@@ -83,5 +107,6 @@ export class CreatePatient
       },
       error: (err) => {console.error(err); sub.unsubscribe(); this.isLoading = false; } 
     });
+  }
   }
 }

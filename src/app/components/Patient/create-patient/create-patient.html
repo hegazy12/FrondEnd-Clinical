@@ -9,38 +9,26 @@
       
       <form>
         <div class="row g-3 ">
-          
-          <!-- First Name -->
           <div class="col-md-4 ">
             <label class="form-label fw-semibold text-muted small">First Name</label>
             <input type="text" class="form-control" name="Fname" placeholder="John" [(ngModel)]="Fristname" >
           </div>
-
-          <!-- Last Name -->
           <div class="col-md-4 ">
             <label class="form-label fw-semibold text-muted small">Last Name</label>
             <input type="text" class="form-control" name="Lname" placeholder="Doe" [(ngModel)]="LastName">
           </div>
-
-          <!-- Phone Number -->
           <div class="col-md-4 ">
             <label class="form-label fw-semibold text-muted small">Phone Number</label>
             <input type="tel" class="form-control" name="Phone" placeholder="+20..." [(ngModel)] = "Phone">
           </div>
-
-          <!-- Address -->
           <div class="col-md-4 ">
             <label class="form-label fw-semibold text-muted small">Address</label>
             <input type="text" class="form-control" name="Address" placeholder="123 Main St" [(ngModel)]="Address">
           </div>
-
-          <!-- dateOfBirth -->
           <div class="col-md-4 ">
             <label class="form-label fw-semibold text-muted small">dateOfBirth</label>
             <input type="date" class="form-control" name="DateOfBirth" placeholder="1990-01-01" [(ngModel)]="DateOfBirth">
           </div>
-
-       <!-- Gender Toggle Buttons -->
         <div class="col-md-4">
           <label class="form-label fw-semibold text-muted small d-block">Gender</label>
           <div class="btn-group w-100" role="group">
@@ -67,11 +55,7 @@
               </div>
           </div>
         </div>
-
-          
         </div>
-
-        <!-- Action Button Row -->
         <div class="row mt-4 ">
           <div class="col-12 d-flex justify-content-end">
             <button type="button" class="btn btn-primary px-4" [disabled]="isLoading" (click)="onSubmit()">

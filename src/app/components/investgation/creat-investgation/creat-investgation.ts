@@ -1,13 +1,11 @@
-
 import { Component , signal , ViewChild} from '@angular/core';
 import { SwalAlert } from '../../../services/swalAlert/swal-alert';
 import { Callapi } from '../../../services/callapi/callapi';
 import { VerfivationToken } from '../../../services/verfivationToken/verfivation-token';
 import { Router , ActivatedRoute } from '@angular/router';
-import  { MedicalExaminationsResponse ,MedicalExaminationsDTO,saveMedicalExaminationDTO } from '../../../interfaces/medical-examinations-dto';
+import { MedicalExaminationsResponse ,MedicalExaminationsDTO,saveMedicalExaminationDTO } from '../../../interfaces/medical-examinations-dto';
 import { FormsModule } from '@angular/forms';
 import { ListInvestgation } from '../list-investgation/list-investgation'
-
 @Component({
   selector: 'app-creat-investgation',
   imports: [FormsModule,ListInvestgation],
@@ -16,6 +14,7 @@ import { ListInvestgation } from '../list-investgation/list-investgation'
 })
 export class CreatInvestgation
 {
+    @ViewChild(ListInvestgation) ListInvestgationRef!: ListInvestgation;
 
     appointmentId : string;
     MedicalExaminationsid :string="";
@@ -69,14 +68,20 @@ export class CreatInvestgation
           idExamination : this.MedicalExaminationsid
 
         };
-        
-        this.Create(create);
+        if(create.idExamination == "")
+        {
+          this.swal.showWoringSave("Pleas select Examination");
+        } else {
+          this.Create(create);
+        }
       }
-        public Create(Pres :saveMedicalExaminationDTO)  {
+
+      public Create(Pres :saveMedicalExaminationDTO)  {
             let sub =this.Callapi.createExamination (Pres).subscribe({
                   next:(res)=>{
                       sub.unsubscribe();
                       this.swal.showSuccess();
+                      this.ListInvestgationRef.GetInvestgationlist(this.appointmentId);
                       // Safe call check
                       // if (this.prescriptionListRef) {
                       //   this.prescriptionListRef.GetPrescriptionList(this.appointmentId);

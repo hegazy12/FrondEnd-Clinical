@@ -1,18 +1,33 @@
-<div class="container">
- <div class="row">
-@for (item of Appointments(); track $index)
- {
-    <div class="col-sm-4 border border-secondary">
-     <h4> 
-         
-      </h4>
-     <h5>
-       appointmentDate : {{item.appointmentDate}}  
-      - status: {{item.status}} 
-          - notes: {{item.notes}}
-   </h5>
 
+
+<div class="prescription-table border rounded overflow-hidden">
+
+  <div class="row g-0" style="background-color: #0d6efd;">
+    <div class="col-md-2 text-white fw-semibold p-2">Doctor Name</div>
+    <div class="col-md-2 text-white fw-semibold p-2">Appointment Date</div>
+    <div class="col-md-2 text-white fw-semibold p-2">status</div>
+    <div class="col-md-2 text-white fw-semibold p-2">deposit</div>
+    <div class="col-md-2 text-white fw-semibold p-2">notes</div>
+   <div class="col-md-2 text-white fw-semibold p-2">Action</div>
+    
+  </div>
+
+    @for (item of Appointments(); track $index) {
+    <div class="row g-0 table-row">
+      <div class="col-md-2 p-2">{{ item.doctorFirstName }} - {{item.doctorLastName }}</div>
+      <div class="col-md-2 p-2">{{ item.appointmentDate }}</div>
+      <div class="col-md-2 p-2">{{ item.status }}</div>
+      <div class="col-md-2 p-2">{{ item.deposit }}</div>
+      <div class="col-md-2 p-2">Dr. {{ item.notes }}</div>
+      <div class="col-md-2 p-2">view</div>
+   
     </div>
- }
- </div>
-</div>
+  } @empty {
+    <div class="row g-0">
+      <div class="col-md-12 text-center text-muted py-4">
+        No prescriptions found.
+      </div>
+    </div>
+  }
+
+</div> 

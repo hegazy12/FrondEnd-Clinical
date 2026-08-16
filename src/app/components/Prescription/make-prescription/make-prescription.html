@@ -12,18 +12,20 @@
         <div class="col-md-12">
             <label class="form-label fw-semibold text-muted small">Drug</label>
             <select class="form-select" aria-label="Default select example" name="drug" (change)="onSpecialtyChange($event)" >
+             <option value="">select durg pleas</option>  
               @for (Drug of DTODrugs(); track $index) {
                 <option [value]="Drug.id">{{Drug.commercialNameEn}} /{{Drug.scientificName}}</option>
                }
             </select>
         </div>
 
-       <div class="col-md-6" ><label>From</label> <input class="form-control" type="date" name="form" [(ngModel)]="from" ></div>  
-       <div class="col-md-6" ><label>To </label>  <input type="date" class="form-control" name="to" [(ngModel)]="to" ></div>
+       <div class="col-md-6" ><label>From</label> <input class="form-control" type="date" name="form" [(ngModel)]="from" min="{{from}}"></div>  
+       <div class="col-md-6" ><label>To </label>  <input type="date" class="form-control" name="to" [(ngModel)]="to" min="{{from}}"></div>
        
        <div class="col-md-6" >
        <label>Frequency</label> 
         <select class="form-control" name="frequency" (change)="onSpecialtyChange($event)"  >
+            <option value="0">select frequency pleas</option> 
             <option value="6">ever 6 hours</option> 
             <option value="8">ever 8 hours</option> 
             <option value="12">ever 12 hours</option> 
@@ -35,6 +37,7 @@
     <div class="col-md-6" >
     <label for="type">type</label>
     <select class="form-control" name="type" (change)="onSpecialtyChange($event)" >
+         <option value="0">select type pleas</option> 
          <option value="1" > type 1 </option> 
          <option value="2" > type 2 </option> 
          <option value="3" > type 3 </option> 

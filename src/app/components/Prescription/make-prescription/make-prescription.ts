@@ -26,7 +26,7 @@ export class MakePrescription
   public Note = signal<string | null>(null);
   public Frequency = signal<number | null>(6);
   public type = signal<number| null>(1);
-  DrugId =signal<string>('28DBB348-5C7A-47F8-A601-246A600BA075');
+  DrugId =signal<string>('');
   appointmentId : string;
   inputValue = signal<string>('');
   
@@ -46,6 +46,8 @@ export class MakePrescription
       }
     else
       {   
+         this.from = new Date().toISOString().split('T')[0];
+         this.to   = new Date().toISOString().split('T')[0];
 
       }
     }
@@ -94,7 +96,23 @@ export class MakePrescription
         notes :""
       };
       
-      this.Create(Pres);
+      if(Pres.drugId == ""){
+        this.swal.showWoringSave("Please select drug");
+      }
+      else if(Pres.frequency == 0){
+         this.swal.showWoringSave("Please select frequency");
+      }
+      else if(Pres.from == "") {
+           this.swal.showWoringSave("Please entar start date");
+      }else if(Pres.to == "") {
+          this.swal.showWoringSave("Please entar end date");
+      }
+      else if(Pres.type == 0){
+         this.swal.showWoringSave("Please select type");
+      }
+      else{
+         this.Create(Pres);
+      }
       //this.PrescriptionList!.GetPrescriptionList(this.appointmentId);
     }
 

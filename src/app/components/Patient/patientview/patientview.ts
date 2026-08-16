@@ -11,7 +11,7 @@ import { PatientResponse,PatientDTO } from '../../../interfaces/patient-response
 @Component({
   selector: 'app-patientview',
   standalone: true, // تأكد إنها true
-  imports: [Navbar,CCreateAppintment,ListAppintment],
+  imports: [Navbar,CCreateAppintment],
   templateUrl: './patientview.html',
   styleUrl: './patientview.css',
 })
