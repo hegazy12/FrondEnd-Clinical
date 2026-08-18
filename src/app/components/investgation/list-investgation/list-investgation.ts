@@ -1,4 +1,4 @@
-import { Component , signal , ViewChild} from '@angular/core';
+import { Component , Input, signal , ViewChild} from '@angular/core';
 import { SwalAlert } from '../../../services/swalAlert/swal-alert';
 import { Callapi } from '../../../services/callapi/callapi';
 import { VerfivationToken } from '../../../services/verfivationToken/verfivation-token';
@@ -11,17 +11,18 @@ import { saveExaminationListResponse,saveMedicalExaminationDTO1  } from '../../.
   styleUrl: './list-investgation.css',
 })
 export class ListInvestgation {
-    appointmentId:string="";
+   
     public saveExaminationListResponse =signal<saveExaminationListResponse | null>(null);
     public data= signal<saveMedicalExaminationDTO1[]>([]);
-
+   @Input({ required: true }) AppointmentID!: string;
+    
     constructor(private Callapi : Callapi ,
                 private Verfication :VerfivationToken ,
                 private router: Router,
                 private route: ActivatedRoute,
                 private swal: SwalAlert)
                 {
-                  this.appointmentId = this.route.snapshot.paramMap.get('id') || '';
+              
                 }
 
     ngOnInit():void{
@@ -30,7 +31,9 @@ export class ListInvestgation {
                 }
               else
                 { 
-                  this.GetInvestgationlist(this.appointmentId);
+                  this.GetInvestgationlist(this.AppointmentID);
+                  console.log("this.AppointmentID = "+this.AppointmentID);
+                
                 }
               }
     

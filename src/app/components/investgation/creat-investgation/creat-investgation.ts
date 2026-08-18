@@ -16,7 +16,7 @@ export class CreatInvestgation
 {
     @ViewChild(ListInvestgation) ListInvestgationRef!: ListInvestgation;
 
-    appointmentId : string;
+    public appointmentId : string;
     MedicalExaminationsid :string="";
     public MedicalExaminations = signal<MedicalExaminationsResponse  | null>(null);
     public Examinations = signal<MedicalExaminationsDTO[]>([]);

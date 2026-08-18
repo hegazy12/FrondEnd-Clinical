@@ -1,4 +1,4 @@
-import { Component,signal } from '@angular/core';
+import { Component,Input,signal } from '@angular/core';
 import {Callapi} from '../../../services/callapi/callapi';
 import {VerfivationToken} from '../../../services/verfivationToken/verfivation-token';
 import {Router,ActivatedRoute} from '@angular/router';
@@ -14,7 +14,7 @@ import { PrescriptionResponse,Prescriptiondto2 } from '../../../interfaces/presc
 export class PrescriptionList {
 
   appointmentId : string;
-  
+   @Input({ required: true }) AppointmentID!: string;
   public data = signal<Prescriptiondto2[]>([]);
 
   constructor(private Callapi : Callapi ,private Verfication :VerfivationToken ,private router : Router,private route: ActivatedRoute){ 
@@ -27,7 +27,7 @@ export class PrescriptionList {
       }
     else
       {   
-          this.GetPrescriptionList(this.appointmentId);
+        this.GetPrescriptionList(this.appointmentId);
       }
     }
       
@@ -36,7 +36,6 @@ export class PrescriptionList {
           next: (P : PrescriptionResponse) =>
             {
               this.data.set(P.data);
-              console.log(P.data);
             },
           error: (err) => 
           {

@@ -1,1 +1,57 @@
-<p>creat-vital works!</p>
+<form>
+     <div class="row" style="margin-right: .5%; margin-left: .5%;">
+        
+        <div class="row border border-primary rounded" style="margin-right: .5%; margin-left: .5%; padding: 1%;">
+        <div class="col-md-11">
+            <input type="text" class="form-control" #TextsearchTearm placeholder="Search Vital"  >
+        </div>
+        <div class="col-md-1 d-flex justify-content-end">
+            <input type="button" class="btn btn-primary" value="GetDrugs" (click)="SearchVital(TextsearchTearm.value)" >           
+        </div>  
+        <div class="col-md-12">
+             <label class="form-label fw-semibold text-muted small">Drug</label>
+        </div>
+        <div class="col-md-11">
+            <select class="form-select" aria-label="Select a vital sign" #vitalSelect (change)="AddVitalInView(vitalSelect.value)"  >
+                <option value="" disabled selected>Select a vital sign</option>
+                @for (vital of VitalS(); track vital.id) {
+                <option [value]="vital.id">
+                    {{ vital.name }} / {{ vital.mastarName }}
+                </option>
+                }
+            </select>
+        </div>
+       </div> 
+       <div class="row">
+            @if(Vital() != undefined){
+                <h5>{{Vital()?.name}}</h5>
+                <label>{{Vital()?.description}}</label>
+                <div class="col-md-10">
+                    @if(Vital()?.dataTypeName == "Numeric")
+                    {
+                        <input type="number" class="form-control" name="vitalvalue" #idvaluevital [min]="Vital()?.minValue ?? null" [max]="Vital()?.maxValue ?? null" /> 
+                    }@else if (Vital()?.dataTypeName == "Text"){
+                        <input type="text" class="form-control" #idvaluevital name="vitalvalue" >
+                    }@else if(Vital()?.dataTypeName == "Boolean"){
+                            <label>true</label>
+                            <input type="radio" name="vitalvalue" value="true">
+                        <br>
+                            <label>false</label>
+                            <input type="radio" name="vitalvalue" value="false">
+                    }@else if(Vital()?.dataTypeName == "Dropdown"){
+                        <select class="form-select" aria-label="Default select example" #idvaluevital name="vitalvalue">
+                            @for (item of Vital()?.listValues; track $index) {
+                                <option [value]="item">{{item}}</option>
+                            }
+                        </select>
+                    }
+                </div>
+
+                <div class="col-md-1">
+                    <input type="button" class="btn btn-primary" value="Save vital" >
+                </div>
+            }
+        </div>
+
+    </div>
+</form>

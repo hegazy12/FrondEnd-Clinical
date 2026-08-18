@@ -10,6 +10,7 @@ import { DoctorsResponse } from '../../interfaces/doctor-dto';
 import { AppointmentAllinfo, AppointmentDTO0, AppointmentResponse, AppointmentsResponse } from '../../interfaces/appointment-dto-0';
 import { Prescriptiondto,PrescriptionResponse } from '../../interfaces/prescription';
 import {MedicalExaminationsResponse ,saveMedicalExaminationDTO,saveExaminationListResponse} from '../../interfaces/medical-examinations-dto'
+import { VitalSignDto1, VitalSignDtoResponse } from '../../interfaces/vital-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -17,9 +18,9 @@ export class Callapi
 {
   //private url: string = "http://194.146.24.155/clinical/api/";
   //private url: string = "https://localhost:7262/"
-  private url: string = "https://barge-manhole-crib.ngrok-free.dev/api/"
+  //private url: string = "https://barge-manhole-crib.ngrok-free.dev/api/"
   //private url: string = "http://192.168.0.148:5000/"
-   //private url = "https://barge-manhole-crib.ngrok-free.dev/"
+   private url = "http://localhost:5244/"
 
   
   constructor(private Http:HttpClient , private token :VerfivationToken)
@@ -223,5 +224,25 @@ export class Callapi
     );
   }
 
+  public SearchVitals(SearchTerm:string)
+  {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    
+    return this.Http.get<VitalSignDtoResponse>(this.url + `VitalSign/searchByTearm?SearchTerm=${SearchTerm}`, { headers }).pipe(
+      tap(response => { }),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+  }
   
+   public GetPatientAppoinmentStory(DoctorId:string):Observable<AppointmentsResponse>
+  {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    return this.Http.get<AppointmentsResponse>(this.url + `Appointment/GetAllIsCompleted/${DoctorId}`, { headers }).pipe(
+      tap(response => {}),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+  }
+
 }
