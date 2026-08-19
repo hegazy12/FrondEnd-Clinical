@@ -1,4 +1,4 @@
-import { Component ,signal} from '@angular/core';
+import { Component ,signal, ViewChild} from '@angular/core';
 import { Callapi} from '../../../services/callapi/callapi';
 import {VerfivationToken} from '../../../services/verfivationToken/verfivation-token';
 import {Router,ActivatedRoute} from '@angular/router';
@@ -16,6 +16,8 @@ import {ListAppintment} from '../../Appointment/list-appintment/list-appintment'
 })
 export class CCreateAppintment
 {
+   @ViewChild(ListAppintment) ListAppintmentRef!: ListAppintment;
+    // public 
     public dateTimeAppointment: Date | string=""; 
     public note?: string | null="";  
     public doctorId =signal<string>('');
@@ -31,7 +33,6 @@ export class CCreateAppintment
                 private swal: SwalAlert)
                 {
                  this.patientId = this.route.snapshot.paramMap.get('id') || '';
-                 console.log(this.patientId);
                 }
 
      ngOnInit():void{
@@ -97,6 +98,7 @@ export class CCreateAppintment
             return false } 
           });
         }
+        this.ListAppintmentRef.GetPatientAppoinment(this.patientId);
          return true;
         }
 }

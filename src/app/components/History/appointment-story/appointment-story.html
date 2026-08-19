@@ -1,0 +1,15 @@
+<div class="row">
+    <h4> Doctor Name: {{AppointmentDTO3()?.doctorDTO_1?.fristName}} {{AppointmentDTO3()?.doctorDTO_1?.lastName}} {{AppointmentDTO3()?.doctorDTO_1?.specialization}} </h4>
+    <!-- @for (item of AppointmentDTO3()?.Prescriptiondto2; track $index)
+    {
+     <div> </div>
+    } -->
+    <div class="row" >
+        <h5> Prescription-list </h5>
+     <app-prescription-list [AppointmentID]="''" ></app-prescription-list>
+    </div>
+    <div class="row" >
+        <h5> investgation List </h5>
+        <app-list-investgation [AppointmentID]="''" ></app-list-investgation>
+    </div>
+</div>

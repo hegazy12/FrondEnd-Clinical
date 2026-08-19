@@ -3,7 +3,7 @@ import { VerfivationToken } from '../../../services/verfivationToken/verfivation
 import { Router,ActivatedRoute } from '@angular/router';
 import { Callapi } from '../../../services/callapi/callapi';
 import { Navbar } from '../../navbar/navbar';
-import { AppointmentAllinfo , AppointmentDTO2} from '../../../interfaces/appointment-dto-0';
+import { AppointmentAllinfo , AppointmentDTO2, makeCompleteResponse} from '../../../interfaces/appointment-dto-0';
 import { MakePrescription } from '../../Prescription/make-prescription/make-prescription';
 import { DatePipe } from '@angular/common';
 import { CreatInvestgation } from '../../investgation/creat-investgation/creat-investgation';
@@ -19,30 +19,28 @@ import { PatientStory } from '../../History/patient-story/patient-story';
 export class Patientappointment {
   @ViewChild(PatientStory) PatientStoryRef!: PatientStory;
 
-  appointmentId: string = "";
+  public appointmentId: string = "";
   public view = signal<number>(1);
   public PatientId: string ="";
-
+  
+  public makeCompleteResponse = signal<makeCompleteResponse| null>(null);
+  
   constructor(private callapi : Callapi,
               private router:Router,
               private Vervication:VerfivationToken,
               private route: ActivatedRoute)
               { 
                   this.appointmentId = this.route.snapshot.paramMap.get('id') || '';
-                  console.log("Patientappointment id " + this.appointmentId);
               }
   
   ngOnInit():void {
   if(this.Vervication.islogin() == false)
     {
-        console.log("ManePage is " + this.Vervication.islogin());
         this.router.navigate(['/login']);
     }
     else
     {
-        console.log("ManePage is " + this.Vervication.islogin());
         this.GetAppointment(this.appointmentId);
-        console.log("Patientappointment id " + this.appointmentId);
     }
   }
   
@@ -59,13 +57,12 @@ export class Patientappointment {
     else if(viewName == "allergies"){ 
       this.view.set(4);
     }else if(viewName == "viewhistory"){
-      console.log("viewhistory");
-      console.log(this.PatientId)
       this.view.set(5);
       setTimeout(() => {
         this.PatientStoryRef?.GetAppointment(this.PatientId);
        }, 2000);
-       
+    }else if(viewName == "addnextvisit"){
+        this.view.set(6);
     }
 
   }
@@ -78,16 +75,31 @@ export class Patientappointment {
      let Sup = this.callapi.GetAppointmentAllInfo(id).subscribe({
         next: (P :AppointmentAllinfo ) =>
           {
-              this.appointment.set(P.data);
-              //console.log("P.data.patientDTO_1.firstName " + JSON.stringify(P.data.patientDTO_1.firstName));
-              this.PatientId = P.data.patientDTO_1.id;
-              Sup.unsubscribe();
+            this.appointment.set(P.data);
+            this.PatientId = P.data.patientDTO_1.id;
+            Sup.unsubscribe();
           },
         error: (err) => 
         {
-            Sup.unsubscribe();
+          Sup.unsubscribe();
         }
         });
-            return true;
-        }
+          return true;
+  }
+  
+  public callMakeItComplete(){
+    this.makeItComplete(this.appointmentId);
+  }
+
+  public makeItComplete(appointmentId: string): void {
+    this.callapi.makeItComplete(appointmentId).subscribe({
+      next: (response: makeCompleteResponse) => {
+      this.makeCompleteResponse.set(response);
+      },
+      error: (err) => {
+        console.error('Error completing appointment:', err);
+      }
+    });
+  }
+
 }

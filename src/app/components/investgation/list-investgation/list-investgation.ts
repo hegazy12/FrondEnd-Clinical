@@ -30,8 +30,10 @@ export class ListInvestgation {
                   this.router.navigate(['/login']);
                 }
               else
-                { 
-                  this.GetInvestgationlist(this.AppointmentID);
+                {  
+                  if(this.AppointmentID != ""){
+                    this.GetInvestgationlist(this.AppointmentID);
+                  }
                   console.log("this.AppointmentID = "+this.AppointmentID);
                 
                 }

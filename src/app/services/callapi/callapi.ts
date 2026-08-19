@@ -7,8 +7,8 @@ import { createDoctors } from '../../interfaces/CreateDoctor';
 import { DTODrug } from '../../interfaces/dtodrug';
 import { PatientsResponse,PatientResponse } from '../../interfaces/patient-response';
 import { DoctorsResponse } from '../../interfaces/doctor-dto';
-import { AppointmentAllinfo, AppointmentDTO0, AppointmentResponse, AppointmentsResponse } from '../../interfaces/appointment-dto-0';
-import { Prescriptiondto,PrescriptionResponse } from '../../interfaces/prescription';
+import { AppointmentAllinfo, AppointmentDTO0, AppointmentResponse, AppointmentsResponse, AppointmentsStoryResponse, makeCompleteResponse } from '../../interfaces/appointment-dto-0';
+import { createPrescriptionResponse, Prescriptiondto,PrescriptionResponse } from '../../interfaces/prescription';
 import {MedicalExaminationsResponse ,saveMedicalExaminationDTO,saveExaminationListResponse} from '../../interfaces/medical-examinations-dto'
 import { VitalSignDto1, VitalSignDtoResponse } from '../../interfaces/vital-dto';
 @Injectable({
@@ -25,8 +25,7 @@ export class Callapi
   
   constructor(private Http:HttpClient , private token :VerfivationToken)
   {
-  }
-  
+  }  
 
   public createPatient(patientData: PatientCreate):Observable<any>
   {
@@ -64,7 +63,6 @@ export class Callapi
     );
   }
 
-
   public GetPatient(id : string)
   {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
@@ -87,8 +85,6 @@ export class Callapi
       })
     );
   }
-
-
 
   public createDoctor(Create: createDoctors):Observable<any>
     {
@@ -114,7 +110,6 @@ export class Callapi
     );
   }
 
-
   public GetPatientAppoinment(PatientId:string):Observable<AppointmentsResponse>
   {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
@@ -125,7 +120,6 @@ export class Callapi
       })
     );
   }
-
 
   public GetDoctorAppoinment(DoctorId:string):Observable<AppointmentsResponse>
   {
@@ -170,25 +164,19 @@ export class Callapi
     
   }
 
-
   public GetDrugById(DrugId:string)
   {
     
   }
 
-  public CreatPrescription(Prescriptiondto : Prescriptiondto)
+  public CreatPrescription(Prescriptiondto : Prescriptiondto):Observable<createPrescriptionResponse>
   {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
-    
-    console.log(headers);
-    console.log(this.token.getToken());
-    
-    return this.Http.post<Prescriptiondto>(this.url + `Prescription/Create`,Prescriptiondto, { headers }).pipe(
+    return this.Http.post<createPrescriptionResponse>(this.url + `Prescription/Create`,Prescriptiondto, { headers }).pipe(
       tap(response => { }),
       catchError(error => {return throwError(() => error);
       })
     );
-  
   }
 
   public  PrescriptionList(Id:string)
@@ -201,7 +189,6 @@ export class Callapi
       })
     );
   }
-  
   public createExamination(Create: saveMedicalExaminationDTO):Observable<any>
    {
      const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});  
@@ -212,7 +199,6 @@ export class Callapi
       })
     );
   }
-
   public ExaminationList(id: string):Observable<saveExaminationListResponse>
    {
      const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
@@ -223,7 +209,6 @@ export class Callapi
       })
     );
   }
-
   public SearchVitals(SearchTerm:string)
   {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
@@ -234,13 +219,29 @@ export class Callapi
       })
     );
   }
-  
-   public GetPatientAppoinmentStory(DoctorId:string):Observable<AppointmentsResponse>
+  public GetPatientAppoinmentStory(PatientId:string):Observable<AppointmentsResponse>
   {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
-    return this.Http.get<AppointmentsResponse>(this.url + `Appointment/GetAllIsCompleted/${DoctorId}`, { headers }).pipe(
+    return this.Http.get<AppointmentsResponse>(this.url + `Appointment/GetAllIsCompleted/${PatientId}`, { headers }).pipe(
       tap(response => {}),
       catchError(error => {return throwError(() => error);
+      })
+    );
+  }
+  public makeItComplete(AppointmentId:string):Observable<makeCompleteResponse> {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    
+    return this.Http.get<makeCompleteResponse>(this.url + `Appointment/makeItComplete/${AppointmentId}`, { headers }).pipe(
+      tap(response => {}),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+  }
+  public GetAppoinmentStory(AppointmentId:string):Observable<AppointmentsStoryResponse> {
+      const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+      return this.Http.get<AppointmentsStoryResponse>(this.url + `Appointment/GetHistoryAppointment/${AppointmentId}`, { headers }).pipe(
+        tap(response => {}),
+        catchError(error => {return throwError(() => error);
       })
     );
   }

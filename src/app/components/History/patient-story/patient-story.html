@@ -2,13 +2,12 @@
     <div class="col-md-2">
         @for (item of Appointments(); track $index)
         {
-            <a>
-                {{item.appointmentDate}} 
-            </a>
+            <button type="button" class="btn btn-link" [value]="item.id" (click)="changeAppointmentStoryId(item.id)" > {{item.appointmentDate}} </button>
+            <br/>
         }
     </div>
     
     <div class="col-md-10">
-
+        <app-appointment-story [AppointmentID]="''" ></app-appointment-story>
     </div>
 </div>

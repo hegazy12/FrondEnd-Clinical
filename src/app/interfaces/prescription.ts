@@ -25,3 +25,4 @@ export interface Prescriptiondto2 extends Prescriptiondto1
 }
 
 export type PrescriptionResponse = GeneralResponse<Prescriptiondto2[]>;
+export type createPrescriptionResponse = GeneralResponse<Prescriptiondto1>;

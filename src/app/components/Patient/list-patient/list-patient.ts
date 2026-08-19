@@ -30,30 +30,30 @@ export class ListPatient
           }
         else
         {
-        //  this.getPatients(1);
+          //this.getPatients(1);
           this.getPatientsNew();
         }
       }
         
-    //   public getPatients(numberpage : number) : boolean
-    //   {
-    //          let Sup = this.Callapi.getpatients(numberpage).subscribe({
-    //           next: (P : Patient[]) =>
-    //             {
-    //                 this.Patients.set(P);
-    //                 console.log(P); 
-    //                 Sup.unsubscribe();
-    //                 this.isloding.set(true);
-    //                 console.log("this.isloding" + this.isloding);
-    //             },
-    //           error: (err) => {
-    //             console.error(err); 
-    //             Sup.unsubscribe();
-    //             this.router.navigate(['/Login']);
-    //           }
-    //         });
-    //         return true;
-    // }
+        //   public getPatients(numberpage : number) : boolean
+        //   {
+        //          let Sup = this.Callapi.getpatients(numberpage).subscribe({
+        //           next: (P : Patient[]) =>
+        //             {
+        //                 this.Patients.set(P);
+        //                 console.log(P); 
+        //                 Sup.unsubscribe();
+        //                 this.isloding.set(true);
+        //                 console.log("this.isloding" + this.isloding);
+        //             },
+        //           error: (err) => {
+        //             console.error(err); 
+        //             Sup.unsubscribe();
+        //             this.router.navigate(['/Login']);
+        //           }
+        //         });
+        //         return true;
+        // }
     
       public getPatientsNew() 
       {

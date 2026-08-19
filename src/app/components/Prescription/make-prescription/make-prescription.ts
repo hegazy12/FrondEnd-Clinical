@@ -27,7 +27,7 @@ export class MakePrescription
   public Frequency = signal<number | null>(6);
   public type = signal<number| null>(1);
   DrugId =signal<string>('');
-  appointmentId : string;
+  public appointmentId : string;
   inputValue = signal<string>('');
   
   constructor(private Callapi : Callapi ,
@@ -121,15 +121,21 @@ export class MakePrescription
       let sub =this.Callapi.CreatPrescription(Pres).subscribe({
             next:(res)=>{
                 sub.unsubscribe();
-                this.swal.showSuccess();
-                // Safe call check
-                if (this.prescriptionListRef) {
-                  this.prescriptionListRef.GetPrescriptionList(this.appointmentId);
+                if (res.success) 
+                  {
+                        this.swal.showSuccess();
+                    if (this.prescriptionListRef) {
+                        this.prescriptionListRef.GetPrescriptionList(this.appointmentId);
+                  } else {
+                        console.warn('PrescriptionList component is not present in the DOM.');
+                  }
                 } else {
-                  console.warn('PrescriptionList component is not present in the DOM.');
+                       
+                        this.swal.showWoringSave(res.message);
                 }
             },
             error :(err)=>{
+                this.swal.showWoringSave(err.error.message)
                 sub.unsubscribe();
             }
         });

@@ -90,6 +90,7 @@ export class CreatInvestgation
                       // }
                   },
                   error :(err)=>{
+                      this.swal.showWoringSave(err.error.message)
                       sub.unsubscribe();
                   }
               });
