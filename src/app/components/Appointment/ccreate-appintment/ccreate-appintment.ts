@@ -1,4 +1,4 @@
-import { Component ,signal, ViewChild} from '@angular/core';
+import { Component ,Input,signal, ViewChild} from '@angular/core';
 import { Callapi} from '../../../services/callapi/callapi';
 import {VerfivationToken} from '../../../services/verfivationToken/verfivation-token';
 import {Router,ActivatedRoute} from '@angular/router';
@@ -21,10 +21,11 @@ export class CCreateAppintment
     public dateTimeAppointment: Date | string=""; 
     public note?: string | null="";  
     public doctorId =signal<string>('');
-    public patientId: string="";                
     public deposit: number=0;  
     public Docrors = signal<DoctorDto1[]>([]);
     public isLoading : boolean = false;
+     
+    @Input({ required: true }) PatientId!: string;
 
     constructor(private Callapi : Callapi ,
                 private Verfication :VerfivationToken ,
@@ -32,7 +33,7 @@ export class CCreateAppintment
                 private route: ActivatedRoute,
                 private swal: SwalAlert)
                 {
-                 this.patientId = this.route.snapshot.paramMap.get('id') || '';
+              
                 }
 
      ngOnInit():void{
@@ -73,7 +74,7 @@ export class CCreateAppintment
         let Appointment :AppointmentDTO0 = {  appointmentDate   : this.dateTimeAppointment, 
                                               deposit           : this.deposit,
                                               doctorId          : this.doctorId(),
-                                              patientId         : this.patientId,
+                                              patientId         : this.PatientId,
                                               notes             : this.note,
                                               status            : "Pending" };
         console.log(Appointment);
@@ -98,7 +99,7 @@ export class CCreateAppintment
             return false } 
           });
         }
-        this.ListAppintmentRef.GetPatientAppoinment(this.patientId);
+        this.ListAppintmentRef.GetPatientAppoinment(this.PatientId);
          return true;
         }
 }

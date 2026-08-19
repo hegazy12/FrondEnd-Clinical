@@ -9,9 +9,11 @@ import { DatePipe } from '@angular/common';
 import { CreatInvestgation } from '../../investgation/creat-investgation/creat-investgation';
 import { CreatVital } from '../../vital/creat-vital/creat-vital';
 import { PatientStory } from '../../History/patient-story/patient-story';
+import Swal from 'sweetalert2';
+import { CCreateAppintment } from '../../Appointment/ccreate-appintment/ccreate-appintment';
 @Component({
   selector: 'app-patientappointment',
-  imports:  [Navbar,MakePrescription,DatePipe,CreatInvestgation,CreatVital,PatientStory],
+  imports:  [Navbar,MakePrescription,DatePipe,CreatInvestgation,CreatVital,PatientStory,CCreateAppintment],
   templateUrl: './patientappointment.html',
   styleUrl: './patientappointment.css',
 })
@@ -60,7 +62,7 @@ export class Patientappointment {
       this.view.set(5);
       setTimeout(() => {
         this.PatientStoryRef?.GetAppointment(this.PatientId);
-       }, 2000);
+       }, 20);
     }else if(viewName == "addnextvisit"){
         this.view.set(6);
     }
@@ -88,7 +90,24 @@ export class Patientappointment {
   }
   
   public callMakeItComplete(){
-    this.makeItComplete(this.appointmentId);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "to close this Appointment",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes,Save"
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.makeItComplete(this.appointmentId); 
+        Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+      }
+    });
   }
 
   public makeItComplete(appointmentId: string): void {

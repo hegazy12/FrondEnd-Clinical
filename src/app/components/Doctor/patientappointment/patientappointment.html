@@ -66,10 +66,10 @@
       }@else if ( view() == 5 ) 
       {
         <app-patient-story #patientstory [PatientID]="PatientId" ></app-patient-story>
+      }@else if (view() == 6) {
+        <app-ccreate-appintment [PatientId]="PatientId"></app-ccreate-appintment>
       }
     </div>
-  
-
   </div>
 </div>
 

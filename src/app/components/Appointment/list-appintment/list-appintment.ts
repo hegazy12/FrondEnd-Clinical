@@ -1,4 +1,4 @@
-import {Component ,signal} from '@angular/core';
+import {Component ,Input,signal} from '@angular/core';
 import {Callapi} from '../../../services/callapi/callapi';
 import {VerfivationToken} from '../../../services/verfivationToken/verfivation-token';
 import {Router,ActivatedRoute} from '@angular/router';
@@ -14,14 +14,16 @@ export class ListAppintment {
   
   public AppointmentsResponse = signal<AppointmentsResponse>;
   public Appointments=signal<AppointmentDTO1[]>([]);
-  public patientId: string ="";    
+ 
 
+  @Input({ required: true }) PatientId!: string;
+  
   constructor(  private Callapi     : Callapi ,
                 private Verfication :VerfivationToken ,
                 private router      : Router,
                 private route: ActivatedRoute)
                 { 
-                 this.patientId = this.route.snapshot.paramMap.get('id') || '';
+                
                 }
 
      
@@ -32,7 +34,7 @@ export class ListAppintment {
             }
             else
             {
-             this.GetPatientAppoinment(this.patientId);  
+             this.GetPatientAppoinment(this.PatientId);  
             }
       }
 
