@@ -100,16 +100,24 @@ export class Patientappointment {
       confirmButtonText: "Yes,Save"
     }).then((result) => {
       if (result.isConfirmed){
-        this.makeItComplete(this.appointmentId); 
-        Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
-            icon: "success"
+        this.makeItComplete(this.appointmentId);
+        if(this.makeCompleteResponse()?.success){ 
+            Swal.fire({
+              title: "savaing!",
+              text: "Your file has been saved.",
+              icon: "success"
           });
+        }else{
+          Swal.fire({
+              title: "savaing!",
+              text: "Your file has been not saved.",
+              icon: "warning"  
+            });
+        }
       }
     });
   }
-
+  
   public makeItComplete(appointmentId: string): void {
     this.callapi.makeItComplete(appointmentId).subscribe({
       next: (response: makeCompleteResponse) => {

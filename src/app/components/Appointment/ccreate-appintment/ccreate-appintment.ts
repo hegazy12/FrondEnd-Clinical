@@ -92,14 +92,16 @@ export class CCreateAppintment
           next: (res) => {
             sub.unsubscribe(); 
             this.swal.showSuccess();
-            return true},
+            this.ListAppintmentRef.GetPatientAppoinment(this.PatientId);
+            return true
+          },
             error: (err) => { 
               sub.unsubscribe(); 
               this.isLoading = false;
-            return false } 
+            return false 
+          } 
           });
         }
-        this.ListAppintmentRef.GetPatientAppoinment(this.PatientId);
          return true;
         }
 }
