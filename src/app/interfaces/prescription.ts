@@ -11,6 +11,7 @@ export interface Prescriptiondto
   frequency: number | null;    
   type: number | null;          
   notes: string | null; 
+  last: number;
 }
 
 export interface Prescriptiondto1 extends Prescriptiondto

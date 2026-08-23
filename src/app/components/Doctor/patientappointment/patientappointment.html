@@ -56,7 +56,7 @@
     <div class="col-lg-10 col-xl-11">
       @if( view() == 1 )
       {
-        <app-make-prescription #makeprescription ></app-make-prescription>
+        <app-make-prescription #makeprescription [AppointmentID]="appointmentId" ></app-make-prescription>
       }@else if ( view() == 2 )
       {
         <app-creat-investgation #creatinvestgation ></app-creat-investgation>

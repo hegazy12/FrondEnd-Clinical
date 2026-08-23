@@ -1,10 +1,11 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, Injectable,afterNextRender } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {VerfivationToken } from '../../services/verfivationToken/verfivation-token';
 import { LoginResponse } from '../../interfaces/login-response';
 import {SwalAlert} from '../../services/swalAlert/swal-alert';
+import { ChatService } from '../../services/ChatService/chat-service';
 
 @Component({
   selector: 'app-login',
@@ -20,10 +21,13 @@ export class Login
   public password: string = '';
 
   
-  constructor(private http: HttpClient, private router: Router ,private Verfivation : VerfivationToken,private swal: SwalAlert) {}
-  
-  
-  
+  constructor(private http: HttpClient,
+              private router: Router ,
+              private chatService: ChatService ,
+              private Verfivation : VerfivationToken,
+              private swal: SwalAlert)
+    {
+    }
   
   ngOnInit():void{
 
@@ -42,8 +46,8 @@ export class Login
     // var url = "http://194.146.24.155/clinical/api/Account/Login";
     // var url = " https://localhost:7262/Account/Login";
     // var url = "http://192.168.0.148:5000/Account/Login";
-     var url = "https://barge-manhole-crib.ngrok-free.dev/api/Account/Login";
-    // var url = "http://localhost:5244/Account/Login"
+    //var url = "https://barge-manhole-crib.ngrok-free.dev/api/Account/Login";
+    var url = "http://localhost:5244/Account/Login"
     this.http.post<LoginResponse>(url, { userName: this.username, password: this.password })
       .subscribe(response => {
 
@@ -57,23 +61,24 @@ export class Login
           localStorage.setItem('userName'   , JSON.stringify(response.data.userName));
           console.log('Token stored in localStorage:', response.data.token);
           this.router.navigate(['/mainpage']);
+          ///////////////////////////////////////////////////////
+                this.chatService.connect(response.data.id); /////
+          ///////////////////////////////////////////////////////
           console.log('Login successful:', response);
         }
         else
         {
           console.error('Login failed:', response.message);
-          localStorage.removeItem('token');
+           afterNextRender(() => { 
+              localStorage.removeItem('token');});
           this.swal.showLoginFailed(response.message);
         }
         
-      }, error => {
-         
+      }, error => 
+        {
          console.error('Login failed:', error);
-         
          localStorage.removeItem('token');
-         
          localStorage.setItem('token', JSON.stringify(error));
-      
         });
   }
 }

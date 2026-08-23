@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component ,afterNextRender} from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { Router } from '@angular/router';
-
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-navbar',
   imports: [RouterLink],
@@ -21,7 +21,10 @@ export class Navbar
 
   public logOut (): void 
   {
-    localStorage.clear();
-    this.router.navigate(['/login']);
+     afterNextRender(() => {
+        localStorage.clear();
+        this.router.navigate(['/login']);
+      });
+  
   }
 }

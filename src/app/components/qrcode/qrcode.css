@@ -1,0 +1,6 @@
+    .qr-wrapper {
+      display: inline-flex;
+      padding: 8px;
+      background: #fff;
+      border-radius: 8px;
+    }

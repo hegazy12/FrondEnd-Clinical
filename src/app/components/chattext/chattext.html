@@ -1,0 +1,11 @@
+
+    <!-- <div *ngFor="let msg of messages"> -->
+
+    @for (msg of messages; track $index) {
+            <div>
+                <b>{{ msg.from }}:</b> {{ msg.message }}
+            </div>
+    }
+    <input #targetUser placeholder="target user id" />
+    <input #msgBox placeholder="message" />
+    <button (click)="send(targetUser.value, msgBox.value)">Send</button>

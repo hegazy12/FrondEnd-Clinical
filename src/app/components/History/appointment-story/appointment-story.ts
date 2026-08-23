@@ -49,7 +49,7 @@ export class AppointmentStory
                 {
                     this.AppointmentDTO3.set(P.data);
                     this.ListInvestgationRef.GetInvestgationlist(AppointmentID);
-                    this.prescriptionListRef.GetPrescriptionList(AppointmentID);
+                    this.prescriptionListRef.GetPrescriptionList(AppointmentID,0);
                 },
               error: (err) => 
               {

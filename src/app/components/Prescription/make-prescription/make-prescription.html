@@ -19,8 +19,8 @@
             </select>
         </div>
 
-       <div class="col-md-6" ><label>From</label> <input class="form-control" type="date" name="form" [(ngModel)]="from" min="{{from}}"></div>  
-       <div class="col-md-6" ><label>To </label>  <input type="date" class="form-control" name="to" [(ngModel)]="to" min="{{from}}"></div>
+       <div class="col-md-6" ><label>From</label> <input class="form-control" type="date" name="form" [(ngModel)]="from" min="{{from()}}"></div>  
+       <div class="col-md-6" ><label>To </label>  <input type="date" class="form-control" name="to" [(ngModel)]="to" min="{{from()}}"></div>
        
        <div class="col-md-6" >
        <label>Frequency</label> 
@@ -49,9 +49,26 @@
         <label>Notes</label>
         <textarea id="notes" name="notes" class="form-control" rows="3" placeholder="Enter notes..." [(ngModel)]="Note" ></textarea>
     </div>
-    
-    <div class="col-12 d-flex justify-content-end" style="margin-top: 1%;" >
-    <button type="button" class="btn btn-primary " (click)="onSubmit()" >Save Changes</button>
+            <div class="row" style="margin-top: 1%;">
+            <div class="col-10 d-flex justify-content-end">
+                <button 
+                type="button" 
+                class="btn" 
+                [class.btn-danger]="isHistory() === 0" 
+                [class.btn-success]="isHistory() !== 0"
+                (click)="makePriscriptionHistory()">
+                @if (isHistory() === 0) {
+                    Save Changes In History
+                } @else {
+                    Back To normal behavior
+                }
+                </button>
+            </div>
+            
+        <div class="col-2 d-flex justify-content-end " >
+            <button type="button" class="btn btn-primary " (click)="onSubmit()">Save Changes</button>
+        </div>
+        
     </div>
 </div>
 

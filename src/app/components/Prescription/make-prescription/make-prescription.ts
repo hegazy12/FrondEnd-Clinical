@@ -1,4 +1,4 @@
-import { Component , signal , ViewChild} from '@angular/core';
+import { Component , ElementRef, Input, Renderer2, signal , ViewChild} from '@angular/core';
 import { SwalAlert } from '../../../services/swalAlert/swal-alert';
 import { Callapi } from '../../../services/callapi/callapi';
 import { VerfivationToken } from '../../../services/verfivationToken/verfivation-token';
@@ -19,22 +19,28 @@ import {PrescriptionList } from '../prescription-list/prescription-list'
 export class MakePrescription 
 {
   @ViewChild(PrescriptionList) prescriptionListRef!: PrescriptionList;
+  @ViewChild('targetBox') box!: ElementRef<HTMLElement>;
+  @Input({ required: true }) AppointmentID!: string;
+  //@Input({ required: true }) Appointment!: string;
 
   public DTODrugs = signal<DTODrug[]>([]);
-  public from : Date| string=""; 
-  public to : Date| string=""; 
+  public from = signal<Date |string>(''); 
+  public to = signal<Date |string>(''); 
   public Note = signal<string | null>(null);
   public Frequency = signal<number | null>(6);
   public type = signal<number| null>(1);
   DrugId =signal<string>('');
   public appointmentId : string;
   inputValue = signal<string>('');
+
+  public isHistory = signal<number>(0);
   
   constructor(private Callapi : Callapi ,
               private Verfication :VerfivationToken ,
               private router: Router,
               private route: ActivatedRoute,
-              private swal: SwalAlert)
+              private swal: SwalAlert,
+              private renderer: Renderer2)
               {
                  this.appointmentId = this.route.snapshot.paramMap.get('id') || '';
               }
@@ -46,8 +52,8 @@ export class MakePrescription
       }
     else
       {   
-         this.from = new Date().toISOString().split('T')[0];
-         this.to   = new Date().toISOString().split('T')[0];
+         this.from.set(new Date().toISOString().split('T')[0]);
+         this.to.set(new Date().toISOString().split('T')[0]);
 
       }
     }
@@ -83,19 +89,19 @@ export class MakePrescription
      })
   }
 
-
   public onSubmit() : void
   {
       let Pres :Prescriptiondto =
        {drugId : this.DrugId(),
-        from: this.from ,
-        to:this.to, 
+        from: this.from() ,
+        to:this.to(), 
         appointmentId : this.appointmentId, 
         frequency : this.Frequency(),
         type :this.type(),
-        notes :""
+        notes :this.Note(),
+        last : this.isHistory()
       };
-      
+      console.log(Pres);
       if(Pres.drugId == ""){
         this.swal.showWoringSave("Please select drug");
       }
@@ -116,7 +122,6 @@ export class MakePrescription
       //this.PrescriptionList!.GetPrescriptionList(this.appointmentId);
     }
 
-    
   public Create(Pres :Prescriptiondto)  {
       let sub =this.Callapi.CreatPrescription(Pres).subscribe({
             next:(res)=>{
@@ -125,7 +130,7 @@ export class MakePrescription
                   {
                         this.swal.showSuccess();
                     if (this.prescriptionListRef) {
-                        this.prescriptionListRef.GetPrescriptionList(this.appointmentId);
+                        this.prescriptionListRef.GetPrescriptionList(this.appointmentId,this.isHistory());
                   } else {
                         console.warn('PrescriptionList component is not present in the DOM.');
                   }
@@ -141,4 +146,24 @@ export class MakePrescription
         });
     }
     
+    public async makePriscriptionHistory()
+    {
+    
+      if(this.isHistory() == 0)
+      {
+          this.from.set('');
+          this.isHistory.set(1);
+          await this.prescriptionListRef.GetPrescriptionList(this.appointmentId,this.isHistory());
+          this.to.set(''); 
+          this.Frequency.set(6);
+          this.type.set(0);
+          this.Note.set('');
+      }
+      else
+      {
+          this.from.set(new Date().toISOString().split('T')[0]);
+          this.isHistory.set(0); 
+          this.prescriptionListRef.GetPrescriptionList(this.appointmentId,this.isHistory());
+      }
+    }
   }
