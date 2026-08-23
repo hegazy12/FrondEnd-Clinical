@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Qrcode } from './qrcode';
+import { Camera } from './camera';
 
-describe('Qrcode', () => {
-  let component: Qrcode;
-  let fixture: ComponentFixture<Qrcode>;
+describe('Camera', () => {
+  let component: Camera;
+  let fixture: ComponentFixture<Camera>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Qrcode],
+      imports: [Camera],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Qrcode);
+    fixture = TestBed.createComponent(Camera);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

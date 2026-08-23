@@ -1,0 +1,18 @@
+<div class="camera-wrapper">
+  @if (errorMessage()) {
+    <p class="error">{{ errorMessage() }}</p>
+  }
+
+  <video #video autoplay playsinline muted [style.display]="capturedPhoto() ? 'none' : 'block'"></video>
+
+  @if (!capturedPhoto()) {
+    <button (click)="capturePhoto()" [disabled]="!isStreaming()">
+      Take Photo
+    </button>
+  } @else {
+    <img [src]="capturedPhoto()" alt="Captured photo" />
+    <button (click)="retake()">Retake</button>
+  }
+
+  <canvas #canvas style="display: none;"></canvas>
+</div>

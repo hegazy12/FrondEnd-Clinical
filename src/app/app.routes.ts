@@ -6,13 +6,13 @@ import {Patientview} from './components/Patient/patientview/patientview'
 import {Settings} from './components/settings/settings'
 import { Mypatient } from './components/Doctor/mypatient/mypatient';
 import { Patientappointment } from './components/Doctor/patientappointment/patientappointment';
+import {PhoneTraker} from './components/phone-traker/phone-traker';
 
 export const routes: Routes = [
     {
         path:"",
         component: Login
-    },
-    {
+    },{
         path:"login",
         component: Login
     },{
@@ -27,14 +27,15 @@ export const routes: Routes = [
     },{
         path:"sitting",
         component: Settings
-    },
-    {
+    },{
         path: 'mypatient',
         component: Mypatient
-    },
-    {
+    },{
         path: 'patientappointment/:id',
         component: Patientappointment
+    },{
+        path: 'phonetraker/:id',
+        component: PhoneTraker
     }
 ];
         

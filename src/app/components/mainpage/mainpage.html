@@ -1,2 +1,5 @@
 <app-navbar></app-navbar>
 <app-chattext></app-chattext>
+<qrcode [qrdata]="'http://localhost:4200/phonetraker/'+doctorId()" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+<app-camera></app-camera>
+

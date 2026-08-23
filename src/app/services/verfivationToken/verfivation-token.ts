@@ -52,4 +52,14 @@ export class VerfivationToken
           return false;
       } 
   }
+
+  public GetLoginID() : string |null
+  {
+    if (this.isBrowser)
+    { this.token = localStorage.getItem("id") || "null";
+      return this.token.replace(/"/g, ''); 
+    }else {
+      return null;
+    }
+  }
 }

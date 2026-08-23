@@ -43,4 +43,10 @@ export class UserState {
     public setRole(Role :string) : void{
       this.Roles.push(Role);
     } 
+
+    
+    public GetLoginID() : string |null
+    {
+        return localStorage.getItem('id');
+    }
 }
