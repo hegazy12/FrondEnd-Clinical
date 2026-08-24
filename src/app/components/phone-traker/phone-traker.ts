@@ -28,7 +28,8 @@ export class PhoneTraker {
           
           this.ChatService.messageReceived$.subscribe(msg => {
               console.log(msg);
-              if (msg) this.messages.set(msg);}
+              //if (msg) this.messages.set(msg);
+            }
           );
     }
 

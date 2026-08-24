@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
 <app-chattext></app-chattext>
-<qrcode [qrdata]="'http://localhost:4200/phonetraker/'+doctorId()" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+<qrcode [qrdata]="frontLink()" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+<a href="{{frontLink()}}" >go to tracker </a>
 <app-camera></app-camera>
-

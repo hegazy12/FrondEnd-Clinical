@@ -53,13 +53,13 @@ export class VerfivationToken
       } 
   }
 
-  public GetLoginID() : string |null
+  public GetLoginID() : string 
   {
     if (this.isBrowser)
     { this.token = localStorage.getItem("id") || "null";
       return this.token.replace(/"/g, ''); 
     }else {
-      return null;
+      return '';
     }
   }
 }

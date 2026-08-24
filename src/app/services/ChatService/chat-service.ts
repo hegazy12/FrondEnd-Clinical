@@ -1,33 +1,47 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { BehaviorSubject } from 'rxjs';
-
+import { LinkService} from '../linkService/link-service';
+import { HttpHeaders } from '@angular/common/http';
+import { MassageDto,messages} from '../../interfaces/massage-dto';
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
+
+  private hubUrl = '';
+  constructor(private LinkService : LinkService)
+  {
+   this.hubUrl = LinkService.gitLinK()+'hubs/chat'
+  }  
+
+
   private hubConnection!: signalR.HubConnection;
 
-  // Emits incoming messages: { from: string, message: string }
-  public messageReceived$ = new BehaviorSubject<{ from: string; message: string } | null>(null);
+  public messageReceived$ = new BehaviorSubject<{from :string ,message:messages} | null>(null);
 
  
   public connectionState$ = new BehaviorSubject<signalR.HubConnectionState>(
     signalR.HubConnectionState.Disconnected
   );
 
-  private hubUrl = 'http://localhost:5244/hubs/chat';
+
 
   public connect(userId: string): void {
+    console.log("linK hub:"+this.hubUrl);
+    
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${this.hubUrl}?userId=${encodeURIComponent(userId)}`, {
-        withCredentials: true // needed since CORS uses AllowCredentials()
+     .withUrl(`${this.hubUrl}?userId=${encodeURIComponent(userId)}`, {
+       withCredentials: true,
+        headers: {
+         'ngrok-skip-browser-warning': 'true'
+       }
       })
       .withAutomaticReconnect()
       .configureLogging(signalR.LogLevel.Information)
       .build();
-
-    this.registerHandlers();
+    
+      this.registerHandlers();
 
     this.hubConnection
       .start()
@@ -46,8 +60,8 @@ export class ChatService {
   }
 
   private registerHandlers(): void {
-    this.hubConnection.on('ReceiveMessage', (from: string, message: string) => {
-      this.messageReceived$.next({ from, message });
+    this.hubConnection.on('ReceiveMessage', (from: string, message: messages) => {
+      this.messageReceived$.next({ from, message:message });
     });
   }
 

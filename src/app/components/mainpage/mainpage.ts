@@ -6,6 +6,8 @@ import {Navbar} from '../navbar/navbar'
 import {Chattext} from '../chattext/chattext';
 import { QRCodeComponent } from 'angularx-qrcode';
 import {Camera} from '../camera/camera'
+import {LinkService} from '../../services/linkService/link-service'
+
 @Component({
   selector: 'app-mainpage',
   imports: [Navbar,Chattext  ,QRCodeComponent,Camera],
@@ -16,10 +18,11 @@ import {Camera} from '../camera/camera'
 export class Mainpage 
 {
   public doctorId = signal<string|null>('');
-  
-  constructor(private callapi : Callapi,private router:Router,private Vervication:VerfivationToken)
+  public frontLink = signal<string>('');
+  constructor(private callapi : Callapi,private router:Router,private Vervication:VerfivationToken,private LinkService : LinkService)
   {
      this.doctorId.set(this.Vervication.GetLoginID());
+     this.frontLink.set(this.LinkService.gitFrontOrigin());
   }
   
   ngOnInit():void
@@ -33,10 +36,8 @@ export class Mainpage
     {
         
       console.log("ManePage is " + this.Vervication.islogin());
-        
-     
-
-      console.log('http://localhost:4200/phonetraker/'+ this.doctorId());
+      console.log(this.frontLink() +'/phonetraker/'+ this.doctorId());
+      this.frontLink.set(this.frontLink() +'/phonetraker/'+ this.doctorId());
     }
   }
   

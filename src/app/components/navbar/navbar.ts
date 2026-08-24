@@ -21,10 +21,10 @@ export class Navbar
 
   public logOut (): void 
   {
-     afterNextRender(() => {
+   
         localStorage.clear();
         this.router.navigate(['/login']);
-      });
+   
   
   }
 }
