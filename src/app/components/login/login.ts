@@ -59,6 +59,7 @@ export class Login
           localStorage.setItem('roles'      , JSON.stringify(response.data.roles));
           localStorage.setItem('id'         , JSON.stringify(response.data.id));
           localStorage.setItem('userName'   , JSON.stringify(response.data.userName));
+          localStorage.setItem('doctorid'  ,JSON.stringify(response.data.doctorId));
           console.log('Token stored in localStorage:', response.data.token);
           this.router.navigate(['/mainpage']);
           ///////////////////////////////////////////////////////

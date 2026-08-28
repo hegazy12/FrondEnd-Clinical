@@ -16,8 +16,9 @@ import { PrescriptionList } from '../../Prescription/prescription-list/prescript
 export class AppointmentStory 
 {
   public AppointmentDTO3 = signal<AppointmentDTO3 |undefined>(undefined);
-
+  public isHistory = signal<number>(0);
   @Input({ required: true }) AppointmentID!: string;
+  public appointmentid = signal<string>('');
   @ViewChild(ListInvestgation) ListInvestgationRef!: ListInvestgation;
   @ViewChild(PrescriptionList) prescriptionListRef!: PrescriptionList;
 
@@ -48,8 +49,9 @@ export class AppointmentStory
               next: (P : AppointmentsStoryResponse) =>
                 {
                     this.AppointmentDTO3.set(P.data);
-                    this.ListInvestgationRef.GetInvestgationlist(AppointmentID);
+                    this.ListInvestgationRef.GetInvestgationlist(AppointmentID,0);
                     this.prescriptionListRef.GetPrescriptionList(AppointmentID,0);
+                    this.appointmentid.set(AppointmentID);
                 },
               error: (err) => 
               {
@@ -58,4 +60,17 @@ export class AppointmentStory
               });
               return true;
         }
+
+        public GitHistory()
+        {
+          if(this.isHistory() == 1){
+             this.isHistory.set(0);
+             this.ListInvestgationRef.GetInvestgationlist(this.appointmentid(),this.isHistory());
+             this.prescriptionListRef.GetPrescriptionList(this.appointmentid(),this.isHistory());
+          }else{
+             this.isHistory.set(1);
+             this.ListInvestgationRef.GetInvestgationlist(this.appointmentid(),this.isHistory());
+             this.prescriptionListRef.GetPrescriptionList(this.appointmentid(),this.isHistory());
+          }
+      }
 }

@@ -6,6 +6,7 @@ import { Router , ActivatedRoute } from '@angular/router';
 import { MedicalExaminationsResponse ,MedicalExaminationsDTO,saveMedicalExaminationDTO } from '../../../interfaces/medical-examinations-dto';
 import { FormsModule } from '@angular/forms';
 import { ListInvestgation } from '../list-investgation/list-investgation'
+import { last } from 'rxjs';
 @Component({
   selector: 'app-creat-investgation',
   imports: [FormsModule,ListInvestgation],
@@ -21,7 +22,7 @@ export class CreatInvestgation
     public MedicalExaminations = signal<MedicalExaminationsResponse  | null>(null);
     public Examinations = signal<MedicalExaminationsDTO[]>([]);
     public MedicalExaminationsDTO = signal<MedicalExaminationsDTO | null|undefined>(null)
-
+    public isHistory = signal<number>(0);
     constructor(private Callapi : Callapi ,
                 private Verfication :VerfivationToken ,
                 private router: Router,
@@ -65,8 +66,8 @@ export class CreatInvestgation
         let create : saveMedicalExaminationDTO =
         {
           idAppointment : this.appointmentId,
-          idExamination : this.MedicalExaminationsid
-
+          idExamination : this.MedicalExaminationsid,
+          last: this.isHistory()
         };
         if(create.idExamination == "")
         {
@@ -81,13 +82,7 @@ export class CreatInvestgation
                   next:(res)=>{
                       sub.unsubscribe();
                       this.swal.showSuccess();
-                      this.ListInvestgationRef.GetInvestgationlist(this.appointmentId);
-                      // Safe call check
-                      // if (this.prescriptionListRef) {
-                      //   this.prescriptionListRef.GetPrescriptionList(this.appointmentId);
-                      // } else {
-                      //   console.warn('PrescriptionList component is not present in the DOM.');
-                      // }
+                      this.ListInvestgationRef.GetInvestgationlist(this.appointmentId,this.isHistory());
                   },
                   error :(err)=>{
                       this.swal.showWoringSave(err.error.message)
@@ -95,4 +90,18 @@ export class CreatInvestgation
                   }
               });
           }
+
+        public  makeInvestgationHistory():void
+        {
+            if(this.isHistory() == 0)
+            {
+              this.isHistory.set(1);
+              this.ListInvestgationRef.GetInvestgationlist(this.appointmentId,this.isHistory());
+            }
+            else
+            {
+              this.isHistory.set(0);
+              this.ListInvestgationRef.GetInvestgationlist(this.appointmentId,this.isHistory());
+            }
+        }
 }

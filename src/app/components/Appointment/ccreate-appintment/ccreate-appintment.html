@@ -12,11 +12,11 @@
         <div class="row g-3 ">
           <div class="col-md-4 ">
             <label class="form-label fw-semibold text-muted small">Date Appointment</label>
-            <input type="date" class="form-control" name="dateAppointment"  [(ngModel)]="dateTimeAppointment" >
+            <input type="date" class="form-control" name="dateAppointment" [min]="minDate"  [(ngModel)]="dateTimeAppointment" >
           </div>
           
           <div class="col-md-4 ">
-             <label class="form-label fw-semibold text-muted small">Doctors</label>
+            <label class="form-label fw-semibold text-muted small">Doctors</label>
             <select class="form-select" aria-label="Default select example" name="Doctors" (change)="onSpecialtyChange($event)">
               <option value="no" selected>Open this select menu</option>
               @for (Doctor of Docrors(); track $index) {

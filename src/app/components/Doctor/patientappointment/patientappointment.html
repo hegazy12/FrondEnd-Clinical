@@ -28,6 +28,11 @@
   <div class="row g-3">
     <!-- Left Action Column -->
     <div class="col-lg-2 col-xl-1">
+     
+      <button class="btn btn-primary shadow-sm" style="margin: 1%;" #diagnosid name="diagnos" (click)="viewpage(diagnosid.name)" >
+        Diagnos
+      </button>
+
       <button class="btn btn-primary shadow-sm" style="margin: 1%;" #prescriptionid name="prescription" (click)="viewpage(prescriptionid.name)" >
         prescription
       </button>
@@ -68,6 +73,9 @@
         <app-patient-story #patientstory [PatientID]="PatientId" ></app-patient-story>
       }@else if (view() == 6) {
         <app-ccreate-appintment [PatientId]="PatientId"></app-ccreate-appintment>
+      }@else if(view() == 7)
+      {
+          
       }
     </div>
   </div>

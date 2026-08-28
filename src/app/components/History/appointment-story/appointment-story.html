@@ -4,6 +4,23 @@
     {
      <div> </div>
     } -->
+    <div class="row">
+        <div class="col-10 d-flex justify-content-end">
+                <button 
+                type="button" 
+                class="btn" 
+                [class.btn-danger]="isHistory() === 1" 
+                [class.btn-success]="isHistory() !== 1"
+                (click)="GitHistory()">
+                @if (isHistory() === 0) {
+                     GitHistory
+                } @else {
+                    Git Is Recorded by us 
+                }
+                </button>
+            </div>
+    </div>
+    
     <div class="row" >
         <h5> Prescription-list </h5>
      <app-prescription-list [AppointmentID]="''" ></app-prescription-list>
@@ -12,4 +29,5 @@
         <h5> investgation List </h5>
         <app-list-investgation [AppointmentID]="''" ></app-list-investgation>
     </div>
+
 </div>

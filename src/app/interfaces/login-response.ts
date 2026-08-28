@@ -11,6 +11,7 @@ interface UserData
   token: string;
   roles: string[];
   error: string | null;
+  doctorId:string|null
 }
 
 export type LoginResponse = GeneralResponse<UserData>;

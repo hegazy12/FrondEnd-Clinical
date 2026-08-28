@@ -32,19 +32,22 @@ export class ListInvestgation {
               else
                 {  
                   if(this.AppointmentID != ""){
-                    this.GetInvestgationlist(this.AppointmentID);
+                    this.GetInvestgationlist(this.AppointmentID,0);
                   }
                   console.log("this.AppointmentID = "+this.AppointmentID);
                 
                 }
               }
     
-    public GetInvestgationlist(patientId : string) : boolean {
+    public GetInvestgationlist(patientId : string, last:number) : boolean {
             let Sup = this.Callapi.ExaminationList(patientId).subscribe({
             next: (P : saveExaminationListResponse) =>
               {
                 this.data.set(P.data);
                 console.log(P.data);
+                console.log(P.data);
+                console.log(P.data.filter(m=> m.last  === 0));
+                this.data.set(P.data.filter(m=> m.last === last));
               },
             error: (err) => 
             {

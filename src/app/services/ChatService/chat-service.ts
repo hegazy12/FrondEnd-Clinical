@@ -61,6 +61,7 @@ export class ChatService {
 
   private registerHandlers(): void {
     this.hubConnection.on('ReceiveMessage', (from: string, message: messages) => {
+      console.log('from : '+from +', message.message : '+message.message+', message.time : '+message.time + ',num : '+ message.num );
       this.messageReceived$.next({ from, message:message });
     });
   }

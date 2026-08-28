@@ -56,10 +56,27 @@ export class VerfivationToken
   public GetLoginID() : string 
   {
     if (this.isBrowser)
-    { this.token = localStorage.getItem("id") || "null";
-      return this.token.replace(/"/g, ''); 
-    }else {
+    { 
+      let tokenI = localStorage.getItem("id") || "null";
+      return tokenI.replace(/"/g, ''); 
+    }
+    else
+    {
       return '';
     }
   }
+
+  public GetDoctorId() : string 
+  {
+    if (this.isBrowser)
+    { 
+      let tokenI = localStorage.getItem("doctorid") || "null";
+      return tokenI.replace(/"/g, ''); 
+    }
+    else 
+    {
+      return '';
+    }
+  }
+
 }

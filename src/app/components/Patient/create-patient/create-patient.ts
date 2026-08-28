@@ -1,4 +1,4 @@
-import { Component , ViewChild } from '@angular/core';
+import { Component , signal, Signal, ViewChild } from '@angular/core';
 import { Navbar } from '../../navbar/navbar'
 import { FormsModule } from '@angular/forms';
 import { PatientCreate } from '../../../interfaces/patient-create'
@@ -26,11 +26,11 @@ export class CreatePatient
     public Address   : string= '';
     public DateOfBirth : string= '';
     public gender : string= '';
-    public isLoading :boolean = false;
+    public isLoading = signal<boolean>(false); 
     public refrishvalue : boolean= false;
 
-    constructor(private Callapi : Callapi ,private Verfication :VerfivationToken ,private router: Router,private swal: SwalAlert){
-      
+    constructor(private Callapi : Callapi ,private Verfication :VerfivationToken ,private router: Router,private swal: SwalAlert)
+    {  
     }
     
    
@@ -61,7 +61,7 @@ export class CreatePatient
 
     public onSubmit() :void
     {
-     this.isLoading = true;
+       this.isLoading.set(true);
     
       let Patint : PatientCreate ={ 
       firstName :this.Fristname ,
@@ -75,23 +75,28 @@ export class CreatePatient
       if(Patint.firstName == "")
       {
         this.swal.showWoringSave("please inter Fristname for patient");
-        this.isLoading = false;
+        this.isLoading.set(false);
       }
       else if(Patint.lastName == "")
       {
         this.swal.showWoringSave("Please inter Lastname for patient");
-        this.isLoading = false;
+         this.isLoading.set(false);
       }else if(Patint.dateOfBirth == ""){
         this.swal.showWoringSave("Please inter dateOfBirth for patient");
-        this.isLoading = false;
+        this.isLoading.set(false);
 
       }else if(Patint.gender == ""){
         this.swal.showWoringSave("Please select gender for patient");
-        this.isLoading = false;
+        this.isLoading.set(false);
       }else if(Patint.phoneNumber == ""){
         this.swal.showWoringSave("Please inter phoneNumber for patient");
-        this.isLoading = false;
-      } else{
+         this.isLoading.set(false);
+      }else if(Patint.phoneNumber.length != 11 )
+      {
+        this.swal.showWoringSave("Please enter the phone number correctly.");
+         this.isLoading.set(false);
+      }
+      else{
 
      this.makefildesEmpty();
     
@@ -100,13 +105,12 @@ export class CreatePatient
         console.log('Successfully created:', res);
          sub.unsubscribe(); 
          this.swal.showSuccess();  
-         this.isLoading = false;
-
+         this.isLoading.set(false);
          this.ListPatienttRef.getPatientsNew();
-
       },
-      error: (err) => {console.error(err); sub.unsubscribe(); this.isLoading = false; } 
+      error: (err) => {console.error(err); sub.unsubscribe();   this.isLoading.set(false); } 
     });
   }
-  }
+      this.isLoading.set(false);
+ }
 }

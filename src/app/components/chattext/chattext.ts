@@ -11,7 +11,7 @@ import { MassageDto, } from '../../interfaces/massage-dto';
 export class Chattext {
   
   public messagess = signal<MassageDto[]>([]);
-  private Dto = signal<MassageDto|undefined>(undefined);
+
 
   constructor(private chatService: ChatService,private Vervication:VerfivationToken) {}
 

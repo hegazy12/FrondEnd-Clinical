@@ -22,6 +22,7 @@ export interface saveMedicalExaminationDTO
 {
   idExamination:string;
   idAppointment:string;
+  last: number;
 } 
 
 export interface saveMedicalExaminationDTO1 extends saveMedicalExaminationDTO{

@@ -54,8 +54,8 @@
                 <button 
                 type="button" 
                 class="btn" 
-                [class.btn-danger]="isHistory() === 0" 
-                [class.btn-success]="isHistory() !== 0"
+                [class.btn-danger]="isHistory() === 1" 
+                [class.btn-success]="isHistory() !== 1"
                 (click)="makePriscriptionHistory()">
                 @if (isHistory() === 0) {
                     Save Changes In History

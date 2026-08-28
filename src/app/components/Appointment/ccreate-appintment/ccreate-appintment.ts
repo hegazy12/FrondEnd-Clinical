@@ -24,7 +24,7 @@ export class CCreateAppintment
     public deposit: number=0;  
     public Docrors = signal<DoctorDto1[]>([]);
     public isLoading : boolean = false;
-     
+    public minDate: string = new Date().toISOString().split('T')[0];
     @Input({ required: true }) PatientId!: string;
 
     constructor(private Callapi : Callapi ,

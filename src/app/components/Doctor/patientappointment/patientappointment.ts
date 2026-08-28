@@ -3,13 +3,13 @@ import { VerfivationToken } from '../../../services/verfivationToken/verfivation
 import { Router,ActivatedRoute } from '@angular/router';
 import { Callapi } from '../../../services/callapi/callapi';
 import { Navbar } from '../../navbar/navbar';
-import { AppointmentAllinfo , AppointmentDTO2, makeCompleteResponse} from '../../../interfaces/appointment-dto-0';
+import { AppointmentAllinfo , AppointmentDTO1, AppointmentDTO2, AppointmentsResponse, makeCompleteResponse} from '../../../interfaces/appointment-dto-0';
 import { MakePrescription } from '../../Prescription/make-prescription/make-prescription';
 import { DatePipe } from '@angular/common';
 import { CreatInvestgation } from '../../investgation/creat-investgation/creat-investgation';
 import { CreatVital } from '../../vital/creat-vital/creat-vital';
 import { PatientStory } from '../../History/patient-story/patient-story';
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { CCreateAppintment } from '../../Appointment/ccreate-appintment/ccreate-appintment';
 @Component({
   selector: 'app-patientappointment',
@@ -22,11 +22,19 @@ export class Patientappointment {
   @ViewChild(PatientStory) PatientStoryRef!: PatientStory;
 
   public appointmentId: string = "";
+  
   public view = signal<number>(1);
+  
   public PatientId: string ="";
   
   public makeCompleteResponse = signal<makeCompleteResponse| null>(null);
   
+  public AppointmentsResponse = signal<AppointmentsResponse>;
+  
+  public Appointments=signal<AppointmentDTO1[]>([]);
+  
+  public x = signal<boolean>(false);
+
   constructor(private callapi : Callapi,
               private router:Router,
               private Vervication:VerfivationToken,
@@ -65,6 +73,8 @@ export class Patientappointment {
        }, 20);
     }else if(viewName == "addnextvisit"){
         this.view.set(6);
+    }else if(viewName == "diagnos"){
+        this.view.set(7);
     }
 
   }
@@ -89,11 +99,33 @@ export class Patientappointment {
           return true;
   }
   
-  public callMakeItComplete(){
-    Swal.fire({
+  public async callMakeItComplete()
+  {
+
+   let x = await this.GetPatientAppoinment(this.PatientId)
+   
+   let values: { icon: SweetAlertIcon; message: string } = {
+        icon: "info",
+        message: ""
+      };
+    
+    console.log("let values: { icon: SweetAlertIcon; message: string }");
+    
+    console.log(x);
+    
+    if(this.x() == false)
+    {
+      values.icon = "question";
+      values.message = "This Patient Dont Have Next Appointment"
+    }else{
+      values.icon = "info";
+      values.message = "To Close This Appointmen";
+    }
+
+    Swal.fire({   
       title: "Are you sure?",
-      text: "to close this Appointment",
-      icon: "warning",
+      text: values.message,
+      icon: values.icon,
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
@@ -128,5 +160,38 @@ export class Patientappointment {
       }
     });
   }
-
+  
+  public async GetPatientAppoinment(patientId : string) 
+  {
+    let Sup = await this.callapi.GetPatientAppoinment(patientId).subscribe({
+    next: (P : AppointmentsResponse) =>
+      {
+          this.Appointments.set(P.data);
+          console.log(P.data);
+          console.log(this.Vervication.GetDoctorId());
+          console.log(this.appointmentId);
+          
+          if(this.Appointments().find(m=> m.doctorId ==  this.Vervication.GetDoctorId() && m.id != this.appointmentId) == undefined)
+          {
+            console.log("this.Appointments().find(m=> m.doctorId ==  this.Vervication.GetDoctorId() && m.id != this.appointmentId) == undefined");
+            Sup.unsubscribe();
+            this.x.set(false);
+            return false;
+          }
+          else
+          {
+            Sup.unsubscribe();
+            this.x.set(true);
+            return true;
+        }
+      },
+    error: (err) => 
+    {
+      Sup.unsubscribe();
+      this.x.set(false);
+      return false;
+    }
+    });
+    
+  }
 }

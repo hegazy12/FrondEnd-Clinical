@@ -3,6 +3,7 @@ export interface MassageDto {
     message: string|null|undefined; 
 }
 export interface messages{
-    time: Date|null;
+    time: string|null;
     message: string|null;
+    num:number;
 }

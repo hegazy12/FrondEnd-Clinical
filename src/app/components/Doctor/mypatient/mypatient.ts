@@ -21,19 +21,19 @@ export class Mypatient {
               private router:Router,
               private Vervication:VerfivationToken,
               private route: ActivatedRoute)
-              { this.DoctorId = localStorage.getItem("id")?.replace(/"/g, '') || '';}
+              { 
+                this.DoctorId = localStorage.getItem("id")?.replace(/"/g, '') || '';
+              }
 
 
-  ngOnInit():void {
-
+  ngOnInit():void 
+  {
     if(this.Vervication.islogin() == false)
-    {
-        console.log("ManePage is " + this.Vervication.islogin());
-         this.router.navigate(['/login']);
+    { 
+      this.router.navigate(['/login']);
     }
     else
     {
-      console.log("ManePage is " + this.Vervication.islogin());
       this.GetDoctorAppoinment(this.DoctorId);
     }
   }
@@ -51,6 +51,7 @@ export class Mypatient {
           Sup.unsubscribe();
     }
     });
-          return true;
-    }
+    return true;
+  }
+  
 }
