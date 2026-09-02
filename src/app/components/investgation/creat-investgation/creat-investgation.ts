@@ -6,7 +6,7 @@ import { Router , ActivatedRoute } from '@angular/router';
 import { MedicalExaminationsResponse ,MedicalExaminationsDTO,saveMedicalExaminationDTO } from '../../../interfaces/medical-examinations-dto';
 import { FormsModule } from '@angular/forms';
 import { ListInvestgation } from '../list-investgation/list-investgation'
-import { last } from 'rxjs';
+
 @Component({
   selector: 'app-creat-investgation',
   imports: [FormsModule,ListInvestgation],
@@ -23,6 +23,7 @@ export class CreatInvestgation
     public Examinations = signal<MedicalExaminationsDTO[]>([]);
     public MedicalExaminationsDTO = signal<MedicalExaminationsDTO | null|undefined>(null)
     public isHistory = signal<number>(0);
+    
     constructor(private Callapi : Callapi ,
                 private Verfication :VerfivationToken ,
                 private router: Router,

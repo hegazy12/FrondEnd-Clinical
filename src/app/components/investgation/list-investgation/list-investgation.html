@@ -5,8 +5,6 @@
     <div class="col-md-4 text-white fw-semibold p-2">medicalExamination</div>
     <div class="col-md-2 text-white fw-semibold p-2">DoctorName</div>
     <div class="col-md-2 text-white fw-semibold p-2">Action</div>
-    <!-- <div class="col-md-2 text-white fw-semibold p-2">Doctor Name</div> -->
-    <!-- <div class="col-md-2 text-white fw-semibold p-2 text-center">Action</div> -->
   </div>
 
   @for (item of data(); track item.id ?? $index) {
@@ -15,10 +13,6 @@
       <div class="col-md-4 p-2">{{ item.medicalExaminationsDTO.nameEn }} - ({{item.medicalExaminationsDTO.classificationExaminationDTO1.categoryNameEn}}) </div>
       <div class="col-md-2 p-2">{{ item.doctorDTO.fristName }} - {{item.doctorDTO.lastName}} - ({{item.doctorDTO.specialization}})</div>
       <div class="col-md-2 p-2">view</div>
-      <!-- <div class="col-md-2 p-2"></div> -->
-      <!-- <div class="col-md-2 p-2 text-center">
-        <a [routerLink]="['/Patientappointment', item.id]" class="btn btn-sm btn-outline-primary">View</a>
-      </div> -->
     </div>
   } @empty {
     <div class="row g-0">

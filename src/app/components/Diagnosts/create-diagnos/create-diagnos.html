@@ -1,0 +1,40 @@
+<div class="row" style="margin-right: .5%; margin-left: .5%;">
+        
+        <div class="col-md-12">
+            <label class="form-label fw-semibold text-muted small">Search Diagnos</label>
+        </div>
+        
+        <div class="col-md-10">     
+            <input type="text" class="form-control" value="{{name()}}" #TextsearchTearm placeholder="Search Diagnos" [(ngModel)]="name"  >
+        </div>
+        
+        <div class="col-md-2 d-flex justify-content-end">
+            <input type="button" class="btn btn-primary" value="GetDiagnos" (click)="searchDiagnos(TextsearchTearm.value)" >           
+        </div>   
+        
+        <div class="col-md-12">
+            <label class="form-label fw-semibold text-muted small"> Select Diagnos </label>
+            <select class="form-select" aria-label="Default select example" name="Diagnos" #diagnos (change)="onSpecialtyChange($event)"  >
+                <option value="">Please select Diagnos</option>
+              @for (EX of data(); track $index) {
+                <option [value]="EX.id">{{EX.name}} /{{EX.code}}</option>
+               }
+            </select>
+        </div>
+        
+        <div class="col-md-12">
+            <label class="form-label fw-semibold text-muted small">Description</label>
+            <textarea class="form-control" rows="3" name="description" #description  [(ngModel)]="Note" ></textarea>   
+        </div>
+
+        <div class="row" style="margin-top: 1%;">
+            <div class="col-12 d-flex justify-content-end">
+                <button type="button" class="btn btn-primary " (click)="onSubmit()">Save Changes</button>
+            </div>
+        </div>
+</div>
+
+<div class="row" style="margin:.5%">
+        <app-list-diagnosos [AppointmentID]="appointmentId" ></app-list-diagnosos>
+</div>
+   

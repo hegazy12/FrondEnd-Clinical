@@ -48,7 +48,7 @@
          <input type="button" class="btn btn btn-secondary d-flex justify-content-end"  name="viewhistory" style="margin: 1%;" #viewhistory value="View History" (click)="viewpage(viewhistory.name)">
       
       <button class="btn btn-primary shadow-sm" style="margin: 1%;" #addnextvisit name="addnextvisit" (click)="viewpage(addnextvisit.name)" >
-        nexrt visit
+        next visit
       </button>
 
       <button class="btn btn-danger shadow-sm" style="margin: 1%;" #colsevisit name="colseVisit" (click)="callMakeItComplete()"  >
@@ -75,7 +75,7 @@
         <app-ccreate-appintment [PatientId]="PatientId"></app-ccreate-appintment>
       }@else if(view() == 7)
       {
-          
+          <app-create-diagnos [AppointmentID]="appointmentId" ></app-create-diagnos>
       }
     </div>
   </div>

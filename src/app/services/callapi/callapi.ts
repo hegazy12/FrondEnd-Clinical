@@ -12,6 +12,7 @@ import { createPrescriptionResponse, Prescriptiondto,PrescriptionResponse } from
 import {MedicalExaminationsResponse ,saveMedicalExaminationDTO,saveExaminationListResponse} from '../../interfaces/medical-examinations-dto'
 import { VitalSignDto1, VitalSignDtoResponse } from '../../interfaces/vital-dto';
 import {LinkService} from '../linkService/link-service'
+import { CreateDiagnosDTO, CreateDiagnosisResponse, GetDiagnosisListResponse, GetDiagnosisMasterResponse } from '../../interfaces/diagnos-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -239,11 +240,53 @@ export class Callapi
       })
     );
   }
+ 
   public GetAppoinmentStory(AppointmentId:string):Observable<AppointmentsStoryResponse> {
       const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
       return this.Http.get<AppointmentsStoryResponse>(this.url + `Appointment/GetHistoryAppointment/${AppointmentId}`, { headers }).pipe(
         tap(response => {}),
         catchError(error => {return throwError(() => error);
+      })
+    );
+  }
+
+  public CreateMasterDiagnos(Create: CreateDiagnosDTO) : Observable<CreateDiagnosisResponse>
+  {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    return this.Http.post<CreateDiagnosisResponse>(this.url + "Diagnos/AddDiagnos",Create,{ headers }).pipe(
+      tap(response => {}),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  public GetDiagnosByAppointmentId(AppointmentId:string):Observable<GetDiagnosisListResponse>
+  {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    return this.Http.get<GetDiagnosisListResponse>(this.url + `Diagnos/GetDiagnosByAppoitmentID/${AppointmentId}`, { headers }).pipe(
+      tap(response => {}),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+  }
+
+  public SearchDiagnos(SearchTerm:string):Observable<GetDiagnosisMasterResponse>
+  {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    return this.Http.get<GetDiagnosisMasterResponse>(this.url + `Diagnos/GetDiagnos?SearchTerm=${SearchTerm}`, { headers }).pipe(
+      tap(response => {}),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+  }
+
+  public DeleteDiagnos(DiagnosId:string):Observable<CreateDiagnosisResponse>
+  {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    return this.Http.delete<CreateDiagnosisResponse>(this.url + `Diagnos/Delete/${DiagnosId}`, { headers }).pipe(
+      tap(response => {}),
+      catchError(error => {return throwError(() => error);
       })
     );
   }

@@ -3,11 +3,11 @@
         <div class="col-md-10">
             <input type="text" class="form-control" #TextsearchTearm placeholder="Search Examination"  >
         </div>
-
+        
         <div class="col-md-2 d-flex justify-content-end">
             <input type="button" class="btn btn-primary" value="GetExaminations" (click)="SearchExaminations(TextsearchTearm.value)" >           
         </div>   
-
+        
         <div class="col-md-12">
             <label class="form-label fw-semibold text-muted small">Examination</label>
             <select class="form-select" aria-label="Default select example" name="Examination" #examination (change)="onSpecialtyChange($event)"  >

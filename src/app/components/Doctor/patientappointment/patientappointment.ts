@@ -11,9 +11,10 @@ import { CreatVital } from '../../vital/creat-vital/creat-vital';
 import { PatientStory } from '../../History/patient-story/patient-story';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { CCreateAppintment } from '../../Appointment/ccreate-appintment/ccreate-appintment';
+import { CreateDiagnos } from '../../Diagnosts/create-diagnos/create-diagnos';
 @Component({
   selector: 'app-patientappointment',
-  imports:  [Navbar,MakePrescription,DatePipe,CreatInvestgation,CreatVital,PatientStory,CCreateAppintment],
+  imports:  [Navbar,MakePrescription,DatePipe,CreatInvestgation,CreatVital,PatientStory,CCreateAppintment,CreateDiagnos],
   templateUrl: './patientappointment.html',
   styleUrl: './patientappointment.css',
 })

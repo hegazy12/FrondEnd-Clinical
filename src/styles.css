@@ -4,6 +4,194 @@
     margin: 1%;
 }
 /* 
+    =========================================================
+   Clinic Theme — Colors & Typography
+   (Global visual theme only — no structural/layout changes)
+   ========================================================= 
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700&display=swap');
+
+:root {
+  /* Brand palette */
+  --clinic-primary: #2563eb;
+  --clinic-primary-dark: #1d4ed8;
+  --clinic-primary-darker: #1e3a8a;
+  --clinic-primary-light: #dbeafe;
+  --clinic-primary-lighter: #f0f6ff;
+
+  --clinic-accent: #0d9488;
+  --clinic-accent-light: #ccfbf1;
+
+  --clinic-success: #16a34a;
+  --clinic-warning: #f59e0b;
+  --clinic-danger: #dc2626;
+  --clinic-info: #0ea5e9;
+
+  --clinic-ink: #1e2a3a;
+  --clinic-muted: #64748b;
+  --clinic-border: #e2e8f0;
+  --clinic-surface: #ffffff;
+  --clinic-bg: #f5f8fc;
+
+  --clinic-radius: 10px;
+  --clinic-shadow: 0 2px 10px rgba(30, 64, 175, 0.07);
+  --clinic-shadow-hover: 0 8px 20px rgba(30, 64, 175, 0.14);
+
+  --clinic-font: 'Inter', 'Segoe UI', Tahoma, Arial, sans-serif;
+  --clinic-font-heading: 'Poppins', 'Inter', 'Segoe UI', sans-serif;
+
+  /* Bootstrap 5.3 theming hooks — keeps every default Bootstrap
+     class (buttons, links, badges, tables...) in sync automatically */
+  --bs-primary: var(--clinic-primary);
+  --bs-primary-rgb: 37, 99, 235;
+  --bs-link-color: var(--clinic-primary);
+  --bs-link-color-rgb: 37, 99, 235;
+  --bs-link-hover-color: var(--clinic-primary-dark);
+  --bs-link-hover-color-rgb: 29, 78, 216;
+  --bs-body-font-family: var(--clinic-font);
+  --bs-body-color: var(--clinic-ink);
+  --bs-body-bg: var(--clinic-bg);
+  --bs-border-color: var(--clinic-border);
+  --bs-border-radius: 8px;
+  --bs-border-radius-lg: 12px;
+  --bs-border-radius-sm: 6px;
+}
+
+/* Base typography */
+html, body {
+  font-family: var(--clinic-font);
+  background-color: var(--clinic-bg);
+  color: var(--clinic-ink);
+  letter-spacing: 0.1px;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: var(--clinic-font-heading);
+  font-weight: 700;
+  color: var(--clinic-primary-darker);
+  letter-spacing: 0.2px;
+}
+
+p, span, label, td, th, li { font-family: var(--clinic-font); }
+
+a { color: var(--clinic-primary); text-decoration: none; }
+a:hover { color: var(--clinic-primary-dark); text-decoration: underline; }
+
+/* Buttons */
+.btn {
+  border-radius: var(--clinic-radius);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  transition: background-color .18s ease-in-out, box-shadow .18s ease-in-out, transform .1s ease-in-out;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+  background-color: var(--clinic-primary);
+  border-color: var(--clinic-primary);
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--clinic-primary-dark);
+  border-color: var(--clinic-primary-dark);
+  box-shadow: var(--clinic-shadow-hover);
+}
+
+.btn-outline-primary {
+  color: var(--clinic-primary);
+  border-color: var(--clinic-primary);
+}
+.btn-outline-primary:hover {
+  background-color: var(--clinic-primary);
+  border-color: var(--clinic-primary);
+}
+
+.btn-success { background-color: var(--clinic-success); border-color: var(--clinic-success); }
+.btn-danger  { background-color: var(--clinic-danger);  border-color: var(--clinic-danger); }
+.btn-warning { background-color: var(--clinic-warning); border-color: var(--clinic-warning); color: #3a2a06; }
+.btn-info    { background-color: var(--clinic-info);    border-color: var(--clinic-info); }
+
+/* 
+    Top nav bars styled with the old bootstrap-blue inline background
+    (kept as an inline style in the HTML — matched here only by that
+    inline value so no markup needs to change)
+*/
+.navbar,
+[style*="background-color: #0d6efd"],
+[style*="background-color:#0d6efd"] {
+  background: linear-gradient(135deg, var(--clinic-primary) 0%, var(--clinic-primary-dark) 100%) !important;
+  box-shadow: var(--clinic-shadow);
+}
+
+.nav-link { font-weight: 600; }
+.nav-link.text-white:hover { color: var(--clinic-accent-light) !important; opacity: .92; }
+
+/* Cards */
+.card {
+  border: 1px solid var(--clinic-border);
+  border-radius: 14px;
+  box-shadow: var(--clinic-shadow);
+  transition: box-shadow .18s ease-in-out;
+}
+.card:hover { box-shadow: var(--clinic-shadow-hover); }
+.card-header {
+  background-color: var(--clinic-primary-lighter);
+  font-weight: 700;
+  color: var(--clinic-primary-darker);
+}
+
+/* Tables */
+.table {
+  --bs-table-hover-bg: var(--clinic-primary-lighter);
+}
+.table thead th {
+  background-color: var(--clinic-primary-light);
+  color: var(--clinic-primary-darker);
+  font-weight: 700;
+  border-bottom: 2px solid var(--clinic-primary);
+}
+.table-hover tbody tr:hover {
+  background-color: var(--clinic-primary-lighter);
+}
+
+/* Forms */
+.form-control, .form-select {
+  border-radius: 8px;
+  border-color: var(--clinic-border);
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--clinic-primary);
+  box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.15);
+}
+.form-label { font-weight: 600; color: var(--clinic-ink); }
+
+/* Badges */
+.badge.bg-primary { background-color: var(--clinic-primary) !important; }
+.badge.bg-success { background-color: var(--clinic-success) !important; }
+.badge.bg-danger  { background-color: var(--clinic-danger)  !important; }
+.badge.bg-warning { background-color: var(--clinic-warning) !important; color: #3a2a06 !important; }
+.badge.bg-info    { background-color: var(--clinic-info)    !important; }
+
+/* Alerts */
+.alert-primary {
+  background-color: var(--clinic-primary-lighter);
+  border-color: var(--clinic-primary-light);
+  color: var(--clinic-primary-darker);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--clinic-bg); }
+::-webkit-scrollbar-thumb { background: var(--clinic-primary-light); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--clinic-primary); }
+
+.spase1{
+    padding: 1%;
+    margin: 1%;
+}
+/* 
 body{
     background-color: rgb(206, 219, 235);
 }
@@ -12,4 +200,3 @@ body{
 {
  background-color: rgb(138, 170, 211);
 } */
-
