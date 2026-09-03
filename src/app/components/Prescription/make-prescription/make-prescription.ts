@@ -4,9 +4,9 @@ import { Callapi } from '../../../services/callapi/callapi';
 import { VerfivationToken } from '../../../services/verfivationToken/verfivation-token';
 import { Router , ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { DTODrug} from '../../../interfaces/dtodrug';
-import {Prescriptiondto} from '../../../interfaces/prescription'
-import {PrescriptionList } from '../prescription-list/prescription-list'
+import { DTODrug } from '../../../interfaces/dtodrug';
+import { Prescriptiondto} from '../../../interfaces/prescription'
+import { PrescriptionList } from '../prescription-list/prescription-list'
 
 
 @Component({

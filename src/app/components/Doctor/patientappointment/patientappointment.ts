@@ -97,7 +97,7 @@ export class Patientappointment {
           Sup.unsubscribe();
         }
         });
-          return true;
+        return true;
   }
   
   public async callMakeItComplete()
@@ -124,7 +124,7 @@ export class Patientappointment {
     }
 
     Swal.fire({   
-      title: "Are you sure?",
+      title: "Are You Sure? To Close Appointment",
       text: values.message,
       icon: values.icon,
       showCancelButton: true,
@@ -134,13 +134,17 @@ export class Patientappointment {
     }).then((result) => {
       if (result.isConfirmed){
         this.makeItComplete(this.appointmentId);
-        if(this.makeCompleteResponse()?.success){ 
-            Swal.fire({
-              title: "savaing!",
-              text: "Your file has been saved.",
-              icon: "success"
+        if(this.makeCompleteResponse()?.success)
+        { 
+          Swal.fire({
+            title: "savaing!",
+            text: "Your file has been saved.",
+            icon: "success"
           });
-        }else{
+          this.router.navigate(['/mypatient']);
+        }
+        else
+        {
           Swal.fire({
               title: "savaing!",
               text: "Your file has been not saved.",
@@ -154,7 +158,7 @@ export class Patientappointment {
   public makeItComplete(appointmentId: string): void {
     this.callapi.makeItComplete(appointmentId).subscribe({
       next: (response: makeCompleteResponse) => {
-      this.makeCompleteResponse.set(response);
+              this.makeCompleteResponse.set(response);
       },
       error: (err) => {
         console.error('Error completing appointment:', err);

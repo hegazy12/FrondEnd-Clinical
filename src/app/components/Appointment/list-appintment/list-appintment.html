@@ -19,7 +19,7 @@
       <div class="col-md-2 p-2">{{ item.status }}</div>
       <div class="col-md-2 p-2">{{ item.deposit }}</div>
       <div class="col-md-2 p-2">Dr. {{ item.notes }}</div>
-      <div class="col-md-2 p-2">view</div>
+      <div class="col-md-2 p-2"> <button class="btn btn-sm btn-outline-danger" (click)="DeleteAppoinment(item.id)" > Delete </button> </div>
    
     </div>
   } @empty {

@@ -27,38 +27,38 @@
 
   <div class="row g-3">
     <!-- Left Action Column -->
-    <div class="col-lg-2 col-xl-1">
+    <div class="col-lg-3 col-xl-1">
      
-      <button class="btn btn-primary shadow-sm" style="margin: 1%;" #diagnosid name="diagnos" (click)="viewpage(diagnosid.name)" >
-        Diagnos
+      <button class="btn btn-primary shadow-sm fixsize"  #diagnosid name="diagnos" (click)="viewpage(diagnosid.name)" >
+        Diagnosis
       </button>
 
-      <button class="btn btn-primary shadow-sm" style="margin: 1%;" #prescriptionid name="prescription" (click)="viewpage(prescriptionid.name)" >
-        prescription
+      <button class="btn btn-primary shadow-sm fixsize"  #prescriptionid name="prescription" (click)="viewpage(prescriptionid.name)" >
+        Medication
       </button>
-      <button class="btn btn-primary shadow-sm" style="margin: 1%;" #investgationid  name="investgation" (click)="viewpage(investgationid.name)" >
-        investgation
+      <button class="btn btn-primary shadow-sm fixsize"  #investgationid  name="investgation" (click)="viewpage(investgationid.name)" >
+        LabTests
       </button>
-      <button class="btn btn-primary shadow-sm" style="margin: 1%;" #vitalsignsid  name="vitalsigns" (click)="viewpage(vitalsignsid.name)" >
-        vitalsigns
+      <button class="btn btn-primary shadow-sm fixsize"  #vitalsignsid  name="vitalsigns" (click)="viewpage(vitalsignsid.name)" >
+        Vitals
       </button>
-      <button class="btn btn-primary shadow-sm" style="margin: 1%;" #allergiesid name="allergies" (click)="viewpage(allergiesid.name)" >
-        allergies
+      <button class="btn btn-primary shadow-sm fixsize"  #allergiesid name="allergies" (click)="viewpage(allergiesid.name)" >
+        Allergies
       </button>
-         <input type="button" class="btn btn btn-secondary d-flex justify-content-end"  name="viewhistory" style="margin: 1%;" #viewhistory value="View History" (click)="viewpage(viewhistory.name)">
+         <input type="button" class="btn btn btn-secondary d-flex justify-content-end fixsize"  name="viewhistory"  #viewhistory value="ViewStory" (click)="viewpage(viewhistory.name)">
       
-      <button class="btn btn-primary shadow-sm" style="margin: 1%;" #addnextvisit name="addnextvisit" (click)="viewpage(addnextvisit.name)" >
-        next visit
+      <button class="btn btn-primary shadow-sm fixsize" #addnextvisit name="addnextvisit" (click)="viewpage(addnextvisit.name)" >
+        NextVisit
       </button>
 
-      <button class="btn btn-danger shadow-sm" style="margin: 1%;" #colsevisit name="colseVisit" (click)="callMakeItComplete()"  >
-        Colse visit
+      <button class="btn btn-danger shadow-sm fixsize"  #colsevisit name="colseVisit" (click)="callMakeItComplete()"  >
+        EndVisit
       </button>
    
     </div>
 
 
-    <div class="col-lg-10 col-xl-11">
+    <div class="col-lg-9 col-xl-11">
       @if( view() == 1 )
       {
         <app-make-prescription #makeprescription [AppointmentID]="appointmentId" ></app-make-prescription>

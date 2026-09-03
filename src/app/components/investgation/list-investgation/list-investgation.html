@@ -12,7 +12,9 @@
       <div class="col-md-2 p-2">{{ item.medicalExaminationsDTO.code}}</div>
       <div class="col-md-4 p-2">{{ item.medicalExaminationsDTO.nameEn }} - ({{item.medicalExaminationsDTO.classificationExaminationDTO1.categoryNameEn}}) </div>
       <div class="col-md-2 p-2">{{ item.doctorDTO.fristName }} - {{item.doctorDTO.lastName}} - ({{item.doctorDTO.specialization}})</div>
-      <div class="col-md-2 p-2">view</div>
+      <div class="col-md-2 p-2"> 
+        <button class="btn btn-sm btn-outline-danger" (click)="DeleteInvestgation(item.id)" > Delete </button> 
+      </div>
     </div>
   } @empty {
     <div class="row g-0">

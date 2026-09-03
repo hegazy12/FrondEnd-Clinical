@@ -88,7 +88,7 @@ export class CCreateAppintment
            return false
         }else{
 
-          let sub =  this.Callapi.createِِِAppointment(Appointment).subscribe({
+          let sub =  this.Callapi.createAppointment(Appointment).subscribe({
           next: (res) => {
             sub.unsubscribe(); 
             this.swal.showSuccess();

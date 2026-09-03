@@ -1,14 +1,14 @@
 /* Make the vertical action buttons (Diagnos / prescription / investgation /
    vitalsigns / allergies / View History / next visit / Close visit)
    equal width and consistently stacked. CSS-only change, no HTML/TS edits. */
- 
-.col-lg-2.col-xl-1 {
+/*  
+.col-lg-3.col-xl-1 {
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
  
-.col-lg-2.col-xl-1 .btn {
+.col-lg-3.col-xl-1 .btn {
   width: 100%;
   box-sizing: border-box;
   text-align: center;
@@ -16,9 +16,15 @@
  
 /* The "View History" control is an <input type="button">
    with d-flex + justify-content-end, which pushes its label
-   to the right and breaks the alignment with the other buttons. */
-.col-lg-2.col-xl-1 input.btn {
+   to the right and breaks the alignment with the other buttons. 
+.col-lg-3.col-xl-1 input.btn {
   display: block !important;
   justify-content: normal !important;
   text-align: center !important;
+} */
+
+.fixsize 
+{
+  width: 115%;
+  margin: 1%; 
 }

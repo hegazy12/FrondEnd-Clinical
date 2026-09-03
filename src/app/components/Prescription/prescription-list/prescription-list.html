@@ -6,7 +6,7 @@
     <div class="col-md-2 text-white fw-semibold p-2">Start Date</div>
     <div class="col-md-2 text-white fw-semibold p-2">Type</div>
     <div class="col-md-2 text-white fw-semibold p-2">Doctor Name</div>
-    <!-- <div class="col-md-2 text-white fw-semibold p-2 text-center">Action</div> -->
+    <div class="col-md-2 text-white fw-semibold p-2 text-center">Action</div> 
   </div>
 
   @for (item of data(); track item.id ?? $index) {
@@ -16,9 +16,9 @@
       <div class="col-md-2 p-2">{{ item.from }}</div>
       <div class="col-md-2 p-2">{{ item.type }}</div>
       <div class="col-md-2 p-2">Dr. {{ item.doctor.fristName }}</div>
-      <!-- <div class="col-md-2 p-2 text-center">
-        <a [routerLink]="['/Patientappointment', item.id]" class="btn btn-sm btn-outline-primary">View</a>
-      </div> -->
+    <div class="col-md-2 p-2 text-center">
+        <button class="btn btn-sm btn-outline-danger" (click)="DeletePrescription(item.id)"> Delete </button>
+      </div> 
     </div>
   } @empty {
     <div class="row g-0">

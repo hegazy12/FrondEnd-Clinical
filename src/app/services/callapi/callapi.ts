@@ -22,7 +22,7 @@ export class Callapi
   //private url: string = "https://localhost:7262/"
   // private url: string = "https://barge-manhole-crib.ngrok-free.dev/api/"
   //private url: string = "http://192.168.0.148:5000/"
-   private url = "http://localhost:5244/"
+  private url = "";
 
   
   constructor(private Http:HttpClient , private token :VerfivationToken,private LinkService : LinkService)
@@ -77,7 +77,7 @@ export class Callapi
     );
   }
 
-  public createِِِAppointment(Create: AppointmentDTO0):Observable<AppointmentResponse>
+  public createAppointment(Create: AppointmentDTO0):Observable<AppointmentResponse>
   {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
     
@@ -192,6 +192,7 @@ export class Callapi
       })
     );
   }
+
   public createExamination(Create: saveMedicalExaminationDTO):Observable<any>
    {
      const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});  
@@ -202,6 +203,7 @@ export class Callapi
       })
     );
   }
+
   public ExaminationList(id: string):Observable<saveExaminationListResponse>
    {
      const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
@@ -212,6 +214,7 @@ export class Callapi
       })
     );
   }
+
   public SearchVitals(SearchTerm:string)
   {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
@@ -222,6 +225,7 @@ export class Callapi
       })
     );
   }
+
   public GetPatientAppoinmentStory(PatientId:string):Observable<AppointmentsResponse>
   {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
@@ -231,6 +235,7 @@ export class Callapi
       })
     );
   }
+
   public makeItComplete(AppointmentId:string):Observable<makeCompleteResponse> {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
     
@@ -287,6 +292,39 @@ export class Callapi
     return this.Http.delete<CreateDiagnosisResponse>(this.url + `Diagnos/Delete/${DiagnosId}`, { headers }).pipe(
       tap(response => {}),
       catchError(error => {return throwError(() => error);
+      })
+    );
+  }
+  
+  public DeleteAppointmentById(Id:string):Observable<AppointmentResponse>
+  {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    
+     return this.Http.delete<AppointmentResponse>(this.url + `Appointment/DeleteAppointment/${Id}`,{ headers }).pipe(
+      tap(response => {}),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  public DeletePrescription(Id:string):Observable<createPrescriptionResponse>
+  {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    return this.Http.delete<createPrescriptionResponse>(this.url + `Prescription/Delete/${Id}`, { headers }).pipe(
+      tap(response => { }),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+  }
+  
+  public DeleteExamination(Id:string):Observable<any>
+   {
+     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});  
+        return this.Http.delete<any>(this.url + `medicalExamination/DeleteMedicalExamination/${Id}`,{ headers }).pipe(
+          tap(response => {}),
+          catchError(error => {
+            return throwError(() => error);
       })
     );
   }

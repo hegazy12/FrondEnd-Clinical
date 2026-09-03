@@ -6,6 +6,7 @@
         <div class="col-md-2 text-white fw-semibold p-2"> address </div>
         <div class="col-md-2 text-white fw-semibold p-2"> dateOfBirth </div>
         <div class="col-md-2 text-white fw-semibold p-2"> gender </div>
+         <div class="col-md-2 text-white fw-semibold p-2"> Action </div>
    </div>
 
     @if(isloding())
@@ -17,7 +18,9 @@
               <div class="col-md-2 p-2">{{ patient.address }}</div>
               <div class="col-md-2 p-2">{{ patient.dateOfBirth | date }}</div>
               <div class="col-md-2 p-2">{{ patient.gender }}</div>
-              <div class="col-md-2 p-2"><a [routerLink]="['/patient/getpatient', patient.id]">view</a> </div>
+              <div class="col-md-2 p-2"><a [routerLink]="['/patient/getpatient', patient.id]">view</a>  
+                <button class="btn btn-sm btn-outline-danger"> Delete 
+              </button></div>
             
           </div>
           } 

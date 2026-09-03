@@ -22,9 +22,7 @@ export class Navbar
   public logOut (): void 
   {
    
-        localStorage.clear();
-        this.router.navigate(['/login']);
-   
-  
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 }
