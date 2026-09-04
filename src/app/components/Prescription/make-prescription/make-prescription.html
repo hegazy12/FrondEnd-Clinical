@@ -9,8 +9,7 @@
             <input type="button" class="btn btn-primary" value="GetDrugs" (click)="SearchDrug(TextsearchTearm.value)" >           
         </div>   
 
-        <div class="col-md-12">
-            <label class="form-label fw-semibold text-muted small">Drug</label>
+        <div class="col-md-12" style="margin-top: 1%;">
             <select class="form-select" aria-label="Default select example" name="drug" (change)="onSpecialtyChange($event)" >
              <option value="">select durg pleas</option>  
               @for (Drug of DTODrugs(); track $index) {
@@ -19,11 +18,17 @@
             </select>
         </div>
 
-       <div class="col-md-6" ><label>From</label> <input class="form-control" type="date" name="form" [(ngModel)]="from" min="{{from()}}"></div>  
-       <div class="col-md-6" ><label>To </label>  <input type="date" class="form-control" name="to" [(ngModel)]="to" min="{{from()}}"></div>
-       
-       <div class="col-md-6" >
-       <label>Frequency</label> 
+       <div class="col-md-6" style="margin-top: 1%;">
+            <label>From</label>
+            <input class="form-control" type="date" name="form" [(ngModel)]="from" min="{{minDate}}">
+        </div>
+        <div class="col-md-6" style="margin-top: 1%;">
+            <label>To </label>
+            <input type="date" class="form-control" name="to" [(ngModel)]="to" min="{{from()}}">
+        </div>
+
+       <div class="col-md-6" style="margin-top: 1%;">
+
         <select class="form-control" name="frequency" (change)="onSpecialtyChange($event)"  >
             <option value="0">select frequency pleas</option> 
             <option value="6">ever 6 hours</option> 
@@ -34,8 +39,8 @@
         </select>
         </div>
     
-    <div class="col-md-6" >
-    <label for="type">type</label>
+    <div class="col-md-6" style="margin-top: 1%;">
+   
     <select class="form-control" name="type" (change)="onSpecialtyChange($event)" >
          <option value="0">select type pleas</option> 
          <option value="1" > type 1 </option> 
@@ -45,8 +50,8 @@
     </select>
     </div>
     
-    <div class="col-md-12" >
-        <label>Notes</label>
+    <div class="col-md-12" style="margin-top: 1%;" >
+     
         <textarea id="notes" name="notes" class="form-control" rows="3" placeholder="Enter notes..." [(ngModel)]="Note" ></textarea>
     </div>
             <div class="row" style="margin-top: 1%;">
@@ -71,8 +76,7 @@
         
     </div>
 </div>
-
 </form>
 <div class="row" style="margin:.5%">
-<app-prescription-list [AppointmentID]="appointmentId" ></app-prescription-list>
+    <app-prescription-list [AppointmentID]="appointmentId" [isInHistoryMood]="false" ></app-prescription-list>
 </div>

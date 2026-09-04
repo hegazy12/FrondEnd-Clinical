@@ -1,4 +1,4 @@
-<div class="prescription-table border rounded overflow-hidden">
+<!-- <div class="prescription-table border rounded overflow-hidden">
 
   <div class="row g-0" style="background-color: #0d6efd;">
         <div class="col-md-2 text-white fw-semibold p-2"> Name</div>
@@ -35,4 +35,68 @@
     }
 
 
+</div> -->
+<div class="container mt-4">
+  <h2 class="page-title">Patients List</h2>
+  <div class="table-responsive patients-card">
+
+    <div class="table-toolbar">
+        <input matInput class="form-control searchControl" (keyup)="applyFilter($event)" placeholder="Search">
+    </div>
+
+    <table mat-table [dataSource]="dataSource" matSort class="patients-table">
+
+      <ng-container matColumnDef="FirstName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>firstName</th>
+        <td mat-cell *matCellDef="let PatientDTO">{{ PatientDTO.firstName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="LastName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>lastName</th>
+        <td mat-cell *matCellDef="let PatientDTO">{{ PatientDTO.lastName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Address">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>address</th>
+        <td mat-cell *matCellDef="let PatientDTO">{{ PatientDTO.address }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="phoneNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>phoneNumber</th>
+        <td mat-cell *matCellDef="let PatientDTO">{{ PatientDTO.phoneNumber }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Gender">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>gender</th>
+        <td mat-cell *matCellDef="let PatientDTO">
+          <span class="badge-gender" [class.male]="PatientDTO.gender === 'Male'" [class.female]="PatientDTO.gender === 'Female'">
+            {{ PatientDTO.gender }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dateOfBirth">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>dateOfBirth</th>
+        <td mat-cell *matCellDef="let PatientDTO">{{ PatientDTO.dateOfBirth | date:'mediumDate' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="actions-header">Actions</th>
+        <td mat-cell *matCellDef="let PatientDTO" class="actions-cell">
+          <a [routerLink]="['/patient/getpatient', PatientDTO.id]">view</a>  
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell no-data-cell" [attr.colspan]="displayedColumns.length">
+          No patients found.
+        </td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons class="patients-paginator"></mat-paginator>
+  </div>
 </div>

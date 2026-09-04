@@ -14,12 +14,16 @@ import { createPrescriptionResponse } from '../../../interfaces/prescription';
 })
 
 export class PrescriptionList {
+  
 
   appointmentId : string;
   
   last = signal<number>(0);
 
   @Input({ required: true }) AppointmentID!: string;
+  
+  @Input({ required: true }) isInHistoryMood!: boolean;
+
   public data = signal<Prescriptiondto2[]>([]);
 
   constructor(private Callapi : Callapi ,private Verfication :VerfivationToken ,private router : Router,private route: ActivatedRoute)

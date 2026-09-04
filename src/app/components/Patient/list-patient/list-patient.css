@@ -1,0 +1,119 @@
+/* ===== General ===== */
+.container {
+  font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
+}
+
+.page-title {
+  color: #2b3990;
+  font-weight: 700;
+  font-size: 1.75rem;
+  margin-bottom: 20px;
+}
+
+/* ===== Card wrapper ===== */
+.patients-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* ===== Toolbar / Search ===== */
+.table-toolbar {
+  margin-bottom: 16px;
+}
+
+.search-field {
+  width: 280px;
+}
+.searchControl{
+    width: 30%;
+}
+
+::ng-deep .search-field .mat-mdc-text-field-wrapper {
+  border-radius: 8px;
+}
+
+/* ===== Table ===== */
+.patients-table {
+  width: 100%;
+  font-family: inherit;
+}
+
+::ng-deep .patients-table .mat-mdc-header-row {
+  background-color: #f4f6fb;
+}
+
+::ng-deep .patients-table .mat-mdc-header-cell {
+  color: #2b3990;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+  border-bottom: 2px solid #e0e4f0;
+}
+
+::ng-deep .patients-table .mat-mdc-cell {
+  color: #333;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #eef0f6;
+}
+
+::ng-deep .patients-table .mat-mdc-row:hover {
+  background-color: #f8f9fd;
+  transition: background-color 0.15s ease;
+}
+
+.table-row {
+  cursor: default;
+}
+
+/* ===== Gender badge ===== */
+.badge-gender {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.badge-gender.male {
+  background-color: #e8eeff;
+  color: #3b5bdb;
+}
+
+.badge-gender.female {
+  background-color: #ffe8f0;
+  color: #d6336c;
+}
+
+/* ===== Actions ===== */
+.actions-header {
+  color: #2b3990;
+  font-weight: 700;
+}
+
+.actions-cell {
+  white-space: nowrap;
+}
+
+.action-btn {
+  transform: scale(0.9);
+}
+
+/* ===== No data ===== */
+.no-data-cell {
+  text-align: center;
+  padding: 32px 0;
+  color: #999;
+  font-style: italic;
+}
+
+/* ===== Paginator ===== */
+.patients-paginator {
+  background: transparent;
+  margin-top: 8px;
+}
+
+::ng-deep .patients-paginator .mat-mdc-paginator-container {
+  color: #555;
+  font-size: 0.85rem;
+}

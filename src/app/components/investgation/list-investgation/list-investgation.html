@@ -4,7 +4,10 @@
     <div class="col-md-2 text-white fw-semibold p-2">code</div>
     <div class="col-md-4 text-white fw-semibold p-2">medicalExamination</div>
     <div class="col-md-2 text-white fw-semibold p-2">DoctorName</div>
+    @if (!isInHistoryMood)
+    {
     <div class="col-md-2 text-white fw-semibold p-2">Action</div>
+   }
   </div>
 
   @for (item of data(); track item.id ?? $index) {
@@ -12,9 +15,13 @@
       <div class="col-md-2 p-2">{{ item.medicalExaminationsDTO.code}}</div>
       <div class="col-md-4 p-2">{{ item.medicalExaminationsDTO.nameEn }} - ({{item.medicalExaminationsDTO.classificationExaminationDTO1.categoryNameEn}}) </div>
       <div class="col-md-2 p-2">{{ item.doctorDTO.fristName }} - {{item.doctorDTO.lastName}} - ({{item.doctorDTO.specialization}})</div>
-      <div class="col-md-2 p-2"> 
-        <button class="btn btn-sm btn-outline-danger" (click)="DeleteInvestgation(item.id)" > Delete </button> 
-      </div>
+      @if (!isInHistoryMood) {
+        <div class="col-md-2 p-2"> 
+          <button class="btn btn-sm btn-outline-danger" (click)="DeleteInvestgation(item.id)" > Delete </button>
+          <button class="btn btn-sm btn-outline-primary" style="margin-left: 1%;" (click)="takePhoto(item.id)"> takePhoto </button> 
+        </div>
+        
+      }
     </div>
   } @empty {
     <div class="row g-0">

@@ -32,7 +32,7 @@ export class MakePrescription
   DrugId =signal<string>('');
   public appointmentId : string;
   inputValue = signal<string>('');
-
+  minDate: string = new Date().toISOString().split('T')[0];
   public isHistory = signal<number>(0);
   
   constructor(private Callapi : Callapi ,

@@ -2,7 +2,7 @@ import {Component ,Input,signal} from '@angular/core';
 import {Callapi} from '../../../services/callapi/callapi';
 import {VerfivationToken} from '../../../services/verfivationToken/verfivation-token';
 import {Router,ActivatedRoute} from '@angular/router';
-import { AppointmentDTO1, AppointmentsResponse } from '../../../interfaces/appointment-dto-0';
+import { AppointmentDTO1, AppointmentResponse, AppointmentsResponse } from '../../../interfaces/appointment-dto-0';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -30,13 +30,13 @@ export class ListAppintment {
   ngOnInit():void
   {
     if(this.Verfication.islogin() == false)
-          {
-            this.router.navigate(['/Login']);
-          }
-          else
-          {
-            this.GetPatientAppoinment(this.PatientId);  
-          }
+    {
+      this.router.navigate(['/Login']);
+    }
+    else
+    {
+      this.GetPatientAppoinment(this.PatientId);  
+    }
   }
 
   public GetPatientAppoinment(patientId : string) : boolean
@@ -78,7 +78,9 @@ export class ListAppintment {
                     icon: "success"
                    });
                 }
+
                 this.GetPatientAppoinment(this.PatientId);
+
                 Sup.unsubscribe();
               },
             error: (err) => 

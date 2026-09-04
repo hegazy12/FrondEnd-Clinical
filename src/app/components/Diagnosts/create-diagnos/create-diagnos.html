@@ -1,19 +1,16 @@
 <div class="row" style="margin-right: .5%; margin-left: .5%;">
         
-        <div class="col-md-12">
-            <label class="form-label fw-semibold text-muted small">Search Diagnos</label>
-        </div>
+       
         
-        <div class="col-md-10">     
+        <div class="col-md-10" style="margin-top: 1%;">     
             <input type="text" class="form-control" value="{{name()}}" #TextsearchTearm placeholder="Search Diagnos" [(ngModel)]="name"  >
         </div>
         
-        <div class="col-md-2 d-flex justify-content-end">
+        <div class="col-md-2 d-flex justify-content-end" style="margin-top: 1%;">
             <input type="button" class="btn btn-primary" value="GetDiagnos" (click)="searchDiagnos(TextsearchTearm.value)" >           
         </div>   
         
-        <div class="col-md-12">
-            <label class="form-label fw-semibold text-muted small"> Select Diagnos </label>
+        <div class="col-md-12" style="margin-top: 1%;">
             <select class="form-select" aria-label="Default select example" name="Diagnos" #diagnos (change)="onSpecialtyChange($event)"  >
                 <option value="">Please select Diagnos</option>
               @for (EX of data(); track $index) {
@@ -22,9 +19,8 @@
             </select>
         </div>
         
-        <div class="col-md-12">
-            <label class="form-label fw-semibold text-muted small">Description</label>
-            <textarea class="form-control" rows="3" name="description" #description  [(ngModel)]="Note" ></textarea>   
+        <div class="col-md-12" style="margin-top: 1%;">
+            <textarea class="form-control" rows="3" name="description" #description  [(ngModel)]="Note" placeholder="Enter notes..." ></textarea>   
         </div>
 
         <div class="row" style="margin-top: 1%;">

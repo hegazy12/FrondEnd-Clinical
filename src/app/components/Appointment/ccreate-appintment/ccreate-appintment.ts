@@ -96,6 +96,7 @@ export class CCreateAppintment
             return true
           },
             error: (err) => { 
+               this.swal.showWoringSave(err.error.message);
               sub.unsubscribe(); 
               this.isLoading = false;
             return false 

@@ -13,6 +13,8 @@ import {MedicalExaminationsResponse ,saveMedicalExaminationDTO,saveExaminationLi
 import { VitalSignDto1, VitalSignDtoResponse } from '../../interfaces/vital-dto';
 import {LinkService} from '../linkService/link-service'
 import { CreateDiagnosDTO, CreateDiagnosisResponse, GetDiagnosisListResponse, GetDiagnosisMasterResponse } from '../../interfaces/diagnos-dto';
+import { GeneralResponse } from '../../interfaces/general-response';
+import { UploadPhotoRequest } from '../../interfaces/upload-photo-request';
 @Injectable({
   providedIn: 'root',
 })
@@ -285,7 +287,7 @@ export class Callapi
       })
     );
   }
-
+  
   public DeleteDiagnos(DiagnosId:string):Observable<CreateDiagnosisResponse>
   {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
@@ -325,6 +327,19 @@ export class Callapi
           tap(response => {}),
           catchError(error => {
             return throwError(() => error);
+      })
+    );
+  }
+
+  uploadPhotoExamination(examinationId: string, UploadPhotoRequest: UploadPhotoRequest): Observable<GeneralResponse<string>>
+  {
+
+      const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});  
+      return this.Http.post<GeneralResponse<string>>(this.url + `medicalExamination/UploadPhoto/${examinationId}`,UploadPhotoRequest ,{headers } ).
+        pipe(
+          tap(response => {}),
+          catchError(error => {
+          return throwError(() => error);
       })
     );
   }
