@@ -1,1 +1,14 @@
-<h1>{{messagess()?.message}}</h1>
+@if (!takeMood()) {
+  <h1>{{messagess()?.message}}</h1>
+}
+
+@if (takeMood()) {
+  <div class="page-center">
+    <div class="row" style="width:98%; height:93vh;">
+      <app-camera
+        [createBy]="'f2751e5e-dc63-49e0-9655-65bdbe5d751b'"
+        [examinationIdInput]="pendingExaminationId()">
+      </app-camera>
+    </div>
+  </div>
+}

@@ -37,6 +37,7 @@ export class ListInvestgation {
             this.GetInvestgationlist(this.AppointmentID,0);
           }
           console.log("this.AppointmentID = "+this.AppointmentID);
+          this.chatService.connect(this.Verfication.GetLoginID()); 
         }
     }
     
@@ -97,22 +98,10 @@ export class ListInvestgation {
     
     public async takePhoto(examinationId: string) 
     {
-          //this.chatService.disconnect()
-          this.chatService.connect(this.Verfication.GetLoginID()); 
-          this.chatService.messageReceived$.subscribe(msg => {
-            console.log(msg?.from + " " + msg?.message.message + " " + msg?.message.time);
-            const newMsg: MassageDto = {
-              from: msg?.from,
-              message: msg?.message?.message
-            };
-              //if (msg) this.messagess.update(msgs => [...msgs, newMsg]);
-            });
-             this.chatService.sendToUser(this.Verfication.GetLoginID(), examinationId);
-            // try {
-            //   await this.chatService.sendMessage('takePhoto', { examinationId });
-            //   console.log('Message sent to the server to take a photo.');
-            // } catch (error) {
-            //   console.error('Error sending message to the server:', error);
-            // }
-     }
+      this.chatService.sendToUser(this.Verfication.GetLoginID(), examinationId);
+    }
+    
+  ngOnDestroy(): void {
+    this.chatService.disconnect();
+  }
 }

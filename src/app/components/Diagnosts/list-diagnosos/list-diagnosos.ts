@@ -11,10 +11,11 @@ import Swal from 'sweetalert2';
   templateUrl: './list-diagnosos.html',
   styleUrl: './list-diagnosos.css',
 })
+
 export class ListDiagnosos {
 
     @Input({ required: true }) AppointmentID!: string;
-    
+    @Input({ required: true }) isInHistoryMood!: boolean;
     public diagnosesnse = signal<GetDiagnosisListResponse | null>(null);
     public DiagnosDTO2 = signal<DiagnosDTO2[]>([]);
     
@@ -72,10 +73,12 @@ export class ListDiagnosos {
               { 
                 if(P.success == true)
                 {
-                  Swal.fire({   title: "Deleted!",
-                                text: "Your file has been deleted.",
-                                icon: "success"
+                  Swal.fire({  
+                      title: "Deleted!",
+                      text: "Your file has been deleted.",
+                      icon: "success"
                    });
+                   
                   Sup.unsubscribe();
                 }
                 else

@@ -16,7 +16,7 @@ export class CreatVital {
 
   appointmentId : string;
   public VitalS = signal<VitalSignDto1[]>([]);
-public Vital = signal<VitalSignDto1 | undefined>(undefined);
+  public Vital = signal<VitalSignDto1 | undefined>(undefined);
 
   constructor(private Callapi : Callapi ,private Verfication :VerfivationToken ,private router: Router,
                 private route: ActivatedRoute,
@@ -25,30 +25,29 @@ public Vital = signal<VitalSignDto1 | undefined>(undefined);
                    this.appointmentId = this.route.snapshot.paramMap.get('id') || '';
                 }
 
-    
-                ngOnInit():void{
-                if(this.Verfication.islogin() == false){
-                    this.router.navigate(['/Login']);
-                  }
-                else
-                  {   
-                  }
-                }
+    ngOnInit():void{
+    if(this.Verfication.islogin() == false){
+        this.router.navigate(['/Login']);
+      }
+    else
+      {   
+      }
+    }
 
-                public SearchVital(SearchTerm :string) : void
-                  {
-                    let sub = this.Callapi.SearchVitals(SearchTerm).subscribe({
-                      next:(res : VitalSignDtoResponse)=>{
-                        this.VitalS.set(res.data);
-                        sub.unsubscribe(); 
-                      },error :(err)=>{
-                        sub.unsubscribe(); 
-                      }
-                    })
-                  }
+    public SearchVital(SearchTerm :string) : void
+      {
+        let sub = this.Callapi.SearchVitals(SearchTerm).subscribe({
+          next:(res : VitalSignDtoResponse)=>{
+            this.VitalS.set(res.data);
+            sub.unsubscribe(); 
+          },error :(err)=>{
+            sub.unsubscribe(); 
+          }
+        })
+      }
 
-                public AddVitalInView(vitalid: string): void {
-                const selectedVital = this.VitalS().find(m => m.id === vitalid);
-                this.Vital.set(selectedVital);
-              }
+    public AddVitalInView(vitalid: string): void {
+    const selectedVital = this.VitalS().find(m => m.id === vitalid);
+    this.Vital.set(selectedVital);
+  }
 }

@@ -2,7 +2,7 @@
      <div class="row" style="margin-right: .5%; margin-left: .5%;">
         
         <div class="col-md-11">
-            <input type="text" class="form-control" #TextsearchTearm placeholder="Search Drug"  >
+            <input type="text" class="form-control" #TextsearchTearm placeholder="Search Drug" value="{{Drugname()}}"   >
         </div>
 
         <div class="col-md-1 d-flex justify-content-end">
@@ -12,7 +12,8 @@
         <div class="col-md-12" style="margin-top: 1%;">
             <select class="form-select" aria-label="Default select example" name="drug" (change)="onSpecialtyChange($event)" >
              <option value="">select durg pleas</option>  
-              @for (Drug of DTODrugs(); track $index) {
+              @for (Drug of DTODrugs(); track $index)
+               {
                 <option [value]="Drug.id">{{Drug.commercialNameEn}} /{{Drug.scientificName}}</option>
                }
             </select>

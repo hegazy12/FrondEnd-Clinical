@@ -47,6 +47,8 @@ export class PatientStory
     public changeAppointmentStoryId(Id : string)
     {
       this.AppointmentStoryId.set(Id);
+      this.AppointmentStoryRef.isHistory.set(0);
+      this.AppointmentStoryRef.appointmentid.set(Id);
       this.AppointmentStoryRef.GetAppoinmentStory(Id);
       console.log(this.AppointmentStoryId());
     }

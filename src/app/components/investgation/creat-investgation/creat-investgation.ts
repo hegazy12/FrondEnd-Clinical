@@ -23,6 +23,8 @@ export class CreatInvestgation
     public Examinations = signal<MedicalExaminationsDTO[]>([]);
     public MedicalExaminationsDTO = signal<MedicalExaminationsDTO | null|undefined>(null)
     public isHistory = signal<number>(0);
+    public ExaminationName = signal<string>('');
+    public Note = signal<string>('');
     
     constructor(private Callapi : Callapi ,
                 private Verfication :VerfivationToken ,
@@ -34,13 +36,14 @@ export class CreatInvestgation
                 }
     
     ngOnInit():void{
-              if(this.Verfication.islogin() == false){
-                  this.router.navigate(['/Login']);
-                }
-              else
-                {   
-                }
-              }
+      if(this.Verfication.islogin() == false){
+          this.router.navigate(['/Login']);
+        }
+      else
+        {   
+
+        }
+     }
         
       public SearchExaminations(SearchTerm :string) : void
       {
@@ -60,6 +63,7 @@ export class CreatInvestgation
           let x =this.Examinations().find(m=> m.id == element.value);
           this.MedicalExaminationsDTO.set(x);
           this.MedicalExaminationsid = element.value;
+          this.ExaminationName.set(element.options[element.selectedIndex].text.split('/')[0]);
        }
 
       public onSubmit()
@@ -68,7 +72,8 @@ export class CreatInvestgation
         {
           idAppointment : this.appointmentId,
           idExamination : this.MedicalExaminationsid,
-          last: this.isHistory()
+          last: this.isHistory(),
+          note: this.Note()
         };
         if(create.idExamination == "")
         {
@@ -79,30 +84,30 @@ export class CreatInvestgation
       }
 
       public Create(Pres :saveMedicalExaminationDTO)  {
-            let sub =this.Callapi.createExamination (Pres).subscribe({
-                  next:(res)=>{
-                      sub.unsubscribe();
-                      this.swal.showSuccess();
-                      this.ListInvestgationRef.GetInvestgationlist(this.appointmentId,this.isHistory());
-                  },
-                  error :(err)=>{
-                      this.swal.showWoringSave(err.error.message)
-                      sub.unsubscribe();
-                  }
-              });
-          }
+        let sub =this.Callapi.createExamination (Pres).subscribe({
+              next:(res)=>{
+                  sub.unsubscribe();
+                  this.swal.showSuccess();
+                  this.ListInvestgationRef.GetInvestgationlist(this.appointmentId,this.isHistory());
+              },
+              error :(err)=>{
+                  this.swal.showWoringSave(err.error.message)
+                  sub.unsubscribe();
+              }
+          });
+      }
 
-        public  makeInvestgationHistory():void
+      public  makeInvestgationHistory():void
+      {
+        if(this.isHistory() == 0)
         {
-            if(this.isHistory() == 0)
-            {
-              this.isHistory.set(1);
-              this.ListInvestgationRef.GetInvestgationlist(this.appointmentId,this.isHistory());
-            }
-            else
-            {
-              this.isHistory.set(0);
-              this.ListInvestgationRef.GetInvestgationlist(this.appointmentId,this.isHistory());
-            }
+          this.isHistory.set(1);
+          this.ListInvestgationRef.GetInvestgationlist(this.appointmentId,this.isHistory());
         }
+        else
+        {
+          this.isHistory.set(0);
+          this.ListInvestgationRef.GetInvestgationlist(this.appointmentId,this.isHistory());
+        }
+      }
 }

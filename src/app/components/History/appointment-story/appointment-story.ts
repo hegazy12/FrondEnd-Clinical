@@ -6,10 +6,11 @@ import { Router , ActivatedRoute } from '@angular/router';
 import { AppointmentDTO3, AppointmentsStoryResponse } from '../../../interfaces/appointment-dto-0';
 import { ListInvestgation } from '../../investgation/list-investgation/list-investgation';
 import { PrescriptionList } from '../../Prescription/prescription-list/prescription-list';
+import { ListDiagnosos } from '../../Diagnosts/list-diagnosos/list-diagnosos';
 
 @Component({
   selector: 'app-appointment-story',
-  imports: [ListInvestgation,PrescriptionList],
+  imports: [ListInvestgation,PrescriptionList,ListDiagnosos],
   templateUrl: './appointment-story.html',
   styleUrl: './appointment-story.css',
 })
@@ -21,6 +22,7 @@ export class AppointmentStory
   public appointmentid = signal<string>('');
   @ViewChild(ListInvestgation) ListInvestgationRef!: ListInvestgation;
   @ViewChild(PrescriptionList) prescriptionListRef!: PrescriptionList;
+  @ViewChild(ListDiagnosos) listDiagnososRef!: ListDiagnosos;
 
   constructor(private Callapi : Callapi ,
                 private Verfication :VerfivationToken ,
@@ -51,6 +53,7 @@ export class AppointmentStory
                     this.AppointmentDTO3.set(P.data);
                     this.ListInvestgationRef.GetInvestgationlist(AppointmentID,0);
                     this.prescriptionListRef.GetPrescriptionList(AppointmentID,0);
+                    this.listDiagnososRef.GetDiagnososlist(AppointmentID);
                     this.appointmentid.set(AppointmentID);
                 },
               error: (err) => 
@@ -67,10 +70,12 @@ export class AppointmentStory
              this.isHistory.set(0);
              this.ListInvestgationRef.GetInvestgationlist(this.appointmentid(),this.isHistory());
              this.prescriptionListRef.GetPrescriptionList(this.appointmentid(),this.isHistory());
+             //  this.listDiagnososRef.GetDiagnososlist(this.appointmentid());
           }else{
              this.isHistory.set(1);
              this.ListInvestgationRef.GetInvestgationlist(this.appointmentid(),this.isHistory());
              this.prescriptionListRef.GetPrescriptionList(this.appointmentid(),this.isHistory());
+             //this.listDiagnososRef.GetDiagnososlist(this.appointmentid());
           }
       }
 }

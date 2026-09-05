@@ -39,8 +39,8 @@ export class PrescriptionList {
     else
       {   
          if(this.AppointmentID != ""){
-        this.GetPrescriptionList(this.AppointmentID,0);
-      }
+          this.GetPrescriptionList(this.AppointmentID,0);
+         }
       }
     }
       

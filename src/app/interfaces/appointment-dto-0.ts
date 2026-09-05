@@ -23,7 +23,7 @@ export interface AppointmentDTO1 extends AppointmentDTO0
   id: string;                
 }
 
-export  interface AppointmentDTO2 extends AppointmentDTO1
+export interface AppointmentDTO2 extends AppointmentDTO1
 {
    patientDTO_1 : PatientDTO;
    doctorDTO_1  : DoctorDto1 ;

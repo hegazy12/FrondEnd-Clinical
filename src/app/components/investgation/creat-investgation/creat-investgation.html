@@ -1,7 +1,7 @@
 <form>
      <div class="row" style="margin-right: .5%; margin-left: .5%;">
         <div class="col-md-10">
-            <input type="text" class="form-control" #TextsearchTearm placeholder="Search Examination"  >
+            <input type="text" class="form-control" #TextsearchTearm placeholder="Search Examination"  value="{{ExaminationName()}}"   >
         </div>
         
         <div class="col-md-2 d-flex justify-content-end">
@@ -17,13 +17,18 @@
                }
             </select>
         </div>
+
+        <div class="col-md-12" style="margin-top: 1%;">
+            <textarea class="form-control" rows="3" name="description" #description [value]="Note()" placeholder="Enter notes..." ></textarea>   
+        </div>
         
         <div class="col-md-10" style="margin-top: 1%;" >
-          @if(MedicalExaminationsDTO() != null){
-          <h5>
-            ({{MedicalExaminationsDTO()?.code}}) {{MedicalExaminationsDTO()?.nameEn}} - {{MedicalExaminationsDTO()?.classificationExaminationDTO1?.categoryNameEn}}
-          </h5>
-          }
+          @if(MedicalExaminationsDTO() != null)
+            {
+                <h5>
+                    ({{MedicalExaminationsDTO()?.code}}) {{MedicalExaminationsDTO()?.nameEn}} - {{MedicalExaminationsDTO()?.classificationExaminationDTO1?.categoryNameEn}}
+                </h5>
+            }
         </div>
         
             <div class="row" style="margin-top: 1%;">

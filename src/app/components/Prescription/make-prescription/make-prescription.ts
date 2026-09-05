@@ -22,7 +22,7 @@ export class MakePrescription
   @ViewChild('targetBox') box!: ElementRef<HTMLElement>;
   @Input({ required: true }) AppointmentID!: string;
   //@Input({ required: true }) Appointment!: string;
-
+  
   public DTODrugs = signal<DTODrug[]>([]);
   public from = signal<Date |string>(''); 
   public to = signal<Date |string>(''); 
@@ -34,7 +34,7 @@ export class MakePrescription
   inputValue = signal<string>('');
   minDate: string = new Date().toISOString().split('T')[0];
   public isHistory = signal<number>(0);
-  
+  public Drugname = signal<string>('');
   constructor(private Callapi : Callapi ,
               private Verfication :VerfivationToken ,
               private router: Router,
@@ -69,12 +69,19 @@ export class MakePrescription
         }else if(element.name == "type")
         {
             this.type.set(Number(element.value));
-             console.log("type = " + this.type());
+            console.log("type = " + this.type());
         }else if(element.name == "drug")
         {
             this.DrugId.set(element.value);
-             console.log("Frequency = " + this.DrugId);
+
+            this.Drugname.set(element.options[element.selectedIndex].text.split('/')[0]);
+            console.log("DrugId = " + this.DrugId);
         }
+        // else if(element.name == "search")
+        // {
+        //     this.Drugname.set(element.value);
+        //     console.log("Drugname = " + this.Drugname());
+        // }
       }
     
   public SearchDrug(SearchTerm :string) : void

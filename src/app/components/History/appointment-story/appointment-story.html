@@ -13,14 +13,18 @@
                 [class.btn-success]="isHistory() !== 1"
                 (click)="GitHistory()">
                 @if (isHistory() === 0) {
-                     GitHistory
+                     Get History
                 } @else {
-                    Git Is Recorded by us 
+                    Get Recorded 
                 }
                 </button>
             </div>
     </div>
-    
+  
+      <div class="row" >
+        <h5> Diagnos List </h5>
+        <app-list-diagnosos [AppointmentID]="''" [isInHistoryMood]="true" ></app-list-diagnosos>
+    </div>
     <div class="row" >
         <h5> Prescription-list </h5>
      <app-prescription-list [AppointmentID]="''" [isInHistoryMood]="true" ></app-prescription-list>
@@ -29,5 +33,5 @@
         <h5> investgation List </h5>
         <app-list-investgation [AppointmentID]="''" [isInHistoryMood]="true" ></app-list-investgation>
     </div>
-
+  
 </div>

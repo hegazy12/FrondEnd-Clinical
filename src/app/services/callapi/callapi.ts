@@ -9,7 +9,7 @@ import { PatientsResponse,PatientResponse } from '../../interfaces/patient-respo
 import { DoctorsResponse } from '../../interfaces/doctor-dto';
 import { AppointmentAllinfo, AppointmentDTO0, AppointmentResponse, AppointmentsResponse, AppointmentsStoryResponse, makeCompleteResponse } from '../../interfaces/appointment-dto-0';
 import { createPrescriptionResponse, Prescriptiondto,PrescriptionResponse } from '../../interfaces/prescription';
-import {MedicalExaminationsResponse ,saveMedicalExaminationDTO,saveExaminationListResponse} from '../../interfaces/medical-examinations-dto'
+import {MedicalExaminationsResponse ,saveMedicalExaminationDTO,saveExaminationListResponse, FullByIdResponse} from '../../interfaces/medical-examinations-dto'
 import { VitalSignDto1, VitalSignDtoResponse } from '../../interfaces/vital-dto';
 import {LinkService} from '../linkService/link-service'
 import { CreateDiagnosDTO, CreateDiagnosisResponse, GetDiagnosisListResponse, GetDiagnosisMasterResponse } from '../../interfaces/diagnos-dto';
@@ -340,6 +340,19 @@ export class Callapi
           tap(response => {}),
           catchError(error => {
           return throwError(() => error);
+      })
+    );
+  }
+
+  public GetExaminationByIdFull(examinationId: string) : Observable<FullByIdResponse>
+  {
+
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    
+    return this.Http.get<FullByIdResponse>(this.url + `medicalExamination/GetByIdFull/${examinationId}`, { headers }).pipe(
+      tap(response => { }) ,
+      catchError(error => {
+        return throwError(() => error);
       })
     );
   }
