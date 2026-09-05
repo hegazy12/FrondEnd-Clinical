@@ -1,14 +1,69 @@
 @if (!takeMood()) {
-  <h1>{{messagess()?.message}}</h1>
+ 
+  
+  <div class="container-fluid px-4 py-3">
+    <!-- Patient Header Section -->
+    <div class="border-bottom pb-3 mb-4">
+      <div class="row">
+        <div class="col-md-10">
+          
+          <!-- تم إصلاح الخطأ هنا بإضافة ?. قبل اسم الحقل الأخير وقبل appointmentDTO_2 -->
+          <h2 class="h3 fw-bold text-primary mb-1">
+            {{ saveMedicalExaminationDTO2()?.appointmentDTO_2?.patientFirstName }} 
+            {{ saveMedicalExaminationDTO2()?.appointmentDTO_2?.patientLastName }}
+          </h2>
+          
+          <p class="text-muted mb-0">
+            <!-- تم إصلاح الـ ?. هنا أيضاً لمنع الخطأ Object is possibly 'undefined' -->
+            <span class="me-3">
+              <strong>Gender : </strong> 
+              {{ saveMedicalExaminationDTO2()?.appointmentDTO_2?.patientDTO_1?.gender }}
+            </span>
+            
+            <span class="me-3">
+              <strong>DOB : </strong> 
+              {{ saveMedicalExaminationDTO2()?.appointmentDTO_2?.patientDTO_1?.dateOfBirth }}
+            </span>
+            
+            <span class="me-3">
+              <strong>Phone : </strong> 
+              {{ saveMedicalExaminationDTO2()?.appointmentDTO_2?.patientDTO_1?.phoneNumber }}
+            </span>    
+          </p>
+          
+          <h4> 
+            {{ saveMedicalExaminationDTO2()?.medicalExaminationsDTO?.nameEn }} / 
+            {{ saveMedicalExaminationDTO2()?.medicalExaminationsDTO?.nameAr }} / 
+            {{ saveMedicalExaminationDTO2()?.medicalExaminationsDTO?.classificationExaminationDTO1 }} 
+          </h4>
+          
+        </div>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="col-md-12 " >
+      <button class="btn btn-primary" (click)="openCamira()" [disabled]="!openCameMood()">
+            open camira
+         </button>
+      </div>
+    </div>
+  </div>
+
 }
 
 @if (takeMood()) {
-  <div class="page-center">
-    <div class="row" style="width:98%; height:93vh;">
-      <app-camera
-        [createBy]="'f2751e5e-dc63-49e0-9655-65bdbe5d751b'"
-        [examinationIdInput]="pendingExaminationId()">
-      </app-camera>
-    </div>
+<div class="page-center">
+  <div class="row" style="width:100%; height:98vh;">
+    <app-camera
+      [createBy]="createBy()"
+      [examinationIdInput]="pendingExaminationId()">
+    </app-camera>
   </div>
+
+  <div class="row">
+    <button class="btn btn-primary" (click)="openCamira()" [disabled]="!openCameMood()">
+      claseCamira
+    </button>
+  </div>
+</div>
 }

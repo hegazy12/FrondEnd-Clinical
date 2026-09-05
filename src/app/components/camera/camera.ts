@@ -14,16 +14,18 @@ export class Camera implements OnDestroy, OnChanges {
 
   @ViewChild('video', { static: true }) videoRef!: ElementRef<HTMLVideoElement>;
   @ViewChild('canvas', { static: true }) canvasRef!: ElementRef<HTMLCanvasElement>;
-
+  
   @Input({ required: true }) createBy!: string;
-  @Input() examinationIdInput: string | null = null;   // ← جديد: يستقبلها من الأب
-
+  @Input() examinationIdInput: string | null  |undefined= null;   
+  
   photoCaptured = output<string>();
   errorMessage  = signal<string>('');
   isStreaming   = signal<boolean>(false);
   capturedPhoto = signal<string | null>(null);
-  public examinationId = signal<string | undefined | null>(null);  // ← القيمة الابتدائية null
-
+  public examinationId = signal<string | undefined | null>(null);  
+  
+  public takePhotoMood = signal<boolean>(true);
+  
   private stream: MediaStream | null = null;
 
   constructor(private Callapi: Callapi, private Verfication: VerfivationToken) {
@@ -62,6 +64,9 @@ export class Camera implements OnDestroy, OnChanges {
   }
 
   capturePhoto(): void {
+    
+    this.takePhotoMood.set(false);
+    
     const examId = this.examinationId();
 
     if (!examId) {
@@ -95,12 +100,15 @@ export class Camera implements OnDestroy, OnChanges {
       next: (res) => {
         console.log('Photo uploaded successfully:', res);
         Swal.fire({ icon: 'success', title: 'Success', text: 'Photo uploaded successfully!' });
+        this.takePhotoMood.set(true);
       },
       error: (err) => {
         console.error('Error uploading photo:', err);
         Swal.fire({ icon: 'error', title: 'Error', text: 'Failed to upload photo.' });
+         this.takePhotoMood.set(true);
       }
     });
+
   }
 
   retake(): void {

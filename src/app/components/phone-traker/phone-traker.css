@@ -1,7 +1,19 @@
 .page-center {
   display: flex;
-  align-items: center;      /* توسيط رأسي */
-  justify-content: center;  /* توسيط أفقي */
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;   /* مسافة نظيفة بدل <br> */
   width: 100%;
   min-height: 100vh;
+}
+
+
+.page-center1 {
+  position: fixed;
+  top: 20px;           /* المسافة من أعلى الصفحة */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;  /* توسيط أفقي */
+  z-index: 10;
 }
