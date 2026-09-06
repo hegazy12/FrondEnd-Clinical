@@ -1,4 +1,4 @@
-import { Component , Input, signal} from '@angular/core';
+import { Component , Input, signal, ViewChild} from '@angular/core';
 import { Callapi } from '../../../services/callapi/callapi';
 import { VerfivationToken } from '../../../services/verfivationToken/verfivation-token';
 import { Router  } from '@angular/router';
@@ -6,25 +6,35 @@ import { saveExaminationListResponse , saveMedicalExaminationDTO1  } from '../..
 import Swal from 'sweetalert2';
 import { ChatService } from '../../../services/ChatService/chat-service';
 import { MassageDto } from '../../../interfaces/massage-dto';
+import { DitaialInvestgation } from '../ditaial-investgation/ditaial-investgation';
 
 @Component({
   selector: 'app-list-investgation',
-  imports: [],
+  imports: [DitaialInvestgation],
   templateUrl: './list-investgation.html',
   styleUrl: './list-investgation.css',
 })
-export class ListInvestgation {
-   
+export class ListInvestgation
+{
+    @ViewChild(DitaialInvestgation) DitaialInvestgationRef!: DitaialInvestgation;
+    
     public saveExaminationListResponse =signal<saveExaminationListResponse | null>(null);
     public data= signal<saveMedicalExaminationDTO1[]>([]);
     last = signal<number>(0);
+    
+    public showPhotoState =  signal<boolean>(false);
+
+    public examinationPhotoId = signal<string>('');
+
     @Input({ required: true }) AppointmentID!: string;
     @Input({ required: true }) isInHistoryMood!: boolean;
 
     constructor(private Callapi : Callapi ,
                 private Verfication :VerfivationToken ,
                 private router: Router,
-                private chatService: ChatService){}
+                private chatService: ChatService){
+
+                }
 
     ngOnInit():void
     {
@@ -78,9 +88,10 @@ export class ListInvestgation {
               { 
                 if(P.success == true)
                 {
-                  Swal.fire({   title: "Deleted!",
-                                text: "Your file has been deleted.",
-                                icon: "success"
+                  Swal.fire({   
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
                    });
                  
                 }
@@ -101,7 +112,24 @@ export class ListInvestgation {
       this.chatService.sendToUser(this.Verfication.GetLoginID(), examinationId);
     }
     
-  ngOnDestroy(): void {
-    this.chatService.disconnect();
-  }
+    public showPhoto(examinationId: string)
+    {
+      //this.showPhotoState.set(this.DitaialInvestgationRef.isVisible());
+      console.log("this.showPhotoState.set(this.DitaialInvestgationRef.isVisible())" + this.showPhotoState() );
+      
+      if(this.showPhotoState())
+      {
+        this.showPhotoState.set(false);
+      }
+      else
+      {
+        this.showPhotoState.set(true);
+      }
+
+      this.examinationPhotoId.set(examinationId);
+    }
+
+    ngOnDestroy(): void {
+      this.chatService.disconnect();
+    }
 }
