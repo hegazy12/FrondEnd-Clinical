@@ -1,11 +1,10 @@
-import { Component, Injectable,afterNextRender } from '@angular/core';
+import { Component, afterNextRender } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { VerfivationToken } from '../../services/verfivationToken/verfivation-token';
 import { LoginResponse } from '../../interfaces/login-response';
 import { SwalAlert } from '../../services/swalAlert/swal-alert';
-import { ChatService } from '../../services/ChatService/chat-service';
 import { LinkService } from '../../services/linkService/link-service';
 @Component({
   selector: 'app-login',
@@ -23,7 +22,6 @@ export class Login
   
   constructor(private http: HttpClient,
               private router: Router ,
-              private chatService: ChatService ,
               private Verfivation : VerfivationToken,
               private swal: SwalAlert,private LinkService : LinkService)
     {

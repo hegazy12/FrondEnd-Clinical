@@ -5,7 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { Patient } from '../../../interfaces/patient-create';
 import { CommonModule } from '@angular/common'; 
 import { PatientDTO, PatientsResponse } from '../../../interfaces/patient-response';
-import {  AfterViewInit, viewChild } from '@angular/core';
+import { viewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -26,7 +26,8 @@ export class ListPatient
 
       displayedColumns: string[] = ['FirstName', 'LastName', 'Address', 'phoneNumber', 'Gender', 'dateOfBirth', 'actions'];
 
-      constructor(private Callapi : Callapi, private Verfication :VerfivationToken ,private router : Router){
+      constructor(private Callapi : Callapi, private Verfication :VerfivationToken ,private router : Router)
+      {
          //this.getPatientsNew();
       }
       public PatientsData = signal<PatientDTO[] | undefined>(undefined);   
@@ -68,49 +69,15 @@ export class ListPatient
       }
 
         addUser() {
-        // const newUser: User = {
-        //   id: this.nextId++,
-        //   name: 'مستخدم جديد',
-        //   email: `user${this.nextId}@example.com`,
-        //   role: 'User'
-        // };
-        // const updated = [...this.dataSource.data, newUser];
-        // this.dataSource.data = updated;
-        // if (this.dataSource.paginator) {
-        //   this.dataSource.paginator.lastPage();
-        // }
       }
 
       editUser(PatientDTO: PatientDTO) {
-        // hook this up to a dialog / route as needed
-        //console.log('Edit user:', user);
       }
 
       deleteUser(PatientDTO: PatientDTO) {
-      // const updated = this.dataSource.data.filter(u => u.id !== user.id);
-      // this.dataSource.data = updated;
       }
 
       
-      //   public getPatients(numberpage : number) : boolean
-      //   {
-      //        let Sup = this.Callapi.getpatients(numberpage).subscribe({
-      //           next: (P : Patient[]) =>
-      //             {
-      //                 this.Patients.set(P);
-      //                 console.log(P); 
-      //                 Sup.unsubscribe();
-      //                 this.isloding.set(true);
-      //                 console.log("this.isloding" + this.isloding);
-      //             },
-      //           error: (err) => {
-      //             console.error(err); 
-      //             Sup.unsubscribe();
-      //             this.router.navigate(['/Login']);
-      //           }
-      //         });
-      //         return true;
-      // }
     
       public getPatientsNew() 
       {

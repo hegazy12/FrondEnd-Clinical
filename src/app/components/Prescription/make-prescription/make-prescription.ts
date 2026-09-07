@@ -60,7 +60,6 @@ export class MakePrescription
 
      onSpecialtyChange(event: Event) {
        const element = event.target as HTMLSelectElement;
-         console.log("element.name = " + element.name);
        if(element.name =="frequency") 
         {
            this.Frequency.set(Number(element.value));
@@ -73,15 +72,9 @@ export class MakePrescription
         }else if(element.name == "drug")
         {
             this.DrugId.set(element.value);
-
             this.Drugname.set(element.options[element.selectedIndex].text.split('/')[0]);
             console.log("DrugId = " + this.DrugId);
         }
-        // else if(element.name == "search")
-        // {
-        //     this.Drugname.set(element.value);
-        //     console.log("Drugname = " + this.Drugname());
-        // }
       }
     
   public SearchDrug(SearchTerm :string) : void

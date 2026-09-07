@@ -1,4 +1,4 @@
-import { Component , signal, Signal, ViewChild } from '@angular/core';
+import { Component , signal,  ViewChild } from '@angular/core';
 import { Navbar } from '../../navbar/navbar'
 import { FormsModule } from '@angular/forms';
 import { PatientCreate } from '../../../interfaces/patient-create'
@@ -20,12 +20,12 @@ export class CreatePatient
     @ViewChild(ListPatient) ListPatienttRef!: ListPatient;
    
    
-    public Fristname : string ='';
-    public LastName  : string = '';
-    public Phone     : string= '';
-    public Address   : string= '';
-    public DateOfBirth : string= '';
-    public gender : string= '';
+    public Fristname : string   = '';
+    public LastName  : string   = '';
+    public Phone     : string   = '';
+    public Address   : string   = '';
+    public DateOfBirth : string = '';
+    public gender : string      = '';
     public isLoading = signal<boolean>(false); 
     public refrishvalue : boolean= false;
 

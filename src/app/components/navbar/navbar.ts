@@ -1,7 +1,6 @@
-import { Component ,afterNextRender} from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { Router } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-navbar',
   imports: [RouterLink],

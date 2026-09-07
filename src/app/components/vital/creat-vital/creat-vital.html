@@ -26,19 +26,23 @@
             @if(Vital() != undefined){
                 <h5>{{Vital()?.name}}</h5>
                 <label>{{Vital()?.description}}</label>
-                <div class="col-md-10">
+                <div #vitalContainer class="col-md-10">
                     @if(Vital()?.dataTypeName == "Numeric")
                     {
-                        <input type="number" class="form-control" name="vitalvalue" #idvaluevital [min]="Vital()?.minValue ?? null" [max]="Vital()?.maxValue ?? null" /> 
-                    }@else if (Vital()?.dataTypeName == "Text"){
-                        <input type="text" class="form-control" #idvaluevital name="vitalvalue" >
-                    }@else if(Vital()?.dataTypeName == "Boolean"){
-                            <label>true</label>
-                            <input type="radio" name="vitalvalue" value="true">
-                        <br>
-                            <label>false</label>
-                            <input type="radio" name="vitalvalue" value="false">
-                    }@else if(Vital()?.dataTypeName == "Dropdown"){
+                        <input type="number" class="form-control" name="vitalvalue" #idvaluevitalSingle [min]="Vital()?.minValue ?? null" [max]="Vital()?.maxValue ?? null" /> 
+                    }
+                    @else if (Vital()?.dataTypeName == "Text"){
+                        <input type="text" class="form-control" #idvaluevitalSingle name="vitalvalue" >
+                    }
+                    @else if(Vital()?.dataTypeName == "Boolean")
+                    {
+                        <label>true</label>
+                        <input type="radio" name="vitalvalue" value="true">
+                            <br>
+                        <label>false</label>
+                        <input type="radio" name="vitalvalue" value="false">
+                    }@else if(Vital()?.dataTypeName == "Dropdown")
+                    {
                         <select class="form-select" aria-label="Default select example" #idvaluevital name="vitalvalue">
                             @for (item of Vital()?.listValues; track $index) {
                                 <option [value]="item">{{item}}</option>
@@ -48,10 +52,14 @@
                 </div>
 
                 <div class="col-md-1">
-                    <input type="button" class="btn btn-primary" value="Save vital" >
+                    <input type="button" class="btn btn-primary" (click)="onSaveVital()" value="Save vital" >
                 </div>
             }
         </div>
 
     </div>
 </form>
+
+<div class="row" style="margin:.5%">
+   <app-list-vital [AppointmentID]="appointmentId" ></app-list-vital>  
+</div>

@@ -1,11 +1,9 @@
-import { Component, OnInit, signal, inject } from '@angular/core';
+import { Component,  signal } from '@angular/core';
 import { Navbar } from '../../navbar/navbar';
 import { Callapi } from '../../../services/callapi/callapi';
 import { VerfivationToken } from '../../../services/verfivationToken/verfivation-token';
 import { Router, ActivatedRoute } from '@angular/router'; 
-import { Patient } from '../../../interfaces/patient-create';
 import {CCreateAppintment} from '../../Appointment/ccreate-appintment/ccreate-appintment';
-import {ListAppintment} from '../../Appointment/list-appintment/list-appintment';
 import { PatientResponse,PatientDTO } from '../../../interfaces/patient-response';
 
 @Component({

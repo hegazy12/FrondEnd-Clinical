@@ -5,7 +5,6 @@ import { Router  } from '@angular/router';
 import { saveExaminationListResponse , saveMedicalExaminationDTO1  } from '../../../interfaces/medical-examinations-dto';
 import Swal from 'sweetalert2';
 import { ChatService } from '../../../services/ChatService/chat-service';
-import { MassageDto } from '../../../interfaces/massage-dto';
 import { DitaialInvestgation } from '../ditaial-investgation/ditaial-investgation';
 
 @Component({
@@ -92,8 +91,7 @@ export class ListInvestgation
                     title: "Deleted!",
                     text: "Your file has been deleted.",
                     icon: "success"
-                   });
-                 
+                   }); 
                 }
                 this.GetInvestgationlist(this.AppointmentID,this.last());
                 Sup.unsubscribe();
@@ -101,11 +99,11 @@ export class ListInvestgation
             error: (err) => 
             {
                 this.GetInvestgationlist(this.AppointmentID,this.last());
-              Sup.unsubscribe();
+                Sup.unsubscribe();
             }
             });
         });
-    }
+      }
     
     public async takePhoto(examinationId: string) 
     {

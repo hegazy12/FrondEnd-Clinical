@@ -3,7 +3,7 @@ import { VerfivationToken } from '../../../services/verfivationToken/verfivation
 import { Router,ActivatedRoute ,RouterLink} from '@angular/router';
 import { Callapi } from '../../../services/callapi/callapi';
 import { Navbar } from '../../navbar/navbar';
-import { AppointmentDTO1 , AppointmentsResponse, AppointmentResponse} from '../../../interfaces/appointment-dto-0';
+import { AppointmentDTO1 , AppointmentsResponse} from '../../../interfaces/appointment-dto-0';
 
 @Component({
   selector: 'app-mypatient',

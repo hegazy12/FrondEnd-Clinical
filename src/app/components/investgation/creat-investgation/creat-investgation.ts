@@ -68,6 +68,9 @@ export class CreatInvestgation
 
       public onSubmit()
       {
+        
+        console.log(this.Note());
+        
         let create : saveMedicalExaminationDTO =
         {
           idAppointment : this.appointmentId,
@@ -75,16 +78,20 @@ export class CreatInvestgation
           last: this.isHistory(),
           note: this.Note()
         };
+        
         if(create.idExamination == "")
         {
           this.swal.showWoringSave("Pleas select Examination");
-        } else {
+        } 
+        else 
+        {
           this.Create(create);
         }
+        
       }
 
-      public Create(Pres :saveMedicalExaminationDTO)  {
-        let sub =this.Callapi.createExamination (Pres).subscribe({
+      public Create(DTO :saveMedicalExaminationDTO)  {
+        let sub =this.Callapi.createExamination(DTO).subscribe({
               next:(res)=>{
                   sub.unsubscribe();
                   this.swal.showSuccess();

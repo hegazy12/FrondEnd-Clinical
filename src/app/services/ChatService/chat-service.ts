@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { BehaviorSubject } from 'rxjs';
 import { LinkService} from '../linkService/link-service';
-import { HttpHeaders } from '@angular/common/http';
-import { MassageDto,messages} from '../../interfaces/massage-dto';
+import { messages} from '../../interfaces/massage-dto';
 @Injectable({
   providedIn: 'root'
 })

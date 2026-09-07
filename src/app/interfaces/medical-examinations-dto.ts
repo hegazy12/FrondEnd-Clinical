@@ -25,7 +25,7 @@ export interface saveMedicalExaminationDTO
   idAppointment : string;
   note : string;
   last : number ;
-} 
+}
 
 export interface saveMedicalExaminationDTO1 extends saveMedicalExaminationDTO{
     id : string ;
@@ -37,7 +37,15 @@ export interface saveMedicalExaminationDTO2  extends saveMedicalExaminationDTO1{
     appointmentDTO_2 : AppointmentDTO2;
 }
 
+export interface ExaminationPhotoDto {
+  id: string;
+  examinationId: string;
+  photoPath: string;       // مسار سيرفر — لا يُستخدم في الفرونت إند
+  photoBase64: string;     // ده اللي هنعرضه فعليًا
+  imageBytes: string;      // نفس القيمة مكررة، تجاهلها
+}
 
 export type MedicalExaminationsResponse = GeneralResponse<MedicalExaminationsDTO[]>;
 export type saveExaminationListResponse = GeneralResponse<saveMedicalExaminationDTO1[]>;
-export type FullByIdResponse = GeneralResponse<saveMedicalExaminationDTO2>;
+export type FullByIdResponse            = GeneralResponse<saveMedicalExaminationDTO2>;
+export type ExaminationPhotoResponse    = GeneralResponse<ExaminationPhotoDto[]>;

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ChatService } from '../../services/ChatService/chat-service';
 import { VerfivationToken } from '../../services/verfivationToken/verfivation-token';
 import { MassageDto, } from '../../interfaces/massage-dto';

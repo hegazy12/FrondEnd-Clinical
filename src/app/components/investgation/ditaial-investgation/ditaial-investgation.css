@@ -24,6 +24,11 @@
   line-height: 1.5;
   color: #333;
   word-break: break-word; /* عشان النص الطويل من غير مسافات ميكسرش التصميم */
+
+    flex-wrap: wrap;         /* تلف الصور لسطر جديد لو المساحة ضاقت */
+  justify-content: center; /* توسيط الصور أفقيًا */
+  align-items: center;
+  gap: 16px;               /* الفواصل بين الصور */
 }
 
 .alert-image {
@@ -47,4 +52,12 @@
 
 .close-btn:hover {
   color: #333;
+}
+
+.image1
+{
+  margin: 10px;
+    object-fit: cover;
+  border-radius: 12px;     /* البوردر روندد */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
