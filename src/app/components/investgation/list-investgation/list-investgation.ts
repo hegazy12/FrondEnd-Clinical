@@ -112,9 +112,8 @@ export class ListInvestgation
     
     public showPhoto(examinationId: string)
     {
-      //this.showPhotoState.set(this.DitaialInvestgationRef.isVisible());
       console.log("this.showPhotoState.set(this.DitaialInvestgationRef.isVisible())" + this.showPhotoState() );
-      
+       
       if(this.showPhotoState())
       {
         this.showPhotoState.set(false);
@@ -123,7 +122,7 @@ export class ListInvestgation
       {
         this.showPhotoState.set(true);
       }
-
+      
       this.examinationPhotoId.set(examinationId);
     }
 

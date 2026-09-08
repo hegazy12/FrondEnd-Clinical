@@ -1,0 +1,12 @@
+
+<div class="prescription-table border rounded overflow-hidden" style="padding: .5%; margin: .5%;">
+<div class="row">
+        @for (item of data(); track $index)
+        {
+            <div class="col-md-2 p-2" >
+                <button type="button" class="btn btn-outline-secondary"> {{item.name}}</button>
+            </div>
+        }
+</div>
+
+</div>

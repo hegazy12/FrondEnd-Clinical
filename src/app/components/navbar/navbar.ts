@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component ,PLATFORM_ID,Inject } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { Router } from '@angular/router';
 @Component({
@@ -9,14 +10,22 @@ import { Router } from '@angular/router';
 })
 export class Navbar 
 {
-  public roles :string[] = JSON.parse(localStorage.getItem("roles") || "[]");
- 
-   constructor(private router: Router ){}
+   public roles: string[] = [];
 
-   ngOnInit():void
-   {
-    console.log("roles : " + this.roles);
-   }
+  constructor(
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) 
+  {
+
+  }
+  
+  ngOnInit():void
+  {
+    if (isPlatformBrowser(this.platformId)) {
+      this.roles = JSON.parse(localStorage.getItem("roles") || "[]");
+    }
+  }
 
   public logOut (): void 
   {
@@ -24,4 +33,5 @@ export class Navbar
     localStorage.clear();
     this.router.navigate(['/login']);
   }
+  
 }

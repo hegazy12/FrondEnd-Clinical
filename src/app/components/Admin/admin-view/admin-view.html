@@ -1,2 +1,26 @@
 <app-navbar></app-navbar>
-<p>admin-view works!</p>
+  <div class="row g-3 bodyContainer">
+    <div class="col-lg-3 col-xl-1">
+      
+      <button class="btn btn-primary shadow-sm fixsize"  #addSheet name="addSheet" (click)="viewpage(addSheet.name)" >
+                addSheet
+      </button>
+      
+      <button class="btn btn-primary shadow-sm fixsize"  #addQuestion name="addSheet" (click)="viewpage(addQuestion.name)" >
+                addQuestion
+      </button>
+    </div>
+
+
+    <div class="col-lg-9 col-xl-11">
+      @if( view() == 1 )
+      {
+          <app-add-sheet></app-add-sheet>
+      }@else if(view() == 2 ){
+        <app-add-question></app-add-question>
+      }
+    </div>
+
+
+  </div>
+

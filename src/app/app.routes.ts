@@ -7,6 +7,7 @@ import {Settings} from './components/settings/settings'
 import { Mypatient } from './components/Doctor/mypatient/mypatient';
 import { Patientappointment } from './components/Doctor/patientappointment/patientappointment';
 import {PhoneTraker} from './components/phone-traker/phone-traker';
+import { AdminView } from './components/Admin/admin-view/admin-view';
 
 export const routes: Routes = [
     {
@@ -36,6 +37,12 @@ export const routes: Routes = [
     },{
         path: 'phonetraker/:id',
         component: PhoneTraker
+    },{
+        path: 'Admin',
+        component: AdminView
+    },{
+         path: 'Settings',
+        component: Settings
     }
 ];
         

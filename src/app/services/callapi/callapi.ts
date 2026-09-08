@@ -10,11 +10,12 @@ import { DoctorsResponse } from '../../interfaces/doctor-dto';
 import { AppointmentAllinfo, AppointmentDTO0, AppointmentResponse, AppointmentsResponse, AppointmentsStoryResponse, makeCompleteResponse } from '../../interfaces/appointment-dto-0';
 import { createPrescriptionResponse, Prescriptiondto,PrescriptionResponse } from '../../interfaces/prescription';
 import {MedicalExaminationsResponse ,saveMedicalExaminationDTO,saveExaminationListResponse, FullByIdResponse, ExaminationPhotoResponse} from '../../interfaces/medical-examinations-dto'
-import {  ListsaveVitalSignResponse, saveVitalSignDto, saveVitalSignDto1, saveVitalSignResponse, VitalSignDtoResponse } from '../../interfaces/vital-dto';
+import {  ListsaveVitalSignResponse, saveVitalSignDto,  saveVitalSignResponse, VitalSignDtoResponse } from '../../interfaces/vital-dto';
 import {LinkService} from '../linkService/link-service'
 import { CreateDiagnosDTO, CreateDiagnosisResponse, GetDiagnosisListResponse, GetDiagnosisMasterResponse } from '../../interfaces/diagnos-dto';
 import { GeneralResponse } from '../../interfaces/general-response';
 import { UploadPhotoRequest } from '../../interfaces/upload-photo-request';
+import { ListSheetResponse, SheetDto, SheetDto1 } from '../../interfaces/sheet-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -400,4 +401,27 @@ export class Callapi
     );
   }
   
+  public CreatSheet(Sheet : SheetDto):Observable<SheetDto1>
+  {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    return this.Http.post<SheetDto1>(this.url + `Sheet/save`,Sheet, { headers }).pipe(
+      tap(response => { }),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+  }
+
+  
+  public SheetList():Observable<ListSheetResponse>
+   {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    
+    return this.Http.get<ListSheetResponse>(this.url + `Sheet/GetAll`, { headers }).pipe(
+      tap(response => { }),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+
+  }
+
 }

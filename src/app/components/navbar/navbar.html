@@ -3,15 +3,21 @@
     <strong> <a class="nav-link text-white" [routerLink]="['/createpatient']">Add Patient</a></strong>
   </div>
 
-  <div class="col-md-10">
+  <div class="col-md-1">
     @if (roles.includes('doctor') ||roles.includes('Doctor')) {
       <strong> <a class="nav-link text-white" [routerLink]="['/mypatient']">my Patients</a> </strong>
     }
   </div>
 
-  <!-- <div class="col-md-9" >
+   <div class="col-md-9">
+    @if (roles.includes('doctor') ||roles.includes('Doctor')) {
+      <strong> <a class="nav-link text-white" [routerLink]="['/Admin']">Admin</a> </strong>
+    }
+  </div>
+
+  <!-- <div class="col-md-8" >
     <strong> <a class="nav-link text-white" [routerLink]="['/Sitting']">Settings</a></strong>
-  </div> -->
+  </div>  -->
 
   <div class="col-md-1 d-flex justify-content-end"  >
      <button type="button" class="btn btn-danger" (click)="logOut()" >logOut</button>

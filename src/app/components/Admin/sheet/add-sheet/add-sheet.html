@@ -1,0 +1,12 @@
+<div class="row">
+
+        <div class="col-md-10">
+            <input type="text" class="form-control" #sheetItemInput placeholder="Add New Sheet">
+        </div>
+        <div class="col-md-2 d-flex justify-content-end">
+            <input type="button" class="btn btn-primary" value="Add Sheet" (click)="AddSheetItem(sheetItemInput.value)" >           
+        </div>   
+
+</div>
+
+<app-sheet-list></app-sheet-list>
