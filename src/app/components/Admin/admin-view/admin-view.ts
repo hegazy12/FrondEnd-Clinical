@@ -22,7 +22,7 @@ export class AdminView
     {
       this.view.set(1);
     }
-    else if(viewName == "investgation")
+    else if(viewName == "addQuestion")
     {
       this.view.set(2);
     }

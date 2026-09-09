@@ -35,13 +35,12 @@ export class SheetList {
     }
     
 
-    public SheetList() : boolean {
-            
+    public SheetList() : boolean 
+    {            
       let Sup = this.Callapi.SheetList().subscribe({
         next: (P : ListSheetResponse) =>
               {
                 this.data.set(P.data);
-                console.log(P.data);
                 Sup.unsubscribe();
               },
         error: (err) => 
@@ -49,7 +48,6 @@ export class SheetList {
               Sup.unsubscribe();
             }
             });
-
-            return true;
-      }
+      return true;
+    }
 }

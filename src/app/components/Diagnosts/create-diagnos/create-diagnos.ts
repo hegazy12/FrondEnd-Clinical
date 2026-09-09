@@ -77,7 +77,7 @@ export class CreateDiagnos
           console.log(element.value);
           this.SelectedData.set(this.data().find(m=> m.id == element.value) || null);
           this.name.set(this.SelectedData()?.name || null);
-          console.log(this.SelectedData());
+        
       }
       
       public searchDiagnos(SearchTerm:string)

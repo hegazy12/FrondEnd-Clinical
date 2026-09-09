@@ -7,7 +7,7 @@ export interface SheetDto
 
 export interface SheetDto1 extends SheetDto
 {
-    Id: string;
+    id: string;
 }
 
 export type  ListSheetResponse   = GeneralResponse<SheetDto1[]>;

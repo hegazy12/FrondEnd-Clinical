@@ -1,3 +1,73 @@
 
+<form>
+     <div class="row" style="margin-right: .5%; margin-left: .5%;">
+
+        <div class="col-md-12 itemStyel">
+             <label class="form-label fw-semibold text-muted small itemStyel">Quation Body</label>
+                <textarea class="form-control" rows="2" name="QuationBodyName" #QuationBodyId  placeholder="Entar Quation Body"  [(ngModel)]="QuationBody"   ></textarea>   
+        </div>
+
+        <div class="col-md-12 itemStyel">
+             <label class="form-label fw-semibold text-muted small itemStyel">Quation description</label>
+                <textarea class="form-control" rows="3" name="descriptionName" #descriptionId  placeholder="Entar Quation Body" [value]="description()" ></textarea>   
+        </div>
+
+        <div class="col-md-6 ">
+            <label class="form-label fw-semibold text-muted small itemStyel">Sheet Item</label>
+            <select class="form-select" aria-label="Default select example" name="sheetName" #sheetName (change)="onSpecialtyChange($event)"  >
+                 <option value="">Please select sheet Name</option>
+                 @for (item of SheetItems(); track $index)
+                 {
+                      <option [value]="item.id">{{item.name}}</option>
+                 }
+            </select>
+         </div>
+
+        <div class="col-md-6 ">
+            <label class="form-label fw-semibold text-muted small itemStyel">Data Type</label>
+            <select class="form-select" aria-label="Default select example" name="QuationDataType" #QuationDataType (change)="onSpecialtyChange($event)"  >
+                 <option value="">Please select DataType</option>            
+                 <option value="Boolean">Boolean</option>
+                 <option value="Dropdown">Dropdown</option>
+                 <option value="Numeric">Numeric</option>
+                 <option value="Text">Text</option>
+            </select>
+        </div>         
+        <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted small itemStyel">Min number</label>
+            <input type="number" class="form-control itemStyel" #minNumberId >
+        </div>
+        <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted small itemStyel">Max number</label>
+            <input type="number" class="form-control itemStyel" #maxNumberId >
+        </div>
+        <div class="col-md-10">
+            <input type="text" class="form-control itemStyel" #ItemInlist placeholder="Item In list"  value="{{Itemlist()}}"   >
+        </div>
+        
+        <div class="col-md-2 d-flex justify-content-end ">
+            <input type="button" class="btn btn-primary fixsize itemStyel" value="add In list" (click)="addItemInlist(ItemInlist.value)" >      
+        </div> 
+        
+        <div class="col-md-12">
+            <div class="row">
+                @for (item of list(); track $index)
+                {
+                    <div class="col-md-3">
+                        <h4>{{item}}</h4>
+                    </div>
+                }
+            </div>
+        </div>
+        
+        <div class="row" style="margin-top: 1%;"> 
+            <div class="col-12 d-flex justify-content-end itemStyel" >
+                <button type="button" class="btn btn-primary " (click)="onSubmit(QuationBodyId.value, descriptionId.value, minNumberId.value, maxNumberId.value)">Save Changes</button>
+            </div>
+        </div>
+
+     </div>
+</form>
+
 
 <app-list-question></app-list-question>
