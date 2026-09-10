@@ -1,0 +1,17 @@
+<div class="row" style="margin-right: .5%; margin-left: .5%;">
+   <div class="col-md-12" style="margin-top: 1%;">
+        <select class="form-select" aria-label="Default select example" name="Sheet" (change)="onSpecialtyChange($event)"  >
+            <option value="">select sheet pleas</option>  
+            @for (Sheet of Sheetdata(); track $index)
+            {
+                <option [value]="Sheet.id">{{Sheet.name}} </option>
+            }
+        </select>
+    </div>
+</div>
+
+<div class="row">
+
+    <app-list-answer-question [SheetID]="SelectedSheetID()" ></app-list-answer-question>
+    
+</div>

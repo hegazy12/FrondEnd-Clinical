@@ -12,7 +12,7 @@ import { PatientStory } from '../../History/patient-story/patient-story';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { CCreateAppintment } from '../../Appointment/ccreate-appintment/ccreate-appintment';
 import { CreateDiagnos } from '../../Diagnosts/create-diagnos/create-diagnos';
-import { AddHistory } from '../add-history/add-history';
+import { AddHistory } from '../History/add-history/add-history';
 @Component({
   selector: 'app-patientappointment',
   imports:  [Navbar,MakePrescription,DatePipe,CreatInvestgation,CreatVital,PatientStory,CCreateAppintment,CreateDiagnos,AddHistory],
