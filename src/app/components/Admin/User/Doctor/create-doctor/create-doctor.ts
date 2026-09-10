@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Callapi } from '../../../services/callapi/callapi';
-import { VerfivationToken} from '../../../services/verfivationToken/verfivation-token'
+import { Callapi } from '../../../../../services/callapi/callapi';
+import { VerfivationToken} from '../../../../../services/verfivationToken/verfivation-token'
 import { Router } from '@angular/router';
-import { SwalAlert } from '../../../services/swalAlert/swal-alert';
-import { createDoctors } from '../../../interfaces/CreateDoctor'
+import { SwalAlert } from '../../../../../services/swalAlert/swal-alert';
+import { createDoctors } from '../../../../../interfaces/CreateDoctor'
 
 @Component({
   selector: 'app-create-doctor',

@@ -10,13 +10,13 @@ export interface QuestionDTO
   minValue: string;
   requeried: boolean;        
   listValues: string[];
-  questionDependId: string; 
+  questionDependId: string |null; 
 }
 
-export interface QuestionDTO1
+export interface QuestionDTO1 extends QuestionDTO
 {
-  Id : string;
+  id : string;
 }
 
-export type  QuestionDtoResponse   = GeneralResponse<QuestionDTO1[]>;
+export type  QuestionListResponse   = GeneralResponse<QuestionDTO1[]>;
 export type  SaveQuestionResponse = GeneralResponse<QuestionDTO1>;

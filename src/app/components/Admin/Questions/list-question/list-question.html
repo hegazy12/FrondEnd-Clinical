@@ -1,0 +1,41 @@
+<div class="prescription-table border rounded overflow-hidden" style="padding: .5%; margin: .5%;">
+
+
+  @for (item of data(); track item.id ?? $index) 
+  {
+    <div class="row g-0 border border-primary table-row">
+      
+      <div class="col-md-1 p-2"> Question </div>
+      
+      <div class="col-md-10 p-2"> 
+        <h5>{{item.questionBody}} <strong> DataType : {{item.dataTypeName}} </strong> </h5>
+        @if( item.dataTypeName == "Dropdown" )
+        {
+            <p> 
+                @for (i of item.listValues; track $index)
+                { 
+                    <strong> (itemList : </strong> {{i}} <strong> ),</strong>    
+                }
+            </p>
+          }@else if ( item.dataTypeName == "Numeric") 
+          {
+            <strong>( MaxNumber : </strong>  {{item.maxValue}}  <strong> )</strong>    
+            <strong>,(MinNumber : </strong>  {{item.minValue}} <strong> )</strong>    
+          }
+        <p> {{item.description}}</p>
+      </div>
+
+      <div class="col-md-1 p-2" >
+        <button class="btn btn-sm btn-outline-danger" (click)="DeleteQuestion(item.id)" > Delete </button>
+      </div>
+
+    </div>
+  } @empty {
+    <div class="row g-0">
+      <div class="col-md-12 text-center text-muted py-4">
+        No Questions found.
+      </div>
+    </div>
+  }
+
+</div>

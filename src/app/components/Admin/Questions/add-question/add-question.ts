@@ -28,6 +28,8 @@ export class AddQuestion
       public MinNumber   = signal<number>(0);
       public description = signal<string>('');
 
+    
+
       constructor(private Callapi : Callapi,
                   private Verfication :VerfivationToken,
                   private swal: SwalAlert)
@@ -45,7 +47,7 @@ export class AddQuestion
         else if(element.name == "sheetName")
         {
             this.sheetId.set(element.value);
-            console.log(this.sheetId());
+            this.ListQuestionRef.GitQuestionsBySheetId(element.value);
         }
       }
 
@@ -62,83 +64,83 @@ export class AddQuestion
       }
 
 
-  public onSubmit(quationBody: string, description: string, minValue: string, maxValue: string): void {
-      console.log('quationBody param:', quationBody, typeof quationBody);
-  console.log('description param:', description, typeof description);
-      if (this.sheetId() != '') {
-            if (this.dataType() == "Dropdown") {
-                 if (this.list().length < 2) {
-                  this.swal.showWoringSave("please Enter More than 2 item in list");
-             return;
-              }
-            } else if (this.dataType() == "Numeric") {
-                if (Number(minValue) > Number(maxValue)) {
-                 this.swal.showWoringSave("Min number bigger than Max number");
-            return;
+      public onSubmit(quationBody: string, description: string, minValue: string, maxValue: string): void 
+      {
+          if (this.sheetId() != '') {
+                if (this.dataType() == "Dropdown") {
+                    if (this.list().length < 2) {
+                      this.swal.showWoringSave("please Enter More than 2 item in list");
+                return;
+                  }
+                } else if (this.dataType() == "Numeric") {
+                    if (Number(minValue) > Number(maxValue)) {
+                    this.swal.showWoringSave("Min number bigger than Max number");
+                return;
+                }
             }
+
+            let questionDto: QuestionDTO =
+              {
+                  sheetId: this.sheetId(),
+                  questionBody: this.QuationBody,
+                  description: description,
+                  dataTypeName: this.dataType(),
+                  maxValue: maxValue,
+                  minValue: minValue,
+                  requeried: false,
+                  listValues: this.list(),
+                  questionDependId: '9E43D18F-A507-446F-AC4E-6F3A01FB290B',
+                };
+          
+            this.Create(questionDto);
+           
+          }
+          else 
+          {
+            this.swal.showWoringSave("Please Select Sheet");
+            return;
+          }
+        }
+      
+        public Create(DTO :QuestionDTO) 
+        {
+        let sub =this.Callapi.AddQuestion(DTO).subscribe({
+              next:(res)=>{
+                  sub.unsubscribe();
+                  this.swal.showSuccess();
+                   this.ListQuestionRef.GitQuestionsBySheetId(this.sheetId());
+              },
+              error :(err)=>{
+                  this.swal.showWoringSave(err.error.message)
+                  sub.unsubscribe();
+              }
+          });
         }
 
-         let questionDto: QuestionDTO =
-           {
-              sheetId: this.sheetId(),
-              questionBody: this.QuationBody,
-              description: description,
-              dataTypeName: this.dataType(),
-              maxValue: maxValue,
-              minValue: minValue,
-              requeried: false,
-              listValues: this.list(),
-              questionDependId: '',
-            };
-      console.log(questionDto)
-        this.Create(questionDto);
-      }
-      else 
-      {
-        this.swal.showWoringSave("Please Select Sheet");
-        return;
-      }
-    }
-      
-    public Create(DTO :QuestionDTO) 
-    {
-    let sub =this.Callapi.AddQuestion(DTO).subscribe({
-          next:(res)=>{
-              sub.unsubscribe();
-              this.swal.showSuccess();
-          },
-          error :(err)=>{
-              this.swal.showWoringSave(err.error.message)
-              sub.unsubscribe();
+          public SheetList() : boolean 
+          {            
+            let Sup = this.Callapi.SheetList().subscribe({
+              next: (P : ListSheetResponse) =>
+                    {
+                      
+                      this.SheetItems.set(P.data);
+                      
+                      Sup.unsubscribe();
+                      
+                      this.ListQuestionRef.GitQuestionsBySheetId(this.sheetId());
+
+                    },
+              error: (err) => 
+                  {
+                    Sup.unsubscribe();
+                  }
+                  });
+            return true;
           }
-      });
-    }
 
-      public SheetList() : boolean 
-      {            
-        let Sup = this.Callapi.SheetList().subscribe({
-          next: (P : ListSheetResponse) =>
-                {
-                  this.SheetItems.set(P.data);
-                  Sup.unsubscribe();
-                },
-          error: (err) => 
-              {
-                Sup.unsubscribe();
-              }
-              });
-        return true;
-      }
-
-      public addItemInlist(ItemInlist:string)
-      {
-        this.list.update(msgs => [...msgs, ItemInlist]);
-        this.Itemlist.set('');
-      }
-
-      // public RemoveItemList(itemInList: string, event: MouseEvent) {
-      //   event.preventDefault();
-      //   this.list.update(msgs => msgs.filter(m => m !== itemInList));
-      // }
-
+          public addItemInlist(ItemInlist:string)
+          {
+            this.list.update(msgs => [...msgs, ItemInlist]);
+            this.Itemlist.set('');
+          }
 }

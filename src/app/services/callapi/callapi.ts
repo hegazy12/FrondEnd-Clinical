@@ -16,7 +16,8 @@ import { CreateDiagnosDTO, CreateDiagnosisResponse, GetDiagnosisListResponse, Ge
 import { GeneralResponse } from '../../interfaces/general-response';
 import { UploadPhotoRequest } from '../../interfaces/upload-photo-request';
 import { ListSheetResponse, SheetDto, SheetDto1 } from '../../interfaces/sheet-dto';
-import { QuestionDTO, SaveQuestionResponse } from '../../interfaces/question-dto';
+import { QuestionDTO, QuestionListResponse, SaveQuestionResponse } from '../../interfaces/question-dto';
+import { RegisterResponse, UserDto } from '../../interfaces/user-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -436,7 +437,6 @@ export class Callapi
     );
   }
 
-  
   public SheetList():Observable<ListSheetResponse>
    {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
@@ -458,4 +458,34 @@ export class Callapi
     );
   }
 
+  public GitQuestionsBySheetId(Id:string):Observable<QuestionListResponse>
+  {
+   const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    return this.Http.get<QuestionListResponse>(this.url + `Question/getbysheetid/${Id}`, { headers }).pipe(
+      tap(response => {}),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+  }
+
+  public GitQuestionsByDepndOnQuestionID(Id:string):Observable<QuestionListResponse>
+  {
+   const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    return this.Http.get<QuestionListResponse>(this.url + `Question/GetbyDepndOnQuestionID/${Id}`, { headers }).pipe(
+      tap(response => {}),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+  }
+
+  public CreateUser(User :UserDto):Observable<RegisterResponse>
+  {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    return this.Http.post<RegisterResponse>(this.url + "Account/Register",User,{ headers }).pipe(
+      tap(response => {}),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    );
+  }
 }
