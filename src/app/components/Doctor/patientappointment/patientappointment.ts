@@ -12,9 +12,10 @@ import { PatientStory } from '../../History/patient-story/patient-story';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { CCreateAppintment } from '../../Appointment/ccreate-appintment/ccreate-appintment';
 import { CreateDiagnos } from '../../Diagnosts/create-diagnos/create-diagnos';
+import { AddHistory } from '../add-history/add-history';
 @Component({
   selector: 'app-patientappointment',
-  imports:  [Navbar,MakePrescription,DatePipe,CreatInvestgation,CreatVital,PatientStory,CCreateAppintment,CreateDiagnos],
+  imports:  [Navbar,MakePrescription,DatePipe,CreatInvestgation,CreatVital,PatientStory,CCreateAppintment,CreateDiagnos,AddHistory],
   templateUrl: './patientappointment.html',
   styleUrl: './patientappointment.css',
 })
@@ -57,25 +58,41 @@ export class Patientappointment {
   
   public viewpage(viewName : string)
   {
-    console.log(viewName);
-    if(viewName == "prescription"){
+    //console.log(viewName);
+    if(viewName == "prescription")
+    {
       this.view.set(1);
-    }else if(viewName == "investgation"){
+    }
+    else if(viewName == "investgation")
+    {
       this.view.set(2);
-    }else if(viewName == "vitalsigns"){ 
+    }
+    else if(viewName == "vitalsigns")
+    { 
       this.view.set(3);
     }
-    else if(viewName == "allergies"){ 
+    else if(viewName == "allergies")
+    { 
       this.view.set(4);
-    }else if(viewName == "viewhistory"){
+    }
+    else if(viewName == "viewhistory")
+    {
       this.view.set(5);
       setTimeout(() => {
         this.PatientStoryRef?.GetAppointment(this.PatientId);
        }, 20);
-    }else if(viewName == "addnextvisit"){
+    }
+    else if(viewName == "addnextvisit")
+    {
         this.view.set(6);
-    }else if(viewName == "diagnos"){
+    }
+    else if(viewName == "diagnos")
+    {
         this.view.set(7);
+    }
+    else if (viewName == "AddHistory") 
+    {
+        this.view.set(8);
     }
 
   }

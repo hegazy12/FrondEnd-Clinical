@@ -12,10 +12,11 @@ import Swal from 'sweetalert2';
 })
 export class ListVital 
 {
-    @Input({ required: true }) AppointmentID!: string;
+    @Input({ required: true })  AppointmentID!: string;
+    @Input({ required: true }) isInHistoryMood!:   boolean;
     public Response = signal<ListsaveVitalSignResponse | null>(null);
     public data = signal<saveVitalSignDto2[]>([]);
-    public isInHistoryMood = signal<boolean>(false)
+   //public isInHistoryMood = signal<boolean>(false)
     
     constructor(private Callapi : Callapi ,
                 private Verfication : VerfivationToken)
@@ -32,7 +33,10 @@ export class ListVital
         }
       else
         {   
-          this.GetsaveVitalSighAppoinmenById(this.AppointmentID);
+          if(this.AppointmentID != '')
+          {
+            this.GetsaveVitalSighAppoinmenById(this.AppointmentID);
+          }
         }
     }
 

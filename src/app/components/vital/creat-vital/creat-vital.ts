@@ -64,60 +64,82 @@ export class CreatVital {
 
     public async Create(saveDTO :saveVitalSignDto)  
     {
-      let sub =this.Callapi.saveVitalSign(saveDTO).subscribe({
-        next:(res)=>{
-          if(res.success == true)
-            {
+        let sub =this.Callapi.saveVitalSign(saveDTO).subscribe({
+          next:(res)=>{
+            if(res.success == true)
+              {
+                sub.unsubscribe();
+                this.swal.showSuccess();
+                this.ListVitalRef.GetsaveVitalSighAppoinmenById(this.appointmentId);
+              }
+              else
+              {
+                sub.unsubscribe();
+                this.swal.showWoringSave(res.message);
+              }                         
+          },
+          error :(err)=>{
+              this.swal.showWoringSave(err.error.message)
               sub.unsubscribe();
-              this.swal.showSuccess();
-              this.ListVitalRef.GetsaveVitalSighAppoinmenById(this.appointmentId);
-            }
-            else
-            {
-              sub.unsubscribe();
-              this.swal.showWoringSave(res.message);
-            }                         
-        },
-        error :(err)=>{
-            this.swal.showWoringSave(err.error.message)
-            sub.unsubscribe();
-        }
-    });
+          }
+      });
     }
     
     @ViewChild('vitalContainer') vitalContainer!: ElementRef<HTMLDivElement>;
 
-    getVitalValue(): string | null 
+    getVitalValue(): string  
     {
         const container = this.vitalContainer?.nativeElement;
-        if (!container) return null;
+        if (!container) 
+          return '';
         const type = this.Vital()?.dataTypeName;
         
         if (type === 'Boolean')
           {
             const checked = container.querySelector<HTMLInputElement>('input[name="vitalvalue"]:checked');
-            return checked ? checked.value : null;
+            return checked ? checked.value : '';
           }
 
         const field = container.querySelector<HTMLInputElement | HTMLSelectElement>('[name="vitalvalue"]');
-        return field ? field.value : null;
+        return field ? field.value : '';
     }
 
-    onSaveVital(): void {
-        const value = this.getVitalValue();
-        if (value === null || value === '') {
-            console.warn('لازم تدخل قيمة قبل الحفظ');
-            return;
+    onSaveVital(): void
+    {
+        const value   = this.getVitalValue();
+        if (value === null || value === '') 
+        {
+          this.swal.showWoringSave("You Please Inter Value");
+          return;
         }
-        
-        console.log('Vital value:', value);
+        else if(this.Vital()?.dataTypeName == "Numeric")
+        {
+          if(Number(value) <= Number(this.Vital()?.minValue))
+          {
+            this.swal.showWoringSave("You Are Inter Value Less Than minValue");
+            return ;
+          }else if(Number(value) >= Number(this.Vital()?.maxValue))
+          {
+              this.swal.showWoringSave("You Are Inter Value More Than minValue");
+              return ;
+          }
+        }
+        else if(this.Vital()?.dataTypeName  == "Text")
+        {
+          if (value === null || value === '') 
+          {
+              this.swal.showWoringSave("please inter Value");
+              return;
+          }
+        }
 
         const saveDTO : saveVitalSignDto = 
         {
           appointmentId : this.appointmentId,
-          value : value,
+          value : value ,
           vitalSignId : this.Vital()?.id
         }
+
         this.Create(saveDTO);
     }
 

@@ -1,10 +1,10 @@
 
-<div class="diagnosis-table border rounded overflow-hidden" style="padding: .5%; margin: .5%;" >
+<div class="diagnosis-table border rounded-top overflow-hidden" style="padding: .5%; margin: .5%;" >
 
-  <div class="row g-0 rounded" style="background-color: #0d6efd;">
+  <div class="row g-0 rounded-top" style="background-color: #0d6efd;">
     <div class="col-md-4 text-white fw-semibold p-2"> Name </div>
     <div class="col-md-4 text-white fw-semibold p-2"> Value </div>
-    @if(!isInHistoryMood()){
+    @if(!isInHistoryMood){
     <div class="col-md-4 text-white fw-semibold p-2"> Actions </div>
      }
   </div>
@@ -14,7 +14,7 @@
     <div class="row g-0 table-row">
       <div class="col-md-4 p-2">{{ item.vitalSignDto1?.name }} / {{item.vitalSignDto1?.mastarName }}</div>
       <div class="col-md-4 p-2">{{ item?.value }}</div>
-        @if(!isInHistoryMood())
+        @if(!isInHistoryMood)
         {
           <div class="col-md-4 p-2">
             <button class="btn btn-sm btn-outline-danger" (click)="DeleteInvestgation(item.id)" > Delete </button>

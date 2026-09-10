@@ -7,10 +7,11 @@ import { AppointmentDTO3, AppointmentsStoryResponse } from '../../../interfaces/
 import { ListInvestgation } from '../../investgation/list-investgation/list-investgation';
 import { PrescriptionList } from '../../Prescription/prescription-list/prescription-list';
 import { ListDiagnosos } from '../../Diagnosts/list-diagnosos/list-diagnosos';
+import { ListVital } from '../../vital/list-vital/list-vital';
 
 @Component({
   selector: 'app-appointment-story',
-  imports: [ListInvestgation,PrescriptionList,ListDiagnosos],
+  imports: [ListInvestgation,PrescriptionList,ListDiagnosos,ListVital],
   templateUrl: './appointment-story.html',
   styleUrl: './appointment-story.css',
 })
@@ -23,6 +24,8 @@ export class AppointmentStory
   @ViewChild(ListInvestgation) ListInvestgationRef!: ListInvestgation;
   @ViewChild(PrescriptionList) prescriptionListRef!: PrescriptionList;
   @ViewChild(ListDiagnosos) listDiagnososRef!: ListDiagnosos;
+  @ViewChild(ListVital) ListVitalRef!: ListDiagnosos;
+
 
   constructor(private Callapi : Callapi ,
                 private Verfication :VerfivationToken ,

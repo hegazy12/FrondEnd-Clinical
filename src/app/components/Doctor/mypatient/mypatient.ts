@@ -19,8 +19,7 @@ export class Mypatient {
 
   constructor(private callapi : Callapi,
               private router:Router,
-              private Vervication:VerfivationToken,
-              private route: ActivatedRoute)
+              private Vervication:VerfivationToken)
               { 
                 this.DoctorId = localStorage.getItem("id")?.replace(/"/g, '') || '';
               }
