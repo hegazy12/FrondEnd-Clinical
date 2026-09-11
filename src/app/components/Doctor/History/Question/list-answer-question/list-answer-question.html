@@ -1,2 +1,48 @@
-<p>list-answer-question works!</p>
+<form>
+    <div class="row" #questionContainer style="margin-right: .5%; margin-left: .5%;">
+        @for (item of data(); track $index) 
+        {
+            <h5> {{item?.questionBody}} </h5>
+                <label class="text-secondary" >{{item?.description}}</label>
+                <div class="col-md-12">
+                    @if(item?.dataTypeName == "Numeric")
+                    {
+                        <input type="number" class="form-control" name="questionvalue" id="{{item.id}}" [min]="item?.minValue ?? null" [max]="item?.maxValue ?? null" /> 
+                    }
+                    @else if (item?.dataTypeName == "Text"){
+                        <input type="text" class="form-control" id="{{item.id}}" name="vitalvalue" >
+                    }
+                    @else if(item?.dataTypeName == "Boolean")
+                    {
+                        <label>true</label>
+                        <input type="radio" id="{{item.id}}-true" name="{{item.id}}" value="true">
+                            <br>
+                        <label>false</label>
+                        <input type="radio" id="{{item.id}}-false" name="{{item.id}}" value="false">
+                    }
+                    @else if(item?.dataTypeName == "Dropdown")
+                    {
+                        <select class="form-select" aria-label="Default select example" id="{{item.id}}" name="{{item.id}}">
+                             <option [value]=""></option>
+                            @for (it of item?.listValues; track $index)
+                            {
+                                <option [value]="it">{{it}}</option>
+                            }
+                        </select>
+                    }
+                </div>
+        }
+        @if(SheetID != '')
+        {
+         <div class="col-12 d-flex justify-content-end " style="margin-top: 2%;" >
+            <button type="button" class="btn btn-primary " (click)="SendAnswers()">
+                Send Answer
+            </button>
+        </div>
+        }
+    </div>
+  
+
+
+</form>
 <app-save-answer-question [SheetID]="SheetID" ></app-save-answer-question>

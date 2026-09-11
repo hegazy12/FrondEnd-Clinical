@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, signal, ViewChild } from '@angular/core';
 import { ListSheetResponse, SheetDto1 } from '../../../../interfaces/sheet-dto';
 import { Callapi } from '../../../../services/callapi/callapi';
 import { VerfivationToken } from '../../../../services/verfivationToken/verfivation-token';
@@ -17,6 +17,7 @@ export class AddHistory
   public Sheetdata =signal<SheetDto1[]>([]); 
   public SheetDto1 = signal<SheetDto1 | undefined>(undefined);
   public SelectedSheetID = signal<string>('');
+  @ViewChild(ListAnswerQuestion) ListAnswerQuestionRef!: ListAnswerQuestion;
 
   constructor(private callapi : Callapi,private Vervication:VerfivationToken){}
            
@@ -53,6 +54,8 @@ export class AddHistory
     const element = event.target as HTMLSelectElement;
     let x =this.Sheetdata().find(m=> m.id == element.value);
     this.SheetDto1.set(x);
+    this.SelectedSheetID.set(element.value);
+    this.ListAnswerQuestionRef.GitQuestionsBySheetId(element.value);
   }
 
 }
