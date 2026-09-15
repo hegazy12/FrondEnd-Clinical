@@ -1,5 +1,8 @@
 <form>
-     <div class="row" style="margin-right: .5%; margin-left: .5%;">
+     <div class="row" class="row border rounded-top"
+       [class.border-danger]="isHistory() === 1" 
+       [class.border-light]="isHistory() !== 1" 
+       style="margin: .5%; padding: .5%;">
         <div class="col-md-10">
             <input type="text" class="form-control" #TextsearchTearm placeholder="Search Examination"  value="{{ExaminationName()}}"   >
         </div>
@@ -36,13 +39,13 @@
                 <button 
                 type="button" 
                 class="btn" 
-                [class.btn-danger]="isHistory() === 1" 
-                [class.btn-success]="isHistory() !== 1"
+                [class.btn-danger]="isHistory() !== 1" 
+                [class.btn-success]="isHistory() === 1"
                 (click)="makeInvestgationHistory()">
-                @if (isHistory() === 0) {
-                    Save Changes In History
+                 @if (isHistory() === 0) {
+                    History Mood
                 } @else {
-                    Back To normal behavior
+                    Normal Mood
                 }
                 </button>
             </div>

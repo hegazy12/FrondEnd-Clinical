@@ -1,5 +1,6 @@
 <div class="row">
     <h4> Doctor Name: {{AppointmentDTO3()?.doctorDTO_1?.fristName}} {{AppointmentDTO3()?.doctorDTO_1?.lastName}} {{AppointmentDTO3()?.doctorDTO_1?.specialization}} </h4>
+    <h5> Date : {{AppointmentDTO3()?.appointmentDate}}  </h5>
     <div class="row">
         <div class="col-10 d-flex justify-content-end">
                 <button 
@@ -32,6 +33,33 @@
     <div>
         <h5> vital List </h5>
         <app-list-vital [AppointmentID]="''" [isInHistoryMood]="true" ></app-list-vital>
+    </div>
+    <div>
+          <h5> Sheet List </h5>
+          @if(Sheet() != undefined)
+          {
+            <div class="row">
+                <div class="col-md-2 p-2" >
+                    <button type="button" class="btn btn-outline-info" (click)="SetInSelected('')" > Get All Sheets </button>
+                </div>
+                @for (item of Sheet(); track $index)
+                {
+                    <div class="col-md-2 p-2" >
+                        <button type="button" class="btn btn-outline-secondary" (click)="SetInSelected(item.id)" > {{item.name}}</button>
+                    </div>
+                }
+            </div>
+        }
+
+        @if(SelectSheet() != undefined)
+        {
+            @for (item of SelectSheet(); track $index)
+            {
+                <h6> {{item.name}} Sheet </h6>
+                <app-save-answer-question [AppointmentID]="appointmentid()" [isInHistoryMood]="true" [SheetID]="item.id" > </app-save-answer-question>
+            }
+        }
+
     </div>
   
 </div>

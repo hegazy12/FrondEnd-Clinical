@@ -55,7 +55,7 @@ export class AddHistory
     let x =this.Sheetdata().find(m=> m.id == element.value);
     this.SheetDto1.set(x);
     this.SelectedSheetID.set(element.value);
-    this.ListAnswerQuestionRef.GitQuestionsBySheetId(element.value);
+    this.ListAnswerQuestionRef.GitQuestionsBySheetId1(element.value,this.AppointmentID);
   }
 
 }

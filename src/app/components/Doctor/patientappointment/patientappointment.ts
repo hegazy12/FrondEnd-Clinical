@@ -25,7 +25,7 @@ export class Patientappointment {
 
   public appointmentId: string = "";
   
-  public view = signal<number>(1);
+  public view = signal<number>(8);
   
   public PatientId: string ="";
   
@@ -126,11 +126,7 @@ export class Patientappointment {
         icon: "info",
         message: ""
       };
-    
-    console.log("let values: { icon: SweetAlertIcon; message: string }");
-    
-    console.log(x);
-    
+      
     if(this.x() == false)
     {
       values.icon = "question";
@@ -148,34 +144,37 @@ export class Patientappointment {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes,Save"
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed){
-        this.makeItComplete(this.appointmentId);
-        if(this.makeCompleteResponse()?.success)
-        { 
-          Swal.fire({
-            title: "savaing!",
-            text: "Your file has been saved.",
-            icon: "success"
-          });
-          this.router.navigate(['/mypatient']);
-        }
-        else
-        {
-          Swal.fire({
-              title: "savaing!",
-              text: "Your file has been not saved.",
-              icon: "warning"  
-            });
-        }
-      }
+        await this.makeItComplete(this.appointmentId).then(()=>
+          {
+            if(this.makeCompleteResponse()?.success)
+            { 
+              Swal.fire({
+                title: "savaing!",
+                text: "Your file has been saved.",
+                icon: "success"
+              });
+              this.router.navigate(['/mypatient']);
+            }
+            else
+            {
+              Swal.fire({
+                  title: "savaing!",
+                  text: "Your file has been not saved.",
+                  icon: "warning"  
+                });
+            }
+        })};
     });
   }
   
-  public makeItComplete(appointmentId: string): void {
+  public async makeItComplete(appointmentId: string): Promise<void> {
     this.callapi.makeItComplete(appointmentId).subscribe({
-      next: (response: makeCompleteResponse) => {
-              this.makeCompleteResponse.set(response);
+      next: (response: makeCompleteResponse) =>
+      {
+          this.makeCompleteResponse.set(response);
+          
       },
       error: (err) => {
         console.error('Error completing appointment:', err);
@@ -189,9 +188,6 @@ export class Patientappointment {
     next: (P : AppointmentsResponse) =>
       {
           this.Appointments.set(P.data);
-          console.log(P.data);
-          console.log(this.Vervication.GetDoctorId());
-          console.log(this.appointmentId);
           
           if(this.Appointments().find(m=> m.doctorId ==  this.Vervication.GetDoctorId() && m.id != this.appointmentId) == undefined)
           {

@@ -15,8 +15,8 @@ import { LinkService} from '../linkService/link-service'
 import { CreateDiagnosDTO, CreateDiagnosisResponse, GetDiagnosisListResponse, GetDiagnosisMasterResponse } from '../../interfaces/diagnos-dto';
 import { GeneralResponse } from '../../interfaces/general-response';
 import { UploadPhotoRequest } from '../../interfaces/upload-photo-request';
-import { ListSheetResponse, SheetDto, SheetDto1 } from '../../interfaces/sheet-dto';
-import { QuestionDTO, QuestionListResponse, SaveQuestionResponse } from '../../interfaces/question-dto';
+import { ListSheetResponse, SheetDto, SheetDto1, SheetsInAppointmentSavedResponse } from '../../interfaces/sheet-dto';
+import { GetsaveQuestionInSheetResponse, QuestionDTO, QuestionListResponse, SaveAnswersListResponse, saveQuestionDTO, SaveQuestionResponse} from '../../interfaces/question-dto';
 import { RegisterResponse, UserDto } from '../../interfaces/user-dto';
 @Injectable({
   providedIn: 'root',
@@ -427,6 +427,18 @@ export class Callapi
     );
   }
 
+   public DeleteSaveQuestion(Id:string):Observable<any>
+   {
+     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});  
+        return this.Http.delete<any>(this.url + `saveQuestion/Delete/${Id}`,{ headers }).pipe(
+          tap(response => {}),
+          catchError(error =>
+          {
+            return throwError(() => error);
+          })
+    );
+  }
+
   public CreatSheet(Sheet : SheetDto):Observable<SheetDto1>
   {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
@@ -468,6 +480,27 @@ export class Callapi
     );
   }
 
+  public GitQuestionsBySheetId1(Id:string,appointmentId:string):Observable<QuestionListResponse>
+  {
+   const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    return this.Http.get<QuestionListResponse>(this.url + `Question/getbysheetid/${Id}/${appointmentId}`, { headers }).pipe(
+      tap(response => {}),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+  }
+
+  public GetsaveQuestionInSheet(Id:string,appointmentId:string):Observable<GetsaveQuestionInSheetResponse>
+  {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    return this.Http.get<GetsaveQuestionInSheetResponse>(this.url + `saveQuestion/getbysheetid/${Id}/${appointmentId}`, { headers }).pipe(
+      tap(response => {}),
+      catchError(error => {return throwError(() => error);
+      })
+    );
+
+  }
+
   public GitQuestionsByDepndOnQuestionID(Id:string):Observable<QuestionListResponse>
   {
    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
@@ -488,4 +521,27 @@ export class Callapi
       })
     );
   }
+
+  public SaveAnswersList( AnswersList :saveQuestionDTO[]) :Observable<SaveAnswersListResponse>
+  {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+    return this.Http.post<SaveAnswersListResponse>(this.url + "saveQuestion/AddList",AnswersList,{ headers }).pipe(
+      tap(response => {}),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  public GetSheetsInAppointmentSaved(id:string):Observable<SheetsInAppointmentSavedResponse>
+  {
+     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+     return this.Http.get<SheetsInAppointmentSavedResponse>(this.url + `saveQuestion/GetSheetsInAppointmentSaved/${id}`,{ headers }).pipe(
+      tap(response => {}),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    );
+  }
+
 }

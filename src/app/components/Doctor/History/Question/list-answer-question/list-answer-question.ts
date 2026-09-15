@@ -2,7 +2,8 @@ import { Component, ElementRef, Input, signal, ViewChild } from '@angular/core';
 import { SaveAnswerQuestion } from '../save-answer-question/save-answer-question';
 import { Callapi } from '../../../../../services/callapi/callapi';
 import { VerfivationToken } from '../../../../../services/verfivationToken/verfivation-token';
-import { QuestionDTO1, QuestionListResponse } from '../../../../../interfaces/question-dto';
+import { QuestionDTO1, QuestionListResponse, SaveAnswersListResponse, saveQuestionDTO } from '../../../../../interfaces/question-dto';
+import { SwalAlert } from '../../../../../services/swalAlert/swal-alert';
 
 @Component({
   selector: 'app-list-answer-question',
@@ -13,12 +14,23 @@ import { QuestionDTO1, QuestionListResponse } from '../../../../../interfaces/qu
 export class ListAnswerQuestion 
 {
       @Input({ required: true }) SheetID!: string;
+      @Input({ required: true }) AppointmentID!: string;
       
-      constructor(private callapi : Callapi,private Vervication:VerfivationToken){}
+      
+      
+      @ViewChild(SaveAnswerQuestion) SaveAnswerQuestionRef!: SaveAnswerQuestion;
+
+      constructor(private callapi : Callapi,private Vervication:VerfivationToken,private swal: SwalAlert)
+      {
+
+      }
       
       public data = signal<QuestionDTO1[]>([])
       
-      
+       onMessageReceived()
+       {
+        this.GitQuestionsBySheetId1(this.SheetID,this.AppointmentID);
+       }
 
       ngOnInit():void 
       {
@@ -27,19 +39,20 @@ export class ListAnswerQuestion
         }
         else
         {
-          this.GitQuestionsBySheetId(this.SheetID);
+          this.GitQuestionsBySheetId1(this.SheetID,this.AppointmentID);
         }
       }  
 
-      public GitQuestionsBySheetId(SheetId : string) : boolean {
+      public GitQuestionsBySheetId1(SheetId : string ,appointmentId : string) : boolean {
   
         if(SheetId != '') 
         {
-          let Sup = this.callapi.GitQuestionsBySheetId(SheetId).subscribe({
+          let Sup = this.callapi.GitQuestionsBySheetId1(SheetId,appointmentId).subscribe({
           next: (P : QuestionListResponse) =>
             {
               this.data.set(P.data);
               Sup.unsubscribe();
+              this.SaveAnswerQuestionRef.GetsaveQuestionInSheet(SheetId,appointmentId);
                
             },
           error: (err) => 
@@ -57,37 +70,88 @@ export class ListAnswerQuestion
 
     getQuestionValue(Question: QuestionDTO1): string  
     {
-        const container = this.questionContainer?.nativeElement;
-        if (!container) 
-          return '';
-       
-        const type : string = Question.dataTypeName;
-        if (type === 'Boolean')
-          {
-              const checked = container.querySelector<HTMLInputElement>('input[name="'+Question.id+'"]:checked');
-              return checked ? checked.value : '';
-          }
-          else if(type === 'Dropdown')
-          {
-              const field = container.querySelector<HTMLInputElement | HTMLSelectElement>('[name="'+Question.id+'"]');
-              console.log(field);
-              return field ? field.value : '';
-          }
-          else 
-          {
-              const field = container.querySelector<HTMLInputElement>('input[name="'+Question.id+'"]');
-              return field ? field.value : '';
-          }
+      const container = this.questionContainer?.nativeElement;
+      if (!container) 
+        return '';
+      
+      const type : string = Question.dataTypeName;
+      if (type === 'Boolean')
+        {
+            const checked = container.querySelector<HTMLInputElement>('input[name="'+Question.id+'"]:checked');
+            return checked ? checked.value : '';
+        }
+        else if(type === 'Dropdown')
+        {
+            const field = container.querySelector<HTMLInputElement | HTMLSelectElement>('[name="'+Question.id+'"]');
+            return field ? field.value : '';
+        }
+        else 
+        {
+            const field = container.querySelector<HTMLInputElement>('input[name="'+Question.id+'"]');
+            return field ? field.value : '';
+        }
     }
 
     public SendAnswers()
     {
-       this.data().forEach(M => {
-           let x = this.getQuestionValue(M);
-           console.log(x);
-       })
-      
-    }
+      const saveQuestionDTOs: saveQuestionDTO[] = [];
+      let flagsend = true;
+      this.data().forEach(M => {
+        const answerValue = this.getQuestionValue(M);
+        if(answerValue !="")
+         {
+          if( M.dataTypeName == "Numeric")
+          {
+                if(Number(answerValue) <= Number(M.minValue))
+                {
+                  flagsend =false;
+                  this.swal.showWoringSave("You Are Inter "+ M.questionBody+" Less Than minValue");
+                 
+                  return ;
+                }else if(Number(answerValue) >= Number(M.maxValue))
+                {flagsend =false;
+                    this.swal.showWoringSave("You Are Inter  "+ M.questionBody+" More Than MaxValue");
+                  
+                    return ;
+                }
+          }
+          else if ( M.dataTypeName == "Dropdown" ){}
+          else if( M.dataTypeName == "Boolean" ){}
+          else if( M.dataTypeName == "Text" ){}
 
-    
+          saveQuestionDTOs.push({
+            appointmentId : this.AppointmentID,
+            notes : '',
+            questionId : M.id,
+            sheetId : this.SheetID,
+            value : answerValue
+          });
+        }
+
+      });
+
+     if(saveQuestionDTOs.length == 0)
+     {
+        this.swal.showWoringSave("Please Full Inputs Fialds");
+     }
+     else
+     {
+     setTimeout(() => {
+      if(flagsend){
+      let Sup = this.callapi.SaveAnswersList(saveQuestionDTOs).subscribe({
+        next: (P : SaveAnswersListResponse) =>
+          {
+           console.log(P.data);
+           this.swal.showSuccess();
+           this.GitQuestionsBySheetId1(this.SheetID,this.AppointmentID);
+          },
+        error: (err) => 
+        {
+          Sup.unsubscribe();
+        }
+        });
+    }},2000);
+    }
+   }
+
 }

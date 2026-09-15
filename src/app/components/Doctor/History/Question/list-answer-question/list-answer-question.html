@@ -1,13 +1,14 @@
 <form>
-    <div class="row" #questionContainer style="margin-right: .5%; margin-left: .5%;">
+    <div class="row border-secondary" #questionContainer style="margin-right: .5%; margin-left: .5%;">
         @for (item of data(); track $index) 
         {
             <h5> {{item?.questionBody}} </h5>
                 <label class="text-secondary" >{{item?.description}}</label>
-                <div class="col-md-12">
+                <div class="col-md-12 ">
                     @if(item?.dataTypeName == "Numeric")
                     {
-                        <input type="number" class="form-control" name="questionvalue" id="{{item.id}}" [min]="item?.minValue ?? null" [max]="item?.maxValue ?? null" /> 
+                        <p>Min Value : <samp> {{item?.minValue}}</samp> , Mix Value : <samp>{{item?.maxValue}}</samp> </p>
+                        <input type="number" class="form-control" name="{{item.id}}" id="{{item.id}}" [min]="item?.minValue ?? null" [max]="item?.maxValue ?? null" /> 
                     }
                     @else if (item?.dataTypeName == "Text"){
                         <input type="text" class="form-control" id="{{item.id}}" name="vitalvalue" >
@@ -41,8 +42,7 @@
         </div>
         }
     </div>
-  
-
-
 </form>
-<app-save-answer-question [SheetID]="SheetID" ></app-save-answer-question>
+
+<app-save-answer-question [SheetID]="SheetID" [AppointmentID]="AppointmentID" (messageSent)="onMessageReceived()" [isInHistoryMood]="false" ></app-save-answer-question>
+

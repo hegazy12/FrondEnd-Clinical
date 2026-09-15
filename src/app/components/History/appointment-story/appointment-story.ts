@@ -1,4 +1,4 @@
-import { Component , Input, signal , ViewChild} from '@angular/core';
+import { Component , Input , signal , ViewChild} from '@angular/core';
 import { SwalAlert } from '../../../services/swalAlert/swal-alert';
 import { Callapi } from '../../../services/callapi/callapi';
 import { VerfivationToken } from '../../../services/verfivationToken/verfivation-token';
@@ -8,10 +8,12 @@ import { ListInvestgation } from '../../investgation/list-investgation/list-inve
 import { PrescriptionList } from '../../Prescription/prescription-list/prescription-list';
 import { ListDiagnosos } from '../../Diagnosts/list-diagnosos/list-diagnosos';
 import { ListVital } from '../../vital/list-vital/list-vital';
+import { SheetDto1, SheetsInAppointmentSavedResponse } from '../../../interfaces/sheet-dto';
+import { SaveAnswerQuestion } from '../../Doctor/History/Question/save-answer-question/save-answer-question';
 
 @Component({
   selector: 'app-appointment-story',
-  imports: [ListInvestgation,PrescriptionList,ListDiagnosos,ListVital],
+  imports: [ListInvestgation,PrescriptionList,ListDiagnosos,ListVital,SaveAnswerQuestion],
   templateUrl: './appointment-story.html',
   styleUrl: './appointment-story.css',
 })
@@ -25,7 +27,11 @@ export class AppointmentStory
   @ViewChild(PrescriptionList) prescriptionListRef!: PrescriptionList;
   @ViewChild(ListDiagnosos) listDiagnososRef!: ListDiagnosos;
   @ViewChild(ListVital) ListVitalRef!: ListDiagnosos;
+  
+  public Sheet = signal<SheetDto1[]| undefined>(undefined);
 
+
+  public SelectSheet = signal<SheetDto1[] | undefined>(undefined);
 
   constructor(private Callapi : Callapi ,
                 private Verfication :VerfivationToken ,
@@ -49,36 +55,68 @@ export class AppointmentStory
     }
 
   public GetAppoinmentStory(AppointmentID : string) : boolean
+    {
+        let Sup = this.Callapi.GetAppoinmentStory(AppointmentID).subscribe({
+        next: (P : AppointmentsStoryResponse) =>
           {
-              let Sup = this.Callapi.GetAppoinmentStory(AppointmentID).subscribe({
-              next: (P : AppointmentsStoryResponse) =>
-                {
-                    this.AppointmentDTO3.set(P.data);
-                    this.ListInvestgationRef.GetInvestgationlist(AppointmentID,0);
-                    this.prescriptionListRef.GetPrescriptionList(AppointmentID,0);
-                    this.listDiagnososRef.GetDiagnososlist(AppointmentID);
-                    this.appointmentid.set(AppointmentID);
-                },
-              error: (err) => 
-              {
-                Sup.unsubscribe();
-              }
-              });
-              return true;
-        }
-
-        public GitHistory()
+              this.AppointmentDTO3.set(P.data);
+              this.ListInvestgationRef.GetInvestgationlist(AppointmentID,0);
+              this.prescriptionListRef.GetPrescriptionList(AppointmentID,0);
+              this.listDiagnososRef.GetDiagnososlist(AppointmentID);
+              this.GetSheetsInAppointmentSaved(AppointmentID);
+              this.appointmentid.set(AppointmentID);
+              this.SelectSheet.set(undefined);
+          },
+        error: (err) => 
         {
-          if(this.isHistory() == 1){
-             this.isHistory.set(0);
-             this.ListInvestgationRef.GetInvestgationlist(this.appointmentid(),this.isHistory());
-             this.prescriptionListRef.GetPrescriptionList(this.appointmentid(),this.isHistory());
-             //  this.listDiagnososRef.GetDiagnososlist(this.appointmentid());
-          }else{
-             this.isHistory.set(1);
-             this.ListInvestgationRef.GetInvestgationlist(this.appointmentid(),this.isHistory());
-             this.prescriptionListRef.GetPrescriptionList(this.appointmentid(),this.isHistory());
-             //this.listDiagnososRef.GetDiagnososlist(this.appointmentid());
-          }
-      }
+          Sup.unsubscribe();
+        }
+        });
+        return true;
+  }
+  
+
+
+  public GitHistory()
+  {
+    if(this.isHistory() == 1){
+        this.isHistory.set(0);
+        this.ListInvestgationRef.GetInvestgationlist(this.appointmentid(),this.isHistory());
+        this.prescriptionListRef.GetPrescriptionList(this.appointmentid(),this.isHistory());
+        //  this.listDiagnososRef.GetDiagnososlist(this.appointmentid());
+    }else{
+        this.isHistory.set(1);
+        this.ListInvestgationRef.GetInvestgationlist(this.appointmentid(),this.isHistory());
+        this.prescriptionListRef.GetPrescriptionList(this.appointmentid(),this.isHistory());
+        //this.listDiagnososRef.GetDiagnososlist(this.appointmentid());
+    }
+  }
+
+  public GetSheetsInAppointmentSaved(AppointmentID : string) : boolean 
+    {            
+      let Sup = this.Callapi.GetSheetsInAppointmentSaved(AppointmentID).subscribe({
+        next: (P : SheetsInAppointmentSavedResponse) =>
+              {
+                this.Sheet.set(P.data);
+                Sup.unsubscribe();
+              },
+        error: (err) => 
+            {
+              Sup.unsubscribe();
+            }
+            });
+      return true;
+    }
+
+  public SetInSelected(SheetID : string)
+  {
+    if(SheetID != '')
+    {
+      this.SelectSheet.set(this.Sheet()?.filter(m=> m.id ==SheetID));
+    }else if(SheetID =='')
+    {
+      this.SelectSheet.set(this.Sheet());
+    }
+  }
+
 }

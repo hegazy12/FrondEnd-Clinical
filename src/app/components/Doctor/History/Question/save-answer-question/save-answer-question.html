@@ -1,6 +1,45 @@
+<div class="prescription-table border rounded overflow-hidden" style="padding: .5%; margin: .5%;">
 
 
+  @for (item of data(); track item.id ?? $index) 
+  {
+    <div class="row g-0 border border-primary table-row">
+      
+      <div class="col-md-1 p-2"> Question </div>
+      
+      <div class="col-md-10 p-2"> 
+        <h5>{{item.questionDTO1.questionBody}} <strong> DataType : {{item.questionDTO1.dataTypeName}} </strong> </h5>
+        @if( item.questionDTO1.dataTypeName == "Dropdown" )
+        {
+            <p> 
+                @for (i of item.questionDTO1.listValues; track $index)
+                { 
+                    <strong> (itemList : </strong> {{i}} <strong> ),</strong>    
+                }
+            </p>
+          }@else if ( item.questionDTO1.dataTypeName == "Numeric") 
+          {
+            <strong>( MaxNumber : </strong>  {{item.questionDTO1.maxValue}}  <strong> )</strong>    
+            <strong>,(MinNumber : </strong>  {{item.questionDTO1.minValue}} <strong> )</strong>    
+          }
+        <p> {{item.questionDTO1.description}}</p>
+        <div> <strong> Answers </strong> {{item.value}} </div>
+      </div>
+     
+      <div class="col-md-1 p-2" >
+        @if(!isInHistoryMood)
+        {
+          <button class="btn btn-sm btn-outline-danger" (click)="DeleteSaveQuestion(item.id)" > Delete </button>
+        }
+      </div>
 
+    </div>
+  } @empty {
+    <div class="row g-0">
+      <div class="col-md-12 text-center text-muted py-4">
+        No Questions found.
+      </div>
+    </div>
+  }
 
-
-
+</div>

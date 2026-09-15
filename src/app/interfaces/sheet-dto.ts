@@ -11,3 +11,4 @@ export interface SheetDto1 extends SheetDto
 }
 
 export type  ListSheetResponse   = GeneralResponse<SheetDto1[]>;
+export type  SheetsInAppointmentSavedResponse = GeneralResponse<SheetDto1[]>;
