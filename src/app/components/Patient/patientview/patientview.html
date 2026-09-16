@@ -18,5 +18,33 @@
     </div>
     </div>
     
-<app-ccreate-appintment [PatientId]="patientId" ></app-ccreate-appintment>
 
+
+
+
+
+  <div class="row g-3 bodyContainer">
+    <div class="col-lg-3 col-xl-1">
+      
+      <button class="btn btn-primary shadow-sm fixsize"  #AddAppintment name="AddAppintment" (click)="viewpage(AddAppintment.name)" >
+                Add Appintment
+      </button>
+      
+      <input type="button" class="btn btn btn-secondary d-flex justify-content-end fixsize"  name="viewhistory"  #viewhistory value="ViewStory" (click)="viewpage(viewhistory.name)">
+
+    </div>
+
+     
+    <div class="col-lg-9 col-xl-11">
+      
+      @if( view() == 1 )
+      {
+          <app-ccreate-appintment [PatientId]="patientId" ></app-ccreate-appintment>
+      }
+      @else if(view() == 2 )
+      {
+        <app-patient-story #patientstory [PatientID]="patientId" ></app-patient-story>
+      }
+    </div>
+
+  </div>- 

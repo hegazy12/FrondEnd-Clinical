@@ -200,3 +200,17 @@ body{
 {
  background-color: rgb(138, 170, 211);
 } */
+
+
+ 
+.bodyContainer
+{
+    margin: .5%;
+}
+
+
+.fixsize 
+{
+  width: 115%;
+  margin: 1%; 
+}

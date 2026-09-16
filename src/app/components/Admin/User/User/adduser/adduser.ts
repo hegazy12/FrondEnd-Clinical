@@ -6,4 +6,10 @@ import { Component } from '@angular/core';
   templateUrl: './adduser.html',
   styleUrl: './adduser.css',
 })
-export class Adduser {}
+export class Adduser
+{
+  
+
+
+
+}

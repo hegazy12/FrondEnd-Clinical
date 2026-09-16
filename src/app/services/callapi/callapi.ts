@@ -6,7 +6,7 @@ import { PatientCreate } from '../../interfaces/patient-create';
 import { createDoctors } from '../../interfaces/CreateDoctor';
 import { DTODrug } from '../../interfaces/dtodrug';
 import { PatientsResponse,PatientResponse } from '../../interfaces/patient-response';
-import { DoctorsResponse } from '../../interfaces/doctor-dto';
+import { DoctorsResponse, SpecializationResponse } from '../../interfaces/doctor-dto';
 import { AppointmentAllinfo, AppointmentDTO0, AppointmentResponse, AppointmentsResponse, AppointmentsStoryResponse, makeCompleteResponse } from '../../interfaces/appointment-dto-0';
 import { createPrescriptionResponse, Prescriptiondto,PrescriptionResponse } from '../../interfaces/prescription';
 import { MedicalExaminationsResponse ,saveMedicalExaminationDTO,saveExaminationListResponse, FullByIdResponse, ExaminationPhotoResponse} from '../../interfaces/medical-examinations-dto'
@@ -544,4 +544,16 @@ export class Callapi
     );
   }
 
+  public GetSpecializations():Observable<SpecializationResponse>
+  {
+      const headers = new HttpHeaders({'Authorization': `Bearer ${this.token.getToken()}`,'ngrok-skip-browser-warning': 'true'});
+     return this.Http.get<SpecializationResponse>(this.url + `Doctor/GetAllSpecialization`,{ headers }).pipe(
+      tap(response => {}),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    );
+
+  }
+ 
 }

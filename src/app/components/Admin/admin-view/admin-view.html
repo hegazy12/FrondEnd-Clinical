@@ -9,24 +9,28 @@
       <button class="btn btn-primary shadow-sm fixsize"  #addQuestion name="addQuestion" (click)="viewpage(addQuestion.name)" >
                 addQuestion
       </button>
+
       <button class="btn btn-primary shadow-sm fixsize"  #addUser name="addUser" (click)="viewpage(addUser.name)" >
                 addUser
       </button>
+
       <button class="btn btn-primary shadow-sm fixsize"  #addDoctor name="addDoctor" (click)="viewpage(addDoctor.name)" >
                 addDoctor
       </button>
+
     </div>
 
-
+     
     <div class="col-lg-9 col-xl-11">
+      
       @if( view() == 1 )
       {
           <app-add-sheet></app-add-sheet>
-      }@else if(view() == 2 ){
-        <app-add-question></app-add-question>
+      }
+      @else if(view() == 2 )
+      {
+          <app-add-question></app-add-question>
       }
     </div>
 
-
-  </div>
-
+  </div>- 

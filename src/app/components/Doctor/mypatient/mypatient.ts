@@ -21,7 +21,7 @@ export class Mypatient {
               private router:Router,
               private Vervication:VerfivationToken)
               { 
-                this.DoctorId = localStorage.getItem("id")?.replace(/"/g, '') || '';
+                
               }
 
 
@@ -33,6 +33,7 @@ export class Mypatient {
     }
     else
     {
+      this.DoctorId = localStorage.getItem("id")?.replace(/"/g, '') || '';
       this.GetDoctorAppoinment(this.DoctorId);
     }
   }

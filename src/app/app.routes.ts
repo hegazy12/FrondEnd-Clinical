@@ -8,41 +8,56 @@ import { Mypatient } from './components/Doctor/mypatient/mypatient';
 import { Patientappointment } from './components/Doctor/patientappointment/patientappointment';
 import {PhoneTraker} from './components/phone-traker/phone-traker';
 import { AdminView } from './components/Admin/admin-view/admin-view';
+import { DoctorView } from './components/Doctor/doctor-view/doctor-view';
 
 export const routes: Routes = [
     {
         path:"",
         component: Login
-    },{
+    },
+    {
         path:"login",
         component: Login
-    },{
+    },
+    {
         path:"mainpage",
         component: Mainpage
-    },{
+    },
+    {
         path :"createpatient",
         component :CreatePatient
-    },{
+    },
+    {
         path:"patient/getpatient/:id",
         component:Patientview
-    },{
+    },
+    {
         path:"sitting",
         component: Settings
-    },{
+    },
+    {
         path: 'mypatient',
         component: Mypatient
-    },{
+    },
+    {
         path: 'patientappointment/:id',
         component: Patientappointment
-    },{
+    },
+    {
         path: 'phonetraker/:id',
         component: PhoneTraker
-    },{
+    },
+    {
         path: 'Admin',
         component: AdminView
-    },{
+    },
+    {
          path: 'Settings',
         component: Settings
+    },
+    {
+        path: 'DoctorView',
+        component: DoctorView
     }
 ];
         

@@ -89,7 +89,7 @@ export class AddQuestion
                   minValue: minValue,
                   requeried: false,
                   listValues: this.list(),
-                  questionDependId: '9E43D18F-A507-446F-AC4E-6F3A01FB290B',
+                  questionDependId: '03a8b4b5-5dd3-4467-9e61-1a6b89400ea4',
                 };
           
             this.Create(questionDto);
@@ -117,30 +117,30 @@ export class AddQuestion
           });
         }
 
-          public SheetList() : boolean 
-          {            
-            let Sup = this.Callapi.SheetList().subscribe({
-              next: (P : ListSheetResponse) =>
-                    {
-                      
-                      this.SheetItems.set(P.data);
-                      
-                      Sup.unsubscribe();
-                      
-                      this.ListQuestionRef.GitQuestionsBySheetId(this.sheetId());
+      public SheetList() : boolean 
+      {            
+        let Sup = this.Callapi.SheetList().subscribe({
+          next: (P : ListSheetResponse) =>
+                {
+                  
+                  this.SheetItems.set(P.data);
+                  
+                  Sup.unsubscribe();
+                  
+                  this.ListQuestionRef.GitQuestionsBySheetId(this.sheetId());
 
-                    },
-              error: (err) => 
-                  {
-                    Sup.unsubscribe();
-                  }
-                  });
-            return true;
-          }
-
-          public addItemInlist(ItemInlist:string)
-          {
-            this.list.update(msgs => [...msgs, ItemInlist]);
-            this.Itemlist.set('');
-          }
+                },
+          error: (err) => 
+              {
+                Sup.unsubscribe();
+              }
+              });
+        return true;
+      }
+      
+      public addItemInlist(ItemInlist:string)
+      {
+        this.list.update(msgs => [...msgs, ItemInlist]);
+        this.Itemlist.set('');
+      }
 }

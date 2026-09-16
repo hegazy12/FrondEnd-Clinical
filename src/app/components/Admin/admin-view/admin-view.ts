@@ -17,7 +17,7 @@ export class AdminView
   
   public viewpage(viewName : string)
   {
-    console.log(viewName);
+   
     if(viewName == "addSheet")
     {
       this.view.set(1);
@@ -25,26 +25,6 @@ export class AdminView
     else if(viewName == "addQuestion")
     {
       this.view.set(2);
-    }
-    else if(viewName == "vitalsigns")
-    { 
-     
-    }
-    else if(viewName == "allergies")
-    { 
-     
-    }
-    else if(viewName == "viewhistory")
-    {
-
-    }
-    else if(viewName == "addnextvisit")
-    {
-     
-    }
-    else if(viewName == "diagnos")
-    {
-    
     }
 
   }

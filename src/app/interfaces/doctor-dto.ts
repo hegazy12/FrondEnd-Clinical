@@ -10,7 +10,8 @@ export interface DoctorDto0 {
 
 }
 
-export interface DoctorDto1 extends DoctorDto0 {
+export interface DoctorDto1 extends DoctorDto0 
+{
     fristName: string; 
     lastName: string;
     jobTitle: string;
@@ -21,3 +22,4 @@ export interface DoctorDto1 extends DoctorDto0 {
 export type DoctorsResponse = GeneralResponse<DoctorDto1[]>;
 
 export type DoctorResponse = GeneralResponse<DoctorDto1>;
+export type SpecializationResponse = GeneralResponse<string[]>;

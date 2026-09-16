@@ -25,7 +25,7 @@ export class Patientappointment {
 
   public appointmentId: string = "";
   
-  public view = signal<number>(8);
+  public view = signal<number>(1);
   
   public PatientId: string ="";
   

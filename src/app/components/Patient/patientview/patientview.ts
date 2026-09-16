@@ -5,11 +5,12 @@ import { VerfivationToken } from '../../../services/verfivationToken/verfivation
 import { Router, ActivatedRoute } from '@angular/router'; 
 import {CCreateAppintment} from '../../Appointment/ccreate-appintment/ccreate-appintment';
 import { PatientResponse,PatientDTO } from '../../../interfaces/patient-response';
+import { PatientStory } from '../../History/patient-story/patient-story';
 
 @Component({
   selector: 'app-patientview',
-  standalone: true, // تأكد إنها true
-  imports: [Navbar,CCreateAppintment],
+  standalone: true,
+  imports: [Navbar,CCreateAppintment,PatientStory],
   templateUrl: './patientview.html',
   styleUrl: './patientview.css',
 })
@@ -52,4 +53,21 @@ export class Patientview
             });
             return true;
         }
+
+
+    public view = signal<number>(1);
+  
+  
+    public viewpage(viewName : string)
+    {
+      console.log(viewName);
+      if(viewName == "AddAppintment")
+      {
+        this.view.set(1);
+      }
+      else if(viewName == "viewhistory")
+      {
+        this.view.set(2);
+      }
+  }
 }
