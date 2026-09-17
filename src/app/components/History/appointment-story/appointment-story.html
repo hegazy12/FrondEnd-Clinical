@@ -1,65 +1,73 @@
 <div class="row">
-    <h4> Doctor Name: {{AppointmentDTO3()?.doctorDTO_1?.fristName}} {{AppointmentDTO3()?.doctorDTO_1?.lastName}} {{AppointmentDTO3()?.doctorDTO_1?.specialization}} </h4>
-    <h5> Date : {{AppointmentDTO3()?.appointmentDate}}  </h5>
+    <h4> Doctor Name: {{AppointmentDTO3()?.doctorDTO_1?.fristName}} {{AppointmentDTO3()?.doctorDTO_1?.lastName}}
+        {{AppointmentDTO3()?.doctorDTO_1?.specialization}} </h4>
+    <h5> Date : {{AppointmentDTO3()?.appointmentDate}} </h5>
     <div class="row">
         <div class="col-10 d-flex justify-content-end">
-                <button 
-                type="button" 
-                class="btn" 
-                [class.btn-danger]="isHistory() === 1" 
-                [class.btn-success]="isHistory() !== 1"
-                (click)="GitHistory()">
+            <button type="button" class="btn" [class.btn-danger]="isHistory() === 1"
+                [class.btn-success]="isHistory() !== 1" (click)="GitHistory()">
                 @if (isHistory() === 0) {
-                     Get History
+                Get History
                 } @else {
-                    Get Recorded 
+                Get Recorded
                 }
-                </button>
-            </div>
+            </button>
+        </div>
     </div>
-  
-      <div class="row" >
+    <div class="row">
+        <h5> Examination Findings </h5>
+        <app-list-save-examination-finding [AppointmentID]="appointmentid()"
+            [isInHistoryMood]="true"></app-list-save-examination-finding>
+    </div>
+
+    <div class="row">
         <h5> Diagnos List </h5>
-        <app-list-diagnosos [AppointmentID]="''" [isInHistoryMood]="true" ></app-list-diagnosos>
+        <app-list-diagnosos [AppointmentID]="''" [isInHistoryMood]="true"></app-list-diagnosos>
     </div>
-    <div class="row" >
+
+    <div class="row">
         <h5> Prescription-list </h5>
-     <app-prescription-list [AppointmentID]="''" [isInHistoryMood]="true" ></app-prescription-list>
+        <app-prescription-list [AppointmentID]="''" [isInHistoryMood]="true"></app-prescription-list>
     </div>
-    <div class="row" >
+
+    <div class="row">
         <h5> investgation List </h5>
-        <app-list-investgation [AppointmentID]="''" [isInHistoryMood]="true" ></app-list-investgation>
+        <app-list-investgation [AppointmentID]="''" [isInHistoryMood]="true"></app-list-investgation>
     </div>
+
     <div>
         <h5> vital List </h5>
-        <app-list-vital [AppointmentID]="''" [isInHistoryMood]="true" ></app-list-vital>
+        <app-list-vital [AppointmentID]="''" [isInHistoryMood]="true"></app-list-vital>
     </div>
+
     <div>
-          <h5> Sheet List </h5>
-          @if(Sheet() != undefined)
-          {
-            <div class="row">
-                <div class="col-md-2 p-2" >
-                    <button type="button" class="btn btn-outline-info" (click)="SetInSelected('')" > Get All Sheets </button>
-                </div>
-                @for (item of Sheet(); track $index)
-                {
-                    <div class="col-md-2 p-2" >
-                        <button type="button" class="btn btn-outline-secondary" (click)="SetInSelected(item.id)" > {{item.name}}</button>
-                    </div>
-                }
+        <h5> Sheet List </h5>
+        @if(Sheet() != undefined)
+        {
+        <div class="row">
+            <div class="col-md-2 p-2">
+                <button type="button" class="btn btn-outline-info" (click)="SetInSelected('')"> Get All Sheets </button>
             </div>
+            @for (item of Sheet(); track $index)
+            {
+            <div class="col-md-2 p-2">
+                <button type="button" class="btn btn-outline-secondary" (click)="SetInSelected(item.id)">
+                    {{item.name}}</button>
+            </div>
+            }
+        </div>
         }
 
         @if(SelectSheet() != undefined)
         {
-            @for (item of SelectSheet(); track $index)
-            {
-                <h6> {{item.name}} Sheet </h6>
-                <app-save-answer-question [AppointmentID]="appointmentid()" [isInHistoryMood]="true" [SheetID]="item.id" > </app-save-answer-question>
-            }
+        @for (item of SelectSheet(); track $index)
+        {
+        <h6> {{item.name}} Sheet </h6>
+        <app-save-answer-question [AppointmentID]="appointmentid()" [isInHistoryMood]="true" [SheetID]="item.id">
+        </app-save-answer-question>
+        }
         }
 
     </div>
-  
+
 </div>

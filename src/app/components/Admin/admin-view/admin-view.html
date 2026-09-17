@@ -1,36 +1,46 @@
 <app-navbar></app-navbar>
-  <div class="row g-3 bodyContainer">
-    <div class="col-lg-3 col-xl-1">
-      
-      <button class="btn btn-primary shadow-sm fixsize"  #addSheet name="addSheet" (click)="viewpage(addSheet.name)" >
-                addSheet
-      </button>
-      
-      <button class="btn btn-primary shadow-sm fixsize"  #addQuestion name="addQuestion" (click)="viewpage(addQuestion.name)" >
-                addQuestion
-      </button>
+<div class="row g-3 bodyContainer">
+  <div class="col-lg-3 col-xl-1">
 
-      <button class="btn btn-primary shadow-sm fixsize"  #addUser name="addUser" (click)="viewpage(addUser.name)" >
-                addUser
-      </button>
+    <button class="btn btn-primary shadow-sm fixsize" #addSheet name="addSheet" (click)="viewpage(addSheet.name)">
+      addSheet
+    </button>
 
-      <button class="btn btn-primary shadow-sm fixsize"  #addDoctor name="addDoctor" (click)="viewpage(addDoctor.name)" >
-                addDoctor
-      </button>
+    <button class="btn btn-primary shadow-sm fixsize" #addQuestion name="addQuestion"
+      (click)="viewpage(addQuestion.name)">
+      addQuestion
+    </button>
 
-    </div>
+    <button class="btn btn-primary shadow-sm fixsize" #addUser name="addUser" (click)="viewpage(addUser.name)">
+      addUser
+    </button>
 
-     
-    <div class="col-lg-9 col-xl-11">
-      
-      @if( view() == 1 )
-      {
-          <app-add-sheet></app-add-sheet>
-      }
-      @else if(view() == 2 )
-      {
-          <app-add-question></app-add-question>
-      }
-    </div>
+    <button class="btn btn-primary shadow-sm fixsize" #addDoctor name="addDoctor" (click)="viewpage(addDoctor.name)">
+      addDoctor
+    </button>
 
-  </div>- 
+    <button class="btn btn-primary shadow-sm fixsize" #addExaminationFinding name="addExaminationFinding"
+      (click)="viewpage(addExaminationFinding.name)">
+      Add Examination Finding
+    </button>
+
+  </div>
+
+
+  <div class="col-lg-9 col-xl-11">
+
+    @if( view() == 1 )
+    {
+    <app-add-sheet></app-add-sheet>
+    }
+    @else if(view() == 2 )
+    {
+    <app-add-question></app-add-question>
+    }
+    @else if(view() == 3 )
+    {
+    <app-create-examination-finding></app-create-examination-finding>
+    }
+  </div>
+
+</div>-
