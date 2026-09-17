@@ -72,6 +72,16 @@ export class Callapi {
     );
   }
 
+  public getPatientsAll(): Observable<PatientsResponse> {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
+    return this.Http.get<PatientsResponse>(this.url + `Patient/GetAll`, { headers }).pipe(
+      tap(response => { }),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    );
+  }
+
   public GetPatient(id: string) {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
 

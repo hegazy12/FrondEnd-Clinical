@@ -1,9 +1,9 @@
-import { Component ,signal } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { Callapi } from '../../../services/callapi/callapi';
 import { VerfivationToken } from '../../../services/verfivationToken/verfivation-token';
 import { Router, RouterLink } from '@angular/router';
 import { Patient } from '../../../interfaces/patient-create';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
 import { PatientDTO, PatientsResponse } from '../../../interfaces/patient-response';
 import { viewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -21,81 +21,98 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './list-patient.css',
 })
 
-export class ListPatient
-{
+export class ListPatient {
 
-      displayedColumns: string[] = ['FirstName', 'LastName', 'Address', 'phoneNumber', 'Gender', 'dateOfBirth', 'actions'];
+  displayedColumns: string[] = ['FirstName', 'LastName', 'Address', 'phoneNumber', 'Gender', 'dateOfBirth', 'actions'];
 
-      constructor(private Callapi : Callapi, private Verfication :VerfivationToken ,private router : Router)
-      {
-         //this.getPatientsNew();
-      }
-      public PatientsData = signal<PatientDTO[] | undefined>(undefined);   
-      dataSource = new MatTableDataSource<PatientDTO>(this.PatientsData());
-      private nextId = 10;
+  @Input({ required: true }) isInHistoryMood!: boolean;
 
-      public Patients = signal<Patient[]>([]);
-      public isloding = signal<boolean>(false);
-      public PatientsResponse = signal<PatientsResponse | null>(null);
-      
-      readonly sort = viewChild.required(MatSort);
-      readonly paginator = viewChild.required(MatPaginator);
+  constructor(private Callapi: Callapi, private Verfication: VerfivationToken, private router: Router) {
 
-      ngOnInit():void
-      {
-        console.log(" ListPatient: ngOnInit");
-        if(this.Verfication.islogin() == false){
-            this.router.navigate(['/Login']);
-          }
-        else
-        {
-          //this.getPatients(1);
-          this.getPatientsNew();
-          this.dataSource = new MatTableDataSource<PatientDTO>(this.PatientsData());
-        }
-      }
+  }
+  public PatientsData = signal<PatientDTO[] | undefined>(undefined);
+  dataSource = new MatTableDataSource<PatientDTO>(this.PatientsData());
+  private nextId = 10;
 
-      ngAfterViewInit() {
-        this.dataSource.sort = this.sort();
-        this.dataSource.paginator = this.paginator();
-      }
+  public Patients = signal<Patient[]>([]);
+  public isloding = signal<boolean>(false);
+  public PatientsResponse = signal<PatientsResponse | null>(null);
 
-      applyFilter(event: Event) {
-        const filterValue = (event.target as HTMLInputElement).value;
-        this.dataSource.filter = filterValue.trim().toLowerCase();
-        if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
-        }
-      }
+  readonly sort = viewChild.required(MatSort);
+  readonly paginator = viewChild.required(MatPaginator);
 
-        addUser() {
-      }
-
-      editUser(PatientDTO: PatientDTO) {
-      }
-
-      deleteUser(PatientDTO: PatientDTO) {
-      }
-
-      
-    
-      public getPatientsNew() 
-      {
-        let Sup = this.Callapi.getPatientsNew().subscribe({
-        next: (P : PatientsResponse) =>
-          {
-              this.PatientsResponse.set(P);
-              this.PatientsData.set(P.data);
-               this.dataSource.data = P.data;
-              Sup.unsubscribe();
-              this.isloding.set(true);
-              console.log("this.isloding" + this.isloding);
-          },
-        error: (err) => {
-          console.error(err); 
-          Sup.unsubscribe();
-          this.router.navigate(['/Login']);
-        }
-      });
+  ngOnInit(): void {
+    console.log(" ListPatient: ngOnInit");
+    if (this.Verfication.islogin() == false) {
+      this.router.navigate(['/Login']);
     }
+    else {
+
+      if (this.isInHistoryMood) {
+        this.getPatientsAll();
+      }
+      else {
+        this.getPatientsNew();
+      }
+
+      this.dataSource = new MatTableDataSource<PatientDTO>(this.PatientsData());
+    }
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort();
+    this.dataSource.paginator = this.paginator();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  addUser() { }
+
+  editUser(PatientDTO: PatientDTO) { }
+
+  deleteUser(PatientDTO: PatientDTO) { }
+
+
+
+  public getPatientsNew() {
+    let Sup = this.Callapi.getPatientsNew().subscribe({
+      next: (P: PatientsResponse) => {
+        this.PatientsResponse.set(P);
+        this.PatientsData.set(P.data);
+        this.dataSource.data = P.data;
+        Sup.unsubscribe();
+        this.isloding.set(true);
+        console.log("this.isloding" + this.isloding);
+      },
+      error: (err) => {
+        console.error(err);
+        Sup.unsubscribe();
+        this.router.navigate(['/Login']);
+      }
+    });
+  }
+
+  public getPatientsAll() {
+    let Sup = this.Callapi.getPatientsAll().subscribe({
+      next: (P: PatientsResponse) => {
+        this.PatientsResponse.set(P);
+        this.PatientsData.set(P.data);
+        this.dataSource.data = P.data;
+        Sup.unsubscribe();
+        this.isloding.set(true);
+        console.log("this.isloding" + this.isloding);
+      },
+      error: (err) => {
+        console.error(err);
+        Sup.unsubscribe();
+        this.router.navigate(['/Login']);
+      }
+    });
+  }
 }

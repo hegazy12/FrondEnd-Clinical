@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+<div class="row g-3 bodyContainer">
+    <div class="col-lg-3 col-xl-1">
+
+        <button class="btn btn-primary shadow-sm fixsize" #AllPatients name="AllPatients"
+            (click)="viewpage(AllPatients.name)">
+            All Patients
+        </button>
+
+        <button class="btn btn-primary shadow-sm fixsize" #addPatient name="addPatient"
+            (click)="viewpage(addPatient.name)">
+            Add Patient
+        </button>
+
+    </div>
+
+
+    <div class="col-lg-9 col-xl-11">
+
+        @if( view() == 1 )
+        {
+        <app-list-patient [isInHistoryMood]="true"></app-list-patient>
+        }
+        @else if(view() == 2 )
+        {
+        <app-create-patient></app-create-patient>
+        }
+
+    </div>
+
+</div>

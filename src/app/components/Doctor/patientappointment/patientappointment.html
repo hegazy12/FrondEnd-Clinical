@@ -75,26 +75,34 @@
     <div class="col-lg-9 col-xl-11">
       @if( view() == 1 )
       {
+      <h6 class="text-center">Medication</h6>
       <app-make-prescription #makeprescription [AppointmentID]="appointmentId"></app-make-prescription>
       }@else if ( view() == 2 )
       {
+      <h6 class="text-center">LabTests</h6>
       <app-creat-investgation #creatinvestgation></app-creat-investgation>
       }@else if( view() == 3 )
       {
+      <h6 class="text-center">Vital</h6>
       <app-creat-vital #creatvital></app-creat-vital>
       }@else if ( view() == 5 )
       {
+      <h6 class="text-center">History</h6>
       <app-patient-story #patientstory [PatientID]="PatientId"></app-patient-story>
       }@else if (view() == 6) {
+      <h6 class="text-center">NextVisit</h6>
       <app-ccreate-appintment [PatientId]="PatientId"></app-ccreate-appintment>
       }@else if(view() == 7)
       {
+      <h6 class="text-center">Diagnosis</h6>
       <app-create-diagnos [AppointmentID]="appointmentId"></app-create-diagnos>
       }@else if(view() == 8)
       {
+      <h6 class="text-center">History</h6>
       <app-add-history [AppointmentID]="appointmentId"></app-add-history>
       }@else if(view() == 9)
       {
+      <h6 class="text-center">Examination Finding</h6>
       <app-add-save-examination-finding [AppointmentID]="appointmentId"></app-add-save-examination-finding>
       }
     </div>

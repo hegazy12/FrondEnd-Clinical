@@ -26,7 +26,6 @@ export class AdminView {
     else if (viewName == "addExaminationFinding") {
       this.view.set(3);
     }
-
   }
 
 }

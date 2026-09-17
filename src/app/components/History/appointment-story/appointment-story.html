@@ -15,33 +15,33 @@
         </div>
     </div>
     <div class="row">
-        <h5> Examination Findings </h5>
+        <h5 class="hed text-secondary"> Examination Findings </h5>
         <app-list-save-examination-finding [AppointmentID]="appointmentid()"
             [isInHistoryMood]="true"></app-list-save-examination-finding>
     </div>
 
     <div class="row">
-        <h5> Diagnos List </h5>
+        <h5 class="hed text-secondary"> Diagnos List </h5>
         <app-list-diagnosos [AppointmentID]="''" [isInHistoryMood]="true"></app-list-diagnosos>
     </div>
 
     <div class="row">
-        <h5> Prescription-list </h5>
+        <h5 class="hed text-secondary"> Prescription-list </h5>
         <app-prescription-list [AppointmentID]="''" [isInHistoryMood]="true"></app-prescription-list>
     </div>
 
     <div class="row">
-        <h5> investgation List </h5>
+        <h5 class="hed text-secondary"> investgation List </h5>
         <app-list-investgation [AppointmentID]="''" [isInHistoryMood]="true"></app-list-investgation>
     </div>
 
     <div>
-        <h5> vital List </h5>
+        <h5 class="hed text-secondary"> vital List </h5>
         <app-list-vital [AppointmentID]="''" [isInHistoryMood]="true"></app-list-vital>
     </div>
 
     <div>
-        <h5> Sheet List </h5>
+        <h5 class="hed text-secondary"> Sheet List </h5>
         @if(Sheet() != undefined)
         {
         <div class="row">

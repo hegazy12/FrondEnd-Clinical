@@ -1,40 +1,40 @@
 <div class="row" style="padding: .3%; background-color: #0d6efd; border-radius: 6px;">
   <div class="col-md-1">
-    <strong> <a class="nav-link text-white" [routerLink]="['/createpatient']">All Patient</a></strong>
+    <strong> <a class="nav-link text-white" [routerLink]="['/allpatientview']">All Patient</a></strong>
   </div>
 
-   
-      <div class="col-md-1">
-         @if (roles.includes('doctor') ||roles.includes('Doctor'))
-          {
-            <strong> <a class="nav-link text-white" [routerLink]="['/mypatient']">my Patients</a> </strong> 
-          }
-     </div>
-     
-     
-     <div class="col-md-1">
-          @if (roles.includes('doctor') ||roles.includes('Doctor'))
-          {
-            <!-- <strong> <a class="nav-link text-white" [routerLink]="['/DoctorView']">Doctor View</a> </strong>  -->
-          }
-    </div>
-  
 
-   <div class="col-md-8">
-    @if (roles.includes('doctor') ||roles.includes('Doctor')) 
+  <div class="col-md-1">
+    @if (roles.includes('doctor') ||roles.includes('Doctor'))
     {
-      <strong> <a class="nav-link text-white" [routerLink]="['/Admin']">Admin</a> </strong>
+    <strong> <a class="nav-link text-white" [routerLink]="['/mypatient']">my Patients</a> </strong>
     }
   </div>
 
-    <!-- 
+
+  <div class="col-md-1">
+    @if (roles.includes('doctor') ||roles.includes('Doctor'))
+    {
+    <!-- <strong> <a class="nav-link text-white" [routerLink]="['/DoctorView']">Doctor View</a> </strong>  -->
+    }
+  </div>
+
+
+  <div class="col-md-8">
+    @if (roles.includes('doctor') ||roles.includes('Doctor'))
+    {
+    <strong> <a class="nav-link text-white" [routerLink]="['/Admin']">Admin</a> </strong>
+    }
+  </div>
+
+  <!-- 
       <div class="col-md-8" >
         <strong> <a class="nav-link text-white" [routerLink]="['/Sitting']">Settings</a></strong>
       </div>  
     -->
 
-  <div class="col-md-1 d-flex justify-content-end"  >
-     <button type="button" class="btn btn-danger" (click)="logOut()" >logOut</button>
+  <div class="col-md-1 d-flex justify-content-end">
+    <button type="button" class="btn btn-danger" (click)="logOut()">logOut</button>
   </div>
-  
+
 </div>

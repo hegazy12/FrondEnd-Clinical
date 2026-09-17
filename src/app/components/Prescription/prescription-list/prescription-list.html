@@ -1,43 +1,44 @@
-<div class="prescription-table border rounded-top overflow-hidden" style="padding: .5%; margin: .5%;" >
+<div class="prescription-table border rounded-top overflow-hidden" style="padding: .5%; margin: .5%;">
 
   <div class="row g-0 rounded-top" style="background-color: #0d6efd;">
-    <div class="col-md-3 text-white fw-semibold p-2">Drug Name</div>
-    <div class="col-md-1 text-white fw-semibold p-2">Frequency</div>
-    <div class="col-md-1 text-white fw-semibold p-2">Start Date</div>
-    <div class="col-md-1 text-white fw-semibold p-2">End Date</div>
-    <div class="col-md-1 text-white fw-semibold p-2">Type</div>
-    <div class="col-md-2 text-white fw-semibold p-2">Doctor Name</div>
-    <div class="col-md-2 text-white fw-semibold p-2">Note</div>
+    <div class="col-md-2 text-white text-center fw-semibold p-2">Drug Name</div>
+    <div class="col-md-1 text-white text-center fw-semibold p-2">Frequency</div>
+    <div class="col-md-2 text-white text-center fw-semibold p-2">Start Date</div>
+    <div class="col-md-2 text-white text-center fw-semibold p-2">End Date</div>
+    <div class="col-md-1 text-white text-center fw-semibold p-2">Type</div>
+    <div class="col-md-2 text-white text-center fw-semibold p-2">Doctor Name</div>
+    <div class="col-md-1 text-white text-center fw-semibold p-2">Note</div>
     @if(!isInHistoryMood) {
-      <div class="col-md-1 text-white fw-semibold p-2 text-center">Action</div>
+    <div class="col-md-1 text-white text-center fw-semibold p-2">Action</div>
     }@else {
-      <div class="col-md-1 text-white fw-semibold p-2 text-center"></div>
+    <div class="col-md-1 text-white text-center fw-semibold p-2"></div>
     }
   </div>
 
   @for (item of data(); track item.id ?? $index) {
-    <div class="row g-0 table-row">
-      <div class="col-md-3 p-2">{{ item.drug.commercialNameEn || item.drug.drugClass || 'N/A' }}</div>
-      <div class="col-md-1 p-2">{{ item.frequency }}</div>
-      <div class="col-md-1 p-2">{{ item.from }}</div>
-      <div class="col-md-1 p-2">{{ item.to }}</div>
-      <div class="col-md-1 p-2">{{ item.type }}</div>
-      <div class="col-md-2 p-2">Dr. {{ item.doctor.fristName }} + {{item.doctor.lastName}} ( {{item.doctor.specialization}} )</div>
-      <div class="col-md-2 p-2"> {{item.notes}} </div>
-      @if(!isInHistoryMood) {
-        <div class="col-md-2 p-2 text-center">
-          <button class="btn btn-sm btn-outline-danger" (click)="DeletePrescription(item.id)"> Delete </button>
-        </div>
-      }@else {
-        <div class="col-md-2 p-2 text-center"></div>
-      }
+  <div class="row g-0 table-row">
+    <div class="col-md-2 text-center p-2">{{ item.drug.commercialNameEn || item.drug.drugClass || 'N/A' }}</div>
+    <div class="col-md-1 text-center p-2">{{ item.frequency }}</div>
+    <div class="col-md-2 text-center p-2">{{ item.from }}</div>
+    <div class="col-md-2 text-center p-2">{{ item.to }}</div>
+    <div class="col-md-1 text-center p-2">{{ item.type }}</div>
+    <div class="col-md-2 text-center p-2">Dr. {{ item.doctor.fristName }} + {{item.doctor.lastName}} (
+      {{item.doctor.specialization}} )</div>
+    <div class="col-md-1 p-2"> {{item.notes}} </div>
+    @if(!isInHistoryMood) {
+    <div class="col-md-2 p-2 text-center">
+      <button class="btn btn-sm btn-outline-danger" (click)="DeletePrescription(item.id)"> Delete </button>
     </div>
+    }@else {
+    <div class="col-md-2 p-2 text-center"></div>
+    }
+  </div>
   } @empty {
-    <div class="row g-0">
-      <div class="col-md-12 text-center text-muted py-4">
-        No prescriptions found.
-      </div>
+  <div class="row g-0">
+    <div class="col-md-12 text-center text-muted py-4">
+      No prescriptions found.
     </div>
+  </div>
   }
 
 </div>

@@ -1,64 +1,64 @@
 <form>
-     <div class="row" class="row border rounded-top"
-       [class.border-danger]="isHistory() === 1" 
-       [class.border-light]="isHistory() !== 1" 
-       style="margin: .5%; padding: .5%;">
+    <div class="row" class="row border rounded-top" [class.border-danger]="isHistory() === 1"
+        [class.border-light]="isHistory() !== 1" style="margin: .5%; padding: .5%;">
         <div class="col-md-10">
-            <input type="text" class="form-control" #TextsearchTearm placeholder="Search Examination"  value="{{ExaminationName()}}"   >
+            <input type="text" class="form-control" #TextsearchTearm placeholder="Search Examination"
+                value="{{ExaminationName()}}">
         </div>
-        
+
         <div class="col-md-2 d-flex justify-content-end">
-            <input type="button" class="btn btn-primary" value="GetExaminations" (click)="SearchExaminations(TextsearchTearm.value)" >           
-        </div>   
-        
+            <input type="button" class="btn btn-primary" value="GetExaminations"
+                (click)="SearchExaminations(TextsearchTearm.value)">
+        </div>
+
         <div class="col-md-12">
             <label class="form-label fw-semibold text-muted small">Examination</label>
-            <select class="form-select" aria-label="Default select example" name="Examination" #examination (change)="onSpecialtyChange($event)"  >
+            <select class="form-select" aria-label="Default select example" name="Examination" #examination
+                (change)="onSpecialtyChange($event)">
                 <option value="">Please select Examination</option>
-              @for (EX of Examinations(); track $index) {
+                @for (EX of Examinations(); track $index) {
                 <option [value]="EX.id">{{EX.nameEn}} /{{EX.code}}</option>
-               }
+                }
             </select>
         </div>
 
         <div class="col-md-12" style="margin-top: 1%;">
-            <textarea class="form-control" rows="3" name="description" #description [value]="Note()" placeholder="Enter notes..." ></textarea>   
+            <textarea class="form-control" rows="3" name="description" #description [value]="Note()"
+                placeholder="Enter notes..."></textarea>
         </div>
-        
-        <div class="col-md-10" style="margin-top: 1%;" >
-          @if(MedicalExaminationsDTO() != null)
+
+        <div class="col-md-10" style="margin-top: 1%;">
+            @if(MedicalExaminationsDTO() != null)
             {
-                <h5>
-                    ({{MedicalExaminationsDTO()?.code}}) {{MedicalExaminationsDTO()?.nameEn}} - {{MedicalExaminationsDTO()?.classificationExaminationDTO1?.categoryNameEn}}
-                </h5>
+            <h5>
+                ({{MedicalExaminationsDTO()?.code}}) {{MedicalExaminationsDTO()?.nameEn}} -
+                {{MedicalExaminationsDTO()?.classificationExaminationDTO1?.categoryNameEn}}
+            </h5>
             }
         </div>
-        
-            <div class="row" style="margin-top: 1%;">
+
+        <div class="row" style="margin-top: 1%;">
             <div class="col-10 d-flex justify-content-end">
-                <button 
-                type="button" 
-                class="btn" 
-                [class.btn-danger]="isHistory() !== 1" 
-                [class.btn-success]="isHistory() === 1"
-                (click)="makeInvestgationHistory()">
-                 @if (isHistory() === 0) {
+                <button type="button" class="btn" [class.btn-danger]="isHistory() !== 1"
+                    [class.btn-success]="isHistory() === 1" (click)="makeInvestgationHistory()">
+                    @if (isHistory() === 0) {
                     History Mood
-                } @else {
+                    } @else {
                     Normal Mood
-                }
+                    }
                 </button>
             </div>
-            
-        <div class="col-2 d-flex justify-content-end " >
-            <button type="button" class="btn btn-primary " (click)="onSubmit()">Save Changes</button>
-        </div>
-        
-         </div>
 
-     </div>
+            <div class="col-2 d-flex justify-content-end ">
+                <button type="button" class="btn btn-primary " (click)="onSubmit(description.value)">Save
+                    Changes</button>
+            </div>
+
+        </div>
+
+    </div>
 </form>
 
 <div class="row" style="margin:.5%">
-<app-list-investgation [AppointmentID]="appointmentId" [isInHistoryMood]="false" ></app-list-investgation>
+    <app-list-investgation [AppointmentID]="appointmentId" [isInHistoryMood]="false"></app-list-investgation>
 </div>

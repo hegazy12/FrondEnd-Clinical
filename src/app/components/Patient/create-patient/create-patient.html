@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<!-- <app-navbar></app-navbar> -->
 
 <div class="container my-4 background">
   <div class="card shadow-sm border-0 background">
@@ -6,12 +6,12 @@
       <h5 class="card-title mb-4 text-secondary">
         <i class="bi bi-person-lines-fill me-2">Add User Information</i>
       </h5>
-      
+
       <form>
         <div class="row g-3 ">
           <div class="col-md-4 ">
             <label class="form-label fw-semibold text-muted small">First Name</label>
-            <input type="text" class="form-control" name="Fname" placeholder="John" [(ngModel)]="Fristname" >
+            <input type="text" class="form-control" name="Fname" placeholder="John" [(ngModel)]="Fristname">
           </div>
           <div class="col-md-4 ">
             <label class="form-label fw-semibold text-muted small">Last Name</label>
@@ -19,7 +19,7 @@
           </div>
           <div class="col-md-4 ">
             <label class="form-label fw-semibold text-muted small">Phone Number</label>
-            <input type="tel" class="form-control" name="Phone" placeholder="+20..." [(ngModel)] = "Phone">
+            <input type="tel" class="form-control" name="Phone" placeholder="+20..." [(ngModel)]="Phone">
           </div>
           <div class="col-md-4 ">
             <label class="form-label fw-semibold text-muted small">Address</label>
@@ -27,34 +27,23 @@
           </div>
           <div class="col-md-4 ">
             <label class="form-label fw-semibold text-muted small">dateOfBirth</label>
-            <input type="date" class="form-control" name="DateOfBirth" placeholder="1990-01-01" [(ngModel)]="DateOfBirth">
+            <input type="date" class="form-control" name="DateOfBirth" placeholder="1990-01-01"
+              [(ngModel)]="DateOfBirth">
           </div>
-        <div class="col-md-4">
-          <label class="form-label fw-semibold text-muted small d-block">Gender</label>
-          <div class="btn-group w-100" role="group">
-          <div class="form-check form-check-inline">
-            <label for="genderMale" >Male</label>
-                <input 
-                  type="radio" 
-                  name="gender" 
-                  id="genderMale" 
-                  value="Male" 
-                  class="ms-8"
-                  [(ngModel)]="gender">
-            </div>
-
-                <div class="form-check form-check-inline">
-                  <label for="genderFemale" >Female</label>
-                      <input 
-                        type="radio" 
-                        name="gender" 
-                        id="genderFemale" 
-                        value="Female" 
-                        class="ms-8"
-                        [(ngModel)]="gender">
+          <div class="col-md-4">
+            <label class="form-label fw-semibold text-muted small d-block">Gender</label>
+            <div class="btn-group w-100" role="group">
+              <div class="form-check form-check-inline">
+                <label for="genderMale">Male</label>
+                <input type="radio" name="gender" id="genderMale" value="Male" class="ms-8" [(ngModel)]="gender">
               </div>
+
+              <div class="form-check form-check-inline">
+                <label for="genderFemale">Female</label>
+                <input type="radio" name="gender" id="genderFemale" value="Female" class="ms-8" [(ngModel)]="gender">
+              </div>
+            </div>
           </div>
-        </div>
         </div>
         <div class="row mt-4 ">
           <div class="col-12 d-flex justify-content-end">
@@ -67,11 +56,9 @@
 
       </form>
 
-      </div>
-        <div class="row" style="margin:.5%">
-        <app-list-patient></app-list-patient>
-        </div>
-      </div>
+    </div>
+    <div class="row" style="margin:.5%">
+      <app-list-patient [isInHistoryMood]="false"></app-list-patient>
+    </div>
+  </div>
 </div>
-
-

@@ -173,7 +173,6 @@ export class Patientappointment {
         this.Appointments.set(P.data);
 
         if (this.Appointments().find(m => m.doctorId == this.Vervication.GetDoctorId() && m.id != this.appointmentId) == undefined) {
-          console.log("this.Appointments().find(m=> m.doctorId ==  this.Vervication.GetDoctorId() && m.id != this.appointmentId) == undefined");
           Sup.unsubscribe();
           this.x.set(false);
           return false;
