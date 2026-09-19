@@ -1,23 +1,22 @@
-import { Component, signal } from '@angular/core';
-import { Callapi } from '../../services/callapi/callapi';
-import { Router } from '@angular/router';
-import { VerfivationToken } from '../../services/verfivationToken/verfivation-token'
-import { Navbar } from '../navbar/navbar'
-import { Chattext } from '../chattext/chattext';
+import { Component, Input, signal } from '@angular/core';
 import { QRCodeComponent } from 'angularx-qrcode';
-import { Camera } from '../camera/camera'
-import { LinkService } from '../../services/linkService/link-service'
+import { Callapi } from '../../../services/callapi/callapi';
+import { VerfivationToken } from '../../../services/verfivationToken/verfivation-token';
+import { Router } from '@angular/router';
+import { LinkService } from '../../../services/linkService/link-service';
+import { Navbar } from '../../navbar/navbar';
+
 
 @Component({
-  selector: 'app-mainpage',
-  imports: [Navbar, Chattext, QRCodeComponent, Camera],
-  templateUrl: './mainpage.html',
-  styleUrl: './mainpage.css',
+  selector: 'app-qrcode-doctor',
+  imports: [QRCodeComponent, Navbar],
+  templateUrl: './qrcode-doctor.html',
+  styleUrl: './qrcode-doctor.css',
 })
-
-export class Mainpage {
+export class QrcodeDoctor {
   public doctorId = signal<string | null>('');
   public frontLink = signal<string>('');
+
   constructor(private callapi: Callapi, private router: Router, private Vervication: VerfivationToken, private LinkService: LinkService) {
     this.doctorId.set(this.Vervication.GetLoginID());
     this.frontLink.set(this.LinkService.gitFrontOrigin());
@@ -31,5 +30,4 @@ export class Mainpage {
       this.frontLink.set(this.frontLink() + '/phonetraker/' + this.doctorId());
     }
   }
-
 }

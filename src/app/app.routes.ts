@@ -10,6 +10,7 @@ import { PhoneTraker } from './components/phone-traker/phone-traker';
 import { AdminView } from './components/Admin/admin-view/admin-view';
 import { DoctorView } from './components/Doctor/doctor-view/doctor-view';
 import { AllPatientview } from './components/Patient/all-patientview/all-patientview';
+import { QrcodeDoctor } from './components/Doctor/qrcode-doctor/qrcode-doctor';
 
 export const routes: Routes = [
     {
@@ -63,5 +64,9 @@ export const routes: Routes = [
     {
         path: 'DoctorView',
         component: DoctorView
+    },
+    {
+        path: 'qrcodedoctor',
+        component: QrcodeDoctor
     }
 ];

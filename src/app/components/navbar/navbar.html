@@ -12,15 +12,15 @@
   </div>
 
 
-  <div class="col-md-1">
+  <div class="col-md-2">
     @if (roles.includes('doctor') ||roles.includes('Doctor'))
     {
-    <!-- <strong> <a class="nav-link text-white" [routerLink]="['/DoctorView']">Doctor View</a> </strong>  -->
+    <strong> <a class="nav-link text-white" [routerLink]="['/qrcodedoctor']">Doctor QR Code</a> </strong>
     }
   </div>
 
 
-  <div class="col-md-8">
+  <div class="col-md-7">
     @if (roles.includes('doctor') ||roles.includes('Doctor'))
     {
     <strong> <a class="nav-link text-white" [routerLink]="['/Admin']">Admin</a> </strong>

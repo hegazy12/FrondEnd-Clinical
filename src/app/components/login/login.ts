@@ -14,50 +14,47 @@ import { LinkService } from '../../services/linkService/link-service';
 })
 
 
-export class Login 
-{
+export class Login {
   public username: string = '';
   public password: string = '';
 
-  
-  constructor(private http: HttpClient,
-              private router: Router ,
-              private Verfivation : VerfivationToken,
-              private swal: SwalAlert,private LinkService : LinkService)
-    {
-    }
-  
-  ngOnInit():void{
 
-     if(this.Verfivation.islogin() == true){
-        this.router.navigate(['/mainpage']);
-      }
-    
+  constructor(private http: HttpClient,
+    private router: Router,
+    private Verfivation: VerfivationToken,
+    private swal: SwalAlert, private LinkService: LinkService) {
+  }
+
+  ngOnInit(): void {
+
+    if (this.Verfivation.islogin() == true) {
+      this.router.navigate(['/allpatientview']);
     }
+
+  }
 
 
   onLogin() {
-    
+
     console.log('Username:', this.username);
     console.log('Password:', this.password);
-    
+
     // var url = "http://194.146.24.155/clinical/api/Account/Login";
     // var url = " https://localhost:7262/Account/Login";
     // var url = "http://192.168.0.148:5000/Account/Login";
     // var url = "https://barge-manhole-crib.ngrok-free.dev/api/Account/Login";
-    
-    var url = this.LinkService.gitLinK()+"Account/Login";
-    
+
+    var url = this.LinkService.gitLinK() + "Account/Login";
+
     this.http.post<LoginResponse>(url, { userName: this.username, password: this.password })
-      .subscribe(response => {   
+      .subscribe(response => {
         localStorage.setItem('Login', JSON.stringify(response.success));
-        if(response.success === true)
-        {
-          localStorage.setItem('token'      , JSON.stringify(response.data.token));
-          localStorage.setItem('roles'      , JSON.stringify(response.data.roles));
-          localStorage.setItem('id'         , JSON.stringify(response.data.id));
-          localStorage.setItem('userName'   , JSON.stringify(response.data.userName));
-          localStorage.setItem('doctorid'  ,JSON.stringify(response.data.doctorId));
+        if (response.success === true) {
+          localStorage.setItem('token', JSON.stringify(response.data.token));
+          localStorage.setItem('roles', JSON.stringify(response.data.roles));
+          localStorage.setItem('id', JSON.stringify(response.data.id));
+          localStorage.setItem('userName', JSON.stringify(response.data.userName));
+          localStorage.setItem('doctorid', JSON.stringify(response.data.doctorId));
           console.log('Token stored in localStorage:', response.data.token);
           this.router.navigate(['/mainpage']);
           ///////////////////////////////////////////////////////
@@ -65,20 +62,19 @@ export class Login
           ///////////////////////////////////////////////////////
           console.log('Login successful:', response);
         }
-        else
-        {
+        else {
           console.error('Login failed:', response.message);
-           afterNextRender(() => { 
-              localStorage.removeItem('token');});
+          afterNextRender(() => {
+            localStorage.removeItem('token');
+          });
           this.swal.showLoginFailed(response.message);
         }
-        
-      }, error => 
-        {
-         console.error('Login failed:', error);
-         localStorage.removeItem('token');
-         localStorage.setItem('token', JSON.stringify(error));
-        });
+
+      }, error => {
+        console.error('Login failed:', error);
+        localStorage.removeItem('token');
+        localStorage.setItem('token', JSON.stringify(error));
+      });
   }
 }
 

@@ -28,6 +28,7 @@ export class AppointmentStory {
   @ViewChild(ListDiagnosos) listDiagnososRef!: ListDiagnosos;
   @ViewChild(ListVital) ListVitalRef!: ListDiagnosos;
   @ViewChild(ListSaveExaminationFinding) listSaveExaminationFindingRef!: ListSaveExaminationFinding;
+  @ViewChild(SaveAnswerQuestion) saveAnswerQuestionRef!: SaveAnswerQuestion;
 
   public Sheet = signal<SheetDto1[] | undefined>(undefined);
 
@@ -102,6 +103,7 @@ export class AppointmentStory {
   public SetInSelected(SheetID: string) {
     if (SheetID != '') {
       this.SelectSheet.set(this.Sheet()?.filter(m => m.id == SheetID));
+      //this.saveAnswerQuestionRef.GetsaveQuestionInSheet(this.appointmentid(), SheetID);
     } else if (SheetID == '') {
       this.SelectSheet.set(this.Sheet());
     }
