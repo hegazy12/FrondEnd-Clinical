@@ -76,7 +76,8 @@ export class SaveAnswerQuestion
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
           }).then((result) => 
-            {     
+            { 
+              if(result.isConfirmed){    
               let Sup = this.callapi.DeleteSaveQuestion(Id).subscribe({
               next: (P : any) =>
                 { 
@@ -103,7 +104,15 @@ export class SaveAnswerQuestion
                 this.GetsaveQuestionInSheet(this.SheetID,this.AppointmentID);
                 Sup.unsubscribe();
               }
-              });
+              })
+            }
+            else if (result.dismiss === Swal.DismissReason.cancel){
+                  Swal.fire({
+                    title: "Cancelled",
+                    text: "Your Question is safe :)",
+                    icon: "error"
+                  })
+          };
           });
       }
    

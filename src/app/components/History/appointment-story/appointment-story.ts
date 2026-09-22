@@ -26,7 +26,7 @@ export class AppointmentStory {
   @ViewChild(ListInvestgation) ListInvestgationRef!: ListInvestgation;
   @ViewChild(PrescriptionList) prescriptionListRef!: PrescriptionList;
   @ViewChild(ListDiagnosos) listDiagnososRef!: ListDiagnosos;
-  @ViewChild(ListVital) ListVitalRef!: ListDiagnosos;
+  @ViewChild(ListVital) ListVitalRef!: ListVital;
   @ViewChild(ListSaveExaminationFinding) listSaveExaminationFindingRef!: ListSaveExaminationFinding;
   @ViewChild(SaveAnswerQuestion) saveAnswerQuestionRef!: SaveAnswerQuestion;
 
@@ -64,6 +64,7 @@ export class AppointmentStory {
         this.GetSheetsInAppointmentSaved(AppointmentID);
         this.listSaveExaminationFindingRef.getdata(AppointmentID);
         this.appointmentid.set(AppointmentID);
+        this.ListVitalRef.GetsaveVitalSighAppoinmenById(AppointmentID);
         this.SelectSheet.set(undefined);
       },
       error: (err) => {

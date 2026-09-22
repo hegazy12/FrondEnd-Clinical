@@ -66,7 +66,8 @@ export class ListAppintment {
           cancelButtonColor: "#d33",
           confirmButtonText: "Yes, delete it!"
         }).then((result) => 
-          {     
+          {    
+             if(result.isConfirmed){     
             let Sup = this.Callapi.DeleteAppointmentById(Id).subscribe({
             next: (P : AppointmentResponse) =>
               { 
@@ -89,6 +90,14 @@ export class ListAppintment {
               Sup.unsubscribe();
             }
             });
-        });
+          }
+          else if (result.dismiss === Swal.DismissReason.cancel)
+            Swal.fire({
+              title: "Cancelled",
+              text: "Your imaginary file is safe :)",
+              icon: "error"
+            });
+        }
+      )
     }
 }

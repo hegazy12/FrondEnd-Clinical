@@ -3,9 +3,9 @@
   <div class="row g-0 rounded-top" style="background-color: #0d6efd;">
     <div class="col-md-1 text-white text-center fw-semibold p-2">code</div>
     <div class="col-md-4 text-white text-center fw-semibold p-2">medicalExamination</div>
-    <div class="col-md-3 text-white text-center fw-semibold p-2">Description</div>
+    <div class="col-md-2 text-white text-center fw-semibold p-2">Description</div>
     <div class="col-md-2 text-white text-center fw-semibold p-2">DoctorName</div>
-    <div class="col-md-2 text-white text-center fw-semibold p-2">Action</div>
+    <div class="col-md-3 text-white text-center fw-semibold p-2">Action</div>
 
   </div>
 
@@ -16,10 +16,10 @@
     <div class="col-md-1 text-center p-2">{{ item.medicalExaminationsDTO.code}}</div>
     <div class="col-md-4 text-center p-2">{{ item.medicalExaminationsDTO.nameEn }} -
       ({{item.medicalExaminationsDTO.classificationExaminationDTO1.categoryNameEn}}) </div>
-    <div class="col-md-3 text-center p-2">{{ item.note }}</div>
-    <div class="col-md-2 text-center p-2">{{ item.doctorDTO.fristName }} - {{item.doctorDTO.lastName}} -
-      ({{item.doctorDTO.specialization}})</div>
-    <div class="col-md-2 text-center p-2">
+    <div class="col-md-2 text-center p-2">{{ item.note }}</div>
+    <div class="col-md-2 text-center p-2">{{ item.doctorDTO.fristName }} - {{item.doctorDTO.lastName}}
+      -\({{item.doctorDTO.specialization}})</div>
+    <div class="col-md-3 text-center p-2">
 
       @if (!isInHistoryMood && last() == 0)
       {

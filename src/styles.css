@@ -1,69 +1,82 @@
-
-.spase1{
-    padding: 1%;
-    margin: 1%;
-}
-/* 
-    =========================================================
-   Clinic Theme — Colors & Typography
-   (Global visual theme only — no structural/layout changes)
-   ========================================================= 
+/*
+   =========================================================
+   Clinic Theme v2 — Colors, Typography & Control Sizes
+   (CSS only — no markup changes; Bootstrap classes are
+   re-themed through variables and overrides below)
+   =========================================================
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
 
 :root {
-  /* Brand palette */
-  --clinic-primary: #2563eb;
-  --clinic-primary-dark: #1d4ed8;
-  --clinic-primary-darker: #1e3a8a;
-  --clinic-primary-light: #dbeafe;
-  --clinic-primary-lighter: #f0f6ff;
+  /* Brand palette — deep teal */
+  --clinic-primary: #0f766e;
+  --clinic-primary-dark: #115e59;
+  --clinic-primary-darker: #134e4a;
+  --clinic-primary-light: #ccfbf1;
+  --clinic-primary-lighter: #f0fdfa;
+  --clinic-primary-rgb: 15, 118, 110;
 
-  --clinic-accent: #0d9488;
-  --clinic-accent-light: #ccfbf1;
+  --clinic-accent: #f97316;
+  --clinic-accent-light: #ffedd5;
 
-  --clinic-success: #16a34a;
+  --clinic-success: #15803d;
   --clinic-warning: #f59e0b;
   --clinic-danger: #dc2626;
-  --clinic-info: #0ea5e9;
+  --clinic-info: #0284c7;
+  --clinic-secondary: #475569;
 
-  --clinic-ink: #1e2a3a;
+  --clinic-ink: #0f172a;
   --clinic-muted: #64748b;
-  --clinic-border: #e2e8f0;
+  --clinic-border: #dbe4ea;
   --clinic-surface: #ffffff;
-  --clinic-bg: #f5f8fc;
+  --clinic-bg: #f4f7f9;
 
+  /* Shape & depth */
   --clinic-radius: 10px;
-  --clinic-shadow: 0 2px 10px rgba(30, 64, 175, 0.07);
-  --clinic-shadow-hover: 0 8px 20px rgba(30, 64, 175, 0.14);
+  --clinic-radius-lg: 16px;
+  --clinic-shadow: 0 1px 3px rgba(15, 23, 42, .06), 0 4px 14px rgba(15, 23, 42, .05);
+  --clinic-shadow-hover: 0 6px 22px rgba(15, 118, 110, .18);
 
+  /* Type scale */
   --clinic-font: 'Inter', 'Segoe UI', Tahoma, Arial, sans-serif;
-  --clinic-font-heading: 'Poppins', 'Inter', 'Segoe UI', sans-serif;
+  --clinic-font-heading: 'Plus Jakarta Sans', 'Inter', 'Segoe UI', sans-serif;
+  --clinic-fs-base: 0.9375rem;   /* 15px */
+  --clinic-fs-small: 0.8125rem;  /* 13px */
+  --clinic-fs-btn: 0.9rem;
+  --clinic-fs-btn-sm: 0.8125rem;
 
-  /* Bootstrap 5.3 theming hooks — keeps every default Bootstrap
-     class (buttons, links, badges, tables...) in sync automatically */
+  /* Control sizes */
+  --clinic-control-h: 42px;
+  --clinic-control-h-sm: 34px;
+  --clinic-control-h-lg: 50px;
+
+  /* Bootstrap 5.3 theming hooks */
   --bs-primary: var(--clinic-primary);
-  --bs-primary-rgb: 37, 99, 235;
+  --bs-primary-rgb: var(--clinic-primary-rgb);
   --bs-link-color: var(--clinic-primary);
-  --bs-link-color-rgb: 37, 99, 235;
+  --bs-link-color-rgb: var(--clinic-primary-rgb);
   --bs-link-hover-color: var(--clinic-primary-dark);
-  --bs-link-hover-color-rgb: 29, 78, 216;
+  --bs-link-hover-color-rgb: 17, 94, 89;
   --bs-body-font-family: var(--clinic-font);
+  --bs-body-font-size: var(--clinic-fs-base);
+  --bs-body-line-height: 1.55;
   --bs-body-color: var(--clinic-ink);
   --bs-body-bg: var(--clinic-bg);
+  --bs-secondary-color: var(--clinic-muted);
   --bs-border-color: var(--clinic-border);
-  --bs-border-radius: 8px;
-  --bs-border-radius-lg: 12px;
-  --bs-border-radius-sm: 6px;
+  --bs-border-radius: 10px;
+  --bs-border-radius-lg: 16px;
+  --bs-border-radius-sm: 8px;
 }
 
-/* Base typography */
+/* ---------- Base typography ---------- */
 html, body {
   font-family: var(--clinic-font);
+  font-size: var(--clinic-fs-base);
   background-color: var(--clinic-bg);
   color: var(--clinic-ink);
-  letter-spacing: 0.1px;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -71,26 +84,71 @@ h1, h2, h3, h4, h5, h6,
   font-family: var(--clinic-font-heading);
   font-weight: 700;
   color: var(--clinic-primary-darker);
-  letter-spacing: 0.2px;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
 }
+h1, .h1 { font-size: 2rem; }
+h2, .h2 { font-size: 1.65rem; }
+h3, .h3 { font-size: 1.4rem; }
+h4, .h4 { font-size: 1.2rem; }
+h5, .h5 { font-size: 1.05rem; }
+h6, .h6 { font-size: 0.95rem; }
 
 p, span, label, td, th, li { font-family: var(--clinic-font); }
+small, .small { font-size: var(--clinic-fs-small); }
+.text-muted { color: var(--clinic-muted) !important; }
+.text-secondary { color: var(--clinic-secondary) !important; }
+.text-primary { color: var(--clinic-primary) !important; }
 
 a { color: var(--clinic-primary); text-decoration: none; }
 a:hover { color: var(--clinic-primary-dark); text-decoration: underline; }
 
-/* Buttons */
+/* ---------- Buttons ---------- */
 .btn {
-  border-radius: var(--clinic-radius);
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  transition: background-color .18s ease-in-out, box-shadow .18s ease-in-out, transform .1s ease-in-out;
+  --bs-btn-padding-x: 1.25rem;
+  --bs-btn-padding-y: 0.5rem;
+  --bs-btn-font-size: var(--clinic-fs-btn);
+  --bs-btn-font-weight: 600;
+  --bs-btn-border-radius: var(--clinic-radius);
+  min-height: var(--clinic-control-h);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .1s ease;
 }
 .btn:active { transform: translateY(1px); }
+.btn:focus-visible { box-shadow: 0 0 0 .25rem rgba(var(--clinic-primary-rgb), .28); }
+
+.btn-sm {
+  --bs-btn-padding-x: 0.85rem;
+  --bs-btn-padding-y: 0.3rem;
+  --bs-btn-font-size: var(--clinic-fs-btn-sm);
+  min-height: var(--clinic-control-h-sm);
+  border-radius: 8px;
+}
+.btn-lg {
+  --bs-btn-padding-x: 1.75rem;
+  --bs-btn-padding-y: 0.7rem;
+  --bs-btn-font-size: 1.05rem;
+  min-height: var(--clinic-control-h-lg);
+  border-radius: 12px;
+}
 
 .btn-primary {
+  --bs-btn-bg: var(--clinic-primary);
+  --bs-btn-border-color: var(--clinic-primary);
+  --bs-btn-hover-bg: var(--clinic-primary-dark);
+  --bs-btn-hover-border-color: var(--clinic-primary-dark);
+  --bs-btn-active-bg: var(--clinic-primary-darker);
+  --bs-btn-active-border-color: var(--clinic-primary-darker);
+  --bs-btn-disabled-bg: var(--clinic-primary);
+  --bs-btn-disabled-border-color: var(--clinic-primary);
   background-color: var(--clinic-primary);
   border-color: var(--clinic-primary);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .12);
 }
 .btn-primary:hover,
 .btn-primary:focus {
@@ -100,117 +158,445 @@ a:hover { color: var(--clinic-primary-dark); text-decoration: underline; }
 }
 
 .btn-outline-primary {
-  color: var(--clinic-primary);
-  border-color: var(--clinic-primary);
-}
-.btn-outline-primary:hover {
-  background-color: var(--clinic-primary);
-  border-color: var(--clinic-primary);
+  --bs-btn-color: var(--clinic-primary);
+  --bs-btn-border-color: var(--clinic-primary);
+  --bs-btn-hover-bg: var(--clinic-primary);
+  --bs-btn-hover-border-color: var(--clinic-primary);
+  --bs-btn-active-bg: var(--clinic-primary-dark);
+  --bs-btn-active-border-color: var(--clinic-primary-dark);
 }
 
-.btn-success { background-color: var(--clinic-success); border-color: var(--clinic-success); }
-.btn-danger  { background-color: var(--clinic-danger);  border-color: var(--clinic-danger); }
-.btn-warning { background-color: var(--clinic-warning); border-color: var(--clinic-warning); color: #3a2a06; }
-.btn-info    { background-color: var(--clinic-info);    border-color: var(--clinic-info); }
+.btn-secondary { --bs-btn-bg: var(--clinic-secondary); --bs-btn-border-color: var(--clinic-secondary); --bs-btn-hover-bg: #334155; --bs-btn-hover-border-color: #334155; }
+.btn-outline-secondary { --bs-btn-color: var(--clinic-secondary); --bs-btn-border-color: #94a3b8; --bs-btn-hover-bg: var(--clinic-secondary); --bs-btn-hover-border-color: var(--clinic-secondary); }
+.btn-success { --bs-btn-bg: var(--clinic-success); --bs-btn-border-color: var(--clinic-success); --bs-btn-hover-bg: #166534; --bs-btn-hover-border-color: #166534; }
+.btn-danger  { --bs-btn-bg: var(--clinic-danger);  --bs-btn-border-color: var(--clinic-danger);  --bs-btn-hover-bg: #b91c1c; --bs-btn-hover-border-color: #b91c1c; }
+.btn-outline-danger { --bs-btn-color: var(--clinic-danger); --bs-btn-border-color: var(--clinic-danger); --bs-btn-hover-bg: var(--clinic-danger); --bs-btn-hover-border-color: var(--clinic-danger); }
+.btn-warning { --bs-btn-bg: var(--clinic-warning); --bs-btn-border-color: var(--clinic-warning); --bs-btn-color: #3a2a06; --bs-btn-hover-bg: #d97706; --bs-btn-hover-border-color: #d97706; --bs-btn-hover-color: #2b1d04; }
+.btn-info    { --bs-btn-bg: var(--clinic-info); --bs-btn-border-color: var(--clinic-info); --bs-btn-color: #fff; --bs-btn-hover-bg: #0369a1; --bs-btn-hover-border-color: #0369a1; --bs-btn-hover-color: #fff; }
+.btn-outline-info { --bs-btn-color: var(--clinic-info); --bs-btn-border-color: var(--clinic-info); --bs-btn-hover-bg: var(--clinic-info); --bs-btn-hover-border-color: var(--clinic-info); }
+.btn-link { font-weight: 600; min-height: 0; }
 
-/* 
-    Top nav bars styled with the old bootstrap-blue inline background
-    (kept as an inline style in the HTML — matched here only by that
-    inline value so no markup needs to change)
-*/
+/* ---------- Navigation bar ----------
+   Nav bars use the old bootstrap-blue inline background
+   (kept in the HTML) — matched here by that inline value. */
 .navbar,
 [style*="background-color: #0d6efd"],
 [style*="background-color:#0d6efd"] {
-  background: linear-gradient(135deg, var(--clinic-primary) 0%, var(--clinic-primary-dark) 100%) !important;
-  box-shadow: var(--clinic-shadow);
+  background: linear-gradient(135deg, var(--clinic-primary-darker) 0%, var(--clinic-primary) 100%) !important;
+  box-shadow: 0 4px 16px rgba(19, 78, 74, .25);
+  align-items: center;
+  min-height: 56px;
 }
 
-.nav-link { font-weight: 600; }
-.nav-link.text-white:hover { color: var(--clinic-accent-light) !important; opacity: .92; }
+.nav-link {
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: background-color .15s ease, color .15s ease;
+}
+.nav-link.text-white:hover {
+  color: #fff !important;
+  background-color: rgba(255, 255, 255, .14);
+  text-decoration: none;
+}
 
-/* Cards */
+/* Center each nav link within its own column instead of hugging the left
+   edge (the logout button keeps its own right alignment via Bootstrap's
+   d-flex/justify-content-end utilities, which win with !important). */
+app-navbar .row > [class*="col-"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* ---------- Cards ---------- */
 .card {
+  background-color: var(--clinic-surface);
   border: 1px solid var(--clinic-border);
-  border-radius: 14px;
+  border-radius: var(--clinic-radius-lg);
   box-shadow: var(--clinic-shadow);
-  transition: box-shadow .18s ease-in-out;
+  transition: box-shadow .2s ease;
 }
 .card:hover { box-shadow: var(--clinic-shadow-hover); }
 .card-header {
   background-color: var(--clinic-primary-lighter);
+  border-bottom: 1px solid var(--clinic-primary-light);
   font-weight: 700;
+  font-size: 1rem;
   color: var(--clinic-primary-darker);
+  padding: 0.9rem 1.25rem;
 }
+.card-body { padding: 1.25rem; }
+.card-title { font-size: 1.1rem; font-weight: 700; }
 
-/* Tables */
+.shadow-sm { box-shadow: var(--clinic-shadow) !important; }
+.border { border-color: var(--clinic-border) !important; }
+.border-primary { border-color: var(--clinic-primary) !important; }
+.rounded { border-radius: var(--clinic-radius) !important; }
+.rounded-top { border-top-left-radius: var(--clinic-radius) !important; border-top-right-radius: var(--clinic-radius) !important; }
+
+/* ---------- Tables ---------- */
 .table {
   --bs-table-hover-bg: var(--clinic-primary-lighter);
+  --bs-table-striped-bg: #f8fafb;
+  font-size: 0.9rem;
+  vertical-align: middle;
 }
+.table > :not(caption) > * > * { padding: 0.8rem 1rem; }
 .table thead th {
   background-color: var(--clinic-primary-light);
   color: var(--clinic-primary-darker);
+  font-size: 0.8rem;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   border-bottom: 2px solid var(--clinic-primary);
 }
-.table-hover tbody tr:hover {
-  background-color: var(--clinic-primary-lighter);
-}
+.table-hover tbody tr:hover { background-color: var(--clinic-primary-lighter); }
 
-/* Forms */
+/* ---------- Forms ---------- */
 .form-control, .form-select {
-  border-radius: 8px;
-  border-color: var(--clinic-border);
+  min-height: var(--clinic-control-h);
+  font-size: var(--clinic-fs-base);
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--clinic-radius);
+  border: 1px solid var(--clinic-border);
+  background-color: var(--clinic-surface);
 }
+textarea.form-control { min-height: 96px; }
+.form-control::placeholder { color: #94a3b8; }
 .form-control:focus, .form-select:focus {
   border-color: var(--clinic-primary);
-  box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.15);
+  box-shadow: 0 0 0 0.25rem rgba(var(--clinic-primary-rgb), .16);
 }
-.form-label { font-weight: 600; color: var(--clinic-ink); }
+.form-control-sm, .form-select-sm { min-height: var(--clinic-control-h-sm); font-size: var(--clinic-fs-small); }
+.form-control-lg, .form-select-lg { min-height: var(--clinic-control-h-lg); font-size: 1.05rem; }
 
-/* Badges */
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--clinic-ink);
+  margin-bottom: 0.35rem;
+}
+.form-text { font-size: var(--clinic-fs-small); color: var(--clinic-muted); }
+.form-check-input { width: 1.15em; height: 1.15em; border-color: #94a3b8; }
+.form-check-input:checked { background-color: var(--clinic-primary); border-color: var(--clinic-primary); }
+.form-check-input:focus { border-color: var(--clinic-primary); box-shadow: 0 0 0 0.25rem rgba(var(--clinic-primary-rgb), .16); }
+.form-check-label { font-size: 0.9rem; }
+
+/* The Gender field's Male/Female group has no border/background, so next to
+   the bordered .form-control fields around it (Address, dateOfBirth, ...) it
+   reads as disconnected from the rest of the form. Box it the same way —
+   same height, border, radius and background as an input — so it lines up
+   with its row and looks consistent with the rest of the form. */
+.btn-group.w-100:has(> .form-check-inline > input[type="radio"].ms-8) {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: var(--clinic-control-h);
+  padding: 0 1rem;
+  background-color: var(--clinic-surface);
+  border: 1px solid var(--clinic-border);
+  border-radius: var(--clinic-radius);
+}
+
+/* The Gender radios (Male/Female) are missing the .form-check-input class
+   that the question radios (Yes/No) use, so they render as plain unstyled
+   browser radios. Give them the exact same look — round, themed border,
+   filled dot when checked — plus proper spacing between the label and the
+   button (the markup puts the label before the input, unlike the question
+   radios). */
+.form-check-inline:has(> input[type="radio"].ms-8) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.form-check-inline:has(> input[type="radio"].ms-8) > label {
+  order: 2;
+  margin: 0;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+input[type="radio"].ms-8 {
+  order: 1;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.15em;
+  height: 1.15em;
+  margin: 0;
+  flex-shrink: 0;
+  border: 1px solid #94a3b8;
+  border-radius: 50%;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color .15s ease, background-color .15s ease, box-shadow .15s ease;
+}
+input[type="radio"].ms-8:checked {
+  border-color: var(--clinic-primary);
+  background-color: var(--clinic-primary);
+  box-shadow: inset 0 0 0 3px #fff;
+}
+input[type="radio"].ms-8:focus-visible {
+  outline: none;
+  border-color: var(--clinic-primary);
+  box-shadow: 0 0 0 0.25rem rgba(var(--clinic-primary-rgb), .16);
+}
+
+/* ---------- Badges ---------- */
+.badge { font-size: 0.75rem; font-weight: 600; padding: 0.4em 0.75em; border-radius: 999px; }
 .badge.bg-primary { background-color: var(--clinic-primary) !important; }
 .badge.bg-success { background-color: var(--clinic-success) !important; }
 .badge.bg-danger  { background-color: var(--clinic-danger)  !important; }
 .badge.bg-warning { background-color: var(--clinic-warning) !important; color: #3a2a06 !important; }
 .badge.bg-info    { background-color: var(--clinic-info)    !important; }
 
-/* Alerts */
+/* ---------- Alerts ---------- */
+.alert { border-radius: var(--clinic-radius); font-size: 0.9rem; }
 .alert-primary {
   background-color: var(--clinic-primary-lighter);
   border-color: var(--clinic-primary-light);
   color: var(--clinic-primary-darker);
 }
 
-/* Scrollbar */
+/* ---------- SweetAlert2 confirm dialogs ----------
+   The delete confirmations set their own confirmButtonColor/cancelButtonColor
+   inline from TypeScript — override them here so the destructive action
+   ("Yes, delete it!") reads as danger red and "Cancel" reads as the calm
+   theme primary color. */
+.swal2-confirm.swal2-styled {
+  background-color: var(--clinic-danger) !important;
+  border-color: var(--clinic-danger) !important;
+}
+.swal2-confirm.swal2-styled:hover {
+  background-color: #b91c1c !important;
+}
+.swal2-confirm.swal2-styled:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, .35) !important;
+}
+.swal2-cancel.swal2-styled {
+  background-color: var(--clinic-primary) !important;
+  border-color: var(--clinic-primary) !important;
+}
+.swal2-cancel.swal2-styled:hover {
+  background-color: var(--clinic-primary-dark) !important;
+}
+.swal2-cancel.swal2-styled:focus {
+  box-shadow: 0 0 0 3px rgba(var(--clinic-primary-rgb), .35) !important;
+}
+
+/* ---------- Scrollbar ---------- */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--clinic-bg); }
-::-webkit-scrollbar-thumb { background: var(--clinic-primary-light); border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: #b6d3d0; border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--clinic-primary); }
 
+/* ---------- Div-based data tables (medication, lab tests, diagnosis, vitals, findings) ----------
+   All of them share one width, spacing, corner radius, header height and row height,
+   so they look identical wherever they appear. */
+.prescription-table,
+.diagnosis-table {
+  width: 100% !important;
+  box-sizing: border-box;
+  margin: 0 0 1rem 0 !important;
+  padding: 0 !important;
+  background-color: var(--clinic-surface);
+  border: 1px solid var(--clinic-border) !important;
+  border-radius: var(--clinic-radius) !important;
+  overflow: hidden;
+  box-shadow: var(--clinic-shadow);
+}
+
+/* Every tab content row under the sidebar keeps this same side inset — matches
+   the .5% margin the other tab rows already carry in their markup, so the
+   History tab's spacing from the sidebar matches every other tab. */
+:root { --clinic-tab-gutter: .5%; }
+
+/* The "Send Answer" form sits with no gap above the answers table on the
+   History tab — give it some breathing room. */
+form + app-save-answer-question {
+  display: block;
+  margin-top: 1.5rem;
+}
+
+/* Question cards on the History tab (Fetal presentation, Fetal Movement, ...)
+   each use col-md-11 with a 3% left margin, which leaves no room for a
+   sibling on the same line, so every card falls to its own row. Lay them
+   out as an aligned two-column grid instead. */
+.row.border-secondary:has(> .col-md-11) {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 0 !important;
+  padding: 0.25rem 0.75rem 0.25rem 1.25rem;
+}
+.row.border-secondary > .col-md-11 {
+  width: auto !important;
+  max-width: 100%;
+  flex: none !important;
+  margin: 0 !important;
+}
+/* the "Send Answer" row should span the full grid width */
+.row.border-secondary > .col-11 {
+  grid-column: 1 / -1;
+}
+@media (max-width: 900px) {
+  .row.border-secondary:has(> .col-md-11) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* The list components sit directly inside a Bootstrap .row, which adds side
+   gutters to them — remove those so the table lines up with the form above it. */
+.row > app-prescription-list,
+.row > app-list-investgation,
+.row > app-list-diagnosos,
+.row > app-list-vital,
+.row > app-list-save-examination-finding,
+.row > app-list-answer-question {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* app-list-answer-question's own .row (History tab questions) has no inline
+   margin override, so it falls back to Bootstrap's default negative row
+   margin and sticks out past the sheet-picker select above it — and past the
+   sidebar. Give it the same inset every other tab row already has. */
+.row:has(> app-list-answer-question) {
+  margin-left: var(--clinic-tab-gutter) !important;
+  margin-right: var(--clinic-tab-gutter) !important;
+}
+
+/* A full-width select on its own row (e.g. the sheet picker on the History tab).
+   Keep the row's own inset (matches the other tabs) but drop the extra
+   Bootstrap column gutter on its child, which was making the select narrower
+   than the list below it. */
+.row:has(> .col-md-12:only-child > select.form-select) {
+  margin-left: var(--clinic-tab-gutter) !important;
+  margin-right: var(--clinic-tab-gutter) !important;
+}
+.row:has(> .col-md-12:only-child > select.form-select) > .col-md-12 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.prescription-table > .row,
+.diagnosis-table > .row {
+  --bs-gutter-x: 0;
+  margin: 0;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  min-height: 48px;
+  border-radius: 0 !important;
+}
+
+/* columns keep their proportions but always stretch to fill the row,
+   so tables with a hidden Actions column still span the full width */
+.prescription-table > .row > [class*="col-"],
+.diagnosis-table > .row > [class*="col-"] {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 0.85rem !important;
+  text-align: center !important;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.prescription-table > .row:first-child > [class*="col-"],
+.diagnosis-table > .row:first-child > [class*="col-"] {
+  font-size: 0.8rem;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.prescription-table .table-row,
+.diagnosis-table .table-row {
+  border-bottom: 1px solid var(--clinic-border);
+}
+.prescription-table .table-row:last-child,
+.diagnosis-table .table-row:last-child { border-bottom: 0; }
+.prescription-table .table-row:nth-of-type(even),
+.diagnosis-table .table-row:nth-of-type(even) { background-color: var(--clinic-primary-lighter); }
+.prescription-table .table-row:hover,
+.diagnosis-table .table-row:hover { background-color: var(--clinic-primary-light); }
+
+/* ---------- Answers review table (History tab) ----------
+   Its content cell packs the question, its data-type/options, the
+   description and the given answer into one <div> — the generic cell rule
+   above turns that into a flex row, which squeezed them into an unreadable
+   jumble. Lay them out as a clean single-line, wrapping flow, and give the
+   answer its own highlighted chip so it stands out. */
+.prescription-table .table-row.border-primary > .col-md-10 {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start !important;
+  gap: 0.35rem 0.6rem;
+  text-align: left !important;
+  line-height: 1.5;
+}
+
+.prescription-table .table-row.border-primary > .col-md-10 h5,
+.prescription-table .table-row.border-primary > .col-md-10 p {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem;
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--clinic-ink);
+}
+
+.prescription-table .table-row.border-primary > .col-md-10 strong {
+  color: var(--clinic-primary-dark);
+}
+
+.prescription-table .table-row.border-primary > .col-md-10 > div {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.8rem;
+  background-color: var(--clinic-accent-light);
+  border: 1px solid var(--clinic-accent);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #9a3412;
+  white-space: nowrap;
+}
+
+.prescription-table .table-row.border-primary > .col-md-10 > div strong {
+  color: var(--clinic-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.72rem;
+}
+
+/* ---------- Existing utility classes (unchanged) ---------- */
 .spase1{
     padding: 1%;
     margin: 1%;
 }
-/* 
-body{
-    background-color: rgb(206, 219, 235);
-}
 
-.background
-{
- background-color: rgb(138, 170, 211);
-} */
-
-
- 
 .bodyContainer
 {
     margin: .5%;
 }
 
-
-.fixsize 
+.fixsize
 {
   width: 115%;
-  margin: 1%; 
+  margin: 1%;
 }

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" fill="none">
+  <circle cx="300" cy="300" r="250" fill="#f0fdfa"/>
+  <circle cx="300" cy="300" r="190" fill="#ccfbf1" opacity=".6"/>
+  <circle cx="120" cy="140" r="14" fill="#99f6e4"/>
+  <circle cx="500" cy="450" r="10" fill="#f97316" opacity=".7"/>
+  <circle cx="90" cy="430" r="8" fill="#0f766e" opacity=".35"/>
+  <path d="M470 120h28M484 106v28" stroke="#0f766e" stroke-width="6" stroke-linecap="round" opacity=".5"/>
+  <path d="M95 300h28M109 286v28" stroke="#0f766e" stroke-width="6" stroke-linecap="round" opacity=".35"/>
+
+  <!-- clipboard -->
+  <rect x="190" y="130" width="220" height="300" rx="22" fill="#fff" stroke="#0f766e" stroke-width="6"/>
+  <rect x="245" y="110" width="110" height="46" rx="14" fill="#0f766e"/>
+  <circle cx="300" cy="125" r="8" fill="#fff"/>
+  <!-- medical cross -->
+  <rect x="278" y="185" width="44" height="118" rx="10" fill="#0f766e"/>
+  <rect x="241" y="222" width="118" height="44" rx="10" fill="#0f766e"/>
+  <!-- lines -->
+  <rect x="222" y="335" width="156" height="12" rx="6" fill="#ccfbf1"/>
+  <rect x="222" y="362" width="120" height="12" rx="6" fill="#ccfbf1"/>
+  <rect x="222" y="389" width="140" height="12" rx="6" fill="#ccfbf1"/>
+
+  <!-- heartbeat line -->
+  <path d="M60 500h120l24-52 36 96 30-72 22 28h248" stroke="#f97316" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- stethoscope -->
+  <path d="M440 300v50a52 52 0 0 1-104 0" stroke="#134e4a" stroke-width="8" stroke-linecap="round" fill="none" transform="translate(40 -20)"/>
+  <circle cx="480" cy="392" r="20" fill="#fff" stroke="#134e4a" stroke-width="8"/>
+  <circle cx="480" cy="392" r="7" fill="#0f766e"/>
+  <circle cx="480" cy="280" r="9" fill="#134e4a"/>
+  <circle cx="376" cy="280" r="9" fill="#134e4a" transform="translate(40 0)"/>
+</svg>

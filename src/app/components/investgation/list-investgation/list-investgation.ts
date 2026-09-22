@@ -81,7 +81,8 @@ export class ListInvestgation
           cancelButtonColor: "#d33",
           confirmButtonText: "Yes, delete it!"
         }).then((result) => 
-          {     
+          {  
+             if(result.isConfirmed){       
             let Sup = this.Callapi.DeleteExamination(Id).subscribe({
             next: (P : saveExaminationListResponse) =>
               { 
@@ -102,7 +103,15 @@ export class ListInvestgation
                 Sup.unsubscribe();
             }
             });
-        });
+          }
+          else if (result.dismiss === Swal.DismissReason.cancel)
+          Swal.fire({
+            title: "Cancelled",
+            text: "Your imaginary file is safe :)",
+            icon: "error"
+          });
+        }
+        );
       }
     
     public async takePhoto(examinationId: string) 

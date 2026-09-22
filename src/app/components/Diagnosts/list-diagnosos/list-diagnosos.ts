@@ -68,6 +68,7 @@ export class ListDiagnosos {
           confirmButtonText: "Yes, delete it!"
         }).then((result) => 
           {     
+             if(result.isConfirmed){       
             let Sup = this.Callapi.DeleteDiagnos(DiagnosId).subscribe({
             next: (P : CreateDiagnosisResponse) =>
               { 
@@ -92,7 +93,14 @@ export class ListDiagnosos {
                 this.GetDiagnososlist(this.AppointmentID);
               Sup.unsubscribe();
             }
-            });
+            })}
+            else if (result.dismiss === Swal.DismissReason.cancel){
+            Swal.fire({
+              title: "Cancelled",
+              text: "Your imaginary file is safe :)",
+              icon: "error"
+            })
+        };
         });
     }
 }

@@ -1,0 +1,27 @@
+.center-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 24px;
+  width: 100%;
+  min-height: calc(100vh - 72px);
+  padding: 32px 16px;
+  box-sizing: border-box;
+}
+
+.center-box h2 {
+  margin: 0;
+}
+
+.qr-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--clinic-surface);
+  border: 1px solid var(--clinic-border);
+  border-radius: var(--clinic-radius-lg);
+  box-shadow: var(--clinic-shadow);
+  padding: 24px;
+}

@@ -1,21 +1,21 @@
 /* ===== General ===== */
 .container {
-  font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
+  font-family: var(--clinic-font);
 }
 
 .page-title {
-  color: #2b3990;
+  color: var(--clinic-primary-darker);
   font-weight: 700;
-  font-size: 1.75rem;
+  font-size: 1.6rem;
   margin-bottom: 20px;
 }
 
 /* ===== Card wrapper ===== */
 .patients-card {
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: var(--clinic-radius-lg);
   padding: 24px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--clinic-shadow);
 }
 
 /* ===== Toolbar / Search ===== */
@@ -41,25 +41,25 @@
 }
 
 ::ng-deep .patients-table .mat-mdc-header-row {
-  background-color: #f4f6fb;
+  background-color: var(--clinic-primary-light);
 }
 
 ::ng-deep .patients-table .mat-mdc-header-cell {
-  color: #2b3990;
+  color: var(--clinic-primary-darker);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.9375rem;
   text-transform: capitalize;
-  border-bottom: 2px solid #e0e4f0;
+  border-bottom: 2px solid var(--clinic-primary);
 }
 
 ::ng-deep .patients-table .mat-mdc-cell {
   color: #333;
-  font-size: 0.9rem;
-  border-bottom: 1px solid #eef0f6;
+  font-size: 0.9375rem;
+  border-bottom: 1px solid var(--clinic-border);
 }
 
 ::ng-deep .patients-table .mat-mdc-row:hover {
-  background-color: #f8f9fd;
+  background-color: var(--clinic-primary-lighter);
   transition: background-color 0.15s ease;
 }
 
@@ -76,8 +76,8 @@
 }
 
 .badge-gender.male {
-  background-color: #e8eeff;
-  color: #3b5bdb;
+  background-color: var(--clinic-primary-light);
+  color: var(--clinic-primary-dark);
 }
 
 .badge-gender.female {
@@ -87,7 +87,7 @@
 
 /* ===== Actions ===== */
 .actions-header {
-  color: #2b3990;
+  color: var(--clinic-primary-darker);
   font-weight: 700;
 }
 
@@ -116,4 +116,84 @@
 ::ng-deep .patients-paginator .mat-mdc-paginator-container {
   color: #555;
   font-size: 0.85rem;
+  border-top: 1px solid var(--clinic-border);
+}
+
+/* Retheme the paginator's Material controls (page-size select + nav icons)
+   so they match the rest of the system instead of stock Material gray/black. */
+::ng-deep .patients-paginator .mat-mdc-paginator-page-size-label,
+::ng-deep .patients-paginator .mat-mdc-paginator-range-label {
+  color: var(--clinic-muted);
+}
+
+::ng-deep .patients-paginator .mat-mdc-select-value-text {
+  color: var(--clinic-ink);
+  font-weight: 600;
+}
+
+/* Center the page-size number vertically inside its box instead of it
+   sitting near the top with empty space below. */
+::ng-deep .patients-paginator .mat-mdc-paginator-page-size-select .mat-mdc-text-field-wrapper {
+  height: 36px;
+  align-items: center;
+}
+::ng-deep .patients-paginator .mat-mdc-paginator-page-size-select .mat-mdc-form-field-flex {
+  align-items: center;
+}
+::ng-deep .patients-paginator .mat-mdc-paginator-page-size-select .mat-mdc-form-field-infix {
+  display: flex;
+  align-items: center;
+  min-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+::ng-deep .patients-paginator .mat-mdc-paginator-page-size-select .mat-mdc-form-field-infix {
+  justify-content: center;
+}
+/* The value box stretches to fill the trigger (pinning the arrow far to the
+   right), which is why the number sat on the left with a big empty gap
+   before the arrow. Let it size to its own text instead, so the whole
+   "5 ▾" group can be centered as one unit. */
+::ng-deep .patients-paginator .mat-mdc-paginator-page-size-select .mat-mdc-select-value {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  text-align: center;
+}
+::ng-deep .patients-paginator .mat-mdc-paginator-page-size-select .mat-mdc-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+::ng-deep .patients-paginator .mat-mdc-select-arrow svg {
+  fill: var(--clinic-primary);
+}
+
+::ng-deep .patients-paginator .mdc-notched-outline__leading,
+::ng-deep .patients-paginator .mdc-notched-outline__notch,
+::ng-deep .patients-paginator .mdc-notched-outline__trailing {
+  border-color: var(--clinic-border) !important;
+}
+
+::ng-deep .patients-paginator .mat-mdc-form-field:hover .mdc-notched-outline__leading,
+::ng-deep .patients-paginator .mat-mdc-form-field:hover .mdc-notched-outline__notch,
+::ng-deep .patients-paginator .mat-mdc-form-field:hover .mdc-notched-outline__trailing,
+::ng-deep .patients-paginator .mat-focused .mdc-notched-outline__leading,
+::ng-deep .patients-paginator .mat-focused .mdc-notched-outline__notch,
+::ng-deep .patients-paginator .mat-focused .mdc-notched-outline__trailing {
+  border-color: var(--clinic-primary) !important;
+}
+
+::ng-deep .patients-paginator .mat-mdc-paginator-icon {
+  fill: var(--clinic-primary);
+}
+
+::ng-deep .patients-paginator .mat-mdc-icon-button.mat-mdc-button-disabled .mat-mdc-paginator-icon {
+  fill: #b9c3cc;
+}
+
+::ng-deep .patients-paginator .mat-mdc-icon-button:not(.mat-mdc-button-disabled):hover {
+  background-color: var(--clinic-primary-lighter);
+  border-radius: 50%;
 }

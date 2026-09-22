@@ -56,7 +56,7 @@ export class Login {
           localStorage.setItem('userName', JSON.stringify(response.data.userName));
           localStorage.setItem('doctorid', JSON.stringify(response.data.doctorId));
           console.log('Token stored in localStorage:', response.data.token);
-          this.router.navigate(['/mainpage']);
+          this.router.navigate(['/allpatientview']);
           ///////////////////////////////////////////////////////
           //sthis.chatService.connect(response.data.id);/////
           ///////////////////////////////////////////////////////

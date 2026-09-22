@@ -72,7 +72,8 @@ export class ListVital
           cancelButtonColor: "#d33",
           confirmButtonText: "Yes, delete it!"
         }).then((result) => 
-          {     
+          {    
+             if(result.isConfirmed){        
             let Sup = this.Callapi.DeleteVitalSigh(Id).subscribe({
             next: (P : any) =>
               { 
@@ -93,6 +94,14 @@ export class ListVital
                 Sup.unsubscribe();
             }
             });
+          }
+           else if (result.dismiss === Swal.DismissReason.cancel){
+            Swal.fire({
+              title: "Cancelled",
+              text: "Your imaginary file is safe :)",
+              icon: "error"
+            })
+        };
         });
       }
 }

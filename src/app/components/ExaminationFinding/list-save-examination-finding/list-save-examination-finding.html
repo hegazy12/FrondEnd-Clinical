@@ -1,22 +1,23 @@
 <div class="diagnosis-table border rounded-top overflow-hidden" style="padding: .5%; margin: .5%;">
 
     <div class="row g-0 rounded-top" style="background-color: #0d6efd;">
-        <div class="col-md-3 text-white fw-semibold p-2"> Name </div>
-        <div class="col-md-5 text-white fw-semibold p-2"> Value </div>
+        <div class="col-md-3 text-center text-white fw-semibold p-2"> Name </div>
+        <div class="col-md-5 text-center text-white fw-semibold p-2"> Value </div>
         @if(!isInHistoryMood){
-        <div class="col-md-4 text-white fw-semibold p-2"> Actions </div>
+        <div class="col-md-4 text-center text-white fw-semibold p-2"> Actions </div>
         }
     </div>
 
     @for (item of data(); track $index)
     {
     <div class="row g-0 table-row">
-        <div class="col-md-4 p-2">{{ item.examinationFindingDTO1?.name }} </div>
-        <div class="col-md-4 p-2">{{ item?.value }}</div>
+        <div class="col-md-4 text-center p-2">{{ item.examinationFindingDTO1?.name }} </div>
+        <div class="col-md-4 text-center p-2">{{ item?.value }}</div>
         @if(!isInHistoryMood)
         {
-        <div class="col-md-4 p-2">
-            <button class="btn btn-sm btn-outline-danger" (click)="deleteSaveExaminationFinding(item.id)"> Delete
+        <div class="col-md-4 text-center p-2">
+            <button class="btn text-center btn-sm btn-outline-danger" (click)="deleteSaveExaminationFinding(item.id)">
+                Delete
             </button>
         </div>
         }
