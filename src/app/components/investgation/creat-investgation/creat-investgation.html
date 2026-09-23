@@ -2,7 +2,7 @@
     <div class="row" class="row border rounded-top" [class.border-danger]="isHistory() === 1"
         [class.border-light]="isHistory() !== 1" style="margin: .5%; padding: .5%;">
         <div class="col-md-10">
-            <input type="text" class="form-control" #TextsearchTearm placeholder="Search Examination"
+            <input type="text" class="form-control" #TextsearchTearm placeholder="SearchLab / Rad"
                 value="{{ExaminationName()}}">
         </div>
 
@@ -12,10 +12,10 @@
         </div>
 
         <div class="col-md-12">
-            <label class="form-label fw-semibold text-muted small">Examination</label>
+            <label class="form-label fw-semibold text-muted small">Lab / Rad</label>
             <select class="form-select" aria-label="Default select example" name="Examination" #examination
                 (change)="onSpecialtyChange($event)">
-                <option value="">Please select Examination</option>
+                <option value="">Please select Lab / Rad</option>
                 @for (EX of Examinations(); track $index) {
                 <option [value]="EX.id">{{EX.nameEn}} /{{EX.code}}</option>
                 }

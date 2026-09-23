@@ -1,0 +1,19 @@
+<div class="row" style="margin-right: .5%; margin-left: .5%;">
+
+    <div class="col-md-12" style="margin-top: 1%;">
+        <textarea class="form-control" rows="6" name="value" #ChiefComplaintvalue
+            placeholder="Chief Complaint"></textarea>
+    </div>
+
+    <div class="row" style="margin-top: 1%;">
+        <div class="col-12 d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" (click)="send(ChiefComplaintvalue.value)">Save
+                Changes</button>
+        </div>
+    </div>
+
+</div>
+
+<div class="row" style="margin:.5%">
+    <app-list-chif-compline [AppointmentID]="AppointmentID" [isInHistoryMood]="false"></app-list-chif-compline>
+</div>

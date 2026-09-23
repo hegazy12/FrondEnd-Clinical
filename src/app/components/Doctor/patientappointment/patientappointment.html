@@ -23,15 +23,32 @@
 
   <div class="row g-3">
     <!-- Left Action Column -->
-    <div class="col-lg-3 col-xl-1">
+    <div class="col-lg-3 col-xl-1" style="margin-top: 1.5%;">
 
       <button class="btn btn-primary shadow-sm fixsize" #AddHistory name="AddHistory"
         (click)="viewpage( AddHistory.name)">
         AddHistory
       </button>
+
+      <button class="btn btn-primary shadow-sm fixsize" #vitalsignsid name="vitalsigns"
+        (click)="viewpage(vitalsignsid.name)">
+        Vitals
+      </button>
+
+      <button class="btn btn-primary shadow-sm fixsize" #ChiefComplaint name="ChiefComplaint"
+        (click)="viewpage( ChiefComplaint.name)">
+        Chief Complaint
+      </button>
+
       <button class="btn btn-primary shadow-sm fixsize" #ExaminationFinding name="ExaminationFinding"
         (click)="viewpage(ExaminationFinding.name)">
         Examination
+      </button>
+
+
+      <button class="btn btn-primary shadow-sm fixsize" #investgationid name="investgation"
+        (click)="viewpage(investgationid.name)">
+        Lab / Rad
       </button>
 
       <button class="btn btn-primary shadow-sm fixsize" #diagnosid name="diagnos" (click)="viewpage(diagnosid.name)">
@@ -43,15 +60,8 @@
         Medication
       </button>
 
-      <button class="btn btn-primary shadow-sm fixsize" #investgationid name="investgation"
-        (click)="viewpage(investgationid.name)">
-        LabTests
-      </button>
 
-      <button class="btn btn-primary shadow-sm fixsize" #vitalsignsid name="vitalsigns"
-        (click)="viewpage(vitalsignsid.name)">
-        Vitals
-      </button>
+
 
       <!-- <button class="btn btn-primary shadow-sm fixsize" #allergiesid name="allergies"
         (click)="viewpage(allergiesid.name)">
@@ -104,6 +114,10 @@
       {
       <h6 class="text-center">Examination Finding</h6>
       <app-add-save-examination-finding [AppointmentID]="appointmentId"></app-add-save-examination-finding>
+      }@else if (view() == 10)
+      {
+      <h6 class="text-center">Chief Compline</h6>
+      <app-create-chif-compline [AppointmentID]="appointmentId"></app-create-chif-compline>
       }
     </div>
   </div>

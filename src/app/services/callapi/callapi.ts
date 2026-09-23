@@ -19,7 +19,8 @@ import { ListSheetResponse, SheetDto, SheetDto1, SheetsInAppointmentSavedRespons
 import { GetsaveQuestionInSheetResponse, QuestionDTO, QuestionListResponse, SaveAnswersListResponse, saveQuestionDTO, SaveQuestionResponse } from '../../interfaces/question-dto';
 import { RegisterResponse, UserDto } from '../../interfaces/user-dto';
 import { ExaminationFindingDTO, ExaminationFindingDTO1, ExaminationFindingListResponse } from '../../interfaces/examination-finding';
-import { AddSaveExaminationFindingResponse, ListSaveExaminationFindingResponse, SaveExaminationFindingDTO, SaveExaminationFindingDTO1 } from '../../interfaces/save-examination-finding';
+import { AddSaveExaminationFindingResponse, ListSaveExaminationFindingResponse, SaveExaminationFindingDTO } from '../../interfaces/save-examination-finding';
+import { CheifComplaneDTO, CreateCheifComplaneResponse, ListCheifComplaneResponse } from '../../interfaces/cheif-complane-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -138,13 +139,16 @@ export class Callapi {
   }
 
   public GetDoctorAppoinment(DoctorId: string): Observable<AppointmentsResponse> {
+   
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
+   
     return this.Http.get<AppointmentsResponse>(this.url + `Appointment/getDoctorAppointments/${DoctorId}`, { headers }).pipe(
       tap(response => { }),
       catchError(error => {
         return throwError(() => error);
       })
     );
+  
   }
 
   public GetAppointmentAllInfo(AppointmentId: string): Observable<AppointmentAllinfo> {
@@ -492,7 +496,6 @@ export class Callapi {
         return throwError(() => error);
       })
     );
-
   }
 
   public GitQuestionsByDepndOnQuestionID(Id: string): Observable<QuestionListResponse> {
@@ -615,5 +618,37 @@ export class Callapi {
       })
     );
   }
+  
 
+  public CreateCheifComplane(Create: CheifComplaneDTO): Observable<CreateCheifComplaneResponse> {
+      const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
+
+      return this.Http.post<CreateCheifComplaneResponse>(this.url + "cheifComplane/Add", Create, { headers }).pipe(
+        tap(response => { }),
+        catchError(error => {
+          return throwError(() => error);
+        })
+      );
+    }
+    
+    public DeleteCheifComplane(Id: string): Observable<any> {
+      const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
+      return this.Http.delete<any>(this.url + `cheifComplane/Delete/${Id}`, { headers }).pipe(
+        tap(response => { }),
+        catchError(error => {
+          return throwError(() => error);
+        })
+      );
+    }
+
+    public GetAllGetbyAppointment(Id: string): Observable<ListCheifComplaneResponse> 
+    {
+      const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
+      return this.Http.get<ListCheifComplaneResponse>(this.url + `cheifComplane/GetbyAppointment/${Id}`, { headers }).pipe(
+        tap(response => { }),
+        catchError(error => {
+          return throwError(() => error);
+        })
+      );
+    }
 }

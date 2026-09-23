@@ -11,10 +11,11 @@ import { ListVital } from '../../vital/list-vital/list-vital';
 import { SheetDto1, SheetsInAppointmentSavedResponse } from '../../../interfaces/sheet-dto';
 import { SaveAnswerQuestion } from '../../Doctor/History/Question/save-answer-question/save-answer-question';
 import { ListSaveExaminationFinding } from '../../ExaminationFinding/list-save-examination-finding/list-save-examination-finding';
+import { ListChifCompline } from '../../ChifCompline/list-chif-compline/list-chif-compline';
 
 @Component({
   selector: 'app-appointment-story',
-  imports: [ListInvestgation, PrescriptionList, ListDiagnosos, ListVital, SaveAnswerQuestion, ListSaveExaminationFinding],
+  imports: [ListInvestgation, ListChifCompline, PrescriptionList, ListDiagnosos, ListVital, SaveAnswerQuestion, ListSaveExaminationFinding],
   templateUrl: './appointment-story.html',
   styleUrl: './appointment-story.css',
 })
@@ -29,6 +30,8 @@ export class AppointmentStory {
   @ViewChild(ListVital) ListVitalRef!: ListVital;
   @ViewChild(ListSaveExaminationFinding) listSaveExaminationFindingRef!: ListSaveExaminationFinding;
   @ViewChild(SaveAnswerQuestion) saveAnswerQuestionRef!: SaveAnswerQuestion;
+  @ViewChild(ListChifCompline) listChifComplineRef!: ListChifCompline;
+
 
   public Sheet = signal<SheetDto1[] | undefined>(undefined);
 
@@ -65,6 +68,7 @@ export class AppointmentStory {
         this.listSaveExaminationFindingRef.getdata(AppointmentID);
         this.appointmentid.set(AppointmentID);
         this.ListVitalRef.GetsaveVitalSighAppoinmenById(AppointmentID);
+        this.listChifComplineRef.GetChifComplineList(AppointmentID);
         this.SelectSheet.set(undefined);
       },
       error: (err) => {

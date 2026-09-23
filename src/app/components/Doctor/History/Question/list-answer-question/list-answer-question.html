@@ -28,7 +28,7 @@
 
                 @if(item?.dataTypeName == "Numeric")
                 {
-                <p>Min Value : <samp> {{item?.minValue}}</samp> , Mix Value : <samp>{{item?.maxValue}}</samp> </p>
+                <p>Min :<samp> {{item?.minValue}}</samp> , Max : <samp>{{item?.maxValue}}</samp> </p>
                 <input type="number" class="form-control border  border-secondary rounded" name="{{item.id}}"
                     id="{{item.id}}" [min]="item?.minValue ?? null" [max]="item?.maxValue ?? null" />
                 }

@@ -15,6 +15,10 @@
         </div>
     </div>
     <div class="row">
+        <h5 class="hed text-secondary"> Chief Complaint </h5>
+        <app-list-chif-compline [AppointmentID]="appointmentid()" [isInHistoryMood]="true"></app-list-chif-compline>
+    </div>
+    <div class="row">
         <h5 class="hed text-secondary"> Examination Findings </h5>
         <app-list-save-examination-finding [AppointmentID]="appointmentid()"
             [isInHistoryMood]="true"></app-list-save-examination-finding>

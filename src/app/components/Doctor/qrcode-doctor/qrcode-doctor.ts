@@ -18,16 +18,14 @@ export class QrcodeDoctor {
   public frontLink = signal<string>('');
 
   constructor(private callapi: Callapi, private router: Router, private Vervication: VerfivationToken, private LinkService: LinkService) {
-    this.doctorId.set(this.Vervication.GetLoginID());
-    this.frontLink.set(this.LinkService.gitFrontOrigin());
+   
   }
 
   ngOnInit(): void {
-    if (this.Vervication.islogin() == false) {
-      this.router.navigate(['/login']);
-    }
-    else {
-      this.frontLink.set(this.frontLink() + '/phonetraker/' + this.doctorId());
-    }
+  
+        this.doctorId.set(this.Vervication.GetLoginID());
+        this.frontLink.set(this.LinkService.gitFrontOrigin());
+        this.frontLink.set(this.frontLink() + '/phonetraker/' + this.doctorId());
+    
   }
 }
