@@ -3,10 +3,11 @@ import { Navbar } from '../../navbar/navbar';
 import { AddSheet } from '../sheet/add-sheet/add-sheet';
 import { AddQuestion } from '../Questions/add-question/add-question';
 import { CreateExaminationFinding } from '../ExaminationFinding/create-examination-finding/create-examination-finding';
+import { CreateMainQuestion } from '../MainQuestion/create-main-question/create-main-question';
 
 @Component({
   selector: 'app-admin-view',
-  imports: [Navbar, AddSheet, AddQuestion, CreateExaminationFinding],
+  imports: [Navbar, AddSheet, AddQuestion, CreateExaminationFinding, CreateMainQuestion],
   templateUrl: './admin-view.html',
   styleUrl: './admin-view.css',
 })
@@ -25,6 +26,9 @@ export class AdminView {
     }
     else if (viewName == "addExaminationFinding") {
       this.view.set(3);
+    }
+    else if (viewName == "addMainQuestion") {
+      this.view.set(4);
     }
   }
 

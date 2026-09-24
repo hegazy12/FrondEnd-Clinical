@@ -1,0 +1,94 @@
+<form>
+    <div class="row" style="margin-right: .5%; margin-left: .5%;">
+
+        <div class="col-md-12 itemStyel">
+            <label class="form-label fw-semibold text-muted small itemStyel">Quation Body</label>
+            <textarea class="form-control" rows="2" name="QuationBodyName" #QuationBodyId
+                placeholder="Entar Quation Body"></textarea>
+        </div>
+
+        <div class="col-md-12 itemStyel">
+            <label class="form-label fw-semibold text-muted small itemStyel">Quation description</label>
+            <textarea class="form-control" rows="3" name="descriptionName" #descriptionId
+                placeholder="Entar Quation Body"></textarea>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted small itemStyel">Min Age</label>
+            <input type="number" class="form-control itemStyel" #minAge>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted small itemStyel">Max Age</label>
+            <input type="number" class="form-control itemStyel" #maxAge>
+        </div>
+
+        <div class="col-md-6 ">
+            <label class="form-label fw-semibold text-muted small d-block">Gender</label>
+            <div class="btn-group w-100" role="group">
+                <div class="form-check form-check-inline">
+                    <label for="genderMale">Male</label>
+                    <input type="radio" name="gender" id="genderMale" value="Male" class="ms-8">
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <label for="genderFemale">Female</label>
+                    <input type="radio" name="gender" id="genderFemale" value="Female" class="ms-8">
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-6 ">
+            <label class="form-label fw-semibold text-muted small itemStyel">Data Type</label>
+            <select class="form-select" aria-label="Default select example" name="QuationDataType" #QuationDataType
+                (change)="onSpecialtyChange($event)">
+                <option value="">Please select DataType</option>
+                <option value="Boolean">Boolean</option>
+                <option value="Dropdown">Dropdown</option>
+                <option value="Numeric">Numeric</option>
+                <option value="Text">Text</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted small itemStyel">Min number</label>
+            <input type="number" class="form-control itemStyel" #minNumberId>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted small itemStyel">Max number</label>
+            <input type="number" class="form-control itemStyel" #maxNumberId>
+        </div>
+        <div class="col-md-10">
+            <label class="form-label fw-semibold text-muted small itemStyel">Item In list</label>
+            <input type="text" class="form-control itemStyel" #ItemInlist placeholder="Item In list"
+                value="{{Itemlist()}}">
+        </div>
+
+        <div class="col-md-2 d-flex align-items-end">
+            <input type="button" class="btn btn-primary w-100 add-in-list-btn" value="add In list"
+                (click)="addItemInlist(ItemInlist.value)">
+        </div>
+
+        <div class="col-md-12">
+            <div class="row">
+                @for (item of list(); track $index)
+                {
+                <div class="col-md-3">
+                    <h4>{{item}}</h4>
+                </div>
+                }
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 1%;">
+            <div class="col-12 d-flex justify-content-end itemStyel">
+                <button type="button" class="btn btn-primary "
+                    (click)="onSubmit(QuationBodyId.value, descriptionId.value, minNumberId.value, maxNumberId.value)">Save</button>
+            </div>
+        </div>
+
+    </div>
+</form>
+<app-list-main-question></app-list-main-question>

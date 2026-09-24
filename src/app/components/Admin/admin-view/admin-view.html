@@ -1,33 +1,38 @@
 <app-navbar></app-navbar>
 <div class="row g-3 bodyContainer">
-  <div class="col-lg-3 col-xl-1">
+  <div class="col-lg-3 col-xl-2 d-grid gap-2 align-content-start">
 
-    <button class="btn btn-primary shadow-sm fixsize" #addSheet name="addSheet" (click)="viewpage(addSheet.name)">
+    <button class="btn btn-primary shadow-sm w-100" #addSheet name="addSheet" (click)="viewpage(addSheet.name)">
       addSheet
     </button>
 
-    <button class="btn btn-primary shadow-sm fixsize" #addQuestion name="addQuestion"
+    <button class="btn btn-primary shadow-sm w-100" #addQuestion name="addQuestion"
       (click)="viewpage(addQuestion.name)">
       addQuestion
     </button>
 
-    <!-- <button class="btn btn-primary shadow-sm fixsize" #addUser name="addUser" (click)="viewpage(addUser.name)">
+    <!-- <button class="btn btn-primary shadow-sm w-100" #addUser name="addUser" (click)="viewpage(addUser.name)">
       addUser
     </button>
 
-    <button class="btn btn-primary shadow-sm fixsize" #addDoctor name="addDoctor" (click)="viewpage(addDoctor.name)">
+    <button class="btn btn-primary shadow-sm w-100" #addDoctor name="addDoctor" (click)="viewpage(addDoctor.name)">
       addDoctor
     </button> -->
 
-    <button class="btn btn-primary shadow-sm fixsize" #addExaminationFinding name="addExaminationFinding"
+    <button class="btn btn-primary shadow-sm w-100" #addExaminationFinding name="addExaminationFinding"
       (click)="viewpage(addExaminationFinding.name)">
       Add Examination Finding
+    </button>
+
+    <button class="btn btn-primary shadow-sm w-100" #addMainQuestion name="addMainQuestion"
+      (click)="viewpage(addMainQuestion.name)">
+      Add Main Question
     </button>
 
   </div>
 
 
-  <div class="col-lg-9 col-xl-11">
+  <div class="col-lg-9 col-xl-10">
 
     @if( view() == 1 )
     {
@@ -41,7 +46,10 @@
     {
     <app-create-examination-finding></app-create-examination-finding>
     }
-
+    @else if(view() == 4 )
+    {
+    <app-create-main-question></app-create-main-question>
+    }
   </div>
 
-</div>-
+</div>
