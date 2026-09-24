@@ -1,0 +1,40 @@
+<div class="diagnosis-table border rounded-top overflow-hidden" style="padding: .5%; margin: .5%;">
+
+    <div class="row g-0 rounded-top" style="background-color: #0d6efd;">
+        <div class="col-md-3 text-white fw-semibold p-2"> Question </div>
+        <div class="col-md-3 text-white fw-semibold p-2"> Description </div>
+        <div class="col-md-2 text-white fw-semibold p-2"> Data Type </div>
+        <div class="col-md-2 text-white fw-semibold p-2"> Values </div>
+        <div class="col-md-2 text-center text-white fw-semibold p-2"> Actions </div>
+    </div>
+
+    @for (item of data(); track item.id)
+    {
+    <div class="row g-0 table-row">
+        <div class="col-md-3 p-2">{{ item.questionBody }}</div>
+        <div class="col-md-3 p-2">{{ item.description }}</div>
+        <div class="col-md-2 p-2">{{ item.dataTypeName }}</div>
+        <div class="col-md-2 p-2">
+            @if (item.listValues.length) {
+            {{ item.listValues.join(', ') }}
+            }
+            @else if (item.minValue || item.maxValue) {
+            {{ item.minValue }} - {{ item.maxValue }}
+            }
+        </div>
+        <div class="col-md-2 text-center p-2">
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteMainQuestion(item.id)">
+                Delete
+            </button>
+        </div>
+    </div>
+    }
+    @empty
+    {
+    <div class="row g-0">
+        <div class="col-md-12 text-center text-muted py-4">
+            No main questions found.
+        </div>
+    </div>
+    }
+</div>
