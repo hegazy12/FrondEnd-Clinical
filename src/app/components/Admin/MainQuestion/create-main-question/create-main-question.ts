@@ -25,6 +25,8 @@ export class CreateMainQuestion {
   public MaxNumber = signal<number>(0);
   public MinNumber = signal<number>(0);
   public description = signal<string>('');
+  // 0 = both, 1 = male, 2 = female
+  public gendar = signal<number>(0);
 
 
 
@@ -52,7 +54,24 @@ export class CreateMainQuestion {
   }
 
 
-  public onSubmit(quationBody: string, description: string, minValue: string, maxValue: string): void {
+  public onSubmit(quationBody: string, description: string, minValue: string, maxValue: string, minageValue: string, maxageValue: string, requer: boolean): void {
+    // input.value is always a string; the API expects numbers (empty -> 0)
+    const minage = Number(minageValue) || 0;
+    const maxage = Number(maxageValue) || 0;
+
+    if (quationBody.trim() == '') {
+      this.swal.showWoringSave("Please enter the question body");
+      return;
+    }
+    if (this.dataType() == '') {
+      this.swal.showWoringSave("Please select data type");
+      return;
+    }
+    if (minage < 0 || maxage < 0 || (maxage > 0 && minage > maxage)) {
+      this.swal.showWoringSave("Min age must be less than or equal to max age");
+      return;
+    }
+
     let questionDto: MainQuestionDTO =
     {
       questionBody: quationBody,
@@ -62,10 +81,10 @@ export class CreateMainQuestion {
       minValue: minValue,
       requeried: false,
       listValues: this.list(),
-      maxage: 1,
-      minage: 1,
-      gendar: 1,
-      requer: true
+      maxage: maxage,
+      minage: minage,
+      gendar: this.gendar(),
+      requer: requer
     };
 
     this.Create(questionDto);

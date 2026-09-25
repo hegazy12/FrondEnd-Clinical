@@ -12,6 +12,11 @@
             Add Patient
         </button>
 
+        <button class="btn btn-primary shadow-sm fixsize" #MainSheet name="MainSheet"
+            (click)="viewpage(MainSheet.name)">
+            Main Sheet
+        </button>
+
     </div>
 
 
@@ -25,7 +30,10 @@
         {
         <app-create-patient></app-create-patient>
         }
-
+        @else if(view() == 3 )
+        {
+        <app-create-patient></app-create-patient>
+        }
     </div>
 
 </div>
