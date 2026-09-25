@@ -27,14 +27,29 @@
             <label class="form-label fw-semibold text-muted small d-block">Gender</label>
             <div class="btn-group w-100" role="group">
                 <div class="form-check form-check-inline">
+                    <label for="genderBoth">Both</label>
+                    <input type="radio" name="gender" id="genderBoth" class="ms-8"
+                        [checked]="gendar() == 0" (change)="gendar.set(0)">
+                </div>
+
+                <div class="form-check form-check-inline">
                     <label for="genderMale">Male</label>
-                    <input type="radio" name="gender" id="genderMale" value="Male" class="ms-8">
+                    <input type="radio" name="gender" id="genderMale" class="ms-8"
+                        [checked]="gendar() == 1" (change)="gendar.set(1)">
                 </div>
 
                 <div class="form-check form-check-inline">
                     <label for="genderFemale">Female</label>
-                    <input type="radio" name="gender" id="genderFemale" value="Female" class="ms-8">
+                    <input type="radio" name="gender" id="genderFemale" class="ms-8"
+                        [checked]="gendar() == 2" (change)="gendar.set(2)">
                 </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 d-flex align-items-end">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="requerId" #requerId>
+                <label class="form-check-label" for="requerId">Required</label>
             </div>
         </div>
 
@@ -85,7 +100,7 @@
         <div class="row" style="margin-top: 1%;">
             <div class="col-12 d-flex justify-content-end itemStyel">
                 <button type="button" class="btn btn-primary "
-                    (click)="onSubmit(QuationBodyId.value, descriptionId.value, minNumberId.value, maxNumberId.value)">Save</button>
+                    (click)="onSubmit(QuationBodyId.value, descriptionId.value, minNumberId.value, maxNumberId.value, minAge.value, maxAge.value, requerId.checked)">Save</button>
             </div>
         </div>
 
