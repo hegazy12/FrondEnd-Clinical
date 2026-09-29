@@ -10,7 +10,7 @@
         </h2>
         <p class="text-muted mb-0">
           <span class="me-3"><strong>Gender: </strong> {{ Patient()?.gender }}</span>
-          <span class="me-3"><strong>DOB:</strong> {{ Patient()?.dateOfBirth }}</span>
+          <span class="me-3"><strong>DOB:</strong> {{ Patient()?.dateOfBirth | date:'mediumDate' }}</span>
           <span><strong>Phone:</strong> {{ Patient()?.phoneNumber }}</span>
         </p>
       </div>
@@ -29,6 +29,10 @@
     <input type="button" class="btn btn btn-secondary d-flex justify-content-end fixsize" name="viewhistory"
       #viewhistory value="ViewStory" (click)="viewpage(viewhistory.name)">
 
+    <button class="btn btn-primary shadow-sm fixsize" #MainSheet name="MainSheet" (click)="viewpage(MainSheet.name)">
+      Main Sheet
+    </button>
+
   </div>
 
 
@@ -42,6 +46,11 @@
     {
     <app-patient-story #patientstory [PatientID]="patientId"></app-patient-story>
     }
+    @else if(view() == 3 )
+    {
+    <app-create-save-main-question [PatientId]="patientId"></app-create-save-main-question>
+    }
+
   </div>
 
-</div>-
+</div>

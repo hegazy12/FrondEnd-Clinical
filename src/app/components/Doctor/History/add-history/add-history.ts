@@ -10,52 +10,43 @@ import { ListAnswerQuestion } from '../Question/list-answer-question/list-answer
   templateUrl: './add-history.html',
   styleUrl: './add-history.css',
 })
-export class AddHistory
-{
+export class AddHistory {
   @Input({ required: true }) AppointmentID!: string;
-
-  public Sheetdata =signal<SheetDto1[]>([]); 
+  @Input({ required: true }) PatientId!: string;
+  public Sheetdata = signal<SheetDto1[]>([]);
   public SheetDto1 = signal<SheetDto1 | undefined>(undefined);
   public SelectedSheetID = signal<string>('');
   @ViewChild(ListAnswerQuestion) ListAnswerQuestionRef!: ListAnswerQuestion;
 
-  constructor(private callapi : Callapi,private Vervication:VerfivationToken){}
-           
-  ngOnInit():void 
-  {
-    if(this.Vervication.islogin() == false)
-    { 
-        
-    }
-    else
-    {
-      this.SheetList();
-    }
-  }   
+  constructor(private callapi: Callapi, private Vervication: VerfivationToken) { }
 
-  public SheetList() : boolean 
-  {            
-    let Sup = this.callapi.SheetList().subscribe({
-      next: (P : ListSheetResponse) =>
-            {
-              this.Sheetdata.set(P.data);
-              Sup.unsubscribe();
-            },
-      error: (err) => 
-          {
-            Sup.unsubscribe();
-          }
-          });
-    return true;
+  ngOnInit(): void {
+    if (this.Vervication.islogin() == false) {
+
+    }
+    else {
+      this.GetSheetByPtinetId(this.PatientId);
+    }
   }
 
-  onSpecialtyChange(event: Event)
-  {
+  public GetSheetByPtinetId(ptinetId: string) {
+    let Sup = this.callapi.GetSheetByPtinetId(ptinetId).subscribe({
+      next: (P: ListSheetResponse) => {
+        this.Sheetdata.set(P.data);
+        Sup.unsubscribe();
+      },
+      error: (err) => {
+        Sup.unsubscribe();
+      }
+    });
+  }
+
+  onSpecialtyChange(event: Event) {
     const element = event.target as HTMLSelectElement;
-    let x =this.Sheetdata().find(m=> m.id == element.value);
+    let x = this.Sheetdata().find(m => m.id == element.value);
     this.SheetDto1.set(x);
     this.SelectedSheetID.set(element.value);
-    this.ListAnswerQuestionRef.GitQuestionsBySheetId1(element.value,this.AppointmentID);
+    this.ListAnswerQuestionRef.GitQuestionsBySheetId1(element.value, this.AppointmentID);
   }
 
 }

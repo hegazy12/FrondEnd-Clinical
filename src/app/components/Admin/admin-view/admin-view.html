@@ -29,6 +29,11 @@
       Add Main Question
     </button>
 
+    <button class="btn btn-primary shadow-sm w-100" #addService name="addService"
+      (click)="viewpage(addService.name)">
+      Add Service
+    </button>
+
   </div>
 
 
@@ -49,6 +54,10 @@
     @else if(view() == 4 )
     {
     <app-create-main-question></app-create-main-question>
+    }
+    @else if(view() == 5 )
+    {
+    <app-create-service></app-create-service>
     }
   </div>
 

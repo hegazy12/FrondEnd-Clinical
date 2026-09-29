@@ -1,0 +1,65 @@
+/* ===== Header: title + day navigation ===== */
+.registry-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+/* ===== Day navigation (one pill container with two arrows) ===== */
+.day-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: var(--clinic-surface, #ffffff);
+  border: 1px solid var(--clinic-border, #dee2e6);
+  border-radius: 999px;
+  box-shadow: var(--clinic-shadow, 0 1px 3px rgba(0, 0, 0, .08));
+}
+
+.day-nav-label {
+  min-width: 48px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--clinic-ink, #333);
+  user-select: none;
+}
+
+.day-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--clinic-primary, #0d6efd);
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease;
+}
+
+.day-nav-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.day-nav-btn:hover {
+  background-color: var(--clinic-primary, #0d6efd);
+  color: #ffffff;
+}
+
+.day-nav-btn:focus-visible {
+  outline: 2px solid var(--clinic-primary, #0d6efd);
+  outline-offset: 2px;
+}

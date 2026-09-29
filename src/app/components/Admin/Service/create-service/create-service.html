@@ -1,0 +1,61 @@
+<div class="row g-2 align-items-end">
+    <div class="col-md-8">
+        <label class="form-label fw-semibold text-muted small">Service Name</label>
+        <input type="text" class="form-control" #serviceName placeholder="Service Name">
+    </div>
+    <div class="col-md-4">
+        <label class="form-label fw-semibold text-muted small">Price</label>
+        <input type="number" min="0" step="0.01" class="form-control" #servicePrice placeholder="0.00">
+    </div>
+    <div class="col-md-12">
+        <label class="form-label fw-semibold text-muted small">Description</label>
+        <textarea class="form-control" rows="3" #serviceDescription placeholder="Service Description"></textarea>
+    </div>
+
+    <!-- Examination Finding -> examinationId -->
+    <div class="col-md-10">
+        <label class="form-label fw-semibold text-muted small">Examination Finding</label>
+        <input type="text" class="form-control" #TextsearchExaminationFinding placeholder="Search Examination Finding">
+    </div>
+    <div class="col-md-2">
+        <input type="button" class="btn btn-primary w-100 control-height" value="Search"
+            (click)="GetExaminationFindingBySearchTearm(TextsearchExaminationFinding.value)">
+    </div>
+    <div class="col-md-12">
+        <select class="form-select" name="SearchExaminationFinding" #examinationFindingSelect
+            (change)="onExaminationFindingChange($event)">
+            <option value="">Please select Examination Finding</option>
+            @for (EX of ExaminationFindings(); track EX.id)
+            {
+            <option [value]="EX.id">{{EX.name}}</option>
+            }
+        </select>
+    </div>
+
+    <!-- Lab / Rad -> medicalExaminationId -->
+    <div class="col-md-10">
+        <label class="form-label fw-semibold text-muted small">Lab / Rad</label>
+        <input type="text" class="form-control" #TextsearchExamination placeholder="Search Lab / Rad">
+    </div>
+    <div class="col-md-2">
+        <input type="button" class="btn btn-primary w-100 control-height" value="Search"
+            (click)="SearchExaminations(TextsearchExamination.value)">
+    </div>
+    <div class="col-md-12">
+        <select class="form-select" name="Examination" #medicalExaminationSelect
+            (change)="onMedicalExaminationChange($event)">
+            <option value="">Please select Lab / Rad</option>
+            @for (EX of Examinations(); track EX.id)
+            {
+            <option [value]="EX.id">{{EX.nameEn}} / {{EX.code}}</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-12 d-flex justify-content-end">
+        <input type="button" class="btn btn-primary" value="Add Service"
+            (click)="AddService(serviceName.value, servicePrice.value, serviceDescription.value)">
+    </div>
+</div>
+
+<app-list-service></app-list-service>

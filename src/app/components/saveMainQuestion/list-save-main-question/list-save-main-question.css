@@ -1,0 +1,16 @@
+/* Description: same look as in the answer form (create-save-main-question .question-desc).
+   Selector is long on purpose to beat the global .prescription-table rule in styles.css. */
+.prescription-table .table-row.border-primary > .col-md-10 p.question-desc {
+  color: var(--clinic-muted, #6c757d);
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+/* This table has no header row, so the global "first row = header" style
+   (uppercase, small bold text) must not apply to the first answer. */
+.prescription-table > .row:first-child > [class*="col-"] {
+  font-size: 0.9rem;
+  font-weight: 400 !important;
+  text-transform: none;
+  letter-spacing: normal;
+}

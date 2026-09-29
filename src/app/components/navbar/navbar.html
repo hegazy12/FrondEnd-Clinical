@@ -15,12 +15,19 @@
   <div class="col-md-2">
     @if (roles.includes('doctor') ||roles.includes('Doctor'))
     {
-    <strong> <a class="nav-link text-white" target="_blank" [routerLink]="['/qrcodedoctor']">Doctor QR Code</a> </strong>
+    <strong> <a class="nav-link text-white" target="_blank" [routerLink]="['/qrcodedoctor']">Doctor QR Code</a>
+    </strong>
     }
   </div>
 
+  <div class="col-md-2">
+    @if( roles.includes('doctor') ||roles.includes('Doctor'))
+    {
+    <strong> <a class="nav-link text-white" [routerLink]="['/doctorview']">Doctor Profile</a> </strong>
+    }
+  </div>
 
-  <div class="col-md-7">
+  <div class="col-md-5">
     @if (roles.includes('doctor') ||roles.includes('Doctor'))
     {
     <strong> <a class="nav-link text-white" [routerLink]="['/Admin']">Admin</a> </strong>
@@ -28,9 +35,9 @@
   </div>
 
   <!-- 
-      <div class="col-md-8" >
-        <strong> <a class="nav-link text-white" [routerLink]="['/Sitting']">Settings</a></strong>
-      </div>  
+       <div class="col-md-8" >
+          <strong> <a class="nav-link text-white" [routerLink]="['/Sitting']">Settings</a></strong>
+       </div>  
     -->
 
   <div class="col-md-1 d-flex justify-content-end">

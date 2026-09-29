@@ -27,12 +27,6 @@
             <label class="form-label fw-semibold text-muted small d-block">Gender</label>
             <div class="btn-group w-100" role="group">
                 <div class="form-check form-check-inline">
-                    <label for="genderBoth">Both</label>
-                    <input type="radio" name="gender" id="genderBoth" class="ms-8"
-                        [checked]="gendar() == 0" (change)="gendar.set(0)">
-                </div>
-
-                <div class="form-check form-check-inline">
                     <label for="genderMale">Male</label>
                     <input type="radio" name="gender" id="genderMale" class="ms-8"
                         [checked]="gendar() == 1" (change)="gendar.set(1)">

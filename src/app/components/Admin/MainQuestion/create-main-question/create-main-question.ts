@@ -26,7 +26,7 @@ export class CreateMainQuestion {
   public MinNumber = signal<number>(0);
   public description = signal<string>('');
   // 0 = both, 1 = male, 2 = female
-  public gendar = signal<number>(0);
+  public gendar = signal<number>(1);
 
 
 

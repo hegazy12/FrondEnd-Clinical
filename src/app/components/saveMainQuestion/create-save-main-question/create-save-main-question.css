@@ -1,0 +1,123 @@
+/* Wrapper for the form + saved answers: 20% wider than Bootstrap's .container
+   (1320px -> 1584px on large screens), full width on smaller ones */
+.sheet-container {
+  width: 100%;
+  max-width: 1584px;
+  margin-inline: auto;
+  padding-inline: 12px;
+}
+
+.main-sheet {
+  background: var(--clinic-surface, #ffffff);
+  border-radius: var(--clinic-radius-lg, 12px);
+  box-shadow: var(--clinic-shadow, 0 1px 3px rgba(0, 0, 0, .08));
+  padding: 24px;
+}
+
+.sheet-title {
+  color: var(--clinic-primary-darker, #1d4f4a);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* ===== Question card ===== */
+.question-card {
+  border: 1px solid var(--clinic-border, #dee2e6);
+  border-radius: var(--clinic-radius, 8px);
+  padding: 16px;
+  margin-bottom: 12px;
+  transition: border-color .15s ease;
+}
+
+.question-card:focus-within {
+  border-color: var(--clinic-primary, #2a7a70);
+}
+
+.question-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.question-body {
+  font-weight: 600;
+  color: var(--clinic-ink, #333);
+  margin-bottom: 4px;
+}
+
+.required-mark {
+  color: #d33;
+  margin-inline-start: 2px;
+}
+
+.type-badge {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--clinic-primary-light, #e3f2ef);
+  color: var(--clinic-primary-dark, #1f5f57);
+}
+
+.question-desc {
+  color: var(--clinic-muted, #6c757d);
+  font-size: 0.875rem;
+  margin-bottom: 8px;
+}
+
+.question-input {
+  margin-top: 8px;
+}
+
+.note-input {
+  margin-top: 8px;
+}
+
+/* ===== Boolean as two pill options ===== */
+.bool-group {
+  display: flex;
+  gap: 8px;
+}
+
+.bool-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 18px;
+  border: 1px solid var(--clinic-border, #dee2e6);
+  border-radius: 999px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+
+.bool-option input {
+  accent-color: var(--clinic-primary, #2a7a70);
+}
+
+.bool-option.selected {
+  border-color: var(--clinic-primary, #2a7a70);
+  background: var(--clinic-primary-lighter, #f1f8f6);
+  font-weight: 600;
+}
+
+/* ===== Footer / empty ===== */
+.sheet-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+/* Saved answers list: same width as the form card above, with a gap between them */
+.saved-answers {
+  margin-top: 16px;
+}
+
+.empty-state {
+  text-align: center;
+  color: #999;
+  font-style: italic;
+  padding: 32px 0;
+}

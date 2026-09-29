@@ -1,0 +1,85 @@
+﻿<div class="sheet-container">
+    <div class="main-sheet">
+        <h4 class="sheet-title">Main Sheet</h4>
+
+        @for (q of MainQuestions(); track q.id)
+        {
+        <div class="question-card">
+            <div class="question-head">
+                <label class="question-body" [for]="'q-' + q.id">
+                    {{ q.questionBody }}
+                    @if (q.requeried || q.requer) {
+                    <span class="required-mark" title="Required">*</span>
+                    }
+                </label>
+                <span class="type-badge">{{ q.dataTypeName }}</span>
+            </div>
+
+            @if (q.description) {
+            <p class="question-desc">{{ q.description }}</p>
+            }
+
+            <div class="question-input">
+                @switch (q.dataTypeName)
+                {
+                @case ('Numeric') {
+                <input type="number" class="form-control" [id]="'q-' + q.id" [class.is-invalid]="isOutOfRange(q)"
+                    [min]="q.minValue || null" [max]="q.maxValue || null"
+                    [placeholder]="(q.minValue || q.maxValue) ? (q.minValue + ' - ' + q.maxValue) : 'Enter a number'"
+                    [value]="Answers()[q.id] || ''" (input)="setAnswer(q.id, $any($event.target).value)">
+                @if (isOutOfRange(q)) {
+                <div class="invalid-feedback">Value must be between {{ q.minValue }} and {{ q.maxValue }}</div>
+                }
+                }
+
+                @case ('Boolean') {
+                <div class="bool-group">
+                    <label class="bool-option" [class.selected]="Answers()[q.id] == 'true'">
+                        <input type="radio" [name]="'q-' + q.id" value="true" [checked]="Answers()[q.id] == 'true'"
+                            (change)="setAnswer(q.id, 'true')">
+                        Yes
+                    </label>
+                    <label class="bool-option" [class.selected]="Answers()[q.id] == 'false'">
+                        <input type="radio" [name]="'q-' + q.id" value="false" [checked]="Answers()[q.id] == 'false'"
+                            (change)="setAnswer(q.id, 'false')">
+                        No
+                    </label>
+                </div>
+                }
+
+                @case ('Dropdown') {
+                <select class="form-select" [id]="'q-' + q.id" (change)="setAnswer(q.id, $any($event.target).value)">
+                    <option value="" [selected]="!Answers()[q.id]">Please select</option>
+                    @for (item of q.listValues; track $index) {
+                    <option [value]="item" [selected]="Answers()[q.id] == item">{{ item }}</option>
+                    }
+                </select>
+                }
+
+                @default {
+                <input type="text" class="form-control" [id]="'q-' + q.id" placeholder="Answer"
+                    [value]="Answers()[q.id] || ''" (input)="setAnswer(q.id, $any($event.target).value)">
+                }
+                }
+            </div>
+        </div>
+        }
+        @empty
+        {
+        <div class="empty-state">No main questions for this patient.</div>
+        }
+
+        @if (MainQuestions().length > 0) {
+        <div class="sheet-actions">
+            <button type="button" class="btn btn-primary" [disabled]="isSaving()" (click)="SaveAll()">
+                {{ isSaving() ? 'Saving...' : 'Save Answers' }}
+            </button>
+        </div>
+        }
+    </div>
+
+    <div class="saved-answers">
+        <app-list-save-main-question [PatientId]="PatientId" [isInHistoryMood]="false"
+            (deleted)="GetMainQuestions(PatientId)"></app-list-save-main-question>
+    </div>
+</div>

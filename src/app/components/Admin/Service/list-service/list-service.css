@@ -1,0 +1,177 @@
+
+.page-title {
+  color: var(--clinic-primary-darker);
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+}
+
+/* ===== Card wrapper ===== */
+.list-card {
+  background: #ffffff;
+  border-radius: var(--clinic-radius-lg);
+  padding: 24px;
+  box-shadow: var(--clinic-shadow);
+}
+
+/* ===== Toolbar / Search ===== */
+.table-toolbar {
+  margin-bottom: 16px;
+}
+
+.search-field {
+  width: 280px;
+}
+.searchControl{
+    width: 30%;
+}
+
+::ng-deep .search-field .mat-mdc-text-field-wrapper {
+  border-radius: 8px;
+}
+
+/* ===== Table ===== */
+.list-table {
+  width: 100%;
+  font-family: inherit;
+}
+
+::ng-deep .list-table .mat-mdc-header-row {
+  background-color: var(--clinic-primary-light);
+}
+
+::ng-deep .list-table .mat-mdc-header-cell {
+  color: var(--clinic-primary-darker);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  text-transform: capitalize;
+  border-bottom: 2px solid var(--clinic-primary);
+}
+
+::ng-deep .list-table .mat-mdc-cell {
+  color: #333;
+  font-size: 0.9375rem;
+  border-bottom: 1px solid var(--clinic-border);
+}
+
+::ng-deep .list-table .mat-mdc-row:hover {
+  background-color: var(--clinic-primary-lighter);
+  transition: background-color 0.15s ease;
+}
+
+.table-row {
+  cursor: default;
+}
+
+/* ===== Actions ===== */
+.actions-header {
+  color: var(--clinic-primary-darker);
+  font-weight: 700;
+}
+
+.actions-cell {
+  white-space: nowrap;
+}
+
+.action-btn {
+  transform: scale(0.9);
+}
+
+/* ===== No data ===== */
+.no-data-cell {
+  text-align: center;
+  padding: 32px 0;
+  color: #999;
+  font-style: italic;
+}
+
+/* ===== Paginator ===== */
+.list-paginator {
+  background: transparent;
+  margin-top: 8px;
+}
+
+::ng-deep .list-paginator .mat-mdc-paginator-container {
+  color: #555;
+  font-size: 0.85rem;
+  border-top: 1px solid var(--clinic-border);
+}
+
+/* Retheme the paginator's Material controls (page-size select + nav icons)
+   so they match the rest of the system instead of stock Material gray/black. */
+::ng-deep .list-paginator .mat-mdc-paginator-page-size-label,
+::ng-deep .list-paginator .mat-mdc-paginator-range-label {
+  color: var(--clinic-muted);
+}
+
+::ng-deep .list-paginator .mat-mdc-select-value-text {
+  color: var(--clinic-ink);
+  font-weight: 600;
+}
+
+/* Center the page-size number vertically inside its box instead of it
+   sitting near the top with empty space below. */
+::ng-deep .list-paginator .mat-mdc-paginator-page-size-select .mat-mdc-text-field-wrapper {
+  height: 36px;
+  align-items: center;
+}
+::ng-deep .list-paginator .mat-mdc-paginator-page-size-select .mat-mdc-form-field-flex {
+  align-items: center;
+}
+::ng-deep .list-paginator .mat-mdc-paginator-page-size-select .mat-mdc-form-field-infix {
+  display: flex;
+  align-items: center;
+  min-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+::ng-deep .list-paginator .mat-mdc-paginator-page-size-select .mat-mdc-form-field-infix {
+  justify-content: center;
+}
+/* The value box stretches to fill the trigger (pinning the arrow far to the
+   right), which is why the number sat on the left with a big empty gap
+   before the arrow. Let it size to its own text instead, so the whole
+   "5 ▾" group can be centered as one unit. */
+::ng-deep .list-paginator .mat-mdc-paginator-page-size-select .mat-mdc-select-value {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  text-align: center;
+}
+::ng-deep .list-paginator .mat-mdc-paginator-page-size-select .mat-mdc-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+::ng-deep .list-paginator .mat-mdc-select-arrow svg {
+  fill: var(--clinic-primary);
+}
+
+::ng-deep .list-paginator .mdc-notched-outline__leading,
+::ng-deep .list-paginator .mdc-notched-outline__notch,
+::ng-deep .list-paginator .mdc-notched-outline__trailing {
+  border-color: var(--clinic-border) !important;
+}
+
+::ng-deep .list-paginator .mat-mdc-form-field:hover .mdc-notched-outline__leading,
+::ng-deep .list-paginator .mat-mdc-form-field:hover .mdc-notched-outline__notch,
+::ng-deep .list-paginator .mat-mdc-form-field:hover .mdc-notched-outline__trailing,
+::ng-deep .list-paginator .mat-focused .mdc-notched-outline__leading,
+::ng-deep .list-paginator .mat-focused .mdc-notched-outline__notch,
+::ng-deep .list-paginator .mat-focused .mdc-notched-outline__trailing {
+  border-color: var(--clinic-primary) !important;
+}
+
+::ng-deep .list-paginator .mat-mdc-paginator-icon {
+  fill: var(--clinic-primary);
+}
+
+::ng-deep .list-paginator .mat-mdc-icon-button.mat-mdc-button-disabled .mat-mdc-paginator-icon {
+  fill: #b9c3cc;
+}
+
+::ng-deep .list-paginator .mat-mdc-icon-button:not(.mat-mdc-button-disabled):hover {
+  background-color: var(--clinic-primary-lighter);
+  border-radius: 50%;
+}
