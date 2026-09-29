@@ -62,7 +62,7 @@ export const routes: Routes = [
         component: Settings
     },
     {
-        path: 'DoctorView',
+        path: 'doctorview',
         component: DoctorView
     },
     {

@@ -1,8 +1,23 @@
 <app-navbar></app-navbar>
 
-
 <div class="container mt-4 background">
-  <h3 class="mb-4 text-primary">Patients Registry</h3>
+  <div class="registry-header">
+    <h3 class="text-primary mb-0">Patients Registry</h3>
+
+    <div class="day-nav">
+      <button type="button" class="day-nav-btn" (click)="decrementDay()" title="Back Day" aria-label="Back Day">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+      <span class="day-nav-label">{{CurrentDay()}}</span>
+      <button type="button" class="day-nav-btn" (click)="incrementDay()" title="Next Day" aria-label="Next Day">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 6l6 6-6 6" />
+        </svg>
+      </button>
+    </div>
+  </div>
   <div class="table-responsive shadow-sm rounded">
     <table class="table table-hover table-striped align-middle mb-0">
       <thead class="table-dark">
@@ -16,24 +31,23 @@
       </thead>
       <tbody>
 
-    
-      @for (item of Appointments(); track $index) {
-          <tr>
-              <td>{{ item.patientFirstName }} - {{ item.patientLastName }}</td>
-              <td>{{item.notes}}</td>
-              <td>{{ item.status }}</td>
-              <td>{{ item.appointmentDate  }}</td>
-              <td><a [routerLink]="['/patientappointment', item.id]"> view </a> </td>
-          </tr>
-          } 
-          @empty
-            {
-          <tr>
-              <td colspan="5" class="text-center text-muted py-4">No patients found.</td>
-          </tr>
-          }
-    
-    </tbody>
+        @for (item of AppointmentsInDay(); track $index) {
+        <tr>
+          <td>{{ item.patientFirstName }} - {{ item.patientLastName }}</td>
+          <td>{{item.notes}}</td>
+          <td>{{ item.status }}</td>
+          <td>{{ item.appointmentDate }}</td>
+          <td><a [routerLink]="['/patientappointment', item.id]"> view </a> </td>
+        </tr>
+        }
+        @empty
+        {
+        <tr>
+          <td colspan="5" class="text-center text-muted py-4">No patients found.</td>
+        </tr>
+        }
+
+      </tbody>
     </table>
   </div>
 </div>

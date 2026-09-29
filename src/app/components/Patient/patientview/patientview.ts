@@ -7,11 +7,12 @@ import { CCreateAppintment } from '../../Appointment/ccreate-appintment/ccreate-
 import { PatientResponse, PatientDTO } from '../../../interfaces/patient-response';
 import { PatientStory } from '../../History/patient-story/patient-story';
 import { DatePipe } from '@angular/common';
+import { CreateSaveMainQuestion } from '../../saveMainQuestion/create-save-main-question/create-save-main-question';
 
 @Component({
   selector: 'app-patientview',
   standalone: true,
-  imports: [Navbar, CCreateAppintment, PatientStory, DatePipe],
+  imports: [Navbar, CCreateAppintment, PatientStory, DatePipe, CreateSaveMainQuestion],
   templateUrl: './patientview.html',
   styleUrl: './patientview.css',
 })

@@ -23,6 +23,7 @@ import { AddSaveExaminationFindingResponse, ListSaveExaminationFindingResponse, 
 import { CheifComplaneDTO, CreateCheifComplaneResponse, ListCheifComplaneResponse } from '../../interfaces/cheif-complane-dto';
 import { ListMainQuestionResponse, MainQuestionDTO, SaveMainQuestionResponse } from '../../interfaces/main-question-dto';
 import { ListSaveMainQuestionResponse, SaveMainQuestionDTO } from '../../interfaces/save-main-question-dto';
+import { ListServiceResponse, ServiceDTO, ServiceResponse } from '../../interfaces/service-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -460,6 +461,17 @@ export class Callapi {
     );
   }
 
+  public GetSheetByPtinetId(ptinetId: string): Observable<ListSheetResponse> {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
+
+    return this.Http.get<ListSheetResponse>(this.url + `Sheet/GetByPtinetId/${ptinetId}`, { headers }).pipe(
+      tap(response => { }),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    );
+  }
+
   public AddQuestion(Question: QuestionDTO): Observable<SaveQuestionResponse> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
     return this.Http.post<SaveQuestionResponse>(this.url + `Question/save`, Question, { headers }).pipe(
@@ -663,6 +675,16 @@ export class Callapi {
     );
   }
 
+  public GetByPatientIdMainQuestion(Id: string): Observable<ListMainQuestionResponse> {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
+    return this.Http.get<ListMainQuestionResponse>(this.url + `MainQuestion/GetByPatientId/${Id}`, { headers }).pipe(
+      tap(response => { }),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    );
+  }
+
   public DeleteMainQuestion(Id: string): Observable<any> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
     return this.Http.delete<any>(this.url + `MainQuestion/Delete/${Id}`, { headers }).pipe(
@@ -683,9 +705,19 @@ export class Callapi {
     );
   }
 
-  public AddSaveMainQuestion(CreateMainQuestion: SaveMainQuestionDTO): Observable<SaveMainQuestionResponse> {
+  // public AddSaveMainQuestion(CreateMainQuestion: SaveMainQuestionDTO): Observable<SaveMainQuestionResponse> {
+  //   const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
+  //   return this.Http.post<SaveMainQuestionResponse>(this.url + "saveQuestion/Add", CreateMainQuestion, { headers }).pipe(
+  //     tap(response => { }),
+  //     catchError(error => {
+  //       return throwError(() => error);
+  //     })
+  //   );
+  // }
+
+  public AddListSaveMainQuestion(CreateMainQuestion: SaveMainQuestionDTO[]): Observable<SaveMainQuestionResponse> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
-    return this.Http.post<SaveMainQuestionResponse>(this.url + "saveQuestion/Add", CreateMainQuestion, { headers }).pipe(
+    return this.Http.post<SaveMainQuestionResponse>(this.url + "saveMainQuestion/AddList", CreateMainQuestion, { headers }).pipe(
       tap(response => { }),
       catchError(error => {
         return throwError(() => error);
@@ -693,9 +725,9 @@ export class Callapi {
     );
   }
 
-  public ListSaveMainQuestion(Id: string): Observable<ListSaveMainQuestionResponse> {
+  public ListSaveMainQuestion(PatientId: string): Observable<ListSaveMainQuestionResponse> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
-    return this.Http.get<ListSaveMainQuestionResponse>(this.url + `saveQuestion/GetByAppointment/${Id}`, { headers }).pipe(
+    return this.Http.get<ListSaveMainQuestionResponse>(this.url + `saveMainQuestion/GetByPatientID/${PatientId}`, { headers }).pipe(
       tap(response => { }),
       catchError(error => {
         return throwError(() => error);
@@ -705,7 +737,47 @@ export class Callapi {
 
   public DeleteSaveMainQuestion(Id: string): Observable<any> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
-    return this.Http.delete<any>(this.url + `saveQuestion/Delete/${Id}`, { headers }).pipe(
+    return this.Http.delete<any>(this.url + `saveMainQuestion/Delete/${Id}`, { headers }).pipe(
+      tap(response => { }),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  public AddService(Create: ServiceDTO): Observable<ServiceResponse> {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
+    return this.Http.post<ServiceResponse>(this.url + "Service/save", Create, { headers }).pipe(
+      tap(response => { }),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  public SearchService(name: string = ''): Observable<ListServiceResponse> {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
+    return this.Http.get<ListServiceResponse>(this.url + "Service/search", { headers, params: { name } }).pipe(
+      tap(response => { }),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  public GetServiceById(Id: string): Observable<ServiceResponse> {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
+    return this.Http.get<ServiceResponse>(this.url + `Service/getById/${Id}`, { headers }).pipe(
+      tap(response => { }),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  public DeleteService(Id: string): Observable<any> {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
+    return this.Http.delete<any>(this.url + `Service/Delete/${Id}`, { headers }).pipe(
       tap(response => { }),
       catchError(error => {
         return throwError(() => error);
