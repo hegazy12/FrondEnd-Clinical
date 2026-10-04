@@ -12,3 +12,5 @@ export interface Appointment {
   deposit: number;
   note: string;
 }
+
+

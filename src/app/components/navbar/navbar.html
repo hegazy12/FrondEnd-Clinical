@@ -28,7 +28,7 @@
   </div>
 
   <div class="col-md-5">
-    @if (roles.includes('doctor') ||roles.includes('Doctor'))
+    @if (roles.includes('SuperAdmin') ||roles.includes('SuperAdmin'))
     {
     <strong> <a class="nav-link text-white" [routerLink]="['/Admin']">Admin</a> </strong>
     }

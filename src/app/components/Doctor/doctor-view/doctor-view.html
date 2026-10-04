@@ -1,1 +1,31 @@
 <app-navbar></app-navbar>
+
+<div class="container-fluid px-4 py-3">
+  @if (isLoading()) {
+  <div class="text-center text-muted py-5">Loading profile...</div>
+  }
+  @else if (errorMessage()) {
+  <div class="alert alert-warning text-center">{{ errorMessage() }}</div>
+  }
+  @else if (doctor(); as d) {
+  <div class="border-bottom pb-3 mb-4">
+    <div class="row">
+      <div class="col-md-10">
+        <h2 class="h3 fw-bold text-primary mb-1">
+          Dr. {{ d.fristName }} {{ d.lastName }}
+        </h2>
+        <p class="text-muted mb-1">
+          <span class="me-3"><strong>Specialization: </strong> {{ d.specialization || '—' }}</span>
+          <span><strong>Email:</strong> {{ d.email || '—' }}</span>
+        </p>
+        <p class="text-muted mb-0">
+          <span class="me-3"><strong>Clinic: </strong> {{ d.clinicName || '—' }}</span>
+          <span class="me-3"><strong>Address:</strong> {{ d.clinicAddress || '—' }}</span>
+          <span class="me-3"><strong>Phone:</strong> {{ d.clinicPhoneNumber || '—' }}</span>
+          <span><strong>Clinic Email:</strong> {{ d.clinicEmail || '—' }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  }
+</div>

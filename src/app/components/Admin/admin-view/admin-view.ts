@@ -5,10 +5,12 @@ import { AddQuestion } from '../Questions/add-question/add-question';
 import { CreateExaminationFinding } from '../ExaminationFinding/create-examination-finding/create-examination-finding';
 import { CreateMainQuestion } from '../MainQuestion/create-main-question/create-main-question';
 import { CreateService } from '../Service/create-service/create-service';
+import { Adduser } from '../User/User/adduser/adduser';
+import { CreateDoctor } from '../User/Doctor/create-doctor/create-doctor';
 
 @Component({
   selector: 'app-admin-view',
-  imports: [Navbar, AddSheet, AddQuestion, CreateExaminationFinding, CreateMainQuestion, CreateService],
+  imports: [Navbar, AddSheet, AddQuestion, CreateDoctor, CreateExaminationFinding, CreateMainQuestion, CreateService, Adduser],
   templateUrl: './admin-view.html',
   styleUrl: './admin-view.css',
 })
@@ -33,6 +35,12 @@ export class AdminView {
     }
     else if (viewName == "addService") {
       this.view.set(5);
+    }
+    else if (viewName == "addUser") {
+      this.view.set(6);
+    }
+    else if (viewName == "addDoctor") {
+      this.view.set(7);
     }
   }
 
