@@ -1,38 +1,74 @@
-import { Component, signal } from '@angular/core';
+import { Component, viewChild } from '@angular/core';
 import { Callapi } from '../../../../services/callapi/callapi';
 import { VerfivationToken } from '../../../../services/verfivationToken/verfivation-token';
 import { SwalAlert } from '../../../../services/swalAlert/swal-alert';
 import { ListMainQuestionResponse, MainQuestionDTO1 } from '../../../../interfaces/main-question-dto';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-main-question',
-  imports: [],
+  imports: [MatTableModule, MatSortModule, MatPaginatorModule, MatInputModule],
   templateUrl: './list-main-question.html',
   styleUrl: './list-main-question.css',
 })
 export class ListMainQuestion {
+
+  displayedColumns: string[] = ['questionBody', 'description', 'dataTypeName', 'values', 'actions'];
+
+  dataSource = new MatTableDataSource<MainQuestionDTO1>([]);
+
+  readonly sort = viewChild.required(MatSort);
+  readonly paginator = viewChild.required(MatPaginator);
 
   constructor(private callapi: Callapi,
     private Verfication: VerfivationToken,
     private swal: SwalAlert) {
   }
 
-  public data = signal<MainQuestionDTO1[]>([]);
-
   ngOnInit(): void {
-    if (this.Verfication.islogin() == false) {
+    // "Values" is a computed column (list items or min - max), so it needs its own sort key.
+    this.dataSource.sortingDataAccessor = (item, property) =>
+      property === 'values'
+        ? this.valuesText(item)
+        : (item as unknown as Record<string, string | number>)[property];
 
-    }
-    else {
+    if (this.Verfication.islogin()) {
       this.getdata();
     }
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort();
+    this.dataSource.paginator = this.paginator();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  // What the "Values" column shows: the dropdown items, or the numeric range.
+  public valuesText(item: MainQuestionDTO1): string {
+    if (item.listValues?.length) {
+      return item.listValues.join(', ');
+    }
+    if (item.minValue || item.maxValue) {
+      return `${item.minValue} - ${item.maxValue}`;
+    }
+    return '';
   }
 
   getdata() {
     let sub = this.callapi.GetAllMainQuestion().subscribe({
       next: (P: ListMainQuestionResponse) => {
-        this.data.set(P.data);
+        this.dataSource.data = P.data;
         sub.unsubscribe();
       },
       error: (err) => {
@@ -65,7 +101,7 @@ export class ListMainQuestion {
             sub.unsubscribe();
           },
           error: (err) => {
-            this.swal.showWoringSave(err.error.message)
+            this.swal.showWoringSave(err.error?.message)
             this.getdata();
             sub.unsubscribe();
           }

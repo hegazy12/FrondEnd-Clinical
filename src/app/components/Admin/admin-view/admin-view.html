@@ -11,13 +11,13 @@
       addQuestion
     </button>
 
-    <!-- <button class="btn btn-primary shadow-sm w-100" #addUser name="addUser" (click)="viewpage(addUser.name)">
+    <button class="btn btn-primary shadow-sm w-100" #addUser name="addUser" (click)="viewpage(addUser.name)">
       addUser
     </button>
 
     <button class="btn btn-primary shadow-sm w-100" #addDoctor name="addDoctor" (click)="viewpage(addDoctor.name)">
       addDoctor
-    </button> -->
+    </button>
 
     <button class="btn btn-primary shadow-sm w-100" #addExaminationFinding name="addExaminationFinding"
       (click)="viewpage(addExaminationFinding.name)">
@@ -29,8 +29,7 @@
       Add Main Question
     </button>
 
-    <button class="btn btn-primary shadow-sm w-100" #addService name="addService"
-      (click)="viewpage(addService.name)">
+    <button class="btn btn-primary shadow-sm w-100" #addService name="addService" (click)="viewpage(addService.name)">
       Add Service
     </button>
 
@@ -58,6 +57,13 @@
     @else if(view() == 5 )
     {
     <app-create-service></app-create-service>
+    }
+    @else if(view() == 6 )
+    {
+    <app-adduser></app-adduser>
+    }@else if (view() == 7)
+    {
+    <app-create-doctor></app-create-doctor>
     }
   </div>
 

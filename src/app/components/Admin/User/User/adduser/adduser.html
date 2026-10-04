@@ -1,32 +1,105 @@
-<!-- <form>
-     <div class="row border rounded-top" style="margin: .5%; padding: .5%;">
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+    <div class="row g-2">
 
-        <div class="col-md-12" style="margin-top: 1%;">
-            <select class="form-select" aria-label="Default select example" name="drug" (change)="onSpecialtyChange($event)" >
-             <option value="">select durg pleas</option>  
-              @for (Drug of DTODrugs(); track $index)
-               {
-                <option [value]="Drug.id">{{Drug.commercialNameEn}} /{{Drug.scientificName}}</option>
-               }
-            </select>
-        </div>
-
-       <div class="col-md-6" style="margin-top: 1%;">
-            <label>From</label>
-            <input class="form-control" type="date" name="form" [(ngModel)]="from" min="{{minDate}}">
-        </div>
-        <div class="col-md-6" style="margin-top: 1%;">
-            <label>To </label>
-            <input type="date" class="form-control" name="to" [(ngModel)]="to" min="{{from()}}">
+        <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted small" for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name"
+                [(ngModel)]="firstName" #firstNameCtrl="ngModel" required
+                [class.is-invalid]="firstNameCtrl.invalid && firstNameCtrl.touched">
+            @if (firstNameCtrl.invalid && firstNameCtrl.touched) {
+            <div class="invalid-feedback">First name is required.</div>
+            }
         </div>
 
-        <div class="col-2 d-flex justify-content-end " >
-            <button type="button" class="btn btn-primary " (click)="onSubmit()">Save Changes</button>
+        <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted small" for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name"
+                [(ngModel)]="lastName" #lastNameCtrl="ngModel" required
+                [class.is-invalid]="lastNameCtrl.invalid && lastNameCtrl.touched">
+            @if (lastNameCtrl.invalid && lastNameCtrl.touched) {
+            <div class="invalid-feedback">Last name is required.</div>
+            }
         </div>
-        
+
+        <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted small" for="jobTitle">Job Title</label>
+            <input type="text" class="form-control" id="jobTitle" name="jobTitle" placeholder="e.g. Receptionist"
+                [(ngModel)]="jobTitle" #jobTitleCtrl="ngModel" required
+                [class.is-invalid]="jobTitleCtrl.invalid && jobTitleCtrl.touched">
+            @if (jobTitleCtrl.invalid && jobTitleCtrl.touched) {
+            <div class="invalid-feedback">Job title is required.</div>
+            }
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted small" for="userName">Username</label>
+            <input type="text" class="form-control" id="userName" name="userName" placeholder="Username"
+                autocomplete="off" [(ngModel)]="userName" #userNameCtrl="ngModel" required
+                [class.is-invalid]="userNameCtrl.invalid && userNameCtrl.touched">
+            @if (userNameCtrl.invalid && userNameCtrl.touched) {
+            <div class="invalid-feedback">Username is required.</div>
+            }
+        </div>
+
+        <div class="col-md-12">
+            <label class="form-label fw-semibold text-muted small" for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"
+                autocomplete="off" [(ngModel)]="email" #emailCtrl="ngModel" required email
+                [class.is-invalid]="emailCtrl.invalid && emailCtrl.touched">
+            @if (emailCtrl.invalid && emailCtrl.touched) {
+            <div class="invalid-feedback">Enter a valid email address.</div>
+            }
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted small" for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                autocomplete="new-password" [(ngModel)]="password" #passwordCtrl="ngModel" required minlength="6"
+                [class.is-invalid]="passwordCtrl.invalid && passwordCtrl.touched">
+            @if (passwordCtrl.invalid && passwordCtrl.touched) {
+            <div class="invalid-feedback">Password must be at least 6 characters.</div>
+            }
+            <div class="form-text">At least 6 characters, with an uppercase letter, a lowercase letter, a number and a
+                symbol.</div>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label fw-semibold text-muted small" for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                placeholder="Confirm Password" autocomplete="new-password" [(ngModel)]="confirmPassword"
+                #confirmPasswordCtrl="ngModel" required
+                [class.is-invalid]="confirmPasswordCtrl.touched && (confirmPasswordCtrl.invalid || confirmPassword !== password)">
+            @if (confirmPasswordCtrl.touched && (confirmPasswordCtrl.invalid || confirmPassword !== password)) {
+            <div class="invalid-feedback">Passwords do not match.</div>
+            }
+        </div>
+
+        <div class="col-md-12">
+            <label class="form-label fw-semibold text-muted small d-block">Roles</label>
+            <div class="d-flex flex-wrap gap-3">
+                @for (role of roles(); track role.id) {
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" [id]="'role-' + role.id"
+                        [checked]="selectedRoles().includes(role.name)" (change)="toggleRole(role.name, $event)">
+                    <label class="form-check-label" [for]="'role-' + role.id">{{ role.name }}</label>
+                </div>
+                }
+                @empty {
+                <span class="text-muted small">No roles found.</span>
+                }
+            </div>
+            @if (rolesTouched() && selectedRoles().length === 0) {
+            <div class="text-danger small mt-1">Select at least one role.</div>
+            }
+        </div>
+
+        <div class="col-12 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary px-4" [disabled]="isLoading()">
+                {{ isLoading() ? 'Saving...' : 'Add User' }}
+            </button>
+        </div>
+
     </div>
-
 </form>
-<div class="row" style="margin:.5%">
-    
-</div> -->
+
+<app-user-list></app-user-list>

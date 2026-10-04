@@ -6,7 +6,7 @@ import { PatientCreate } from '../../interfaces/patient-create';
 import { createDoctors } from '../../interfaces/CreateDoctor';
 import { DTODrug } from '../../interfaces/dtodrug';
 import { PatientsResponse, PatientResponse } from '../../interfaces/patient-response';
-import { DoctorsResponse, SpecializationResponse } from '../../interfaces/doctor-dto';
+import { DoctorResponse, DoctorsResponse, SpecializationResponse } from '../../interfaces/doctor-dto';
 import { AppointmentAllinfo, AppointmentDTO0, AppointmentResponse, AppointmentsResponse, AppointmentsStoryResponse, makeCompleteResponse } from '../../interfaces/appointment-dto-0';
 import { createPrescriptionResponse, Prescriptiondto, PrescriptionResponse } from '../../interfaces/prescription';
 import { MedicalExaminationsResponse, saveMedicalExaminationDTO, saveExaminationListResponse, FullByIdResponse, ExaminationPhotoResponse } from '../../interfaces/medical-examinations-dto'
@@ -17,13 +17,14 @@ import { GeneralResponse } from '../../interfaces/general-response';
 import { UploadPhotoRequest } from '../../interfaces/upload-photo-request';
 import { ListSheetResponse, SheetDto, SheetDto1, SheetsInAppointmentSavedResponse } from '../../interfaces/sheet-dto';
 import { GetsaveQuestionInSheetResponse, QuestionDTO, QuestionListResponse, SaveAnswersListResponse, saveQuestionDTO, SaveQuestionResponse } from '../../interfaces/question-dto';
-import { RegisterResponse, UserDto } from '../../interfaces/user-dto';
+import { RegisterResponse, UserDto, UserResponse } from '../../interfaces/user-dto';
 import { ExaminationFindingDTO, ExaminationFindingDTO1, ExaminationFindingListResponse } from '../../interfaces/examination-finding';
 import { AddSaveExaminationFindingResponse, ListSaveExaminationFindingResponse, SaveExaminationFindingDTO } from '../../interfaces/save-examination-finding';
 import { CheifComplaneDTO, CreateCheifComplaneResponse, ListCheifComplaneResponse } from '../../interfaces/cheif-complane-dto';
 import { ListMainQuestionResponse, MainQuestionDTO, SaveMainQuestionResponse } from '../../interfaces/main-question-dto';
 import { ListSaveMainQuestionResponse, SaveMainQuestionDTO } from '../../interfaces/save-main-question-dto';
 import { ListServiceResponse, ServiceDTO, ServiceResponse } from '../../interfaces/service-dto';
+import { ListRoleesponse } from '../../interfaces/role-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -108,10 +109,10 @@ export class Callapi {
     );
   }
 
-  public createDoctor(Create: createDoctors): Observable<any> {
+  public createDoctor(Create: createDoctors): Observable<DoctorResponse> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
 
-    return this.Http.post<any>(this.url + "Doctor/CreateDoctor", Create, { headers }).pipe(
+    return this.Http.post<DoctorResponse>(this.url + "Doctor/CreateDoctor", Create, { headers }).pipe(
       tap(response => { }),
       catchError(error => {
         return throwError(() => error);
@@ -119,10 +120,23 @@ export class Callapi {
     );
   }
 
-  public GetDoctors() {
+  public GetDoctors() 
+  {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
-
     return this.Http.get<DoctorsResponse>(this.url + `Doctor/getAllDoctors`, { headers }).pipe(
+      tap(response => { }),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+
+  
+  public GetDoctor(DoctorId: string) : Observable<DoctorResponse>
+  {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
+    return this.Http.get<DoctorResponse>(this.url + `Doctor/GetDoctor/${DoctorId}`, { headers }).pipe(
       tap(response => { }),
       catchError(error => {
         return throwError(() => error);
@@ -532,6 +546,16 @@ export class Callapi {
     );
   }
 
+  public ListUser(): Observable<UserResponse> {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
+    return this.Http.get<UserResponse>(this.url + "Account/GetUsers", { headers }).pipe(
+      tap(response => { }),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    );
+  }
+
   public SaveAnswersList(AnswersList: saveQuestionDTO[]): Observable<SaveAnswersListResponse> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
     return this.Http.post<SaveAnswersListResponse>(this.url + "saveQuestion/AddList", AnswersList, { headers }).pipe(
@@ -778,6 +802,17 @@ export class Callapi {
   public DeleteService(Id: string): Observable<any> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
     return this.Http.delete<any>(this.url + `Service/Delete/${Id}`, { headers }).pipe(
+      tap(response => { }),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+
+  public GetListRole(): Observable<ListRoleesponse> {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token.getToken()}`, 'ngrok-skip-browser-warning': 'true' });
+    return this.Http.get<ListRoleesponse>(this.url + `Account/GetRoles`, { headers }).pipe(
       tap(response => { }),
       catchError(error => {
         return throwError(() => error);
